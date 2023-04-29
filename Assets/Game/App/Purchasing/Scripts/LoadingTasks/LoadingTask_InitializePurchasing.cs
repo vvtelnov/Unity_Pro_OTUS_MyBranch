@@ -8,6 +8,7 @@ namespace Game.App.Loading
     {
         public void Do(Action<LoadingResult> callback)
         {
+#if UNITY_PURCHASING
             PurchasingInitializer.Init(result =>
             {
                 if (result.isSuccess)
@@ -19,6 +20,9 @@ namespace Game.App.Loading
                     callback?.Invoke(LoadingResult.Fail(result.error.ToString()));
                 }
             });
+#else
+            callback?.Invoke(LoadingResult.Success());
+#endif
         }
     }
 }
