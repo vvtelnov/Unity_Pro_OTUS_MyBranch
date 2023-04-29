@@ -1,0 +1,25 @@
+/*.ds-node__extension-container*/
+/*{*/
+/*    background-color: #202021;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*.ds-node__custom-data-containers{*/
+/*    background-color: #212325;*/
+/*    border-radius: 4px;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*.ds-node__main-container*/
+/*{*/
+/*    background-color: #1D1D1E;*/
+/*}*/
+
+/*.ds-node__textfield > .unity-text-field__input {*/
+/*    background-color: #1D1D1E;*/
+/*    border-color: #27292C;*/
+/*    border-radius: 4px;*/
+/*    min-width: 160px;*/
+/*    max-width: 240px;*/
+/*    padding: 8px;*/
+/*}*/

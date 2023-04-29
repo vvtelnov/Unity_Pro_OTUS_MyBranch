@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Lessons
+  m_EditorClassIdentifier: 
+  m_GroupName: Lessons
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a97920c78f76f4023af9a035b5982063
+  m_SerializeEntries:
+  - m_GUID: 88d582c306d1f4398ac36d6bed76c299
+    m_Address: Lessons/SaveLoad/GameScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b9a595f24937c4006b7d9469b06533f1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3fd8000a663d24736b6593f06cc2fa3b, type: 2}
+    - {fileID: 11400000, guid: bbd35bee671b040e4a9392a77158bd73, type: 2}
