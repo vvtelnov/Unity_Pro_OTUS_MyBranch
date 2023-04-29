@@ -1,3 +1,5 @@
+#if UNITY_PURCHASING
+
 using Purchasing;
 using UnityEngine.Purchasing;
 
@@ -11,3 +13,5 @@ namespace Game.App
         }
     }
 }
+
+#endif

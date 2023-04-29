@@ -1,3 +1,4 @@
+#if UNITY_PURCHASING
 using System;
 using Game.GameEngine.InventorySystem;
 using Game.Meta;
@@ -44,3 +45,4 @@ namespace Game.App
         }
     }
 }
+#endif

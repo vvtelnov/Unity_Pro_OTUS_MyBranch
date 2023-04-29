@@ -1,3 +1,5 @@
+#if UNITY_PURCHASING
+
 using System;
 using Purchasing;
 using Services;
@@ -24,3 +26,5 @@ namespace Game.App
         }
     }
 }
+
+#endif
