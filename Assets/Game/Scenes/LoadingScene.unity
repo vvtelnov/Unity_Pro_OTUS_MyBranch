@@ -585,6 +585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
+      propertyPath: monoServices.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
       propertyPath: servicePacks.Array.size
       value: 16
       objectReference: {fileID: 0}
@@ -952,6 +957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PurchaseManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 304232184621006967, guid: bcfb12b01f4a2401a8b2fcbe77ced09b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 304232184621006969, guid: bcfb12b01f4a2401a8b2fcbe77ced09b,
         type: 3}
