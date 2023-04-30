@@ -16,4 +16,5 @@ MonoBehaviour:
   releaseScripts:
   - {fileID: 11500000, guid: afecc15b65fe43f3954048ddebcc7d6d, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Game.Analytics.ApplicationAnalyticsTracker

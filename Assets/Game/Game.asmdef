@@ -66,12 +66,18 @@
         "GUID:da1a47b77fc1a43bc894895891c1ed9a",
         "GUID:52ee84b7d63f245e6aa6cf091e952893",
         "GUID:5655719b8117c4205af87e51b8de6cf1",
-        "GUID:c1ee9808abcfc4a96bec5a3fbf077ee9"
+        "GUID:c1ee9808abcfc4a96bec5a3fbf077ee9",
+        "GUID:04afe2d0bb28044d2b3725f0297f8998",
+        "GUID:67b4f0810af534dc4a25571e68375dd7",
+        "GUID:e7ab5e1f3aaba4f16849574f48c617b9",
+        "GUID:62754eb6f8e24495089751c2f5145c44",
+        "GUID:09fe9590324ff4edab54641984f5ac19",
+        "GUID:f1f83ee0a8501442cb8413623bfb289d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
-    "overrideReferences": false,
+    "overrideReferences": true,
     "precompiledReferences": [
         "DOTween.dll",
         "DOTweenEditor.dll",

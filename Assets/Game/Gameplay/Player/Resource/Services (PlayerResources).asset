@@ -17,4 +17,6 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 88ee38063789a42d3bb846ecfb958cd5, type: 3}
   - {fileID: 11500000, guid: 85c2cee475f67426e9a61e03624c8e93, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Game.Gameplay.Player.ResourceMediator
+  - Game.Gameplay.Player.ResourceRepository

@@ -31,7 +31,10 @@ MonoBehaviour:
     assemblyNames:
     - Assets
     - Elementary
+    - ES3
+    - Tween
     - GOAP
+    - Assembly-CSharp
     - BehaviourTree
     - Windows
     - Products
@@ -47,10 +50,13 @@ MonoBehaviour:
     - AITasks
     - CustomParticles
     - PopupSystem
+    - Tutorial
     - DialogueSystem
     - Entities
     - AICommands
+    - Blackboards
     - CustomAnimations
+    - Assembly-CSharp-firstpass
     - Purchasing.Common
     - Services
     - SqliteModule
@@ -61,8 +67,10 @@ MonoBehaviour:
     - Polygons
     - GameResources
     - Purchasing
-    - Blackboards
+    - Waypoints
+    - SystemTime
     - Sirenix.OdinInspector.CompatibilityLayer
+    - Input
     - PPv2URPConverters
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor

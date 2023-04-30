@@ -16,4 +16,5 @@ MonoBehaviour:
   releaseScripts:
   - {fileID: 11500000, guid: 4c4456c6be834ffda94760275225a554, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Game.App.UnityGamingServiceIntializer

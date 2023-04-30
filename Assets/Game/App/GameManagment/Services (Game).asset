@@ -18,4 +18,7 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 083148b9de584d689bff91bdb9adbe0d, type: 3}
   - {fileID: 11500000, guid: 090e1c13435443b39379d04d5bc343de, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Game.App.GameContainer
+  - Game.App.GameSaver
+  - Game.App.GameLauncher

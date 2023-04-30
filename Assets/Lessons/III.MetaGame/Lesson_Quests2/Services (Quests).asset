@@ -18,4 +18,7 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 980eb1ed8d3948319d9a0323075f390b, type: 3}
   - {fileID: 11500000, guid: c842840c524c49b4be09031d830ab617, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Lessons.Meta.QuestRepository
+  - Lessons.Meta.QuestMediator
+  - Lessons.Meta.QuestAssetSupplier
