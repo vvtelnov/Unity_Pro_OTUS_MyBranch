@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 0101080000006300680069006c006400720065006e002f0000000001390000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e0049004c006f00630061006c0069007a006100740069006f006e0043006f006d0070006f006e0065006e0074005b005d002c0020004c006f00630061006c0069007a006100740069006f006e0000000000060200000000000000022f01000000013c000000470061006d0065002e004c006f00630061006c0069007a006100740069006f006e002e0054004d00500072006f00550047005500490043006f006d0070006f006e0065006e0074005f005400720061006e0073006c006100740069006f006e0054006500780074002c002000410073007300650074007300010000000b01040000007400650078007400000000002701030000006b0065007900010e00000043006f006d006d006f006e007c00550050004700520041004400450005023001000000020000000b01040000007400650078007400010000002701030000006b0065007900010a00000043006f006d006d006f006e007c004d0041005800050705
     ReferencedUnityObjects:
     - {fileID: 2007250645121875484}
     - {fileID: 5271573841072319478}
@@ -254,43 +254,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|UPGRADE
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 1
-    - Name: key
-      Entry: 1
-      Data: Common|MAX
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
 --- !u!1 &2007250644821309958
 GameObject:
   m_ObjectHideFlags: 0

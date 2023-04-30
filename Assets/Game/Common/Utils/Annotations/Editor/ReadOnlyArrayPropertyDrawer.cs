@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
@@ -10,3 +12,5 @@ public sealed class ReadOnlyArrayPropertyDrawer : OdinAttributeDrawer<ReadOnlyAr
         GUI.enabled = true;
     }
 }
+
+#endif

@@ -24,7 +24,6 @@ namespace Game.Meta
             return this.levels[index];
         }
 
-#if UNITY_EDITOR
         private void DrawLevels(int index)
         {
             GUILayout.Space(8);
@@ -48,6 +47,5 @@ namespace Game.Meta
 
             this.levels = table;
         }
-#endif
     }
 }

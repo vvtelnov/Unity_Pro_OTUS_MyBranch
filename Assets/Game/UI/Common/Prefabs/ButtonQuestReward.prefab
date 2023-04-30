@@ -582,8 +582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 0101080000006300680069006c006400720065006e002f0000000001390000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e0049004c006f00630061006c0069007a006100740069006f006e0043006f006d0070006f006e0065006e0074005b005d002c0020004c006f00630061006c0069007a006100740069006f006e0000000000060300000000000000022f01000000013c000000470061006d0065002e004c006f00630061006c0069007a006100740069006f006e002e0054004d00500072006f00550047005500490043006f006d0070006f006e0065006e0074005f005400720061006e0073006c006100740069006f006e0054006500780074002c002000410073007300650074007300010000000b01040000007400650078007400000000002701030000006b0065007900011100000043006f006d006d006f006e007c00500052004f00430045005300530049004e00470005023001000000020000000b01040000007400650078007400010000002701030000006b0065007900010a00000043006f006d006d006f006e007c0047004500540005022f02000000013c0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e0054004d00500072006f00550047005500490043006f006d0070006f006e0065006e0074005f0046006f006e007400530069007a0065002c0020004c006f00630061006c0069007a006100740069006f006e00030000000b010400000074006500780074000000000001010900000066006f006e007400530069007a00650073002f03000000012f0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e004c006f00630061006c0069007a006500640049006e0074005b005d002c0020004c006f00630061006c0069007a006100740069006f006e0004000000060200000000000000042f04000000012d0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e004c006f00630061006c0069007a006500640049006e0074002c0020004c006f00630061006c0069007a006100740069006f006e001d01080000006c0061006e00670075006100670065000a00000000000000170105000000760061006c007500650024000000050430040000001d01080000006c0061006e00670075006100670065001e00000000000000170105000000760061006c007500650022000000050705050705
     ReferencedUnityObjects:
     - {fileID: 8148273055160322221}
     - {fileID: 5641988283011806576}
@@ -591,88 +591,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|PROCESSING
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 1
-    - Name: key
-      Entry: 1
-      Data: Common|GET
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 4|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 36
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 34
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
 --- !u!114 &8834446999983404775
 MonoBehaviour:
   m_ObjectHideFlags: 0

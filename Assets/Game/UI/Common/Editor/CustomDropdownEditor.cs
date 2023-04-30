@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 
 namespace Game.App.QualitySettings.Editor
@@ -21,3 +22,4 @@ namespace Game.App.QualitySettings.Editor
         }
     }
 }
+#endif

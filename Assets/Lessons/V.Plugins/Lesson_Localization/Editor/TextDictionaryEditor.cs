@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using Lessons.Plugins.LocalizationLesson;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
@@ -21,3 +23,4 @@ namespace Lessons.Plugins.Lesson_Localization
         }
     }
 }
+#endif

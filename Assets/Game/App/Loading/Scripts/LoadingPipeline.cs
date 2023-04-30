@@ -36,7 +36,7 @@ namespace Game.App
             var classType = Type.GetType(info.className);
             if (classType == null)
             {
-                throw new Exception($"Missed class {info.className} of MonoScript {info.script.name}");
+                throw new Exception($"Class {info.className} is missed!");
             }
 
             return classType;
