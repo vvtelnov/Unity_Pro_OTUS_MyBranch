@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using Asyncoroutine;
 using GameSystem;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.GameEngine.GUI
 {
@@ -11,10 +11,10 @@ namespace Game.GameEngine.GUI
 
         public static async Task DeployInterface(GameContext gameContext)
         {
-            var handle = Addressables.LoadAssetAsync<GameObject>("GameInterface");
-            await handle.Task;
+            var handle = Resources.LoadAsync<GameObject>("GameInterface");
+            await new WaitUntil(() => handle.isDone);
 
-            var prefab = handle.Result;
+            var prefab = (GameObject) handle.asset;
             var gameInteface = GameObject.Instantiate(prefab);
             gameInteface.name = OBJECT_NAME;
 

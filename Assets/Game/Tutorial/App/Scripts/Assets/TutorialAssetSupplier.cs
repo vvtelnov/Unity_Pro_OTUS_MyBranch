@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using Asyncoroutine;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game.Tutorial.App
 {
@@ -17,16 +17,18 @@ namespace Game.Tutorial.App
             return Resources.Load<TutorialList>(STEP_CONFIG_PATH);
         }
 
-        public Task<GameObject> LoadTutorialEngine()
+        public async Task<GameObject> LoadTutorialEngine()
         {
-            var handle = Addressables.LoadAssetAsync<GameObject>(ENGINE_KEY);
-            return handle.Task;
+            var handle = Resources.LoadAsync<GameObject>(ENGINE_KEY);
+            await new WaitUntil(() => handle.isDone);
+            return (GameObject) handle.asset;
         }
 
-        public Task<GameObject> LoadTutorialInterface()
+        public async Task<GameObject> LoadTutorialInterface()
         {
-            var handle = Addressables.LoadAssetAsync<GameObject>(INTERFACE_KEY);
-            return handle.Task;
+            var handle = Resources.LoadAsync<GameObject>(INTERFACE_KEY);
+            await new WaitUntil(() => handle.isDone);
+            return (GameObject) handle.asset;
         }
     }
 }

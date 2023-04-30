@@ -1,5 +1,6 @@
+#if UNITY_EDITOR
+
 using System;
-using System.Reflection;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -44,3 +45,5 @@ namespace Tools.UnityEditor
         }
     }
 }
+
+#endif

@@ -3,8 +3,6 @@ using GameSystem;
 using Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 namespace Lessons.Architecture.SaveLoad
 {
@@ -44,11 +42,12 @@ namespace Lessons.Architecture.SaveLoad
 
         private IEnumerator LoadGameScene()
         {
-            const string sceneId = "Lessons/SaveLoad/GameScene";
-            var operation = Addressables.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
-            yield return operation;
+            yield break;
+            // const string sceneId = "Lessons/SaveLoad/GameScene";
+            // var operation = Addressables.LoadSceneAsync(sceneId, LoadSceneMode.Additive);
+            // yield return operation;
             
-            this.gameContext = FindObjectOfType<GameContext>();
+            // this.gameContext = FindObjectOfType<GameContext>();
         }
 
         private void LoadGameData()

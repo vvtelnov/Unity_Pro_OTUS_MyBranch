@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
@@ -21,3 +23,4 @@ namespace Game.Development
         }
     }
 }
+#endif
