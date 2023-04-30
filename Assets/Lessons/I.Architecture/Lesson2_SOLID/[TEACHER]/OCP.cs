@@ -1,78 +1,66 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
-// using Game.App;
-// using Game.Meta;
+///Нарушение принципа OCP.
+// public sealed class UnitSelection {
+//     
+//     private List<object> selectedUnits;
 //
-// namespace Lessons.Architecture
-// {
-//     //Нарушение принципа OCP.
-//     public sealed class UnitAttacker
-//     {
-//         public void StartAttack(object[] units)
-//         {
-//             foreach (var unit in units)
-//             {
-//                 if (unit is IArcher archer)
-//                 {
-//                     archer.StartShoot();
-//                 }
-//                 else if (unit is IKnight knight)
-//                 {
-//                     knight.StartFight();
-//                 }
-//                 else if (unit is IMage mage)
-//                 {
-//                     mage.StartSpell();
-//                 }
-//                 else if (unit is IOrc orc)
-//                 {
-//                     orc.Cry();
-//                 }
-//             }
+//     public void Move(Vector3 position) {
+//         foreach (var unit in selectedUnits) {
+//             if (unit is IArcher archer) archer.Run(position);
+//             if (unit is IKnight knight) knight.Move(position);
+//             if (unit is IMage mage) mage.Teleport(position);
 //         }
 //     }
 //
-//     public interface IMage
-//     {
-//         void StartSpell();
+//     public void Attack(GameObject target) {
+//         foreach (var unit in selectedUnits) {
+//             if (unit is IArcher archer) archer.Shoot(target);
+//             if (unit is IKnight knight) knight.Fight(target);
+//             if (unit is IMage mage) mage.Spell(target);
+//         }
 //     }
-//
-//     public interface IArcher
-//     {
-//         void StartShoot();
-//     }
-//
-//     public interface IKnight
-//     {
-//         void StartFight();
-//     }
-//
-//     public interface IOrc
-//     {
-//         void Cry();
-//     }
-//
-//     //Если мы захотим добавить новый тип врага (ОРКА), то нам придется снова модифицировать Uniy Attacker... 
-//
-//     ///ПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ
-//     public interface IUnit
-//     {
-//         void StartAttack();
-//     }
+// }
+
+///ПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ
+// public interface IUnitSelect {
 //     
-//     // public sealed class UnitAttacker
-//     // {
-//     //     public void StartAttack(IUnit[] units)
-//     //     {
-//     //         foreach (var unit in units)
-//     //         {
-//     //             unit.StartAttack();
-//     //         }
-//     //     }
-//     // }
+//     void Attack();
+//     void Move();
+// }
 //
+// public sealed class UnitSelection {
+//     
+//     private List<IUnitSelect> selectedUnits;
 //
+//     public void Move(Vector3 position) {
+//         foreach (var unit in selectedUnits) {
+//             unit.Move();
+//         }
+//     }
+//
+//     public void Attack(GameObject target) {
+//         foreach (var unit in selectedUnits) {
+//             unit.Attack();
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //     ///OCP пример с абстрактным классом из проекта:
 //     /// Один раз написали базовую логику и протестировали
 //     public abstract class Upgrade
