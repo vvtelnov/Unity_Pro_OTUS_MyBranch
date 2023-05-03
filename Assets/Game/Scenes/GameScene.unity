@@ -1366,10 +1366,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Castle_Pillar_01 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 119398, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 472634, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -2753,10 +2749,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (56)
       objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -3110,10 +3102,6 @@ PrefabInstance:
     - target: {fileID: 1270400730273450, guid: c5db1147f0437c64d8cb70bfccbad315, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Ground_Logs_01 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270400730273450, guid: c5db1147f0437c64d8cb70bfccbad315, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4833820180595372, guid: c5db1147f0437c64d8cb70bfccbad315, type: 3}
       propertyPath: m_RootOrder
@@ -3561,10 +3549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_Cannon_01
       objectReference: {fileID: 0}
-    - target: {fileID: 1721797142143904, guid: 3da9fd16f2d6c67468ca9222d4abf72f, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 1908795924481528, guid: 3da9fd16f2d6c67468ca9222d4abf72f, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -3632,10 +3616,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_StoneWall_01 (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4087963244521096, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3698,10 +3678,6 @@ PrefabInstance:
     - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_Name
       value: SM_Env_StoneWall_01 (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4087963244521096, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_RootOrder
@@ -4145,10 +4121,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Castle_Pillar_01 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 119398, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 472634, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -4375,10 +4347,6 @@ PrefabInstance:
     - target: {fileID: 1547794875069070, guid: c88647a9d96bbda4f8aaae18ce2dd222, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Barrel_Stack_04 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1547794875069070, guid: c88647a9d96bbda4f8aaae18ce2dd222, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4700768894199442, guid: c88647a9d96bbda4f8aaae18ce2dd222, type: 3}
       propertyPath: m_RootOrder
@@ -5739,6 +5707,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4779866875772001728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &828911727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721797142143904, guid: 3da9fd16f2d6c67468ca9222d4abf72f,
+    type: 3}
+  m_PrefabInstance: {fileID: 590747864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &828911730
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828911727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6c8c3993dda56fb4885dd675588242ba, type: 3}
 --- !u!1001 &846728375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5830,10 +5818,6 @@ PrefabInstance:
     - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_Name
       value: SM_Env_StoneWall_01 (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4087963244521096, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_RootOrder
@@ -6614,7 +6598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.97
+      value: 13.07
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6622,7 +6606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.06
+      value: 10.26
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7008,10 +6992,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (55)
       objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7074,10 +7054,6 @@ PrefabInstance:
     - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (52)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
@@ -7641,10 +7617,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (51)
       objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -8113,7 +8085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.36
+      value: 11.42
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8121,7 +8093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.07
+      value: 11.15
       objectReference: {fileID: 0}
     - target: {fileID: 427918, guid: f028244a47462e3449e09903dedd7955, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9411,10 +9383,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Spike_Fortification_03 (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 1190704525894480, guid: c09337db46d95c6468437afccf3bb9a2, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4794155538418086, guid: c09337db46d95c6468437afccf3bb9a2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9551,10 +9519,6 @@ PrefabInstance:
     - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_Name
       value: SM_Env_StoneWall_01 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4087963244521096, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_RootOrder
@@ -9834,10 +9798,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_StoneWall_01 (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 1421067982400138, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4087963244521096, guid: 56f5a6de40a6f8f4d9078f2e524efd73, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -10102,10 +10062,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (53)
       objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -10168,10 +10124,6 @@ PrefabInstance:
     - target: {fileID: 119398, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Castle_Pillar_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 119398, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 472634, guid: c62ebd6969ff1124792ffb1a88aa399a, type: 3}
       propertyPath: m_RootOrder
@@ -10913,10 +10865,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (54)
       objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -11442,10 +11390,6 @@ PrefabInstance:
     - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Fence_01 (50)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1942173867557608, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
-      propertyPath: m_Layer
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4957597804604218, guid: 8b5272035dfd90243984731c03b5b100, type: 3}
       propertyPath: m_RootOrder
@@ -12811,10 +12755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1621227707}
     m_Modifications:
-    - target: {fileID: 1527947260719730, guid: 26fb16f6113ff3e46a3413791e6792a4, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4170048271508528, guid: 26fb16f6113ff3e46a3413791e6792a4, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -14044,7 +13984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933720221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.74, y: 0, z: 8.94}
+  m_LocalPosition: {x: -11.94, y: 0, z: 9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15016,10 +14956,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Chest_03
       objectReference: {fileID: 0}
-    - target: {fileID: 144976, guid: 045cc9e875b3f1f48b4774837b97b949, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 167976, guid: 045cc9e875b3f1f48b4774837b97b949, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -15467,7 +15403,12 @@ PrefabInstance:
     - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
         type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
+        type: 3}
+      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 727717441783854555, guid: dcbf67a7764454c21b529190dca1a5cb,
         type: 3}
@@ -15972,7 +15913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4981206169049163447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.65, y: 0, z: 16.15}
+  m_LocalPosition: {x: 4.61, y: 0, z: 14.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16127,7 +16068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6910945219309742035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.46, y: 0, z: 10.72}
+  m_LocalPosition: {x: 13.67, y: 0, z: 8.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

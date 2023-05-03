@@ -270,15 +270,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 0101080000006300680069006c006400720065006e002f0000000001390000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e0049004c006f00630061006c0069007a006100740069006f006e0043006f006d0070006f006e0065006e0074005b005d002c0020004c006f00630061006c0069007a006100740069006f006e0000000000060100000000000000022f01000000013c0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e0054004d00500072006f00550047005500490043006f006d0070006f006e0065006e0074005f0046006f006e007400530069007a0065002c0020004c006f00630061006c0069007a006100740069006f006e00010000000b010400000074006500780074000000000001010900000066006f006e007400530069007a00650073002f02000000012f0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e004c006f00630061006c0069007a006500640049006e0074005b005d002c0020004c006f00630061006c0069007a006100740069006f006e0002000000060200000000000000042f03000000012d0000004c006f00630061006c0069007a006100740069006f006e004d006f00640075006c0065002e004c006f00630061006c0069007a006500640049006e0074002c0020004c006f00630061006c0069007a006100740069006f006e001d01080000006c0061006e00670075006100670065000a00000000000000170105000000760061006c007500650028000000050430030000001d01080000006c0061006e00670075006100670065001e00000000000000170105000000760061006c007500650026000000050705050705
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 8016953407358759912}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: children
+      Entry: 7
+      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|LocalizationModule.TMProUGUIComponent_FontSize, Localization
+    - Name: text
+      Entry: 10
+      Data: 0
+    - Name: fontSizes
+      Entry: 7
+      Data: 2|LocalizationModule.LocalizedInt[], Localization
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: LocalizationModule.LocalizedInt, Localization
+    - Name: language
+      Entry: 3
+      Data: 10
+    - Name: value
+      Entry: 3
+      Data: 40
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: LocalizationModule.LocalizedInt, Localization
+    - Name: language
+      Entry: 3
+      Data: 30
+    - Name: value
+      Entry: 3
+      Data: 38
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &8016953406836454291
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,21 +636,22 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3502117102001609714, guid: 2cfd6be5c35eb4ec3b1c4cbed23564da,
+        type: 3}
     - target: {fileID: 3502117102001609714, guid: 2cfd6be5c35eb4ec3b1c4cbed23564da,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3502117102001609714, guid: 2cfd6be5c35eb4ec3b1c4cbed23564da,
         type: 3}
       propertyPath: serializationData.SerializedBytes.Array.size
-      value: 938
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3502117102001609714, guid: 2cfd6be5c35eb4ec3b1c4cbed23564da,
         type: 3}
       propertyPath: serializationData.SerializationNodes.Array.size
-      value: 0
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 3502117102001609714, guid: 2cfd6be5c35eb4ec3b1c4cbed23564da,
         type: 3}

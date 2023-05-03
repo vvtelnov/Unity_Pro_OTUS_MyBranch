@@ -1,24 +1,27 @@
 ///Нарушение принципа OCP.
-// public sealed class UnitSelection {
-//     
-//     private List<object> selectedUnits;
-//
-//     public void Move(Vector3 position) {
-//         foreach (var unit in selectedUnits) {
-//             if (unit is IArcher archer) archer.Run(position);
-//             if (unit is IKnight knight) knight.Move(position);
-//             if (unit is IMage mage) mage.Teleport(position);
-//         }
-//     }
-//
-//     public void Attack(GameObject target) {
-//         foreach (var unit in selectedUnits) {
-//             if (unit is IArcher archer) archer.Shoot(target);
-//             if (unit is IKnight knight) knight.Fight(target);
-//             if (unit is IMage mage) mage.Spell(target);
-//         }
-//     }
-// }
+
+
+
+    // public sealed class UnitSelection {
+    //     
+    //     private List<object> selectedUnits;
+    //
+    //     public void Move(Vector3 position) {
+    //         foreach (var unit in selectedUnits) {
+    //             if (unit is Archer archer) archer.Run(position);
+    //             if (unit is Knight knight) knight.Move(position);
+    //             if (unit is Mage mage) mage.Teleport(position);
+    //         }
+    //     }
+    //
+    //     public void Attack(GameObject target) {
+    //         foreach (var unit in selectedUnits) {
+    //             if (unit is Archer archer) archer.Shoot(target);
+    //             if (unit is Knight knight) knight.Fight(target);
+    //             if (unit is Mage mage) mage.Spell(target);
+    //         }
+    //     }
+    // }
 
 ///ПРАВИЛЬНОЕ ИСПОЛЬЗОВАНИЕ
 // public interface IUnitSelect {
