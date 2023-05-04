@@ -2,6 +2,6 @@ namespace Game.App
 {
     public interface IGameStartListener
     {
-        void OnStartGame(GameContainer gameContainer);
+        void OnStartGame(GameFacade gameFacade);
     }
 }

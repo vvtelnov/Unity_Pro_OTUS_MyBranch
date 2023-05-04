@@ -4,7 +4,7 @@ namespace Game.Tutorial.App
 {
     public sealed class TutorialAnalyticsTracker : IGameStartListener
     {
-        void IGameStartListener.OnStartGame(GameContainer gameContainer)
+        void IGameStartListener.OnStartGame(GameFacade gameFacade)
         {
             var tutorialManager = TutorialManager.Instance;
             if (tutorialManager.IsCompleted)

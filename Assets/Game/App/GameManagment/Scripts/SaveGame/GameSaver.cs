@@ -21,7 +21,7 @@ namespace Game.App
             this.listeners = listeners;
         }
 
-        void IGameStartListener.OnStartGame(GameContainer gameContainer)
+        void IGameStartListener.OnStartGame(GameFacade gameFacade)
         {
             this.remainingSeconds = SAVE_PERIOD_IN_SECONDS;
 
@@ -30,7 +30,7 @@ namespace Game.App
             this.applicationManager.OnQuit += this.OnQuitApplication;
         }
 
-        void IGameStopListener.OnStopGame(GameContainer gameContainer)
+        void IGameStopListener.OnStopGame(GameFacade gameFacade)
         {
             this.applicationManager.OnUpdate -= this.OnApplicationUpdate;
             this.applicationManager.OnPaused -= this.OnApplicationPaused;

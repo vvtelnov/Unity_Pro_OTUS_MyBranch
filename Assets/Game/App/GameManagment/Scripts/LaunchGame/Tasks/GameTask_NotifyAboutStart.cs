@@ -5,14 +5,14 @@ namespace Game.App
 {
     public sealed class GameTask_NotifyAboutStart : ILoadingTask
     {
-        private readonly GameContainer gameContainer;
+        private readonly GameFacade gameFacade;
 
         private readonly IGameStartListener[] startListeners;
         
         [ServiceInject]
-        public GameTask_NotifyAboutStart(GameContainer gameContainer, IGameStartListener[] startListeners)
+        public GameTask_NotifyAboutStart(GameFacade gameFacade, IGameStartListener[] startListeners)
         {
-            this.gameContainer = gameContainer;
+            this.gameFacade = gameFacade;
             this.startListeners = startListeners;
         }
     
@@ -21,7 +21,7 @@ namespace Game.App
             for (int i = 0, count = this.startListeners.Length; i < count; i++)
             {
                 var listener = this.startListeners[i];
-                listener.OnStartGame(this.gameContainer);
+                listener.OnStartGame(this.gameFacade);
             }
 
             callback?.Invoke(LoadingResult.Success());

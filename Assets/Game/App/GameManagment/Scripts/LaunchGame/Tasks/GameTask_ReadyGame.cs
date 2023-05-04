@@ -6,17 +6,17 @@ namespace Game.App
 {
     public sealed class GameTask_ReadyGame : ILoadingTask
     {
-        private readonly GameContainer gameContainer;
+        private readonly GameFacade gameFacade;
 
         [ServiceInject]
-        public GameTask_ReadyGame(GameContainer gameContainer)
+        public GameTask_ReadyGame(GameFacade gameFacade)
         {
-            this.gameContainer = gameContainer;
+            this.gameFacade = gameFacade;
         }
 
         public void Do(Action<LoadingResult> callback)
         {
-            this.gameContainer.ReadyGame();
+            this.gameFacade.ReadyGame();
             callback.Invoke(LoadingResult.Success());
         }
     }

@@ -25,9 +25,9 @@ namespace Game.App
             this.realtimeClock.OnResumed -= this.OnSessionResumed;
         }
 
-        void IGameLoadDataListener.OnLoadData(GameContainer gameContainer)
+        void IGameLoadDataListener.OnLoadData(GameFacade gameFacade)
         {
-            this.timeShiftEmitter = gameContainer.GetService<TimeShiftEmitter>();
+            this.timeShiftEmitter = gameFacade.GetService<TimeShiftEmitter>();
         }
 
         private void OnSessionStarted(long pauseSeconds)

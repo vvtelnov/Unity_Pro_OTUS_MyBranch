@@ -5,17 +5,17 @@ namespace Game.App
 {
     public sealed class GameTask_InitGame : ILoadingTask
     {
-        private readonly GameContainer gameContainer;
+        private readonly GameFacade gameFacade;
 
         [ServiceInject]
-        public GameTask_InitGame(GameContainer gameContainer)
+        public GameTask_InitGame(GameFacade gameFacade)
         {
-            this.gameContainer = gameContainer;
+            this.gameFacade = gameFacade;
         }
 
         public void Do(Action<LoadingResult> callback)
         {
-            this.gameContainer.InitGame();
+            this.gameFacade.InitGame();
             callback?.Invoke(LoadingResult.Success());
         }
     }

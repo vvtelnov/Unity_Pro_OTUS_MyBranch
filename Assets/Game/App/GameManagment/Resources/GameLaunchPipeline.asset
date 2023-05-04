@@ -15,8 +15,6 @@ MonoBehaviour:
   tasks:
   - script: {fileID: 11500000, guid: fdec4862bad74363909105cf4e9519a0, type: 3}
     className: Game.App.GameTask_LoadScene
-  - script: {fileID: 11500000, guid: 926a0ab90f0b4cbabe6ac1a85562aa5e, type: 3}
-    className: Game.App.GameTask_LoadInterface
   - script: {fileID: 11500000, guid: b15689d420c6462894953ca716e89625, type: 3}
     className: Game.App.GameTask_SetupGame
   - script: {fileID: 11500000, guid: d754ddf9a4694df6a8a470e8cef5d226, type: 3}
@@ -30,7 +28,7 @@ MonoBehaviour:
   - script: {fileID: 11500000, guid: e0869c285d5f40d9bf78e8cc4cd8c577, type: 3}
     className: Game.App.GameTask_ReadyGame
   - script: {fileID: 11500000, guid: 3cb545dbad7c4133b4eb24329ce3bf88, type: 3}
-    className: Game.App.LoadingTask_StartRealtimeSession
+    className: Game.App.LoadingTask_StartRealtimeClock
   - script: {fileID: 11500000, guid: 89946aa344824739bf9962a60141b63f, type: 3}
     className: Game.App.GameTask_NotifyAboutStart
   - script: {fileID: 11500000, guid: 6af330d2ad4d475d914d1ac0e5ad95f0, type: 3}

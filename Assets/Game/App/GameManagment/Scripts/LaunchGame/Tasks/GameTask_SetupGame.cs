@@ -8,18 +8,18 @@ namespace Game.App
 {
     public sealed class GameTask_SetupGame : ILoadingTask
     {
-        private readonly GameContainer gameContainer;
+        private readonly GameFacade gameFacade;
 
         [ServiceInject]
-        public GameTask_SetupGame(GameContainer gameContainer)
+        public GameTask_SetupGame(GameFacade gameFacade)
         {
-            this.gameContainer = gameContainer;
+            this.gameFacade = gameFacade;
         }
     
         public void Do(Action<LoadingResult> callback)
         {
             var gameContext = GameObject.FindObjectOfType<GameContext>();
-            this.gameContainer.SetupGame(gameContext);
+            this.gameFacade.SetupGame(gameContext);
             callback?.Invoke(LoadingResult.Success());
         }
     }

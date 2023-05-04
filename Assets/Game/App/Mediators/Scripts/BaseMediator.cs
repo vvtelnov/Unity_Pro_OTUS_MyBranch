@@ -10,10 +10,10 @@ namespace Game.App
 
         private TGameService gameService;
 
-        void IGameLoadDataListener.OnLoadData(GameContainer gameContainer)
+        void IGameLoadDataListener.OnLoadData(GameFacade gameFacade)
         {
             this.repository = ServiceLocator.GetService<TRepository>();
-            this.gameService = gameContainer.GetService<TGameService>();
+            this.gameService = gameFacade.GetService<TGameService>();
             this.OnLoadData(this.repository, this.gameService);
         }
 

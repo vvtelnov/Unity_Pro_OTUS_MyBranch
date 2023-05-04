@@ -5,14 +5,14 @@ namespace Game.App
 {
     public sealed class GameTask_LoadGameData : ILoadingTask
     {
-        private readonly GameContainer gameContainer;
+        private readonly GameFacade gameFacade;
 
         private readonly IGameLoadDataListener[] loadListeners;
 
         [ServiceInject]
-        public GameTask_LoadGameData(GameContainer gameContainer, IGameLoadDataListener[] loadListeners)
+        public GameTask_LoadGameData(GameFacade gameFacade, IGameLoadDataListener[] loadListeners)
         {
-            this.gameContainer = gameContainer;
+            this.gameFacade = gameFacade;
             this.loadListeners = loadListeners;
         }
 
@@ -21,7 +21,7 @@ namespace Game.App
             for (int i = 0, count = this.loadListeners.Length; i < count; i++)
             {
                 var listener = this.loadListeners[i];
-                listener.OnLoadData(this.gameContainer);
+                listener.OnLoadData(this.gameFacade);
             }
 
             callback?.Invoke(LoadingResult.Success());

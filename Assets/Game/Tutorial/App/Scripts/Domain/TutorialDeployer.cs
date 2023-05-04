@@ -13,12 +13,12 @@ namespace Game.Tutorial.App
 
         private TutorialAssetSupplier assetSupplier;
 
-        private GameContainer gameContainer;
+        private GameFacade gameFacade;
 
         void IAppInitListener.Init()
         {
             this.assetSupplier = ServiceLocator.GetService<TutorialAssetSupplier>();
-            this.gameContainer = ServiceLocator.GetService<GameContainer>();
+            this.gameFacade = ServiceLocator.GetService<GameFacade>();
         }
 
         public async Task DeployTutorial()
@@ -29,36 +29,24 @@ namespace Game.Tutorial.App
                 return;
             }
 
-            await this.InstallEngine();
-            await this.InstallInterface();
-        }
-
-        private async Task InstallEngine()
-        {
-            var prefab = await this.assetSupplier.LoadTutorialEngine();
-            var engine = GameObject.Instantiate(prefab);
+            //Load tutorial engine:
+            var enginePrefab = await this.assetSupplier.LoadTutorialEngine();
+            var engine = GameObject.Instantiate(enginePrefab);
             engine.name = ENGINE_NAME;
             
-            var gameElement = engine.GetComponent<IGameElementGroup>();
-            var gameService = engine.GetComponent<IGameServiceGroup>();
-
-            this.gameContainer.RegisterElement(gameElement);
-            this.gameContainer.RegisterService(gameService);
-        }
-
-        private async Task InstallInterface()
-        {
-            var prefab = await this.assetSupplier.LoadTutorialInterface();
-
-            var canvasService = this.gameContainer.GetService<GUICanvasService>();
-            var gui = GameObject.Instantiate(prefab, canvasService.RootTransform);
-            gui.name = prefab.name;
+            //Load tutorial gui:
+            var guiPrefab = await this.assetSupplier.LoadTutorialInterface();
+            var canvasService = this.gameFacade.GetService<GUICanvasService>();
+            var gui = GameObject.Instantiate(guiPrefab, canvasService.RootTransform);
+            gui.name = guiPrefab.name;
             
-            var gameElement = gui.GetComponent<IGameElementGroup>();
-            var gameService = gui.GetComponent<IGameServiceGroup>();
+            //Register services:
+            this.gameFacade.RegisterService(engine.GetComponent<IGameServiceGroup>());
+            this.gameFacade.RegisterService(gui.GetComponent<IGameServiceGroup>());
 
-            this.gameContainer.RegisterElement(gameElement);
-            this.gameContainer.RegisterService(gameService);
+            //Register elements:
+            this.gameFacade.RegisterElement(engine.GetComponent<IGameElementGroup>());
+            this.gameFacade.RegisterElement(gui.GetComponent<IGameElementGroup>());
         }
     }
 }

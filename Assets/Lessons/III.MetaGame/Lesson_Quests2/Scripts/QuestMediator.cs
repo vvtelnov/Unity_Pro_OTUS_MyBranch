@@ -18,9 +18,9 @@ namespace Lessons.Meta
             this.assetSupplier = assetSupplier;
         }
 
-        void IGameLoadDataListener.OnLoadData(GameContainer gameContainer)
+        void IGameLoadDataListener.OnLoadData(GameFacade gameFacade)
         {
-            this.questManager = gameContainer.GetService<QuestManager>();
+            this.questManager = gameFacade.GetService<QuestManager>();
 
             if (this.repository.LoadQuest(out var data))
             {
