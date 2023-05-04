@@ -24,132 +24,102 @@ MonoBehaviour:
           value: UPGRADE
         - language: 30
           value: "\u0423\u041B\u0423\u0427\u0428\u0418\u0422\u042C"
-        - language: 0
-          value: SETTINGS
-        - language: 10
-          value: SETTINGS
-        - language: 30
-          value: "\u041D\u0410\u0421\u0422\u0420\u041E\u0419\u041A\u0418"
       - key: MAX
         translations:
         - language: 10
           value: MAX
         - language: 30
           value: "\u041C\u0410\u041A\u0421"
-        - language: 0
-          value: SOUND
-        - language: 10
-          value: SOUND
-        - language: 30
-          value: "\u0417\u0412\u0423\u041A"
       - key: SETTINGS
         translations:
         - language: 10
           value: SETTINGS
         - language: 30
           value: "\u041D\u0410\u0421\u0422\u0420\u041E\u0419\u041A\u0418"
-        - language: 0
-          value: MUSIC
-        - language: 10
-          value: MUSIC
-        - language: 30
-          value: "\u041C\u0423\u0417\u042B\u041A\u0410"
       - key: SOUND
         translations:
         - language: 10
           value: SOUND
         - language: 30
           value: "\u0417\u0412\u0423\u041A"
-        - language: 0
-          value: GRAPHICS
-        - language: 10
-          value: GRAPHICS
-        - language: 30
-          value: "\u0413\u0420\u0410\u0424\u0418\u041A\u0410"
       - key: MUSIC
         translations:
         - language: 10
           value: MUSIC
         - language: 30
           value: "\u041C\u0423\u0417\u042B\u041A\u0410"
-        - language: 0
-          value: LANGUAGE
-        - language: 10
-          value: LANGUAGE
-        - language: 30
-          value: "\u042F\u0417\u042B\u041A"
       - key: GRAPHICS
         translations:
         - language: 10
           value: GRAPHICS
         - language: 30
           value: "\u0413\u0420\u0410\u0424\u0418\u041A\u0410"
-        - language: 0
-          value: 
-        - language: 10
-          value: 
-        - language: 30
-          value: 
       - key: LANGUAGE
         translations:
         - language: 10
           value: LANGUAGE
         - language: 30
           value: "\u042F\u0417\u042B\u041A"
-        - language: 0
-          value: 
-        - language: 10
-          value: 
-        - language: 30
-          value: 
       - key: GET
         translations:
         - language: 10
           value: GET
         - language: 30
           value: "\u041F\u041E\u041B\u0423\u0427\u0418\u0422\u042C"
-        - language: 0
-          value: 
-        - language: 10
-          value: 
-        - language: 30
-          value: 
       - key: PROCESSING
         translations:
         - language: 10
           value: PROCESSING
         - language: 30
           value: "\u0412 \u041F\u0420\u041E\u0426\u0415\u0421\u0421\u0415"
-        - language: 0
-          value: 
-        - language: 10
-          value: 
-        - language: 30
-          value: 
       - key: LEVEL
         translations:
         - language: 10
           value: Level
         - language: 30
           value: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C"
-        - language: 0
-          value: 
-        - language: 10
-          value: 
-        - language: 30
-          value: 
       - key: VALUE
         translations:
         - language: 10
           value: Value
         - language: 30
           value: "\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435"
-        - language: 0
-          value: 
+      - key: WORKBENCH
+        translations:
         - language: 10
-          value: 
+          value: WORKBENCH
         - language: 30
-          value: 
+          value: "\u0412\u0415\u0420\u0421\u0422\u0410\u041A"
+      - key: INVENTORY
+        translations:
+        - language: 10
+          value: INVENTORY
+        - language: 30
+          value: "\u0418\u041D\u0412\u0415\u041D\u0422\u0410\u0420\u042C"
+      - key: CONSUME
+        translations:
+        - language: 10
+          value: CONSUME
+        - language: 30
+          value: "\u041F\u0420\u0418\u041C\u0415\u041D\u0418\u0422\u042C"
+      - key: CRAFT
+        translations:
+        - language: 10
+          value: CRAFT
+        - language: 30
+          value: "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"
+      - key: MARKET
+        translations:
+        - language: 10
+          value: MARKET
+        - language: 30
+          value: "\u041C\u0410\u0413\u0410\u0417\u0418\u041D"
+      - key: BUY
+        translations:
+        - language: 10
+          value: BUY
+        - language: 30
+          value: "\u041A\u0423\u041F\u0418\u0422\u042C"
     - name: HeroUpgrades
       entities:
       - key: TITLE
