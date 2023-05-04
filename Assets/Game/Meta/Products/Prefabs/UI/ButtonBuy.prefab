@@ -147,8 +147,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BUY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 47f5e33049f4242d7a1ee5d2b03419cc, type: 2}
-  m_sharedMaterial: {fileID: 6070061758891052490, guid: 47f5e33049f4242d7a1ee5d2b03419cc,
+  m_fontAsset: {fileID: 11400000, guid: ef035577179af4b13b6c10edfbf6586a, type: 2}
+  m_sharedMaterial: {fileID: 7738102052382203216, guid: ef035577179af4b13b6c10edfbf6586a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 2940450987557464118}
   - component: {fileID: 5056843099764659883}
   - component: {fileID: 4319794493636721786}
+  - component: {fileID: 3267565958824733104}
   m_Layer: 5
   m_Name: ButtonBuy
   m_TagString: Untagged
@@ -416,6 +417,29 @@ MonoBehaviour:
   priceItem1: {fileID: 4466613010275218287}
   priceItem2: {fileID: 3266308662206756858}
   state: 1
+--- !u!114 &3267565958824733104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4319794493636721791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children:
+  - rid: 8946401860949639419
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639419
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|BUY
+        text: {fileID: 4319794493503411012}
+        fontSizes: []
 --- !u!1001 &5706735419896058031
 PrefabInstance:
   m_ObjectHideFlags: 0

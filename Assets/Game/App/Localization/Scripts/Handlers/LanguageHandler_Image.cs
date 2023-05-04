@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace LocalizationModule
 {
     [Serializable]
-    public class ImageComponent_Sprite : ILocalizationComponent
+    public sealed class LanguageHandler_Image : ILanguageHandler
     {
         [SerializeField]
         private Image image;

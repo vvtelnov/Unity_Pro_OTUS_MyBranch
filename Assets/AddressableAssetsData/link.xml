@@ -94,14 +94,12 @@
     <type fullname="Game.UI.ScrollRectAnimationLocker" preserve="all" />
     <type fullname="Game.UI.StackView" preserve="all" />
     <type fullname="Game.UISoundComponent" preserve="all" />
-    <type fullname="Game.GameEngine.Mechanics.Component_MoneyPrice" preserve="nothing" serialized="true" />
-    <type fullname="Game.GameEngine.Mechanics.Component_ResourcePrice" preserve="nothing" serialized="true" />
     <type fullname="Game.GameEngine.PopupCatalog/PopupInfo" preserve="nothing" serialized="true" />
     <type fullname="Game.GameEngine.UIAnimations/FlySettings" preserve="nothing" serialized="true" />
     <type fullname="Game.GameEngine.UIAnimations/JumpSettings" preserve="nothing" serialized="true" />
     <type fullname="Game.LanguageInfo" preserve="nothing" serialized="true" />
+    <type fullname="Game.Localization.LanguageHandler_Text" preserve="nothing" serialized="true" />
     <type fullname="Game.Meta.BoosterMetadata" preserve="nothing" serialized="true" />
-    <type fullname="Game.Meta.Component_BoosterInfo" preserve="nothing" serialized="true" />
     <type fullname="Game.Meta.MissionListPresenter/MissionItem" preserve="nothing" serialized="true" />
     <type fullname="Game.Meta.MissionPresenter" preserve="nothing" serialized="true" />
     <type fullname="Game.GameEngine.Animation.AnimatorMachine" preserve="nothing" serialized="true" />
@@ -169,7 +167,6 @@
   <assembly fullname="InventorySystem, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Game.GameEngine.InventorySystem.InventoryItemConfig" preserve="all" />
     <type fullname="Game.GameEngine.InventorySystem.InventoryItemReceipt" preserve="all" />
-    <type fullname="Game.GameEngine.InventorySystem.Component_InventoryItem" preserve="nothing" serialized="true" />
     <type fullname="Game.GameEngine.InventorySystem.InventoryItemIngredient" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Products, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

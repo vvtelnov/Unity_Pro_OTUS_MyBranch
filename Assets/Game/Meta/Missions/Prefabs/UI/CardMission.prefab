@@ -269,10 +269,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  children: []
+  children:
+  - rid: 8946401860949639422
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8946401860949639422
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Missions|EASY
+        text: {fileID: 8016953405911724747}
+        fontSizes: []
 --- !u!1 &8016953406836454291
 GameObject:
   m_ObjectHideFlags: 0

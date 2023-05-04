@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LocalizationModule
 {
-    public interface ILocalizationComponent
+    public interface ILanguageHandler
     {
         void UpdateLanguage(SystemLanguage language);
     }

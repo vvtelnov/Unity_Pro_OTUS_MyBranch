@@ -615,6 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
         type: 3}
+      propertyPath: managedReferences[8946401860949639421]
+      value: Assets Game.Localization.LanguageHandler_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
+        type: 3}
       propertyPath: serializationData.SerializedBytes.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -2478,6 +2483,16 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.SerializedFormat
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339523343617511525, guid: 517cb1a329689486e898c392ab2fa190,
+        type: 3}
+      propertyPath: managedReferences[8946401860949639423]
+      value: Assets Game.Localization.LanguageHandler_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339523343617511525, guid: 517cb1a329689486e898c392ab2fa190,
+        type: 3}
+      propertyPath: managedReferences[8946401860949639424]
+      value: Assets Game.Localization.LanguageHandler_Text
       objectReference: {fileID: 0}
     - target: {fileID: 3339523343617511525, guid: 517cb1a329689486e898c392ab2fa190,
         type: 3}
@@ -5766,16 +5781,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  children: []
+  children:
+  - rid: 8946401860949639420
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8946401860949639420
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Missions|TITLE
+        text: {fileID: 5620140177692554888}
+        fontSizes: []
 --- !u!224 &5620140175806709651 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7698418042032367386, guid: 7317cd9ec4ceb4b65a1f74710a619f76,
     type: 3}
   m_PrefabInstance: {fileID: 2821779895624931465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5620140177692554888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7698418041202404865, guid: 7317cd9ec4ceb4b65a1f74710a619f76,
+    type: 3}
+  m_PrefabInstance: {fileID: 2821779895624931465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4399212130212430857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5793,6 +5827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.SerializedFormat
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
+        type: 3}
+      propertyPath: managedReferences[8946401860949639422].key
+      value: Missions|HARD
       objectReference: {fileID: 0}
     - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
         type: 3}
@@ -10857,6 +10896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.SerializedFormat
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
+        type: 3}
+      propertyPath: managedReferences[8946401860949639422].key
+      value: Missions|NORMAL
       objectReference: {fileID: 0}
     - target: {fileID: 3009461853830253220, guid: 517cb1a329689486e898c392ab2fa190,
         type: 3}

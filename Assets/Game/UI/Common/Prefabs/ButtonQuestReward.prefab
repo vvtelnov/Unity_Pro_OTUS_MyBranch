@@ -581,10 +581,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  children: []
+  children:
+  - rid: 8946401860949639425
+  - rid: 8946401860949639426
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8946401860949639425
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|PROCESSING
+        text: {fileID: 8148273055160322221}
+        fontSizes: []
+    - rid: 8946401860949639426
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|GET
+        text: {fileID: 5641988283011806576}
+        fontSizes: []
 --- !u!114 &8834446999983404775
 MonoBehaviour:
   m_ObjectHideFlags: 0

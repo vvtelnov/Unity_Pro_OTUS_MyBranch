@@ -250,85 +250,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 5803435281882190023}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assembly-CSharp
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|GRAPHICS
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 3|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 52
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639430
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639430
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|GRAPHICS
+        text: {fileID: 5803435281882190023}
+        fontSizes:
+        - language: 10
+          value: 52
+        - language: 30
+          value: 48
 --- !u!114 &3128549890774854112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,85 +466,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 5390122327074677897}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assembly-CSharp
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|SOUND
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 3|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 52
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639428
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639428
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|SOUND
+        text: {fileID: 5390122327074677897}
+        fontSizes:
+        - language: 10
+          value: 52
+        - language: 30
+          value: 48
 --- !u!114 &4472354926828737866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,85 +818,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 5390122326157828369}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assembly-CSharp
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|MUSIC
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 3|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 52
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639429
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639429
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|MUSIC
+        text: {fileID: 5390122326157828369}
+        fontSizes:
+        - language: 10
+          value: 52
+        - language: 30
+          value: 48
 --- !u!114 &82556084377860202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,85 +1342,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 2419261052693845003}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assembly-CSharp
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|LANGUAGE
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 3|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 52
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639431
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639431
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|LANGUAGE
+        text: {fileID: 2419261052693845003}
+        fontSizes:
+        - language: 10
+          value: 52
+        - language: 30
+          value: 48
 --- !u!1001 &689723511545920604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1773,40 +1517,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 7152883385033953885}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assembly-CSharp
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|SETTINGS
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639427
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639427
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|SETTINGS
+        text: {fileID: 7152883385033953885}
+        fontSizes: []
 --- !u!1001 &910569050973946153
 PrefabInstance:
   m_ObjectHideFlags: 0

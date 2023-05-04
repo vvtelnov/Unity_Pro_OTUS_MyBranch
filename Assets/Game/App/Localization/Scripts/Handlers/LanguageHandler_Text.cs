@@ -6,20 +6,24 @@ using UnityEngine;
 namespace Game.Localization
 {
     [Serializable]
-    public sealed class TMProUGUIComponent_TranslationText : ILocalizationComponent
+    public sealed class LanguageHandler_Text : ILanguageHandler
     {
-        [SerializeField]
-        private TextMeshProUGUI text;
-
         [TranslationKey]
         [SerializeField]
         private string key;
+        
+        [SerializeField]
+        private TextMeshProUGUI text;
 
-        public TMProUGUIComponent_TranslationText()
+        [Space]
+        [SerializeField]
+        private LocalizedInt[] fontSizes = new LocalizedInt[0];
+
+        public LanguageHandler_Text()
         {
         }
 
-        public TMProUGUIComponent_TranslationText(TextMeshProUGUI text, string key)
+        public LanguageHandler_Text(TextMeshProUGUI text, string key)
         {
             this.text = text;
             this.key = key;
@@ -30,6 +34,11 @@ namespace Game.Localization
             if (this.text != null)
             {
                 this.text.text = LocalizationManager.GetText(this.key, language);
+            }
+            
+            if (this.fontSizes.FindInt(language, out var value))
+            {
+                this.text.fontSize = value;
             }
         }   
     }

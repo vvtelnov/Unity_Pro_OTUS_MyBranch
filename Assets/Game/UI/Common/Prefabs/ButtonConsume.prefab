@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 6713471270188580879}
   - component: {fileID: 6713471270188580878}
   - component: {fileID: 6713471270188580876}
+  - component: {fileID: 1740318432630502199}
   m_Layer: 5
   m_Name: ButtonConsume
   m_TagString: Untagged
@@ -259,8 +260,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.UISoundComponent, Assembly-CSharp
-        m_MethodName: PlayAccept
+        m_TargetAssemblyTypeName: Game.UISoundComponent, Assets
+        m_MethodName: Accept
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -282,3 +283,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1740318432630502199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713471270188580872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  children:
+  - rid: 8946401860949639416
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639416
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|CONSUME
+        text: {fileID: 6713471269143027201}
+        fontSizes: []

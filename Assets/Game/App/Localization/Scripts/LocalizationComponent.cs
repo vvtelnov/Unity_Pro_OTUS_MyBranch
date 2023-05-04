@@ -9,7 +9,7 @@ namespace Game.Localization
     public class LocalizationComponent : MonoBehaviour
     {
         [SerializeReference]
-        private ILocalizationComponent[] children = new ILocalizationComponent[0];
+        private ILanguageHandler[] children = new ILanguageHandler[0];
 
         protected virtual void OnEnable()
         {
@@ -26,8 +26,8 @@ namespace Game.Localization
         {
             for (int i = 0, count = this.children.Length; i < count; i++)
             {
-                var component = this.children[i];
-                component.UpdateLanguage(language);
+                var handler = this.children[i];
+                handler.UpdateLanguage(language);
             }
         }
     }

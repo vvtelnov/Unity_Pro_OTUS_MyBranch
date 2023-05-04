@@ -855,27 +855,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.IComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children:
+  - rid: 8946401860949639414
+  references:
+    version: 2
+    RefIds:
+    - rid: 8946401860949639414
+      type: {class: LanguageHandler_Text, ns: Game.Localization, asm: Assets}
+      data:
+        key: Common|INVENTORY
+        text: {fileID: 7289018261747808615}
+        fontSizes: []
+--- !u!114 &7289018261747808615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7698418041202404865, guid: 7317cd9ec4ceb4b65a1f74710a619f76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1148854509251057510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7007973063692066480
 PrefabInstance:
   m_ObjectHideFlags: 0
