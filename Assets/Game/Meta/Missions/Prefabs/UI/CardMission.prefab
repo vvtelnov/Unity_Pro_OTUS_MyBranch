@@ -269,73 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 8016953407358759912}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|LocalizationModule.TMProUGUIComponent_FontSize, Localization
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: fontSizes
-      Entry: 7
-      Data: 2|LocalizationModule.LocalizedInt[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 10
-    - Name: value
-      Entry: 3
-      Data: 40
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: LocalizationModule.LocalizedInt, Localization
-    - Name: language
-      Entry: 3
-      Data: 30
-    - Name: value
-      Entry: 3
-      Data: 38
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8016953406836454291
 GameObject:
   m_ObjectHideFlags: 0

@@ -244,53 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 2007250645121875484}
-    - {fileID: 5271573841072319478}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Common|UPGRADE
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 1
-    - Name: key
-      Entry: 1
-      Data: Common|MAX
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &2007250644821309958
 GameObject:
   m_ObjectHideFlags: 0

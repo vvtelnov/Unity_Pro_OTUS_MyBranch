@@ -22,7 +22,6 @@ namespace Game.App
 
         private static Task<LoadingResult> DoTask(Type taskType)
         {
-            Debug.Log($"DO TASK {taskType.Name}");
             var tcs = new TaskCompletionSource<LoadingResult>();
             var loadingTask = (ILoadingTask) ServiceInjector.Instantiate(taskType);
             loadingTask.Do(result => tcs.SetResult(result));

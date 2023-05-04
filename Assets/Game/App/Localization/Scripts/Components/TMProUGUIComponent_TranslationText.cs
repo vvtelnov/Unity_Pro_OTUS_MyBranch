@@ -27,8 +27,10 @@ namespace Game.Localization
 
         public void UpdateLanguage(SystemLanguage language)
         {
-            var text = LocalizationManager.GetText(this.key, language);
-            this.text.text = text;
+            if (this.text != null)
+            {
+                this.text.text = LocalizationManager.GetText(this.key, language);
+            }
         }   
     }
 }

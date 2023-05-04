@@ -1,15 +1,14 @@
 ﻿using Game.App;
 using LocalizationModule;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 // ReSharper disable FieldCanBeMadeReadOnly.Local
 
 namespace Game.Localization
 {
-    public class LocalizationComponent : SerializedMonoBehaviour
+    public class LocalizationComponent : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeReference]
         private ILocalizationComponent[] children = new ILocalizationComponent[0];
 
         protected virtual void OnEnable()

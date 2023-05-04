@@ -5766,58 +5766,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e81316abb472643b22ecfb768337de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 5620140177692554888}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: children
-      Entry: 7
-      Data: 0|LocalizationModule.ILocalizationComponent[], Localization
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|Game.Localization.TMProUGUIComponent_TranslationText, Assets
-    - Name: text
-      Entry: 10
-      Data: 0
-    - Name: key
-      Entry: 1
-      Data: Missions|TITLE
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  children: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!224 &5620140175806709651 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7698418042032367386, guid: 7317cd9ec4ceb4b65a1f74710a619f76,
     type: 3}
   m_PrefabInstance: {fileID: 2821779895624931465}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5620140177692554888 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7698418041202404865, guid: 7317cd9ec4ceb4b65a1f74710a619f76,
-    type: 3}
-  m_PrefabInstance: {fileID: 2821779895624931465}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4399212130212430857
 PrefabInstance:
   m_ObjectHideFlags: 0
