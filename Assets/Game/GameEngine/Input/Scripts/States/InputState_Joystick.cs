@@ -1,7 +1,7 @@
 using Elementary;
 using InputModule;
 
-namespace Game.Gameplay.Player
+namespace Game.GameEngine
 {
     public sealed class InputState_Joystick : IState
     {

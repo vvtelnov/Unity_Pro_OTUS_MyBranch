@@ -210,9 +210,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 727717441516978425}
-  - component: {fileID: 727717441516978406}
+  - component: {fileID: 8176222990891014208}
   m_Layer: 0
-  m_Name: LoadInterface
+  m_Name: LoadPopups
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,7 +233,7 @@ Transform:
   m_Father: {fileID: 727717441783854552}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &727717441516978406
+--- !u!114 &8176222990891014208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,9 +242,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 727717441516978424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0824b03e45d4910bba7502ebc1e5044, type: 3}
+  m_Script: {fileID: 11500000, guid: 07260535ac8d4d029c2a07a25685bb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupCatalog: {fileID: 11400000, guid: a457628a0e63e47a1916628491c193fe, type: 2}
 --- !u!1 &727717441783854555
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3cba18d7fa94eb5a277e22a5eb5caec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onLocalMode:
+  debugMode: 0
+  onDebugMode:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 727717440788695285}
@@ -320,10 +322,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 727717441516978406}
-        m_TargetAssemblyTypeName: MyLittleUniverse.Development.GameSceneTools_LoadInterface,
-          Assembly-CSharp
-        m_MethodName: LoadInteface
+      - m_Target: {fileID: 8176222990891014208}
+        m_TargetAssemblyTypeName: Game.GameEngine.Development.EditorScript_PreloadPopups,
+          Assets
+        m_MethodName: PreloadPrefabs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -346,7 +348,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  onGlobalMode:
+  onReleaseMode:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 727717440788695285}

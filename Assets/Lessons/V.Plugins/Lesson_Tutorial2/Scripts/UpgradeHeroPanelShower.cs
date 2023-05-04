@@ -1,7 +1,6 @@
 using System;
 using Game.Tutorial.Gameplay;
 using Game.Tutorial.UI;
-using UnityEngine;
 
 namespace Lessons.Plugins.Lesson_Tutorial2
 {
@@ -12,23 +11,18 @@ namespace Lessons.Plugins.Lesson_Tutorial2
 
         private ScreenTransform screenTransform;
 
-        private MonoBehaviour coroutineDispatcher;
-
         public void Construct(
             UpgradeHeroStepConfig config,
-            ScreenTransform screenTransform,
-            MonoBehaviour coroutineDispatcher
+            ScreenTransform screenTransform
         )
         {
             this.config = config;
             this.screenTransform = screenTransform;
-            this.coroutineDispatcher = coroutineDispatcher;
         }
 
         public void Show()
         {
-            var parent = this.screenTransform.Value;
-            this.coroutineDispatcher.StartCoroutine(this.Show(parent));
+            this.Show(this.screenTransform.Value);
         }
 
         protected override void OnShow()

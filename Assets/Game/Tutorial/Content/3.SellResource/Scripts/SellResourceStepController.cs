@@ -48,7 +48,7 @@ namespace Game.Tutorial
             var targetPosition = this.pointerTransform.position;
             this.pointerManager.ShowPointer(targetPosition, this.pointerTransform.rotation);
             this.navigationManager.StartLookAt(targetPosition);
-            this.StartCoroutine(this.actionPanel.Show(this.screenTransform.Value));
+            this.actionPanel.Show(this.screenTransform.Value);
         }
 
         protected override void OnStop()

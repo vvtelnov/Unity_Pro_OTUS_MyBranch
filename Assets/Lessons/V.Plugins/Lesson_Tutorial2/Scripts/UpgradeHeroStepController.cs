@@ -47,7 +47,7 @@ namespace Lessons.Plugins.Lesson_Tutorial2
             this.popupManager = context.GetService<PopupManager>();
             
             var screenTransform = context.GetService<ScreenTransform>();
-            this.panelShower.Construct(this.stepConfig, screenTransform, this);
+            this.panelShower.Construct(this.stepConfig, screenTransform);
 
             var upgradesManager = context.GetService<UpgradesManager>();
             this.upgradeInspector.Construct(this.stepConfig, upgradesManager);

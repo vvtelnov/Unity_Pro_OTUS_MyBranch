@@ -4,13 +4,13 @@ using InputModule;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game.Gameplay.Player
+namespace Game.GameEngine
 {
     public sealed class InputModule : GameModule
     {
         [GameService, GameElement]
         [ShowInInspector]
-        private InputStateManager stateManager = new();
+        private readonly InputStateManager stateManager = new();
 
         [GameService]
         [SerializeField]
@@ -25,7 +25,6 @@ namespace Game.Gameplay.Player
         {
             this.stateManager.AddState(InputStateId.BASE, new InputState_Joystick(this.joystick));
             this.stateManager.AddState(InputStateId.LOCK, new State());
-            this.stateManager.AddState(InputStateId.DIALOG, new State());
         }
     }
 }

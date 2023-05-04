@@ -10,6 +10,11 @@ namespace Windows
 
         public event Action<TKey> OnPopupHidden;
 
+        public bool HasActivePopups
+        {
+            get { return this.activePopups.Count > 0; }
+        }
+
         private IWindowSupplier<TKey, TPopup> supplier;
 
         private readonly Dictionary<TKey, TPopup> activePopups;

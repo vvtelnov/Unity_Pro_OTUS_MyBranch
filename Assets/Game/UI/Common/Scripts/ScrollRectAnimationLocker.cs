@@ -1,11 +1,12 @@
+#if UNITY_EDITOR
+
 using Windows;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
-    [DisallowMultipleComponent]
-    public sealed class ScrollRect_AnimationHelper : MonoBehaviour
+    public sealed class ScrollRectAnimationLocker : MonoBehaviour
     {
         [SerializeField]
         private ScrollRect rect;
@@ -45,3 +46,5 @@ namespace Game.UI
         }
     }
 }
+
+#endif

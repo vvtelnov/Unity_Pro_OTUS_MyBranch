@@ -1,20 +1,23 @@
 using System;
 using GameSystem;
 using Windows;
+using Game.GameEngine;
 using UnityEngine;
 
 namespace Game.Tutorial.UI
 {
-    public sealed class PopupManager : MonoBehaviour, IWindow.Callback, IGameAttachElement
+    public sealed class PopupManager : MonoBehaviour, IWindow.Callback, IGameConstructElement
     {
         private GameContext gameContext;
+
+        private InputStateManager inputManager;
 
         [SerializeField]
         private Transform rootTransform;
 
-        private Action callback;
-
         private MonoWindow currentPopup;
+
+        private Action callback;
 
         public void Show(MonoWindow prefab, object args = null, Action callback = null)
         {
@@ -31,13 +34,15 @@ namespace Game.Tutorial.UI
                 this.gameContext.RegisterElement(element);
             }
 
+            this.inputManager.SwitchState(InputStateId.LOCK);
             this.currentPopup.Show(args, callback: this);
         }
 
         void IWindow.Callback.OnClose(IWindow popup)
         {
             this.currentPopup.Hide();
-            
+            this.inputManager.SwitchState(InputStateId.BASE);
+
             if (this.currentPopup.TryGetComponent(out IGameElement element))
             {
                 this.gameContext.UnregisterElement(element);
@@ -48,9 +53,10 @@ namespace Game.Tutorial.UI
             this.callback?.Invoke();
         }
 
-        void IGameAttachElement.AttachGame(GameContext context)
+        void IGameConstructElement.ConstructGame(GameContext context)
         {
             this.gameContext = context;
+            this.inputManager = context.GetService<InputStateManager>();
         }
     }
 }

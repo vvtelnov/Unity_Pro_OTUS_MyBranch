@@ -1,6 +1,8 @@
 using System;
+using System.Threading.Tasks;
 using Windows;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.GameEngine
 {
@@ -14,7 +16,18 @@ namespace Game.GameEngine
         [SerializeField]
         private PopupInfo[] popups = Array.Empty<PopupInfo>();
 
-        public MonoWindow LoadPrefab(PopupName name)
+        public async Task PreloadPrefabs()
+        {
+            for (int i = 0, count = this.popups.Length; i < count; i++)
+            {
+                var info = this.popups[i];
+                var handle = info.addressable.LoadAssetAsync<GameObject>();
+                await handle.Task;
+                info.prefab = handle.Result.GetComponent<MonoWindow>();
+            }
+        }
+
+        public MonoWindow GetPrefab(PopupName name)
         {
             for (int i = 0, count = this.popups.Length; i < count; i++)
             {
@@ -35,6 +48,9 @@ namespace Game.GameEngine
             public PopupName name;
             
             [SerializeField]
+            public AssetReference addressable;
+
+            [NonSerialized]
             public MonoWindow prefab;
         }
     }

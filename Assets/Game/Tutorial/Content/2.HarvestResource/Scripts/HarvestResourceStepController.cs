@@ -42,7 +42,7 @@ namespace Game.Tutorial
             TutorialAnalytics.LogEventAndCache("tutorial_step_2__harvest_resource_started");
             this.inspector.Inspect(callback: this.NotifyAboutCompleteAndMoveNext);
             this.pointerManager.ShowPointer(this.pointerTransform.position, this.pointerTransform.rotation);
-            this.StartCoroutine(this.panelShower.Show(this.screenTransform.Value));
+            this.panelShower.Show(this.screenTransform.Value);
         }
 
         protected override void OnStop()

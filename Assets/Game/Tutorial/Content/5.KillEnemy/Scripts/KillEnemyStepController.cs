@@ -1,5 +1,4 @@
 using Entities;
-using Game.GameEngine;
 using Game.Tutorial.Gameplay;
 using Game.Tutorial.UI;
 using GameSystem;
@@ -32,11 +31,11 @@ namespace Game.Tutorial
             base.ConstructGame(context);
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
-            var enemy = this.enemyManager.SpawnEnemy();
+            var enemy = await this.enemyManager.SpawnEnemy();
             this.actionInspector.Inspect(enemy, this.OnEnemyDestroyed);
-            this.StartCoroutine(this.panelShower.Show(this.screenTransform.Value));
+            this.panelShower.Show(this.screenTransform.Value);
         }
 
         private void OnEnemyDestroyed(IEntity enemy)

@@ -1,7 +1,7 @@
 using Elementary;
 using GameSystem;
 
-namespace Game.Gameplay.Player
+namespace Game.GameEngine
 {
     public sealed class InputStateManager : StateMachine<InputStateId>,
         IGameStartElement,

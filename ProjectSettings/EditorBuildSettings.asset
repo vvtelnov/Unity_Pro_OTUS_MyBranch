@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Game/Scenes/GameScene.unity
-    guid: ca3c4a342525c4be1a2561cdb564c810
+    guid: 3047deb8ee58d45649360e843538d58c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: be72ccabd0b4e4494a50d6d9f3a22824,
       type: 2}

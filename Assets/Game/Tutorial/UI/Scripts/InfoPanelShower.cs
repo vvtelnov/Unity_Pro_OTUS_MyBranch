@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Asyncoroutine;
 using Game.Tutorial.UI;
 using UnityEngine;
 
@@ -17,9 +18,9 @@ namespace Game.Tutorial.Gameplay
 
         protected InfoPanel view;
         
-        public IEnumerator Show(Transform parent)
+        public async void Show(Transform parent)
         {
-            yield return new WaitForSeconds(this.showDelay);
+            await new WaitForSeconds(this.showDelay);
 
             this.view = GameObject.Instantiate(this.viewPrefab, parent);
             this.OnShow();

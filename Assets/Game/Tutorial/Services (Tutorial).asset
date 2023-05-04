@@ -15,7 +15,7 @@ MonoBehaviour:
   editorMode: 1
   releaseScripts:
   - {fileID: 11500000, guid: 67ccb1adb4354176a9dfb07837bc9178, type: 3}
-  - {fileID: 11500000, guid: c7700840212140c2bfffd5009f46ff0c, type: 3}
+  - {fileID: 11500000, guid: 7032b9f80b7b419094f2a5d234b90edc, type: 3}
   - {fileID: 11500000, guid: 0371f5cb6cd3463188acc2464db2370d, type: 3}
   - {fileID: 11500000, guid: 0673139518b741a49e70e9f50c464ac9, type: 3}
   - {fileID: 11500000, guid: 4c59e3d27630458c8cea698a101b5d27, type: 3}
@@ -27,6 +27,7 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 4c59e3d27630458c8cea698a101b5d27, type: 3}
   releaseClassNames:
   - Game.Tutorial.App.TutorialRepository
+  - Game.Tutorial.App.TutorialDeployer
   - Game.Tutorial.App.TutorialMediator
   - Game.Tutorial.App.TutorialAssetSupplier
   - Game.Tutorial.App.TutorialAnalyticsTracker

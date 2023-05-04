@@ -4,7 +4,9 @@ using Game.App;
 using Game.Localization;
 using Game.Tutorial.UI;
 using Windows;
+using Asyncoroutine;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Tutorial
 {
@@ -12,7 +14,7 @@ namespace Game.Tutorial
     public sealed class WelcomePopupShower 
     {
         [SerializeField]
-        private MonoWindow popupPrefab;
+        private AssetReference popupPrefab;
         
         [SerializeField]
         private float showPopupDelay = 0.5f;
@@ -27,16 +29,20 @@ namespace Game.Tutorial
             this.config = config;
         }
     
-        public IEnumerator ShowPopup(Action callback)
+        public async void ShowPopup(Action callback)
         {
-            yield return new WaitForSeconds(this.showPopupDelay);
+            await new WaitForSeconds(this.showPopupDelay);
             
-            var language = LanguageManager.CurrentLanguage;
-            var title = LocalizationManager.GetText(this.config.title, language);
-            var description = LocalizationManager.GetText(this.config.description, language);
-            
+            var handle = this.popupPrefab.LoadAssetAsync<GameObject>();
+            await handle.Task;
+
+            var popupPrefab = handle.Result.GetComponent<MonoWindow>();
+
+            var title = LocalizationManager.GetCurrentText(this.config.title);
+            var description = LocalizationManager.GetCurrentText(this.config.description);
             var args = new WelcomeArgs(title, description);
-            this.popupManager.Show(this.popupPrefab, args, callback);
+            
+            this.popupManager.Show(popupPrefab, args, callback);
         }
     }
 }

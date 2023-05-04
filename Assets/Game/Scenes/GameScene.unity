@@ -15500,31 +15500,6 @@ PrefabInstance:
       propertyPath: debugMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
-        type: 3}
-      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
-        type: 3}
-      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 727717440834845783}
-    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
-        type: 3}
-      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
-        type: 3}
-      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: InstantiatePrefabs
-      objectReference: {fileID: 0}
-    - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
-        type: 3}
-      propertyPath: onDebugMode.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Game.GameEngine.Development.EditorScript_InstantiatePrefabs, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 727717441783854555, guid: dcbf67a7764454c21b529190dca1a5cb,
         type: 3}
       propertyPath: m_Name
@@ -15532,18 +15507,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcbf67a7764454c21b529190dca1a5cb, type: 3}
---- !u!114 &727717440834845783 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 84249401, guid: dcbf67a7764454c21b529190dca1a5cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 727717440834845782}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1343930c8f1045858192f47be87acaa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &923384480984823182
 PrefabInstance:
   m_ObjectHideFlags: 0

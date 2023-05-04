@@ -2,7 +2,6 @@ using Game.Gameplay.Player;
 using Game.Tutorial.Gameplay;
 using Game.Tutorial.UI;
 using GameSystem;
-using Windows;
 using UnityEngine;
 
 namespace Game.Tutorial
@@ -15,9 +14,7 @@ namespace Game.Tutorial
         private NavigationManager navigationManager;
 
         private ScreenTransform screenTransform;
-
-        private PopupManager popupManager;
-
+        
         private WorldPlacePopupShower worldPlacePopupShower;
 
         private readonly MoveToUpgradeInspector actionInspector = new();
@@ -32,19 +29,21 @@ namespace Game.Tutorial
         private Transform pointerTransform;
 
         [SerializeField]
-        private MonoWindow popupPrefab;
-
+        private UpgradePopupShower popupShower;
+        
         public override void ConstructGame(GameContext context)
         {
             this.pointerManager = context.GetService<PointerManager>();
             this.navigationManager = context.GetService<NavigationManager>();
             this.screenTransform = context.GetService<ScreenTransform>();
-            this.popupManager = context.GetService<PopupManager>();
             this.worldPlacePopupShower = context.GetService<WorldPlacePopupShower>();
 
             var worldPlaceVisitor = context.GetService<WorldPlaceVisitInteractor>();
             this.actionInspector.Construct(worldPlaceVisitor, this.config);
             this.actionPanel.Construct(this.config);
+
+            var popupManager = context.GetService<PopupManager>();
+            this.popupShower.Construct(popupManager);
 
             base.ConstructGame(context);
         }
@@ -69,14 +68,11 @@ namespace Game.Tutorial
             this.navigationManager.StartLookAt(targetPosition);
 
             //Показываем квест в UI:
-            this.StartCoroutine(this.actionPanel.Show(this.screenTransform.Value));
+            this.actionPanel.Show(this.screenTransform.Value);
         }
 
         private void OnPlaceVisited()
         {
-            //Возвращаем базовый триггер:
-            this.worldPlacePopupShower.SetEnable(true);
-
             //Убираем указатель
             this.pointerManager.HidePointer();
             this.navigationManager.Stop();
@@ -85,7 +81,13 @@ namespace Game.Tutorial
             this.actionPanel.Hide();
 
             //Показываем попап:
-            this.popupManager.Show(this.popupPrefab, args: null);
+            this.popupShower.ShowPopup();
+        }
+
+        protected override void OnStop()
+        {
+            //Возвращаем базовый триггер:
+            this.worldPlacePopupShower.SetEnable(true);
         }
     }
 }

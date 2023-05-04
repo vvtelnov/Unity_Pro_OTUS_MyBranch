@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.GameEngine
 {
-    public class PopupModule : GameModule
+    public sealed class PopupModule : GameModule
     {
         [SerializeField]
         private PopupCatalog catalog;
@@ -20,9 +20,11 @@ namespace Game.GameEngine
 
         private readonly PopupFactory factory = new();
 
+        private readonly PopupInputController inputController = new();
+
         public override IEnumerable<IGameElement> GetElements()
         {
-            yield break;
+            yield return this.inputController;
         }
 
         public override IEnumerable<object> GetServices()
@@ -35,6 +37,8 @@ namespace Game.GameEngine
             this.factory.Construct(this.catalog, this.container);
             this.supplier.Construct(context, this.factory);
             this.manager.SetSupplier(this.supplier);
+            
+            this.inputController.Construct(this.manager, context.GetService<InputStateManager>());
         }
     }
 }

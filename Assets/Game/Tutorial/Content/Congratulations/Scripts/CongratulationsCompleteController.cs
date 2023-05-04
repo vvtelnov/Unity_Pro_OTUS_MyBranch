@@ -1,10 +1,11 @@
-using System.Collections;
+using Windows;
+using Asyncoroutine;
 using Game.Localization;
 using Game.Tutorial.Gameplay;
 using Game.Tutorial.UI;
 using GameSystem;
-using Windows;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Tutorial
 {
@@ -12,7 +13,7 @@ namespace Game.Tutorial
     public sealed class CongratulationsCompleteController : TutorialCompleteController
     {
         [SerializeField]
-        private MonoWindow popupPrefab;
+        private AssetReference popupPrefab;
 
         [SerializeField]
         private CongratulationsConfig config;
@@ -30,18 +31,22 @@ namespace Game.Tutorial
 
         protected override void OnTutorialComplete()
         {
-            this.StartCoroutine(this.ShowPopupRoutine());
+            this.ShowPopup();
         }
 
-        private IEnumerator ShowPopupRoutine()
+        private async void ShowPopup()
         {
-            yield return new WaitForSeconds(this.showPopupDelay);
+            await new WaitForSeconds(this.showPopupDelay);
+
+            var handle = this.popupPrefab.LoadAssetAsync<GameObject>();
+            await handle.Task;
+            var popupPrefab = handle.Result.GetComponent<MonoWindow>();
             
             var title = LocalizationManager.GetCurrentText(this.config.title);
             var description = LocalizationManager.GetCurrentText(this.config.description);
             
             var args = new CongratulationsArgs(title, description);
-            this.popupManager.Show(this.popupPrefab, args);
+            this.popupManager.Show(popupPrefab, args);
         }
     }
 }

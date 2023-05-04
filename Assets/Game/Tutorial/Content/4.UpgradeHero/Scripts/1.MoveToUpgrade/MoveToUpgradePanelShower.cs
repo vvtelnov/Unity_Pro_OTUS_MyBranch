@@ -2,7 +2,6 @@ using System;
 using Game.App;
 using Game.Localization;
 using Game.Tutorial.Gameplay;
-using Game.Tutorial.UI;
 using UnityEngine;
 
 namespace Game.Tutorial

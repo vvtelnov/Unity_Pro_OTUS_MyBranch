@@ -435,8 +435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a2e7d03eda4b0a8047437e35e17c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 2468453825762090558, guid: 9a39ce8ef6db649089bae8e5570d8177,
-    type: 3}
+  popupPrefab:
+    m_AssetGUID: 9a39ce8ef6db649089bae8e5570d8177
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   config: {fileID: 11400000, guid: 6ef1b8bb6e1ff4e749611ca5bda876e6, type: 2}
   showPopupDelay: 0.5
 --- !u!1 &4693716560327999603
@@ -486,8 +489,11 @@ MonoBehaviour:
   stepType: 0
   config: {fileID: 11400000, guid: 27fe7f0916cc946d1be02b4ea024579d, type: 2}
   popupShower:
-    popupPrefab: {fileID: 2468453825762090558, guid: 646f4734a23da42f093401cb3ad4c066,
-      type: 3}
+    popupPrefab:
+      m_AssetGUID: 646f4734a23da42f093401cb3ad4c066
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     showPopupDelay: 0.5
 --- !u!1 &5774641300251117817
 GameObject:
@@ -540,8 +546,12 @@ MonoBehaviour:
     viewPrefab: {fileID: 7004754039173447821, guid: ec0a3f3dd5a8e46c68f98d15568a6457,
       type: 3}
   pointerTransform: {fileID: 9212810819539266258}
-  popupPrefab: {fileID: 37297884168731913, guid: 7d4d3e75ef3a84db3a465d10874d8329,
-    type: 3}
+  popupShower:
+    popupPrefab:
+      m_AssetGUID: 7d4d3e75ef3a84db3a465d10874d8329
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
 --- !u!1 &6648382227896346770
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,8 +630,11 @@ MonoBehaviour:
   stepType: 4
   config: {fileID: 11400000, guid: 6f49808826f3c46878fad426914e28c4, type: 2}
   enemyManager:
-    enemyPrefab: {fileID: 5810975871391316492, guid: 64b782892352d45a1b8bba500bb0385e,
-      type: 3}
+    enemyPrefab:
+      m_AssetGUID: 64b782892352d45a1b8bba500bb0385e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     worldTransform: {fileID: 1558592513771340664}
     spawnPoint: {fileID: 1642970014}
     destroyDelay: 1

@@ -65,7 +65,7 @@ namespace InputModule
         
         private bool IsPointerOverGameObject()
         {
-            if (ReferenceEquals(this.eventSystem, null))
+            if (this.eventSystem == null)
             {
                 return false;
             }
@@ -99,7 +99,7 @@ namespace InputModule
         
         private bool IsPointerOverGameObject(int fingerId)
         {
-            if (ReferenceEquals(this.eventSystem, null))
+            if (this.eventSystem == null)
             {
                 return false;
             }

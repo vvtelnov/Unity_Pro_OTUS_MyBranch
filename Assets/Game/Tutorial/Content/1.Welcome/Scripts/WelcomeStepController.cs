@@ -19,14 +19,14 @@ namespace Game.Tutorial
         {
             base.ConstructGame(context);
             
-            var frameManager = context.GetService<PopupManager>();
-            this.popupShower.Construct(frameManager, this.config);
+            var popupManager = context.GetService<PopupManager>();
+            this.popupShower.Construct(popupManager, this.config);
         }
         
         protected override void OnStart()
         {
             TutorialAnalytics.LogEventAndCache("tutorial_step_1__welcome_started");
-            this.StartCoroutine(this.popupShower.ShowPopup(this.OnPopupClicked));
+            this.popupShower.ShowPopup(this.OnPopupClicked);
         }
 
         private void OnPopupClicked()

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Entities;
 using GameSystem;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Tutorial
 {
@@ -12,7 +14,7 @@ namespace Game.Tutorial
         private GameContext gameContext;
         
         [SerializeField]
-        private MonoEntity enemyPrefab;
+        private AssetReference enemyPrefab;
         
         [SerializeField]
         private Transform worldTransform;
@@ -28,10 +30,14 @@ namespace Game.Tutorial
             this.gameContext = context;
         }
 
-        public MonoEntity SpawnEnemy()
+        public async Task<MonoEntity> SpawnEnemy()
         {
+            var handle = this.enemyPrefab.LoadAssetAsync<GameObject>();
+            await handle.Task;
+            var enemyPrefab = handle.Result.GetComponent<MonoEntity>();
+
             var enemy = GameObject.Instantiate(
-                this.enemyPrefab,
+                enemyPrefab,
                 this.spawnPoint.position,
                 this.spawnPoint.rotation,
                 this.worldTransform
