@@ -18,12 +18,22 @@ namespace Game.GameEngine
 
         public async Task PreloadPrefabs()
         {
-            for (int i = 0, count = this.popups.Length; i < count; i++)
+            var count = this.popups.Length;
+            var tasks = new Task<GameObject>[count];
+            
+            for (var i = 0; i < count; i++)
             {
                 var info = this.popups[i];
                 var handle = info.addressable.LoadAssetAsync<GameObject>();
-                await handle.Task;
-                info.prefab = handle.Result.GetComponent<MonoWindow>();
+                tasks[i] = handle.Task;
+            }
+
+            var prefabs = await Task.WhenAll(tasks);
+            for (var i = 0; i < count; i++)
+            {
+                var info = this.popups[i];
+                var prefab = prefabs[i];
+                info.prefab = prefab.GetComponent<MonoWindow>();
             }
         }
 
