@@ -15,7 +15,7 @@ namespace GameNodes
         {
             this.gameContext
                 .Node<PlayerContext>(it => it.name == "PlayerSys1")
-                .heroService
+                .Service<HeroService>()
                 .GetHero()
                 .Get<IComponent_TakeDamage>()
                 .TakeDamage(new TakeDamageArgs(damage, TakeDamageReason.UNDEFINED));

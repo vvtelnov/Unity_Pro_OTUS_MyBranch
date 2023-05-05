@@ -43,7 +43,7 @@ namespace GameNodes
         //     Debug.Log("Started Game!");
         // }
 
-        protected override IEnumerable<object> ProvideServices()
+        protected override IEnumerable<object> LoadServices()
         {
             yield return new InputSystem();
         }
