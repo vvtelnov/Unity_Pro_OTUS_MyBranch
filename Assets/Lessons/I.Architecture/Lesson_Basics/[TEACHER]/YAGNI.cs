@@ -47,3 +47,20 @@
 //     {
 //     }
 // }
+
+// using System.Collections.Generic;
+//
+//
+//
+//     public sealed class PurchasingManager
+//     {
+//         public void PurchaseProduct(Product product)
+//         {
+//             //Purchasing logic...
+//         }
+//
+//         public List<PurchasingReceipt> GetHistory()
+//         {
+//             //Returns history of purchased products...
+//         }
+//     }

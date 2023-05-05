@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.GameEngine.InventorySystem;
 using GameSystem;
@@ -23,8 +24,16 @@ namespace Game.Meta
 
         private readonly List<InventoryItemReceiptPresenter> presenters = new();
 
+        private bool receiptsCreated;
+
         protected override void OnShow(object args)
         {
+            if (!this.receiptsCreated)
+            {
+                this.CreateReceipts();
+                this.receiptsCreated = true;
+            }
+            
             for (int i = 0, count = this.presenters.Count; i < count; i++)
             {
                 var presenter = this.presenters[i];
@@ -45,7 +54,6 @@ namespace Game.Meta
         {
             this.inventory = context.GetService<InventoryService>().GetInventory();
             this.craftManager = context.GetService<InventoryItemCrafter>();
-            this.CreateReceipts();
         }
 
         private void CreateReceipts()

@@ -8,71 +8,73 @@
 // namespace Lessons.Architecture.Basics
 // {
 //     //BAD
-//     // class Hero
-//     // {
-//     //     void Move(Vector3 direction)
-//     //     {
-//     //         //Move logic
-//     //     }
-//     //
-//     //     void Jump()
-//     //     {
-//     //         //Jump logic
-//     //     }
-//     //
-//     //     void Shoot()
-//     //     {
-//     //         //Shoot logic
-//     //     }
-//     // }
-//
-//     class Enemy
-//     {
-//         void Move(Vector3 direction)
-//         {
-//         }
-//         
-//         void Shoot()
-//         {
-//             //Shoot logic
-//         }
-//     }
-//
-//     class NPC
-//     {
-//         void Move(Vector3 direction)
-//         {
-//             //Move logic
-//         }
-//
-//         void Jump()
-//         {
-//             //Jump logic
-//         }
-//     }
+
+using UnityEngine;
+
+    class Hero {
+        void Move(Vector3 direction) {
+            //Move logic
+        }
+
+        void Jump() {
+            //Jump logic
+        }
+
+        void Shoot() {
+            //Shoot logic
+        }
+    }
+
+    class Enemy {
+        
+        void Move(Vector3 direction) {
+            //Move logic
+        }
+
+        void Shoot() {
+            //Shoot logic
+        }
+    }
+
+    class NPC {
+        
+        void Move(Vector3 direction) {
+            //Move logic
+        }
+
+        void Jump() {
+            //Jump logic
+        }
+    }
+
+
+
 //     
 //     
 //
 //     
 //     
 //     
-//     interface IEntity
-//     {
-//         T GetComponent<T>();
-//     }
-//
-//     interface IMoveComponent
-//     {
-//         void Move(Vector3 direction);
-//     }
-//     
-//     interface IIJumpComponent
-//     {
-//         void Jump();
-//     }
-//
-//     interface IShootComponent
-//     {
-//         void Shoot();
-//     }
+
+     // class MoveComponent {
+     //     void Move(Vector3 direction) {
+     //         //Move logic
+     //     }
+     // }
+     //
+     // class JumpComponent {
+     //     void Jump() {
+     //         //Jump logic
+     //     }
+     // }
+     //
+     // class ShootComponent {
+     //     void Shoot() {
+     //         //Shoot logic
+     //     }
+     // }
+
+
+
+
 // }
