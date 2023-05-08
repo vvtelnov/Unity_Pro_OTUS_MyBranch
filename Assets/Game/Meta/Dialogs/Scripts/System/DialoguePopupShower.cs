@@ -1,10 +1,8 @@
-using DialogueSystem;
 using Game.GameEngine;
-using Game.Meta;
 using GameSystem;
 using Sirenix.OdinInspector;
 
-namespace Game.GameEngine
+namespace Game.Meta
 {
     public sealed class DialoguePopupShower : IDialogueShower
     {
@@ -12,8 +10,9 @@ namespace Game.GameEngine
         private PopupManager popupManager;
 
         [Button]
-        public void ShowDialog(ScriptableDialogue dialogue)
+        public void ShowDialog(DialogueConfig config)
         {
+            var dialogue = new Dialogue(config);
             var presenter = new DialoguePresentationModel(dialogue);
             this.popupManager.ShowPopup(PopupName.DIALOGUE, presenter);
         }

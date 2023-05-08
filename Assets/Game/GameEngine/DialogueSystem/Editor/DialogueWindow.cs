@@ -1,21 +1,21 @@
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.UnityEditor
+namespace Game.GameEngine.UnityEditor
 {
-    public sealed class DialogueEditorWindow : EditorWindow
+    public sealed class DialogueWindow : EditorWindow
     {
-        private GraphView graphView;
+        private DialogueGraph graphView;
 
         private ObjectField dialogField;
 
         [MenuItem("Window/Dialogue/Dialogue Window")]
         public static void ShowWindow()
         {
-            GetWindow<DialogueEditorWindow>("Dialogue Window");
+            GetWindow<DialogueWindow>("Dialogue Window");
         }
 
         private void OnEnable()
@@ -26,7 +26,7 @@ namespace DialogueSystem.UnityEditor
 
         private void InitGraphView()
         {
-            this.graphView = new DialogueGraphView();
+            this.graphView = new DialogueGraph();
             this.graphView.StretchToParentSize();
             this.rootVisualElement.Add(this.graphView);
         }
@@ -35,7 +35,7 @@ namespace DialogueSystem.UnityEditor
         {
             this.dialogField = new ObjectField("Selected Dialog")
             {
-                objectType = typeof(ScriptableDialogue),
+                objectType = typeof(DialogueConfig),
                 allowSceneObjects = false
             };
 
@@ -44,20 +44,26 @@ namespace DialogueSystem.UnityEditor
                 text = "Load",
                 clickable = new Clickable(() =>
                 {
-                    DialogueEditorManager.Load(
-                        this.graphView,
-                        this.dialogField.value as ScriptableDialogue
-                    );
+                    DialogueManager.Load(this.graphView, this.dialogField.value as DialogueConfig);
                 })
             };
 
             var saveButton = new Button
             {
                 text = "Save",
-                clickable = new Clickable(() => DialogueEditorManager.Save(
-                    this.graphView,
-                    this.dialogField.value as ScriptableDialogue
-                ))
+                clickable = new Clickable(() =>
+                {
+                    var config = this.dialogField.value as DialogueConfig;
+                    if (config != null)
+                    {
+                        DialogueManager.Save(this.graphView, config);
+                    }
+                    else
+                    {
+                        DialogueManager.Create(this.graphView, out config);
+                        this.dialogField.value = config;
+                    }
+                })
             };
 
             var toolbar = new Toolbar();

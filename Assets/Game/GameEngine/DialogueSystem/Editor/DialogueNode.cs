@@ -6,9 +6,9 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.UnityEditor
+namespace Game.GameEngine.UnityEditor
 {
-    public sealed class DialogueNodeView : Node
+    public sealed class DialogueNode : Node
     {
         public string Id
         {
@@ -32,6 +32,11 @@ namespace DialogueSystem.UnityEditor
             get { return this.choices; }
         }
 
+        public bool IsEntry
+        {
+            get { return this.isEntry; }
+        }
+
         private TextField idTextField;
 
         private TextField contentTextField;
@@ -40,13 +45,16 @@ namespace DialogueSystem.UnityEditor
 
         private readonly List<Choice> choices = new();
 
-        public static DialogueNodeView Instantiate(Vector2 position)
+        private bool isEntry;
+
+        public static DialogueNode Instantiate(Vector2 position)
         {
-            var node = new DialogueNodeView();
+            var node = new DialogueNode();
             node.SetPosition(new Rect(position, Vector2.zero));
             node.InitTitle();
             node.InitBody();
             node.InitButton_AddChoice();
+            node.InitStyleSheets();
             node.RefreshExpandedState();
             return node;
         }
@@ -102,7 +110,7 @@ namespace DialogueSystem.UnityEditor
             this.extensionContainer.Add(button);
         }
 
-        public Choice AddChoice(string content, bool refresh = true)
+        public void AddChoice(string content, bool refresh = true)
         {
             var port = InstantiatePort(
                 Orientation.Horizontal,
@@ -111,6 +119,8 @@ namespace DialogueSystem.UnityEditor
                 typeof(bool)
             );
             port.portName = "";
+            port.AddToClassList("dialogue_node_port");
+        
 
             var deleteButton = new Button
             {
@@ -122,6 +132,9 @@ namespace DialogueSystem.UnityEditor
             {
                 value = content
             };
+            
+            choiceText.AddToClassList("dialogue_node_choice");
+
 
             port.Add(deleteButton);
             port.Add(choiceText);
@@ -135,12 +148,13 @@ namespace DialogueSystem.UnityEditor
             };
             this.choices.Add(result);
 
+            
+
             if (refresh)
             {
                 this.RefreshExpandedState();
             }
-
-            return result;
+            
         }
 
         public void RemoveOutputPort(Port outputPort, bool refresh = true)
@@ -182,8 +196,28 @@ namespace DialogueSystem.UnityEditor
 
         private void InitStyleSheets()
         {
-            this.extensionContainer.AddToClassList("ds-node__extension-container");
-            this.mainContainer.AddToClassList("ds-node__main-container");
+            this.extensionContainer.AddToClassList("dialogue_node_extension-container");
+            this.mainContainer.AddToClassList("dialogue_node_main-container");
+            this.contentTextField.AddToClassList("dialogue_node_message");
+            this.idTextField.AddToClassList("dialogue_node_id");
+
+            this.style.borderTopLeftRadius = 8;
+            this.style.borderTopRightRadius = 8;
+            this.style.borderBottomLeftRadius = 8;
+            this.style.borderBottomRightRadius = 8;
+        }
+
+        public void SetAsEntry()
+        {
+            this.style.backgroundColor = new Color(0.92f, 0.76f, 0f);
+            this.isEntry = true;
+        }
+
+        public void SetAsNotEntry()
+        {
+            this.style.backgroundColor = new Color(0.53f, 0.53f, 0.56f);
+            
+            this.isEntry = false;
         }
     }
 }

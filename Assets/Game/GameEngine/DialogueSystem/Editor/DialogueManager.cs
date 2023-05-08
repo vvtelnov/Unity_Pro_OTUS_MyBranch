@@ -6,11 +6,11 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace DialogueSystem.UnityEditor
+namespace Game.GameEngine.UnityEditor
 {
-    public static class DialogueEditorManager
+    public static class DialogueManager
     {
-        public static void Load(GraphView graphView, ScriptableDialogue dialogue)
+        public static void Load(GraphView graphView, DialogueConfig dialogue)
         {
             ClearGraph(graphView);
 
@@ -20,10 +20,10 @@ namespace DialogueSystem.UnityEditor
                 return;
             }
 
-            var nodesCache = new List<DialogueNodeView>();
+            var nodesCache = new List<DialogueNode>();
             foreach (var data in dialogue.nodes)
             {
-                var node = DialogueNodeView.Instantiate(data.posiition);
+                var node = DialogueNode.Instantiate(data.posiition);
                 node.Id = data.id;
                 node.Content = data.content;
 
@@ -36,15 +36,20 @@ namespace DialogueSystem.UnityEditor
 
                 nodesCache.Add(node);
                 graphView.AddElement(node);
+
+                if (data.id == dialogue.entryNodeId)
+                {
+                    node.SetAsEntry();
+                }
             }
 
             foreach (var data in dialogue.edges)
             {
-                var outputId = data.outputId;
+                var outputId = data.nodeId;
                 var outputNode = nodesCache.First(it => it.Id == outputId);
-                var outputPort = outputNode.Choices[data.outputIndex].port;
+                var outputPort = outputNode.Choices[data.choiceIndex].port;
 
-                var inputId = data.inputId;
+                var inputId = data.nextId;
                 var inputNode = nodesCache.First(it => it.Id == inputId);
 
                 var edge = new Edge
@@ -70,27 +75,33 @@ namespace DialogueSystem.UnityEditor
             }
         }
 
-        public static void Save(GraphView graphView, ScriptableDialogue dialogue)
+        public static void Create(DialogueGraph graphView, out DialogueConfig dialogue)
         {
-            if (dialogue == null)
-            {
-                Debug.LogWarning("Dialog is null!");
-                return;
-            }
+            var path = EditorUtility.SaveFilePanelInProject("Save file", "Dialog", "asset", "");
+            
+            dialogue = ScriptableObject.CreateInstance<DialogueConfig>();
+            Save(graphView, dialogue);
+            
+            AssetDatabase.CreateAsset(dialogue, path);
+            AssetDatabase.SaveAssets();
+        }
 
+        public static void Save(DialogueGraph graphView, DialogueConfig dialogue)
+        {
             dialogue.nodes = ConvertNodesData(graphView);
             dialogue.edges = ConvertEdgesToData(graphView);
+            dialogue.entryNodeId = graphView.GetEntryNode().Id;
             EditorUtility.SetDirty(dialogue);
         }
 
-        private static List<SerializedDialogueNode> ConvertNodesData(GraphView graphView)
+        private static List<DialogueConfig.Node> ConvertNodesData(GraphView graphView)
         {
-            var result = new List<SerializedDialogueNode>();
+            var result = new List<DialogueConfig.Node>();
             var nodes = graphView.nodes;
             foreach (var view in nodes)
             {
-                var nodeView = (DialogueNodeView) view;
-                var data = new SerializedDialogueNode
+                var nodeView = (DialogueNode) view;
+                var data = new DialogueConfig.Node
                 {
                     id = nodeView.Id,
                     content = nodeView.Content,
@@ -104,7 +115,7 @@ namespace DialogueSystem.UnityEditor
             return result;
         }
 
-        private static string[] ConvertChoicesToData(DialogueNodeView nodeView)
+        private static string[] ConvertChoicesToData(DialogueNode nodeView)
         {
             var choices = nodeView.Choices;
             var count = choices.Count;
@@ -119,21 +130,21 @@ namespace DialogueSystem.UnityEditor
             return result;
         }
 
-        private static List<SerializedDialogueEdge> ConvertEdgesToData(GraphView graphView)
+        private static List<DialogueConfig.Edge> ConvertEdgesToData(GraphView graphView)
         {
-            var result = new List<SerializedDialogueEdge>();
+            var result = new List<DialogueConfig.Edge>();
             var edges = graphView.edges;
             foreach (var edge in edges)
             {
                 var output = edge.output;
-                var outputNode = (DialogueNodeView) output.node;
-                var inputNode = (DialogueNodeView) edge.input.node;
+                var outputNode = (DialogueNode) output.node;
+                var inputNode = (DialogueNode) edge.input.node;
 
-                var data = new SerializedDialogueEdge
+                var data = new DialogueConfig.Edge
                 {
-                    inputId = inputNode.Id,
-                    outputId = outputNode.Id,
-                    outputIndex = outputNode.IndexOfChoice(output)
+                    nextId = inputNode.Id,
+                    nodeId = outputNode.Id,
+                    choiceIndex = outputNode.IndexOfChoice(output)
                 };
 
                 result.Add(data);

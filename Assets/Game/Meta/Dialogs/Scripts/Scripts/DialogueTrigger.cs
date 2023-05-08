@@ -1,17 +1,17 @@
-using DialogueSystem;
+using Game.GameEngine;
 using UnityEngine;
 
-namespace Game.GameEngine
+namespace Game.Meta
 {
     [RequireComponent(typeof(Collider))]
     public sealed class DialogueTrigger : MonoBehaviour
     {
-        public ScriptableDialogue Dialogue
+        public DialogueConfig Dialogue
         {
             get { return this.dialogue; }
         }
 
         [SerializeField]
-        private ScriptableDialogue dialogue;
+        private DialogueConfig dialogue;
     }
 }
