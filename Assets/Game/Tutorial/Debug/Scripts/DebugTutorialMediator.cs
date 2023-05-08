@@ -15,12 +15,12 @@ namespace Game.Tutorial.Development
             }
 
             var assetSuppier = ServiceLocator.GetService<TutorialAssetSupplier>();
-            var stepConfig = assetSuppier.LoadStepConfig();
+            var stepList = assetSuppier.LoadStepList();
             
             data = new TutorialData
             {
                 isCompleted = debugConfig.isCompleted,
-                stepIndex = stepConfig.IndexOf(debugConfig.currentStep)
+                stepIndex = stepList.IndexOf(debugConfig.currentStep)
             };
             return true;
         }

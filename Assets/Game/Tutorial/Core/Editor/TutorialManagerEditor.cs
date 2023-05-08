@@ -7,13 +7,13 @@ namespace Game.Tutorial.UnityEditor
     [CustomEditor(typeof(TutorialManager))]
     public sealed class TutorialManagerEditor : Editor
     {
-        private SerializedProperty config;
+        private SerializedProperty stepList;
 
         private TutorialManager manager;
 
         private void Awake()
         {
-            this.config = this.serializedObject.FindProperty(nameof(this.config));
+            this.stepList = this.serializedObject.FindProperty(nameof(this.stepList));
             this.manager = (TutorialManager) this.target;
         }
 
@@ -22,7 +22,6 @@ namespace Game.Tutorial.UnityEditor
             if (EditorApplication.isPlaying)
             {
                 GUI.enabled = false;
-                EditorGUILayout.Toggle("Initialized", this.manager.IsInitialized);
                 EditorGUILayout.Toggle("Completed", this.manager.IsCompleted);
                 EditorGUILayout.EnumPopup("Current Step", this.manager.CurrentStep);
                 GUI.enabled = true;
@@ -36,7 +35,7 @@ namespace Game.Tutorial.UnityEditor
             }
             
             EditorGUILayout.Space(4.0f);
-            EditorGUILayout.PropertyField(this.config, includeChildren: true);
+            EditorGUILayout.PropertyField(this.stepList, includeChildren: true);
 
             this.serializedObject.ApplyModifiedProperties();
         }

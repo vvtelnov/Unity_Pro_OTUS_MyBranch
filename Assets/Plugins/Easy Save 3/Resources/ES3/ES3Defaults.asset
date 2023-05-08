@@ -49,7 +49,6 @@ MonoBehaviour:
     - GameNodes
     - AITasks
     - CustomParticles
-    - Tutorial
     - DialogueSystem
     - Entities
     - AICommands

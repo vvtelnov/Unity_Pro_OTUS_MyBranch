@@ -1,6 +1,6 @@
 namespace Game.Tutorial
 {
-    public enum TutorialStepType
+    public enum TutorialStep
     {
         WELCOME = 0,
         HARVEST_RESOURCE = 1,

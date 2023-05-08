@@ -35,15 +35,11 @@ namespace Game.Tutorial.App
         {
             if (!this.LoadData(out var data))
             {
-                this.tutorialManager.InitOnStep(index: 0);
-            }
-            else if (!data.isCompleted)
-            {
-                this.tutorialManager.InitOnStep(data.stepIndex);
+                this.tutorialManager.Initialize();
             }
             else
             {
-                this.tutorialManager.InitAsCompleted();
+                this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
             }
         }
 
@@ -52,7 +48,7 @@ namespace Game.Tutorial.App
             return this.repository.LoadState(out data);
         }
 
-        private void OnTutorialStepFinished(TutorialStepType step)
+        private void OnTutorialStepFinished(TutorialStep step)
         {
             var nextStepIndex = this.tutorialManager.IndexOfStep(step) + 1;
 

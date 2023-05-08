@@ -12,7 +12,7 @@ namespace Game.Tutorial.Gameplay
     {
         [FormerlySerializedAs("step")]
         [SerializeField]
-        private TutorialStepType stepType;
+        private TutorialStep step;
 
         private TutorialManager tutorialManager;
 
@@ -29,7 +29,7 @@ namespace Game.Tutorial.Gameplay
 
         public virtual void StartGame()
         {
-            var stepFinished = this.tutorialManager.IsStepPassed(this.stepType);
+            var stepFinished = this.tutorialManager.IsStepPassed(this.step);
             if (!stepFinished)
             {
                 this.CheckForStart(this.tutorialManager.CurrentStep);
@@ -52,7 +52,7 @@ namespace Game.Tutorial.Gameplay
 
         protected void NotifyAboutComplete()
         {
-            if (this.tutorialManager.CurrentStep == this.stepType)
+            if (this.tutorialManager.CurrentStep == this.step)
             {
                 this.tutorialManager.FinishCurrentStep();
             }
@@ -60,7 +60,7 @@ namespace Game.Tutorial.Gameplay
 
         protected void NotifyAboutMoveNext()
         {
-            if (this.tutorialManager.CurrentStep == this.stepType)
+            if (this.tutorialManager.CurrentStep == this.step)
             {
                 this.tutorialManager.MoveToNextStep();
             }
@@ -68,7 +68,7 @@ namespace Game.Tutorial.Gameplay
 
         protected void NotifyAboutCompleteAndMoveNext()
         {
-            if (this.tutorialManager.CurrentStep == this.stepType)
+            if (this.tutorialManager.CurrentStep == this.step)
             {
                 this.tutorialManager.FinishCurrentStep();
                 this.tutorialManager.MoveToNextStep();
@@ -77,20 +77,20 @@ namespace Game.Tutorial.Gameplay
 
         protected bool IsStepFinished()
         {
-            return this.tutorialManager.IsStepPassed(this.stepType);
+            return this.tutorialManager.IsStepPassed(this.step);
         }
 
-        private void CheckForFinish(TutorialStepType step)
+        private void CheckForFinish(TutorialStep step)
         {
-            if (this.stepType == step)
+            if (this.step == step)
             {
                 this.OnStop();
             }
         }
 
-        private void CheckForStart(TutorialStepType step)
+        private void CheckForStart(TutorialStep step)
         {
-            if (this.stepType == step)
+            if (this.step == step)
             {
                 this.OnStart();
             }
