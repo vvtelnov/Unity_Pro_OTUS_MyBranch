@@ -1,19 +1,7 @@
-.dialogue_node_id > .unity-text-field__input{
-    background-color: #1e1c1c;
-    min-width: 200px;
-    max-height: 32px;
-    border-radius: 8px;
-    -unity-text-align: middle-center;
-}
-
-.dialogue_node_port {
-}
-
 .dialogue_node_choice > .unity-text-field__input{
     min-width: 240px;
     max-width: 240px;
     background-color: #1f1f21;
-
 }
 
 .dialogue_node_message > .unity-text-field__input {
@@ -37,5 +25,15 @@
     padding: 8px;
 }
 
+/*.dialogue_node_id > .unity-text-field__input{*/
+/*    background-color: #1e1c1c;*/
+/*    min-width: 200px;*/
+/*    max-height: 32px;*/
+/*    border-radius: 8px;*/
+/*    -unity-text-align: middle-center;*/
+/*}*/
+
+/*.dialogue_node_port {*/
+/*}*/
 
 

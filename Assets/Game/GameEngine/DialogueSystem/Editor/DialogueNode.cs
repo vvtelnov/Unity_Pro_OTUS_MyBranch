@@ -10,10 +10,10 @@ namespace Game.GameEngine.UnityEditor
 {
     public sealed class DialogueNode : Node
     {
-        public string Id
+        public int Id
         {
-            get { return this.idTextField.value; }
-            set { this.idTextField.value = value; }
+            get { return this.id; }
+            set { this.id = value; }
         }
 
         public string Content
@@ -37,7 +37,7 @@ namespace Game.GameEngine.UnityEditor
             get { return this.isEntry; }
         }
 
-        private TextField idTextField;
+        private int id;
 
         private TextField contentTextField;
 
@@ -71,15 +71,6 @@ namespace Game.GameEngine.UnityEditor
             this.inputPort.portColor = Color.white;
             this.inputPort.portName = "";
             this.titleContainer.Insert(0, this.inputPort);
-
-            this.idTextField = new TextField
-            {
-                value = "Dialog Id",
-                maxLength = int.MaxValue,
-                multiline = false
-            };
-
-            this.titleContainer.Insert(1, this.idTextField);
         }
 
         private void InitBody()
@@ -89,14 +80,8 @@ namespace Game.GameEngine.UnityEditor
                 value = "Message",
                 multiline = true
             };
-
-            var foldout = new Foldout
-            {
-                text = "Content"
-            };
-
-            foldout.Add(this.contentTextField);
-            this.inputContainer.Insert(0, foldout);
+            
+            this.inputContainer.Insert(0, this.contentTextField);
         }
 
         private void InitButton_AddChoice()
@@ -120,7 +105,7 @@ namespace Game.GameEngine.UnityEditor
             );
             port.portName = "";
             port.AddToClassList("dialogue_node_port");
-        
+
 
             var deleteButton = new Button
             {
@@ -132,9 +117,8 @@ namespace Game.GameEngine.UnityEditor
             {
                 value = content
             };
-            
-            choiceText.AddToClassList("dialogue_node_choice");
 
+            choiceText.AddToClassList("dialogue_node_choice");
 
             port.Add(deleteButton);
             port.Add(choiceText);
@@ -148,13 +132,11 @@ namespace Game.GameEngine.UnityEditor
             };
             this.choices.Add(result);
 
-            
 
             if (refresh)
             {
                 this.RefreshExpandedState();
             }
-            
         }
 
         public void RemoveOutputPort(Port outputPort, bool refresh = true)
@@ -187,19 +169,12 @@ namespace Game.GameEngine.UnityEditor
             throw new Exception("Index of port is not found!");
         }
 
-        public struct Choice
-        {
-            public Port port;
-
-            public TextField textField;
-        }
 
         private void InitStyleSheets()
         {
             this.extensionContainer.AddToClassList("dialogue_node_extension-container");
             this.mainContainer.AddToClassList("dialogue_node_main-container");
             this.contentTextField.AddToClassList("dialogue_node_message");
-            this.idTextField.AddToClassList("dialogue_node_id");
 
             this.style.borderTopLeftRadius = 8;
             this.style.borderTopRightRadius = 8;
@@ -216,8 +191,13 @@ namespace Game.GameEngine.UnityEditor
         public void SetAsNotEntry()
         {
             this.style.backgroundColor = new Color(0.53f, 0.53f, 0.56f);
-            
             this.isEntry = false;
+        }
+
+        public struct Choice
+        {
+            public Port port;
+            public TextField textField;
         }
     }
 }

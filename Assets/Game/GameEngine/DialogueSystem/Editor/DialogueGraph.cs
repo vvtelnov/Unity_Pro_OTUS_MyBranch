@@ -10,6 +10,8 @@ namespace Game.GameEngine.UnityEditor
 {
     public sealed class DialogueGraph : GraphView
     {
+        public int generatedId;
+        
         public DialogueGraph()
         {
             this.InitStyles();
@@ -71,6 +73,7 @@ namespace Game.GameEngine.UnityEditor
         {
             var screenPosition = actionEvent.eventInfo.localMousePosition;
             var node = DialogueNode.Instantiate(screenPosition);
+            node.Id = this.generatedId++;
             this.AddElement(node);
             
             var list = this.nodes.ToList();

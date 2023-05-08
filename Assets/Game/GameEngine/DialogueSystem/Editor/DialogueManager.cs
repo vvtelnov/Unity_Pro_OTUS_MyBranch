@@ -10,7 +10,7 @@ namespace Game.GameEngine.UnityEditor
 {
     public static class DialogueManager
     {
-        public static void Load(GraphView graphView, DialogueConfig dialogue)
+        public static void Load(DialogueGraph graphView, DialogueConfig dialogue)
         {
             ClearGraph(graphView);
 
@@ -37,7 +37,7 @@ namespace Game.GameEngine.UnityEditor
                 nodesCache.Add(node);
                 graphView.AddElement(node);
 
-                if (data.id == dialogue.entryNodeId)
+                if (data.id == dialogue.entryId)
                 {
                     node.SetAsEntry();
                 }
@@ -60,6 +60,8 @@ namespace Game.GameEngine.UnityEditor
 
                 graphView.AddElement(edge);
             }
+
+            graphView.generatedId = dialogue.generatedId;
         }
 
         private static void ClearGraph(GraphView graphView)
@@ -90,7 +92,8 @@ namespace Game.GameEngine.UnityEditor
         {
             dialogue.nodes = ConvertNodesData(graphView);
             dialogue.edges = ConvertEdgesToData(graphView);
-            dialogue.entryNodeId = graphView.GetEntryNode().Id;
+            dialogue.entryId = graphView.GetEntryNode().Id;
+            dialogue.generatedId = graphView.generatedId;
             EditorUtility.SetDirty(dialogue);
         }
 

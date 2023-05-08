@@ -15,27 +15,30 @@ namespace Game.GameEngine
         [SerializeField]
         public Sprite icon;
 
-        [Header("Graph")]
-        [SerializeField]
-        public string entryNodeId;
-
+        [Header("Editor")]
         [SerializeField]
         public List<Node> nodes;
 
         [SerializeField]
         public List<Edge> edges;
 
+        [SerializeField]
+        public int entryId;
+
+        [SerializeField]
+        public int generatedId;
+
         public bool FindEntryNode(out Node node)
         {
-            return this.FindNode(this.entryNodeId, out node);
+            return this.FindNode(this.entryId, out node);
         }
 
-        public bool FindNextNode(string prevNode, int choiceIndex, out Node nextNode)
+        public bool FindNextNode(int prevId, int choiceIndex, out Node nextNode)
         {
             for (int i = 0, count = this.edges.Count; i < count; i++)
             {
                 var edge = this.edges[i];
-                if (edge.nodeId == prevNode && edge.choiceIndex == choiceIndex)
+                if (edge.nodeId == prevId && edge.choiceIndex == choiceIndex)
                 {
                     if (this.FindNode(edge.nextId, out nextNode))
                     {
@@ -50,7 +53,7 @@ namespace Game.GameEngine
             return false;
         }
 
-        private bool FindNode(string id, out Node result)
+        private bool FindNode(int id, out Node result)
         {
             foreach (var node in this.nodes)
             {
@@ -69,7 +72,7 @@ namespace Game.GameEngine
         public struct Node
         {
             [SerializeField]
-            public string id;
+            public int id;
 
             [SerializeField]
             public string content;
@@ -85,13 +88,13 @@ namespace Game.GameEngine
         public struct Edge
         {
             [SerializeField, FormerlySerializedAs("outputId")]
-            public string nodeId;
+            public int nodeId;
 
             [SerializeField, FormerlySerializedAs("outputIndex")]
             public int choiceIndex;
 
             [SerializeField, FormerlySerializedAs("inputId")]
-            public string nextId;
+            public int nextId;
         }
     }
 }
