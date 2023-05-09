@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AI.Commands
 {
-    public abstract class UnityCommand : MonoBehaviour, ICommand
+    public abstract class AICommand : IAICommand
     {
         public bool IsPlaying
         {
@@ -11,11 +11,11 @@ namespace AI.Commands
 
         private bool isPlaying;
 
-        private ICommandCallback callback;
+        private IAICommandCallback callback;
 
         private object args;
 
-        public void Execute(object args, ICommandCallback callback)
+        public void Execute(object args, IAICommandCallback callback)
         {
             if (this.isPlaying)
             {
@@ -41,13 +41,13 @@ namespace AI.Commands
             this.args = null;
             this.callback = null;
         }
-
+        
         protected abstract void Execute(object args);
 
         protected void Return(bool success)
         {
             this.isPlaying = false;
-
+            
             var callback = this.callback;
             this.callback = null;
 
@@ -62,7 +62,7 @@ namespace AI.Commands
         }
     }
 
-    public abstract class UnityCommand<T> : UnityCommand
+    public abstract class AICommand<T> : AICommand
     {
         protected sealed override void Execute(object args)
         {
@@ -72,7 +72,7 @@ namespace AI.Commands
                 this.Return(false);
                 return;
             }
-
+            
             this.Execute(tArgs);
         }
 

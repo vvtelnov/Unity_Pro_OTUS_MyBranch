@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AI.Tasks
 {
-    public abstract class Task_MoveToTarget<T> : TaskCoroutine
+    public abstract class AITask_MoveToTarget<T> : AITaskCoroutine
     {
         private YieldInstruction framePeriod;
 

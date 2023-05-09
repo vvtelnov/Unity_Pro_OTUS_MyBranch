@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.Commands
 {
-    public abstract class UnityCommandEnqueuer<T> : MonoBehaviour, ICommandEnqueuer<T>
+    public abstract class UnityAICommandEnqueuer<T> : MonoBehaviour, IAICommandEnqueuer<T>
     {
         public event Action<T, object> OnEnqueued
         {
@@ -24,13 +24,13 @@ namespace AI.Commands
         }
 
         [SerializeField]
-        private UnityCommandExecutor<T> executor;
+        private UnityAICommandExecutor<T> executor;
 
-        private ICommandEnqueuer<T> enqueuer;
+        private IAICommandEnqueuer<T> enqueuer;
 
         private void Awake()
         {
-            this.enqueuer = new CommandEnqueuer<T>(this.executor);
+            this.enqueuer = new AICommandEnqueuer<T>(this.executor);
         }
 
         public void Enqueue(T key, object args)

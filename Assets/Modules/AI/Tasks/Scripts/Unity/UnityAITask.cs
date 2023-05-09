@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AI.Tasks
 {
-    public abstract class UnityTask : MonoBehaviour, ITask
+    public abstract class UnityAITask : MonoBehaviour, IAITask
     {
         public bool IsPlaying
         {
@@ -12,10 +12,10 @@ namespace AI.Tasks
 
         private bool isPlaying;
 
-        private ITaskCallback callback;
+        private IAITaskCallback callback;
 
         [Button]
-        public void Do(ITaskCallback callback)
+        public void Do(IAITaskCallback callback)
         {
             if (this.isPlaying)
             {

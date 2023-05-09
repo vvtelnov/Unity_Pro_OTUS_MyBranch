@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AI.Commands
 {
-    public interface ICommandEnqueuer<T>
+    public interface IAICommandEnqueuer<T>
     {
         event Action<T, object> OnEnqueued;
 

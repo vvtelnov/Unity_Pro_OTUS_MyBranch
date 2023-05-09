@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AI.Tasks
 {
-    public abstract class TaskCoroutine : Task
+    public abstract class AITaskCoroutine : AITask
     {
         private Coroutine coroutine;
 

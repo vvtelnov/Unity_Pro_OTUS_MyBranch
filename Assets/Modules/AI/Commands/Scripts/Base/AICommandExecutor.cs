@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.Commands
 {
-    public class CommandExecutor<T> : ICommandExecutor<T>, ICommandCallback
+    public class AICommandExecutor<T> : IAICommandExecutor<T>, IAICommandCallback
     {
         public event Action<T, object> OnStarted;
 
@@ -17,20 +17,20 @@ namespace AI.Commands
             get { return this.currentCommand != null; }
         }
 
-        private readonly Dictionary<T, ICommand> commands = new();
+        private readonly Dictionary<T, IAICommand> commands = new();
 
-        private ICommand currentCommand;
+        private IAICommand currentCommand;
 
         private T currentKey;
 
         private object currentArgs;
 
-        public CommandExecutor(Dictionary<T, ICommand> commands)
+        public AICommandExecutor(Dictionary<T, IAICommand> commands)
         {
             this.commands = commands;
         }
 
-        public CommandExecutor()
+        public AICommandExecutor()
         {
         }
 
@@ -74,7 +74,7 @@ namespace AI.Commands
             return this.currentCommand != null;
         }
 
-        public void RegisterCommand(T key, ICommand command)
+        public void RegisterCommand(T key, IAICommand command)
         {
             this.commands.Add(key, command);
         }
@@ -84,7 +84,7 @@ namespace AI.Commands
             this.commands.Remove(key);
         }
 
-        void ICommandCallback.Invoke(ICommand command, object args, bool success)
+        void IAICommandCallback.Invoke(IAICommand command, object args, bool success)
         {
             this.currentCommand = null;
             this.OnFinished?.Invoke(this.currentKey, this.currentArgs);

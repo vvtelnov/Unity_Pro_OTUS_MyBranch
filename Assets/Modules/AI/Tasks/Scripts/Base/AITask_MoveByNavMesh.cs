@@ -3,9 +3,9 @@ using UnityEngine.AI;
 
 namespace AI.Tasks
 {
-    public abstract class Task_MoveByNavMesh : Task, ITaskCallback
+    public abstract class AITask_MoveByNavMesh : AITask, IAITaskCallback
     {
-        protected abstract Task_MoveByPoints<Vector3> MoveTask { get; }
+        protected abstract AITask_MoveByPoints<Vector3> MoveTask { get; }
 
         private readonly NavMeshPath currentPath = new();
 
@@ -45,7 +45,7 @@ namespace AI.Tasks
 
         protected abstract Vector3 EvaluateStartPosition();
 
-        void ITaskCallback.Invoke(ITask task, bool success)
+        void IAITaskCallback.Invoke(IAITask task, bool success)
         {
             this.Return(success);
         }

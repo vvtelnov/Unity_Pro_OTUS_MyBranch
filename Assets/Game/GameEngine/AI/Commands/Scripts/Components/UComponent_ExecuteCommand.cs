@@ -12,7 +12,7 @@ namespace Game.GameEngine.AI
         }
 
         [SerializeField]
-        private UnityCommandExecutor<Type> executor;
+        private UnityAICommandExecutor<Type> executor;
         
         public void Execute<T>(T args)
         {

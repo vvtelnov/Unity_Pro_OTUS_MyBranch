@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.GameEngine.AI
 {
-    public sealed class Task_Entity_MoveToPosition : Task_MoveToTarget<Vector3>
+    public sealed class Task_Entity_MoveToPosition : AITask_MoveToTarget<Vector3>
     {
         private IComponent_GetPosition positionComponent;
 

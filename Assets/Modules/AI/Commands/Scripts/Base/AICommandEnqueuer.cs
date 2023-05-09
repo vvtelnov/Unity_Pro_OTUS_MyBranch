@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AI.Commands
 {
-    public class CommandEnqueuer<T> : ICommandEnqueuer<T>
+    public class AICommandEnqueuer<T> : IAICommandEnqueuer<T>
     {
         public event Action<T, object> OnEnqueued;
 
@@ -15,16 +15,16 @@ namespace AI.Commands
             get { return this.commandQueue.Count > 0 || this.executor is {IsRunning: true}; }
         }
 
-        private ICommandExecutor<T> executor;
+        private IAICommandExecutor<T> executor;
 
         private readonly Queue<(T, object)> commandQueue = new();
 
-        public CommandEnqueuer(ICommandExecutor<T> executor)
+        public AICommandEnqueuer(IAICommandExecutor<T> executor)
         {
             this.executor = executor;
         }
 
-        public void Construct(ICommandExecutor<T> executor)
+        public void Construct(IAICommandExecutor<T> executor)
         {
             this.executor = executor;
         }

@@ -2,7 +2,7 @@ using System;
 
 namespace AI.Commands
 {
-    public interface ICommandExecutor<T>
+    public interface IAICommandExecutor<T>
     {
         event Action<T, object> OnStarted;
 
@@ -18,7 +18,7 @@ namespace AI.Commands
 
         bool TryGetRunningInfo(out T key, out object args);
 
-        void RegisterCommand(T key, ICommand command);
+        void RegisterCommand(T key, IAICommand command);
 
         void UnregisterCommand(T key);
     }

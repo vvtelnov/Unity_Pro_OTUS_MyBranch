@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.Commands
 {
-    public abstract class UnityCommandExecutor<T> : MonoBehaviour, ICommandExecutor<T>
+    public abstract class UnityAICommandExecutor<T> : MonoBehaviour, IAICommandExecutor<T>
     {
         public event Action<T, object> OnStarted
         {
@@ -30,7 +30,7 @@ namespace AI.Commands
             get { return this.executor.IsRunning; }
         }
 
-        protected readonly CommandExecutor<T> executor = new();
+        protected readonly AICommandExecutor<T> executor = new();
 
         [Button]
         public void Execute(T key, object args = null)
@@ -49,7 +49,7 @@ namespace AI.Commands
             return this.executor.TryGetRunningInfo(out key, out args);
         }
 
-        public void RegisterCommand(T key, ICommand command)
+        public void RegisterCommand(T key, IAICommand command)
         {
             this.executor.RegisterCommand(key, command);
         }

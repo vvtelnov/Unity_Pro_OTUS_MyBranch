@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.Tasks
 {
-    public abstract class Task_MoveByPoints<T> : TaskCoroutine
+    public abstract class AITask_MoveByPoints<T> : AITaskCoroutine
     {
         private readonly List<T> currentPath = new();
 
