@@ -1,141 +1,66 @@
-using System;
-using System.Text;
-using System.Threading.Tasks;
-using Asyncoroutine;
-using UnityEngine.Networking;
-
 namespace Game.App
 {
-    public sealed class Client
+    public class Client
     {
-        private const string SERVER_URL = "http://localhost:3000/"; 
-        
-        public async Task SignIn(string userId, string password)
+        public string UserId
         {
-            var url = SERVER_URL + "/signIn";
-
-            var json = new StringBuilder()
-                .AppendLine("{")
-                .AppendLine($"\"userId\" : {userId}")
-                .AppendLine($"\\")
-                
-                .AppendLine("}");
-
-            
-            var json = $"   {userId}"
-            
-            
-            
-            using (var request = UnityWebRequest.Post(url, "POST"))
-            {
-                var bodyRaw = Encoding.UTF8.GetBytes(json);
-                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-                request.downloadHandler = new DownloadHandlerBuffer();
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke(request.downloadHandler.text);
-                }
-            }
-            
-            
-            
-            
-            
-            
-            
-            string param1 = "value1";
-            string param2 = "value2";
-
-            var url = SERVER_URL + "?param1=" + param1 + "&param2=" + param2;
-            
-            UnityWebRequest request = UnityWebRequest.Get(url + "?param1=" + param1 + "&param2=" + param2);
-
-            
-            
-            using (var request = UnityWebRequest.Get(url))
-            {
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke(request.downloadHandler.text);
-                }
-            }
+            get { return this.userId; }
         }
         
-        
-        
-        
-        
-        
-        public async Task RequestGet(string url, Action<string> onSuccess, Action<string> onError)
+        public string Token
         {
-            using (var request = UnityWebRequest.Get(url))
-            {
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke(request.downloadHandler.text);
-                }
-            }
+            get { return this.token; }
         }
 
-        public async Task RequestPost(string url, string json, Action<string> onSuccess, Action<string> onError)
+        private string userId;
+
+        private string token;
+        
+        public void UpdateUser(string userId)
         {
-            using (var request = UnityWebRequest.Post(url, "POST"))
-            {
-                var bodyRaw = Encoding.UTF8.GetBytes(json);
-                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-                request.downloadHandler = new DownloadHandlerBuffer();
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke(request.downloadHandler.text);
-                }
-            }
+            this.userId = userId;
         }
 
-        public async Task RequestPut(string url, string json, Action onSuccess, Action<string> onError)
+        public void UpdateToken(string token)
         {
-            using (UnityWebRequest request = UnityWebRequest.Put(url, json))
-            {
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke();
-                }
-            }
+            this.token = token;
         }
+
+
+        //
+        // [ServiceInject]
+        // public void Construct(Server server)
+        // {
+        //     this.server = server;
+        // }
+        //
+        // public 
+        //
+        //
+        // public async void SignIn(SignInRequest request, Action onSuccess, Action onError)
+        // {
+        //     await this.server.RequestPost<SignInRequest, SignInResponse>(
+        //         "signIn",
+        //         request,
+        //         onSuccess: res =>
+        //         {
+        //             this.token = res.token;
+        //             onSuccess?.Invoke();
+        //         },
+        //         onError: err => onError?.Invoke()
+        //     );
+        // }
+        //
+        // public async void SignUp(Action<SignUpResponse> onSuccess, Action<string> onError)
+        // {
+        //     await this.server.RequestGet<SignUpResponse>("signUp", onSuccess, onError);
+        // }
+        //
+        // public async void LoadPlayer(string token, Action<Dictionary<string, object>> onSucces, Action<string> onError)
+        // {
+        //     await this.server.RequestGet("save_player?userId=1&token=sfercjewxeing57")
+        // }
+        //
+        // public
     }
 }
