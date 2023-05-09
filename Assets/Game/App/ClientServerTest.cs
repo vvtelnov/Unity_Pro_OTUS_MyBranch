@@ -8,41 +8,43 @@ namespace Game.App
     public sealed class ClientServerTest : MonoBehaviour
     {
         [Button]
-        public void Auth()
+        public void GetPlayerState()
         {
-            var authenticator = ServiceLocator.GetService<UserAuthenticator>();
-            authenticator.Authenticate(
-                onSuccess: () => { Debug.Log("AUTH SUCCEED!"); },
-                onError: () => { Debug.Log("AUTH FAILED!"); }
-            );
-        }
-
-        [Button]
-        public void LoadPlayerState()
-        {
-            var playerClient = ServiceLocator.GetService<PlayerClient>();
-            playerClient.LoadPlayerState(
-                onSuccess: objects => Debug.Log($"LOAD SUCCESS {objects}"),
-                onError: () => Debug.Log("LOAD FAIL")
-            );
+            var playerDownloader = ServiceLocator.GetService<PlayerClient>();
+            var money = playerDownloader.GetDownloadedInt64("money");
+            Debug.Log($"SUCCESS Money: {money}");
         }
 
         [Button]
         public void SavePlayerState()
         {
-            var playerClient = ServiceLocator.GetService<PlayerClient>();
-
-
-            const string data = "{\n" +
-                                "\"money\" : 500,\n" +
-                                "\"experience\" : 1000\n" +
-                                "}";
-
-            playerClient.SavePlayerState(
-                data,
+            var playerSaver = ServiceLocator.GetService<Player___Saver>();
+            playerSaver.SavePlayerState(
+                new Dictionary<string, object>
+                {
+                    {"money", 500},
+                    {"experience", 777}
+                },
                 onSuccess: () => Debug.Log("SAVE SUCCESS "),
                 onError: () => Debug.Log("SAVE FAIL")
             );
+
+
+            // const string data = "{\n" +
+            //                     "\"money\" : 500,\n" +
+            //                     "\"experience\" : 1000\n" +
+            //                     "}";
+            //
+
+            // playerClient.SavePlayerState(
+            //     new Dictionary<string, object>
+            //     {
+            //         {"money", 500},
+            //         {"experience", 777}
+            //     },
+            //     onSuccess: () => Debug.Log("SAVE SUCCESS "),
+            //     onError: () => Debug.Log("SAVE FAIL")
+            // );
         }
     }
 }

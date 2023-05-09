@@ -1,11 +1,12 @@
 using System;
 using Services;
-using UnityEngine;
 
 namespace Game.App
 {
     public sealed class UserAuthenticator
     {
+        public bool IsAuthorized { get; private set; }
+        
         public string Id { get; private set; }
         
         public string Password { get; private set; }
@@ -49,11 +50,12 @@ namespace Game.App
                     this.Id = id;
                     this.Password = password;
                     this.Token = response.token;
-                    Debug.Log("SIGN IN");
+                    this.IsAuthorized = true;
                     onSuccess?.Invoke();
                 },
                 onError: _ =>
                 {
+                    this.IsAuthorized = false;
                     onError?.Invoke();
                 });
         }
@@ -66,6 +68,7 @@ namespace Game.App
                     this.Id = response.userId;
                     this.Password = response.password;
                     this.Token = response.token;
+                    this.IsAuthorized = true;
 
                     this.repository.SaveUser(new UserData
                     {
@@ -73,11 +76,11 @@ namespace Game.App
                         password = response.password
                     });
                     
-                    Debug.Log("SIGN UP");
                     onSuccess?.Invoke();
                 },
                 onError: _ =>
                 {
+                    this.IsAuthorized = false;
                     onError?.Invoke();
                 });
         }

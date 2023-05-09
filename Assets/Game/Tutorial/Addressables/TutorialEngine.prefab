@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321a42cda00244fc8eed630407c6b7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 1
+  step: 1
   config: {fileID: 11400000, guid: 875987ea740354128939e4961d869059, type: 2}
   panelShower:
     showDelay: 0.5
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c796f5cd048a4496bdf2e71f33a08b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 2
+  step: 2
   config: {fileID: 11400000, guid: cd3d63bcc07ef4a81a1e33ff9ecba274, type: 2}
   actionPanel:
     showDelay: 0.5
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470c4cec326b4900b2beba68be151a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 0
+  step: 0
   config: {fileID: 11400000, guid: 27fe7f0916cc946d1be02b4ea024579d, type: 2}
   popupShower:
     popupPrefab:
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9dcb3a50c1480793407b858f6e5a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 3
+  step: 3
   config: {fileID: 11400000, guid: 69ff9f175d99e4ea78e74bed70869a1c, type: 2}
   actionPanel:
     showDelay: 0.5
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7801b2df91f742d6a5e1397ffee874e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 4
+  step: 4
   config: {fileID: 11400000, guid: 6f49808826f3c46878fad426914e28c4, type: 2}
   enemyManager:
     enemyPrefab:
