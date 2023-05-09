@@ -16,19 +16,13 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.userAuth.Authenticate(
-                onSuccess: () =>
-                {
-                    Debug.Log("Auth success");
-                    callback.Invoke(LoadingResult.Success());
-                },
-                onError: () =>
-                {
-                    Debug.Log("Auth failed");
-                    callback.Invoke(LoadingResult.Success());
-                }
-                //Not critical if can't auth user...
-            );
+            this.userAuth.Authenticate(success =>
+            {
+#if UNITY_EDITOR
+                Debug.Log($"Success auth: {success}");
+#endif
+                callback.Invoke(LoadingResult.Success()); //Not critical if can't auth user...
+            });
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Game.App
         public override IEnumerable<object> ProvideServices()
         {
             yield return new PlayerClient();
+            yield return new PlayerDownloader();
+            yield return new PlayerUploader();
         }
     }
 }

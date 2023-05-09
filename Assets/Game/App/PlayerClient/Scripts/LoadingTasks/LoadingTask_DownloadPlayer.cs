@@ -5,29 +5,17 @@ namespace Game.App.LoadingTasks
 {
     public sealed class LoadingTask_DownloadPlayer : ILoadingTask
     {
-        private readonly UserAuthenticator userAuth;
-
-        private readonly PlayerClient playerLoader;
+        private readonly PlayerDownloader playerDownloader;
 
         [ServiceInject]
-        public LoadingTask_DownloadPlayer(UserAuthenticator userAuth, PlayerClient playerLoader)
+        public LoadingTask_DownloadPlayer(PlayerDownloader playerDownloader)
         {
-            this.userAuth = userAuth;
-            this.playerLoader = playerLoader;
+            this.playerDownloader = playerDownloader;
         }
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            if (!this.userAuth.IsAuthorized)
-            {
-                callback.Invoke(LoadingResult.Success()); //Not critical if user not authrorized :)
-                return;
-            }
-
-            this.playerLoader.DownloadState(
-                onSuccess: () => callback.Invoke(LoadingResult.Success()),
-                onError: () => callback.Invoke(LoadingResult.Success())
-            );
+            this.playerDownloader.DownloadState(_ => callback.Invoke(LoadingResult.Success()));
         }
     }
 }

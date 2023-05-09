@@ -1,42 +1,38 @@
 using System;
 using Services;
+// ReSharper disable NotAccessedField.Local
 
 namespace Game.App
 {
     public sealed class UserAuthenticator
     {
-        public bool IsAuthorized { get; private set; }
-        
-        public string Id { get; private set; }
-        
-        public string Password { get; private set; }
-        
-        public string Token { get; private set; }
-
         private BackendServer server;
 
         private UserRepository repository;
 
+        private PlayerClient client;
+
         [ServiceInject]
-        public void Construct(UserRepository repository, BackendServer server)
+        public void Construct(UserRepository repository, BackendServer server, PlayerClient client)
         {
             this.repository = repository;
             this.server = server;
+            this.client = client;
         }
 
-        public void Authenticate(Action onSuccess, Action onError)
+        public void Authenticate(Action<bool> callback = null)
         {
             if (this.repository.LoadUser(out var data))
             {
-                this.SignIn(data.id, data.password, onSuccess, onError);
+                this.SignIn(data.id, data.password, callback);
             }
             else
             {
-                this.SignUp(onSuccess, onError);
+                this.SignUp(callback);
             }
         }
 
-        private async void SignIn(string id, string password, Action onSuccess, Action onError)
+        private async void SignIn(string id, string password, Action<bool> callback)
         {
             var request = new SignInRequest
             {
@@ -47,28 +43,21 @@ namespace Game.App
             await this.server.RequestPost<SignInRequest, SignInResponse>("signIn", request,
                 onSuccess: response =>
                 {
-                    this.Id = id;
-                    this.Password = password;
-                    this.Token = response.token;
-                    this.IsAuthorized = true;
-                    onSuccess?.Invoke();
+                    this.client.SetAuthorized(id, response.token);
+                    callback?.Invoke(true);
                 },
                 onError: _ =>
                 {
-                    this.IsAuthorized = false;
-                    onError?.Invoke();
+                    callback?.Invoke(false);
                 });
         }
         
-        public async void SignUp(Action onSuccess, Action onError)
+        public async void SignUp(Action<bool> callback)
         {
             await this.server.RequestGet<SignUpResponse>("signUp",
                 onSuccess : response =>
                 {
-                    this.Id = response.userId;
-                    this.Password = response.password;
-                    this.Token = response.token;
-                    this.IsAuthorized = true;
+                    this.client.SetAuthorized(response.userId, response.token);
 
                     this.repository.SaveUser(new UserData
                     {
@@ -76,12 +65,11 @@ namespace Game.App
                         password = response.password
                     });
                     
-                    onSuccess?.Invoke();
+                    callback?.Invoke(true);
                 },
                 onError: _ =>
                 {
-                    this.IsAuthorized = false;
-                    onError?.Invoke();
+                    callback?.Invoke(false);
                 });
         }
 

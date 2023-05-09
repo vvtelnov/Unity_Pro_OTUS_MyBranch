@@ -1,59 +1,61 @@
 using System;
 using System.Collections.Generic;
-using Services;
+using Newtonsoft.Json;
 
 namespace Game.App
 {
     public sealed class PlayerClient
     {
-        public bool IsDownloaded
+        public bool IsAuthorized
         {
-            get { return this.playerState != null; }
+            get { return this.UserId != null && this.Token != null; }
         }
 
-        private BackendServer server;
+        public string UserId { get; private set; }
 
-        private UserAuthenticator userAuth;
+        public string Token { get; private set; }
 
-        private Dictionary<string, object> playerState;
+        private Dictionary<string, object> playerData = new();
 
-        [ServiceInject]
-        public void Construct(BackendServer server, UserAuthenticator userAuth)
+        public void SetAuthorized(string userId, string token)
         {
-            this.server = server;
-            this.userAuth = userAuth;
+            this.UserId = userId;
+            this.Token = token;
         }
 
-        public async void DownloadState(Action onSuccess, Action onError)
+        public void SetPlayerData(string playerData)
         {
-            var url = $"load_player?userId={this.userAuth.Id}&token={this.userAuth.Token}";
-            await this.server.RequestGet<Dictionary<string, object>>(url,
-                onSuccess: playerState =>
-                {
-                    this.playerState = playerState;
-                    onSuccess?.Invoke();
-                },
-                onError: _ => onError?.Invoke());
+            this.playerData = JsonConvert.DeserializeObject<Dictionary<string, object>>(playerData);
         }
 
-        public object GetDownloadedRaw(string key)
+        public string GetPlayerData()
         {
-            if (this.playerState == null)
+            return JsonConvert.SerializeObject(this.playerData);
+        }
+
+        public void SetValue(string key, object value)
+        {
+            if (this.playerData == null)
             {
-                throw new Exception("Player state is not downloaded!");
+                throw new Exception("Player data is not downloaded!");
             }
 
-            if (!this.playerState.TryGetValue(key, out var value))
+            this.playerData[key] = value;
+        }
+
+        public object GetValue(string key)
+        {
+            if (this.playerData == null)
+            {
+                throw new Exception("Player data is not downloaded!");
+            }
+
+            if (!this.playerData.TryGetValue(key, out var value))
             {
                 throw new Exception($"Key not found {key}!");
             }
 
             return value;
-        }
-
-        public Int64 GetDownloadedInt64(string key)
-        {
-            return (Int64) this.GetDownloadedRaw(key);
         }
     }
 }

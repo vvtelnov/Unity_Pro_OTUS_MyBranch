@@ -1,3 +1,4 @@
+using System;
 using Services;
 
 namespace Game.App
@@ -6,6 +7,8 @@ namespace Game.App
         IGameStartListener,
         IGameStopListener
     {
+        public event Action OnSaved;
+        
         private const float SAVE_PERIOD_IN_SECONDS = 30;
 
         private ApplicationManager applicationManager;
@@ -64,6 +67,7 @@ namespace Game.App
                 listener.OnSaveData(reason);
             }
 
+            this.OnSaved?.Invoke();
             this.remainingSeconds = SAVE_PERIOD_IN_SECONDS;
         }
     }

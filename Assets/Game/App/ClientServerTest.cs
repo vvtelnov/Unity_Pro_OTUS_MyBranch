@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Services;
 using Sirenix.OdinInspector;
@@ -11,23 +12,23 @@ namespace Game.App
         public void GetPlayerState()
         {
             var playerDownloader = ServiceLocator.GetService<PlayerClient>();
-            var money = playerDownloader.GetDownloadedInt64("money");
+            var money = (Int64) playerDownloader.GetValue("money");
             Debug.Log($"SUCCESS Money: {money}");
         }
 
         [Button]
         public void SavePlayerState()
         {
-            var playerSaver = ServiceLocator.GetService<Player___Saver>();
-            playerSaver.SavePlayerState(
-                new Dictionary<string, object>
-                {
-                    {"money", 500},
-                    {"experience", 777}
-                },
-                onSuccess: () => Debug.Log("SAVE SUCCESS "),
-                onError: () => Debug.Log("SAVE FAIL")
-            );
+            // var playerSaver = ServiceLocator.GetService<Player___Saver>();
+            // playerSaver.SavePlayerState(
+            //     new Dictionary<string, object>
+            //     {
+            //         {"money", 500},
+            //         {"experience", 777}
+            //     },
+            //     onSuccess: () => Debug.Log("SAVE SUCCESS "),
+            //     onError: () => Debug.Log("SAVE FAIL")
+            // );
 
 
             // const string data = "{\n" +
