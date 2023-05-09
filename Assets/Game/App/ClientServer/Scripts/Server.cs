@@ -9,10 +9,12 @@ namespace Game.App
 {
     public sealed class Server
     {
-        private const string SERVER_URL = "http://localhost:3000/";
+        public const string SERVER_URL = "http://localhost:3000/";
 
-        public async Task RequestGet<RES>(string url, Action<RES> onSuccess, Action<string> onError)
+        public async Task RequestGet<RES>(string rest, Action<RES> onSuccess, Action<string> onError)
         {
+            var url = $"{SERVER_URL}/{rest}";
+
             using (var request = UnityWebRequest.Get(url))
             {
                 await request.SendWebRequest();
@@ -57,8 +59,11 @@ namespace Game.App
             }
         }
 
-        public async Task RequestPut(string url, string json, Action onSuccess, Action<string> onError)
+        public async Task RequestPut<REQ>(string rest, REQ req, Action onSuccess, Action<string> onError)
         {
+            var url = $"{SERVER_URL}/{rest}";
+            var json = JsonConvert.SerializeObject(req);
+
             using (UnityWebRequest request = UnityWebRequest.Put(url, json))
             {
                 request.SetRequestHeader("Content-Type", "application/json");

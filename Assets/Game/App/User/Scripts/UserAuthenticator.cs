@@ -1,16 +1,15 @@
 using System;
-using System.Collections.Generic;
 using Services;
 
 namespace Game.App
 {
     public sealed class UserAuthenticator
     {
-        public string UserId { get; private set; }
+        public string Id { get; private set; }
         
-        public string UserPassword { get; private set; }
+        public string Password { get; private set; }
         
-        public string UserToken { get; private set; }
+        public string Token { get; private set; }
 
         private Server server;
 
@@ -45,9 +44,9 @@ namespace Game.App
             await this.server.RequestPost<SignInRequest, SignInResponse>("signIn", request,
                 onSuccess: response =>
                 {
-                    this.UserId = id;
-                    this.UserPassword = password;
-                    this.UserToken = response.token;
+                    this.Id = id;
+                    this.Password = password;
+                    this.Token = response.token;
                     onSuccess?.Invoke();
                 },
                 onError: _ =>
@@ -61,9 +60,9 @@ namespace Game.App
             await this.server.RequestGet<SignUpResponse>("signUp",
                 onSuccess : response =>
                 {
-                    this.UserId = response.userId;
-                    this.UserPassword = response.password;
-                    this.UserToken = response.token;
+                    this.Id = response.userId;
+                    this.Password = response.password;
+                    this.Token = response.token;
 
                     this.repository.SaveUser(new UserData
                     {
@@ -78,6 +77,25 @@ namespace Game.App
                 {
                     onError?.Invoke();
                 });
+        }
+        
+        
+        private struct SignInRequest
+        {
+            public string userId;
+            public string password;
+        }
+        
+        private struct SignInResponse
+        {
+            public string token;
+        }
+
+        private struct SignUpResponse
+        {
+            public string userId;
+            public string password;
+            public string token;
         }
     }
 }
