@@ -7,13 +7,21 @@ using UnityEngine.Networking;
 
 namespace Game.App
 {
-    public sealed class Server
+    public sealed class BackendServer
     {
-        public const string SERVER_URL = "http://localhost:3000/";
+        private readonly string url;
+
+        private readonly int port;
+
+        public BackendServer(string url, int port)
+        {
+            this.url = url;
+            this.port = port;
+        }
 
         public async Task RequestGet<RES>(string rest, Action<RES> onSuccess, Action<string> onError)
         {
-            var url = $"{SERVER_URL}/{rest}";
+            var url = this.CombineUrl(rest);
 
             using (var request = UnityWebRequest.Get(url))
             {
@@ -32,9 +40,28 @@ namespace Game.App
             }
         }
 
+        public async Task RequestGet(string rest, Action<string> onSuccess, Action<string> onError)
+        {
+            var url = this.CombineUrl(rest);
+
+            using (var request = UnityWebRequest.Get(url))
+            {
+                await request.SendWebRequest();
+
+                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
+                {
+                    onError?.Invoke(request.error);
+                }
+                else
+                {
+                    onSuccess?.Invoke(request.downloadHandler.text);
+                }
+            }
+        }
+
         public async Task RequestPost<REQ, RES>(string rest, REQ req, Action<RES> onSuccess, Action<string> onError)
         {
-            var url = $"{SERVER_URL}/{rest}";
+            var url = this.CombineUrl(rest);
             var json = JsonConvert.SerializeObject(req);
 
             using (var request = UnityWebRequest.Post(url, "POST"))
@@ -61,7 +88,7 @@ namespace Game.App
 
         public async Task RequestPut<REQ>(string rest, REQ req, Action onSuccess, Action<string> onError)
         {
-            var url = $"{SERVER_URL}/{rest}";
+            var url = this.CombineUrl(rest);
             var json = JsonConvert.SerializeObject(req);
 
             using (UnityWebRequest request = UnityWebRequest.Put(url, json))
@@ -79,6 +106,32 @@ namespace Game.App
                     onSuccess?.Invoke();
                 }
             }
+        }
+        
+        public async Task RequestPut(string rest, string json, Action onSuccess, Action<string> onError)
+        {
+            var url = this.CombineUrl(rest);
+
+            using (UnityWebRequest request = UnityWebRequest.Put(url, json))
+            {
+                request.SetRequestHeader("Content-Type", "application/json");
+
+                await request.SendWebRequest();
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    onError?.Invoke(request.error);
+                }
+                else
+                {
+                    onSuccess?.Invoke();
+                }
+            }
+        }
+
+        private string CombineUrl(string rest)
+        {
+            return $"{this.url}:{this.port}/{rest}";
         }
     }
 }

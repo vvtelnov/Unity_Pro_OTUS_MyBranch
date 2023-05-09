@@ -1,6 +1,6 @@
 namespace Game.App
 {
-    public class UserSyncronizer
+    public class PlayerStateSyncronizer
     {
         //
         // public async void LoadPlayer(string token, Action<Dictionary<string, object>> onSucces, Action<string> onError)

@@ -1,5 +1,6 @@
 using System;
 using Services;
+using UnityEngine;
 
 namespace Game.App
 {
@@ -11,14 +12,15 @@ namespace Game.App
         
         public string Token { get; private set; }
 
-        private Server server;
+        private BackendServer server;
 
         private UserRepository repository;
 
         [ServiceInject]
-        public void Construct(Client client, Server server, UserRepository repository)
+        public void Construct(UserRepository repository, BackendServer server)
         {
             this.repository = repository;
+            this.server = server;
         }
 
         public void Authenticate(Action onSuccess, Action onError)
@@ -47,6 +49,7 @@ namespace Game.App
                     this.Id = id;
                     this.Password = password;
                     this.Token = response.token;
+                    Debug.Log("SIGN IN");
                     onSuccess?.Invoke();
                 },
                 onError: _ =>
@@ -70,16 +73,15 @@ namespace Game.App
                         password = response.password
                     });
                     
+                    Debug.Log("SIGN UP");
                     onSuccess?.Invoke();
-                    
                 },
                 onError: _ =>
                 {
                     onError?.Invoke();
                 });
         }
-        
-        
+
         private struct SignInRequest
         {
             public string userId;
