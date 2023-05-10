@@ -1,4 +1,8 @@
+using System.Threading.Tasks;
 using Services;
+using UnityEngine;
+
+// ReSharper disable NotAccessedField.Local
 
 namespace Game.App
 {
@@ -10,14 +14,24 @@ namespace Game.App
 
         private GameSaver gameSaver;
 
+        private RealtimeClock realtimeClock;
+
+        private bool isUploading;
+
         [ServiceInject]
-        public void Construct(BackendServer server, PlayerClient client, GameSaver gameSaver)
+        public void Construct(
+            BackendServer server,
+            PlayerClient client,
+            GameSaver gameSaver,
+            RealtimeClock realtimeClock
+        )
         {
             this.server = server;
             this.client = client;
             this.gameSaver = gameSaver;
+            this.realtimeClock = realtimeClock;
         }
-        
+
         void IGameStartListener.OnStartGame(GameFacade gameFacade)
         {
             this.gameSaver.OnSaved += this.OnGameSaved;
@@ -34,11 +48,38 @@ namespace Game.App
             {
                 return;
             }
-            
+
+            if (this.isUploading)
+            {
+                return;
+            }
+
+            this.isUploading = true;
+            await UploadState();
+            this.isUploading = false;
+        }
+
+        private async Task UploadState()
+        {
+            this.client.LastTime = this.realtimeClock.RealtimeSeconds;
+
             var url = $"save_player?userId={this.client.UserId}&token={this.client.Token}";
-            var playerData = this.client.GetPlayerData();
-            
-            await this.server.RequestPut(url, playerData, null, null);
+            var request = new PlayerRequest
+            {
+                userId = this.client.UserId,
+                lastTime = this.client.LastTime,
+                data = this.client.GetPlayerData()
+            };
+
+            Debug.Log($"Upload state {request.data}!");
+            await this.server.RequestPut<PlayerRequest>(url, request, null, null);
+        }
+
+        private struct PlayerRequest
+        {
+            public string userId;
+            public long lastTime;
+            public string data;
         }
     }
 }

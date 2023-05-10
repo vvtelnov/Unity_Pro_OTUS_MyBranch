@@ -1,5 +1,7 @@
 using System;
 using Services;
+using UnityEngine;
+
 // ReSharper disable NotAccessedField.Local
 
 namespace Game.App
@@ -22,9 +24,9 @@ namespace Game.App
 
         public void Authenticate(Action<bool> callback = null)
         {
-            if (this.repository.LoadUser(out var data))
+            if (this.repository.LoadUser(out var user))
             {
-                this.SignIn(data.id, data.password, callback);
+                this.SignIn(user.id, user.password, callback);
             }
             else
             {
@@ -32,18 +34,19 @@ namespace Game.App
             }
         }
 
-        private async void SignIn(string id, string password, Action<bool> callback)
+        private async void SignIn(string userId, string password, Action<bool> callback)
         {
             var request = new SignInRequest
             {
-                userId = id,
+                userId = userId,
                 password = password
             };
             
             await this.server.RequestPost<SignInRequest, SignInResponse>("signIn", request,
                 onSuccess: response =>
                 {
-                    this.client.SetAuthorized(id, response.token);
+                    this.client.UserId = userId;
+                    this.client.Token = response.token;
                     callback?.Invoke(true);
                 },
                 onError: _ =>
@@ -54,10 +57,14 @@ namespace Game.App
         
         public async void SignUp(Action<bool> callback)
         {
-            await this.server.RequestGet<SignUpResponse>("signUp",
+            var deviceId = SystemInfo.deviceUniqueIdentifier;
+            
+            var url = $"signUp/?deviceId={deviceId}";
+            await this.server.RequestGet<SignUpResponse>(url,
                 onSuccess : response =>
                 {
-                    this.client.SetAuthorized(response.userId, response.token);
+                    this.client.UserId = response.userId;
+                    this.client.Token = response.token;
 
                     this.repository.SaveUser(new UserData
                     {

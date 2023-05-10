@@ -12,7 +12,7 @@ namespace Game.App
         public void GetPlayerState()
         {
             var playerDownloader = ServiceLocator.GetService<PlayerClient>();
-            var money = (Int64) playerDownloader.GetValue("money");
+            var money = (Int64) playerDownloader.GetPlayerValue("money");
             Debug.Log($"SUCCESS Money: {money}");
         }
 

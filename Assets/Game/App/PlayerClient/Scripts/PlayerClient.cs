@@ -11,21 +11,21 @@ namespace Game.App
             get { return this.UserId != null && this.Token != null; }
         }
 
-        public string UserId { get; private set; }
+        public string UserId { get; set; }
 
-        public string Token { get; private set; }
+        public string Token { get; set; }
 
+        public long LastTime { get; set; } 
+        
         private Dictionary<string, object> playerData = new();
 
-        public void SetAuthorized(string userId, string token)
+        public void SetPlayerData(string json)
         {
-            this.UserId = userId;
-            this.Token = token;
-        }
-
-        public void SetPlayerData(string playerData)
-        {
-            this.playerData = JsonConvert.DeserializeObject<Dictionary<string, object>>(playerData);
+            var playerData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+            if (playerData != null)
+            {
+                this.playerData = playerData;
+            }
         }
 
         public string GetPlayerData()
@@ -33,17 +33,12 @@ namespace Game.App
             return JsonConvert.SerializeObject(this.playerData);
         }
 
-        public void SetValue(string key, object value)
+        public void SetPlayerValue(string key, object value)
         {
-            if (this.playerData == null)
-            {
-                throw new Exception("Player data is not downloaded!");
-            }
-
             this.playerData[key] = value;
         }
 
-        public object GetValue(string key)
+        public object GetPlayerValue(string key)
         {
             if (this.playerData == null)
             {

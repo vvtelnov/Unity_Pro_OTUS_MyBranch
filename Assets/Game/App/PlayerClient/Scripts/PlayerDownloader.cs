@@ -1,5 +1,6 @@
 using System;
 using Services;
+using UnityEngine;
 
 namespace Game.App
 {
@@ -29,18 +30,27 @@ namespace Game.App
             this.callback = callback;
 
             var url = $"load_player?userId={this.client.UserId}&token={this.client.Token}";
-            await this.server.RequestGet(url, this.OnSuccess, this.OnError);
+            await this.server.RequestGet<PlayerResponse>(url, this.OnSuccess, this.OnError);
         }
 
-        private void OnSuccess(string playerState)
+        private void OnSuccess(PlayerResponse response)
         {
-            this.client.SetPlayerData(playerState);
+            Debug.Log($"Downloaded data: {response.lastTime} {response.data}");
+            this.client.LastTime = response.lastTime;
+            this.client.SetPlayerData(response.data);
             this.callback?.Invoke(true);
         }
 
         private void OnError(string error)
         {
             this.callback?.Invoke(false);
+        }
+        
+        private struct PlayerResponse
+        {
+            public string userId;
+            public long lastTime;
+            public string data;
         }
     }
 }

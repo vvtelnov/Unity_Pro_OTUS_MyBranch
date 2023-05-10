@@ -1,6 +1,5 @@
 using System;
 using Services;
-using UnityEngine;
 
 namespace Game.App
 {
@@ -16,13 +15,7 @@ namespace Game.App
 
         void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.userAuth.Authenticate(success =>
-            {
-#if UNITY_EDITOR
-                Debug.Log($"Success auth: {success}");
-#endif
-                callback.Invoke(LoadingResult.Success()); //Not critical if can't auth user...
-            });
+            this.userAuth.Authenticate(_ => callback.Invoke(LoadingResult.Success()));
         }
     }
 }
