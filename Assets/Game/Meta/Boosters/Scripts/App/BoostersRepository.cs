@@ -2,9 +2,9 @@ using Game.App;
 
 namespace Game.Meta
 {
-    public sealed class BoostersRepository : DataArrayRepository<BoosterData>
+    public sealed class BoostersRepository : Repository
     {
-        protected override string Key => "Boosters";
+        protected override string PrefsKey => "Boosters";
 
         public bool LoadBoosters(out BoosterData[] boostersData)
         {

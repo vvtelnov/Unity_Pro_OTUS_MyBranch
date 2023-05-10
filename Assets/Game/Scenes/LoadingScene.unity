@@ -642,6 +642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
+      propertyPath: servicePacks.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
       propertyPath: monoServices.Array.data[0]
       value: 
       objectReference: {fileID: 533436097}
@@ -675,6 +680,12 @@ PrefabInstance:
       propertyPath: monoServices.Array.data[6]
       value: 
       objectReference: {fileID: 1134119319}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[19]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49cba4684d6964d8d9c476ed84cad743,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed760b4861c1a4ef3b603ae0e39de5c3, type: 3}
 --- !u!4 &1552385120 stripped
@@ -1281,7 +1292,7 @@ PrefabInstance:
     - target: {fileID: 3372915681754760699, guid: a59de8a63e23e4bff9a05c58591b9460,
         type: 3}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59de8a63e23e4bff9a05c58591b9460, type: 3}

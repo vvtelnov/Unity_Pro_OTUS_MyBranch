@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Services;
 using UnityEngine;
 
@@ -21,7 +23,7 @@ namespace Game.App
 
         public async void DownloadState(Action<bool> callback = null)
         {
-            if (!this.client.IsAuthorized)
+            if (!this.client.IsAuthorized())
             {
                 callback?.Invoke(false);
                 return;
@@ -37,7 +39,13 @@ namespace Game.App
         {
             Debug.Log($"Downloaded data: {response.lastTime} {response.data}");
             this.client.LastTime = response.lastTime;
-            this.client.SetPlayerData(response.data);
+
+            var playerData = JsonConvert.DeserializeObject<Dictionary<string, object>>(response.data);
+            if (playerData != null)
+            {
+                this.client.SetPlayerState(playerData);
+            }
+
             this.callback?.Invoke(true);
         }
 
@@ -45,7 +53,7 @@ namespace Game.App
         {
             this.callback?.Invoke(false);
         }
-        
+
         private struct PlayerResponse
         {
             public string userId;

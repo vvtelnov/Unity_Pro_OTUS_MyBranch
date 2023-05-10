@@ -3,11 +3,9 @@ using Game.GameEngine.GameResources;
 
 namespace Game.Gameplay.Player
 {
-    public sealed class ResourceRepository : DataArrayRepository<ResourceData>
+    public sealed class ResourceRepository : Repository<ResourceData[]>
     {
-        private const string PLAYER_BAG_DATA = "PlayerBagData";
-
-        protected override string Key => PLAYER_BAG_DATA;
+        protected override string PrefsKey => "PlayerBagData";
         
         public bool LoadResources(out ResourceData[] gameResources)
         {

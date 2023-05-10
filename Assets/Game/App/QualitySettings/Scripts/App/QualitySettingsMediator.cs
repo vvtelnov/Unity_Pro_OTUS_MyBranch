@@ -7,13 +7,11 @@ namespace Game.App
         IAppStartListener,
         IAppQuitListener
     {
-        [ServiceInject]
-        private QualitySettingsRepository repository;
+        private const string PREFS_KEY = "QualitySettingsData";
 
-        
         void IAppInitListener.Init()
         {
-            if (this.repository.LoadSettings(out var data))
+            if (PlayerPreferences.TryLoad(PREFS_KEY, out QualitySettingsData data))
             {
                 QualitySettingsManager.SetLevel(data.qualityLevel);
             }
@@ -35,7 +33,8 @@ namespace Game.App
             {
                 qualityLevel = level
             };
-            this.repository.SaveSettings(data);
+
+            PlayerPreferences.Save(PREFS_KEY, data);
         }
     }
 }

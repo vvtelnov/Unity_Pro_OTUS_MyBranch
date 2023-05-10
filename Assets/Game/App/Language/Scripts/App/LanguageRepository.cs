@@ -2,13 +2,13 @@
 
 namespace Game.App
 {
-    public sealed class LanguageRepository : DataRepository<LanguageData>
+    public sealed class LanguageRepository : Repository<LanguageData>
     {
-        protected override string Key => "LanguageData";
+        protected override string PrefsKey => "LanguageData";
 
         public bool LoadLanguage(out SystemLanguage language)
         {
-            if (this.LoadData(out var data))
+            if (this.LoadData(out LanguageData data))
             {
                 language = data.language;
                 return true;
@@ -20,11 +20,10 @@ namespace Game.App
 
         public void SaveLanguage(SystemLanguage language)
         {
-            var data = new LanguageData
+            this.SaveData(new LanguageData
             {
                 language = language
-            };
-            this.SaveData(data);
+            });
         }
     }
 }

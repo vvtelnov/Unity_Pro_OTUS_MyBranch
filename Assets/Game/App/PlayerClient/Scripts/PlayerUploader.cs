@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Services;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ namespace Game.App
 
         private async void OnGameSaved()
         {
-            if (!this.client.IsAuthorized)
+            if (!this.client.IsAuthorized())
             {
                 return;
             }
@@ -68,10 +69,10 @@ namespace Game.App
             {
                 userId = this.client.UserId,
                 lastTime = this.client.LastTime,
-                data = this.client.GetPlayerData()
+                data = JsonConvert.SerializeObject(this.client.GetPlayerState()) 
             };
 
-            Debug.Log($"Upload state {request.data}!");
+            Debug.Log($"Upload data {request.data}!");
             await this.server.RequestPut<PlayerRequest>(url, request, null, null);
         }
 

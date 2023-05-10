@@ -2,9 +2,9 @@ using Game.App;
 
 namespace Game.Meta
 {
-    public sealed class UpgradesRepository : DataArrayRepository<UpgradeData>
+    public sealed class UpgradesRepository : Repository
     {
-        protected override string Key => "HeroUpgradesData";
+        protected override string PrefsKey => "HeroUpgradesData";
 
         public bool LoadUpgrades(out UpgradeData[] upgrades)
         {

@@ -11,11 +11,6 @@ namespace Services
         {
             this.services = new List<object>();
         }
-        
-        public ServiceContext(List<object> services)
-        {
-            this.services = new List<object>(services);
-        }
 
         public object GetService(Type serviceType)
         {
@@ -114,17 +109,23 @@ namespace Services
 
         public void AddServices(IEnumerable<object> services)
         {
-            this.services.AddRange(services);
+            foreach (var service in services)
+            {
+                this.AddService(service);
+            }
+        }
+
+        public void AddService(object service)
+        {
+            if (service != null)
+            {
+                this.services.Add(service);
+            }
         }
 
         public void RemoveService(object service)
         {
             this.services.Remove(service);
-        }
-
-        public void AddService(object service)
-        {
-            this.services.Add(service);
         }
     }
 }

@@ -2,9 +2,9 @@ using Game.App;
 
 namespace Game.Tutorial.App
 {
-    public sealed class TutorialRepository : DataRepository<TutorialData>
+    public sealed class TutorialRepository : Repository<TutorialData>
     {
-        protected override string Key => "TutorialData";
+        protected override string PrefsKey => "TutorialData";
 
         public void SaveState(TutorialData data)
         {

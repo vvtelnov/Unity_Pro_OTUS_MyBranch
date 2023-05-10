@@ -3,19 +3,19 @@ using Services;
 
 namespace Game.Meta
 {
-    public sealed class MisssionsMediator : BaseMediator<MissionsDao, MissionsManager>
+    public sealed class MisssionsMediator : BaseMediator<MissionsRepository, MissionsManager>
     {
         [ServiceInject]
         private MissionsAssetSupplier assetSupplier;
 
-        protected override void OnLoadData(MissionsDao dao, MissionsManager manager)
+        protected override void OnLoadData(MissionsRepository repository, MissionsManager manager)
         {
-            if (!dao.SelectMissions(out var missionsData))
+            if (!repository.LoadMissions(out var missionsData))
             {
                 return;
             }
 
-            for (int i = 0, count = missionsData.Count; i < count; i++)
+            for (int i = 0, count = missionsData.Length; i < count; i++)
             {
                 var data = missionsData[i];
                 var config = this.assetSupplier.GetMission(data.id);
@@ -24,9 +24,9 @@ namespace Game.Meta
             }
         }
 
-        protected override void OnSaveData(MissionsDao dao, MissionsManager manager)
+        protected override void OnSaveData(MissionsRepository repository, MissionsManager manager)
         {
-            dao.DeleteMissions();
+            repository.DeleteMissions();
             
             var actualMissions = manager.GetMissions();
             var count = actualMissions.Length;
@@ -39,7 +39,7 @@ namespace Game.Meta
                 dataArray[i] = data;
             }
 
-            dao.InsertMissions(dataArray);
+            repository.SaveMissions(dataArray);
         }
         
         private MissionData ConvertToData(Mission mission)

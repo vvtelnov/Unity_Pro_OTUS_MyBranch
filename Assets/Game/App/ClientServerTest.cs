@@ -11,8 +11,8 @@ namespace Game.App
         [Button]
         public void GetPlayerState()
         {
-            var playerDownloader = ServiceLocator.GetService<PlayerClient>();
-            var money = (Int64) playerDownloader.GetPlayerValue("money");
+            var playerClient = ServiceLocator.GetService<PlayerClient>();
+            var money = playerClient.GetData<Int64>("money");
             Debug.Log($"SUCCESS Money: {money}");
         }
 

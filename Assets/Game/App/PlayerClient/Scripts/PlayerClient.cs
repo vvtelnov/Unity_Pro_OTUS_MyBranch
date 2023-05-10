@@ -1,56 +1,77 @@
-using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Game.App
 {
     public sealed class PlayerClient
     {
-        public bool IsAuthorized
-        {
-            get { return this.UserId != null && this.Token != null; }
-        }
-
         public string UserId { get; set; }
 
         public string Token { get; set; }
 
-        public long LastTime { get; set; } 
-        
-        private Dictionary<string, object> playerData = new();
+        public long LastTime { get; set; }
 
-        public void SetPlayerData(string json)
+        private Dictionary<string, object> playerState = new();
+
+        public T GetData<T>(string key)
         {
-            var playerData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-            if (playerData != null)
-            {
-                this.playerData = playerData;
-            }
+            return (T) this.playerState[key];
         }
 
-        public string GetPlayerData()
+        public bool TryGetData<T>(string key, out T tValue)
         {
-            return JsonConvert.SerializeObject(this.playerData);
-        }
-
-        public void SetPlayerValue(string key, object value)
-        {
-            this.playerData[key] = value;
-        }
-
-        public object GetPlayerValue(string key)
-        {
-            if (this.playerData == null)
+            if (this.playerState.TryGetValue(key, out var value))
             {
-                throw new Exception("Player data is not downloaded!");
+                tValue = (T) value;
+                return true;
             }
 
-            if (!this.playerData.TryGetValue(key, out var value))
-            {
-                throw new Exception($"Key not found {key}!");
-            }
+            tValue = default;
+            return false;
+        }
 
-            return value;
+        public object GetData(string key)
+        {
+            return this.playerState[key];
+        }
+
+        public bool TryGetData(string key, out object value)
+        {
+            return this.playerState.TryGetValue(key, out value);
+        }
+
+        public void SetData<T>(string key, T value)
+        {
+            this.playerState[key] = value;
+        }
+
+        public void SetData(string key, object value)
+        {
+            this.playerState[key] = value;
+        }
+
+        public bool ContainsData(string key)
+        {
+            return this.playerState.ContainsKey(key);
+        }
+
+        public void RemoveData(string key)
+        {
+            this.playerState.Remove(key);
+        }
+
+        internal void SetPlayerState(Dictionary<string, object> playerData)
+        {
+            this.playerState = playerData;
+        }
+
+        internal Dictionary<string, object> GetPlayerState()
+        {
+            return new Dictionary<string, object>(this.playerState);
+        }
+
+        internal bool IsAuthorized()
+        {
+            return this.UserId != null && this.Token != null;
         }
     }
 }

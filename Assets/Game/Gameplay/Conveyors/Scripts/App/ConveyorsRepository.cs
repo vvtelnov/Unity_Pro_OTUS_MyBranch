@@ -2,9 +2,9 @@ using Game.App;
 
 namespace Game.Gameplay.Conveyors
 {
-    public sealed class ConveyorsRepository : DataArrayRepository<ConveyorData>
+    public sealed class ConveyorsRepository : Repository
     {
-        protected override string Key => "ConveyorsData";
+        protected override string PrefsKey => "ConveyorsData";
 
         public bool LoadConveyors(out ConveyorData[] conveyors)
         {

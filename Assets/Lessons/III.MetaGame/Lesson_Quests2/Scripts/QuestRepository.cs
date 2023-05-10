@@ -2,9 +2,9 @@ using Game.App;
 
 namespace Lessons.Meta
 {
-    public sealed class QuestRepository : DataRepository<QuestData>
+    public sealed class QuestRepository : Repository<QuestData>
     {
-        protected override string Key => "QuestData";
+        protected override string PrefsKey => "QuestData";
 
         public bool LoadQuest(out QuestData data)
         {
@@ -18,7 +18,7 @@ namespace Lessons.Meta
 
         public void RemoveQuest()
         {
-           this.RemoveData();
+            this.ClearData();
         }
     }
 }

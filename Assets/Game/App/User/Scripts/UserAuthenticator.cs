@@ -8,23 +8,22 @@ namespace Game.App
 {
     public sealed class UserAuthenticator
     {
-        private BackendServer server;
+        private const string PREFS_KEY = "UserData";
 
-        private UserRepository repository;
+        private BackendServer server;
 
         private PlayerClient client;
 
         [ServiceInject]
-        public void Construct(UserRepository repository, BackendServer server, PlayerClient client)
+        public void Construct(BackendServer server, PlayerClient client)
         {
-            this.repository = repository;
             this.server = server;
             this.client = client;
         }
 
         public void Authenticate(Action<bool> callback = null)
         {
-            if (this.repository.LoadUser(out var user))
+            if (PlayerPreferences.TryLoad(PREFS_KEY, out UserData user))
             {
                 this.SignIn(user.id, user.password, callback);
             }
@@ -66,7 +65,7 @@ namespace Game.App
                     this.client.UserId = response.userId;
                     this.client.Token = response.token;
 
-                    this.repository.SaveUser(new UserData
+                    PlayerPreferences.Save(PREFS_KEY, new UserData
                     {
                         id = response.userId,
                         password = response.password

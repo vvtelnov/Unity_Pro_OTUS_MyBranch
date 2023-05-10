@@ -1,7 +1,9 @@
 #if UNITY_EDITOR
+using JetBrains.Annotations;
 
 namespace Game.Gameplay.Player
 {
+    [UsedImplicitly]
     public sealed class DebugMoneyRepository : MoneyRepository
     {
         public override bool LoadMoney(out int money)
