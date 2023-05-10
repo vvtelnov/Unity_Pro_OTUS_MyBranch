@@ -1,5 +1,3 @@
-using Services;
-
 namespace Game.App
 {
     public sealed class QualitySettingsMediator :
@@ -11,8 +9,9 @@ namespace Game.App
 
         void IAppInitListener.Init()
         {
-            if (PlayerPreferences.TryLoad(PREFS_KEY, out QualitySettingsData data))
+            if (ES3.KeyExists(PREFS_KEY))
             {
+                var data = ES3.Load<QualitySettingsData>(PREFS_KEY);
                 QualitySettingsManager.SetLevel(data.qualityLevel);
             }
         }
@@ -34,7 +33,7 @@ namespace Game.App
                 qualityLevel = level
             };
 
-            PlayerPreferences.Save(PREFS_KEY, data);
+            ES3.Save(PREFS_KEY, data);
         }
     }
 }

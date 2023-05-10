@@ -13,9 +13,10 @@ namespace Game.App
             this.userAuth = userAuth;
         }
 
-        void ILoadingTask.Do(Action<LoadingResult> callback)
+        async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            this.userAuth.Authenticate(_ => callback.Invoke(LoadingResult.Success()));
+            await this.userAuth.Authenticate();
+            callback.Invoke(LoadingResult.Success());
         }
     }
 }

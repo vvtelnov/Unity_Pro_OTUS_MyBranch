@@ -17,17 +17,22 @@ namespace Game.Tutorial
         {
             get { return this.isCompleted; }
         }
-        
+
         public TutorialStep CurrentStep
         {
             get { return this.stepList[this.currentIndex]; }
+        }
+
+        public int CurrentIndex
+        {
+            get { return this.currentIndex; }
         }
 
         internal static TutorialManager Instance { get; private set; }
 
         [SerializeField, FormerlySerializedAs("config")]
         private TutorialList stepList;
-        
+
         private int currentIndex;
 
         private bool isCompleted;

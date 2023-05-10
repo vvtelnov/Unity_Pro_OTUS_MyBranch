@@ -1,75 +1,36 @@
 using Game.App;
+using Newtonsoft.Json;
 using Services;
 
 namespace Game.Tutorial.App
 {
-    public class TutorialMediator :
-        IAppInitListener,
-        IAppStartListener,
-        IAppQuitListener
+    public class TutorialMediator : IGameMediator
     {
         [ServiceInject]
-        private TutorialRepository repository;
+        protected TutorialManager tutorialManager;
 
-        [ServiceInject]
-        private TutorialManager tutorialManager;
-
-        void IAppInitListener.Init()
+        public virtual void SetupData(GameRepository repository)
         {
-            this.LoadTutorialState();
-        }
-
-        void IAppStartListener.Start()
-        {
-            this.tutorialManager.OnStepFinished += this.OnTutorialStepFinished;
-            this.tutorialManager.OnCompleted += this.OnTutorialCompleted;
-        }
-
-        void IAppQuitListener.OnQuit()
-        {
-            this.tutorialManager.OnStepFinished -= this.OnTutorialStepFinished;
-            this.tutorialManager.OnCompleted -= this.OnTutorialCompleted;
-        }
-
-        private void LoadTutorialState()
-        {
-            if (!this.LoadData(out var data))
+            if (repository.TryGetData(nameof(TutorialData), out var json))
             {
-                this.tutorialManager.Initialize();
+                var data = JsonConvert.DeserializeObject<TutorialData>(json);
+                this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
             }
             else
             {
-                this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
+                this.tutorialManager.Initialize();
             }
         }
 
-        protected virtual bool LoadData(out TutorialData data)
+        void IGameMediator.SaveData(GameRepository repository)
         {
-            return this.repository.LoadState(out data);
-        }
-
-        private void OnTutorialStepFinished(TutorialStep step)
-        {
-            var nextStepIndex = this.tutorialManager.IndexOfStep(step) + 1;
-
-            var data = new TutorialData
+            var json = JsonConvert.SerializeObject(new TutorialData
             {
                 isCompleted = false,
-                stepIndex = nextStepIndex
-            };
-
-            this.repository.SaveState(data);
-        }
-
-        private void OnTutorialCompleted()
-        {
-            var data = new TutorialData
-            {
-                isCompleted = true,
-                stepIndex = this.tutorialManager.IndexOfStep(this.tutorialManager.CurrentStep)
-            };
-
-            this.repository.SaveState(data);
+                stepIndex = this.tutorialManager.CurrentIndex
+            });
+            
+            repository.SetData(nameof(TutorialData), json);
         }
     }
 }

@@ -3,47 +3,52 @@ using Services;
 
 namespace Game.Meta
 {
-    public sealed class UpgradesMediator : LazyMediator<UpgradesRepository, UpgradesManager>
+    public sealed class UpgradesMediator : GameMediator<UpgradeData[], UpgradesManager>
     {
         [ServiceInject]
         private UpgradesAssetSupplier assetSupplier;
-
-        protected override void OnLoadData(UpgradesRepository repository, UpgradesManager manager)
+        
+        protected override void SetupFromData(UpgradesManager service, UpgradeData[] dataSet)
         {
-            if (!repository.LoadUpgrades(out var upgradesData))
+            for (int i = 0, count = dataSet.Length; i < count; i++)
             {
-                var configs = this.assetSupplier.GetAllUpgrades();
-                upgradesData = UpgradesConverter.ToInitialDataArray(configs);
-            }
-
-            for (int i = 0, count = upgradesData.Length; i < count; i++)
-            {
-                var data = upgradesData[i];
-                var upgrade = manager.GetUpgrade(data.id);
+                var data = dataSet[i];
+                var upgrade = service.GetUpgrade(data.id);
                 upgrade.SetupLevel(data.level);
             }
         }
 
-        protected override void OnSaveData(UpgradesRepository repository, UpgradesManager manager)
+        protected override void SetupByDefault(UpgradesManager service)
         {
-            var upgrades = manager.GetAllUpgrades();
-            var dataSet = UpgradesConverter.ToDataArray(upgrades);
-            repository.SaveUpgrades(dataSet);
+            var configs = this.assetSupplier.GetAllUpgrades();
+            var count = configs.Length;
+
+            for (var i = 0; i < count; i++)
+            {
+                var config = configs[i];
+                var upgrade = service.GetUpgrade(config.id);
+                upgrade.SetupLevel(config.initialStats.level);
+            }
         }
 
-        protected override void OnStartGame(UpgradesManager manager)
+        protected override UpgradeData[] ConvertToData(UpgradesManager service)
         {
-            manager.OnLevelUp += this.OnUpgradeLevelUp;
-        }
+            var upgrades = service.GetAllUpgrades();
+            var count = upgrades.Length;
+            var result = new UpgradeData[count];
 
-        protected override void OnStopGame(UpgradesManager manager)
-        {
-            manager.OnLevelUp -= this.OnUpgradeLevelUp;
-        }
+            for (var i = 0; i < count; i++)
+            {
+                var upgrade = upgrades[i];
+                var upgradeData = new UpgradeData
+                {
+                    id = upgrade.Id,
+                    level = upgrade.Level
+                };
+                result[i] = upgradeData;
+            }
 
-        private void OnUpgradeLevelUp(Upgrade _)
-        {
-            this.MarkSaveRequired();
+            return result;
         }
     }
 }

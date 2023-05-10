@@ -1,6 +1,9 @@
-using System;
+using System.Threading.Tasks;
+using Asyncoroutine;
+using Newtonsoft.Json;
 using Services;
 using UnityEngine;
+using static UnityEngine.Networking.UnityWebRequest.Result;
 
 // ReSharper disable NotAccessedField.Local
 
@@ -8,7 +11,7 @@ namespace Game.App
 {
     public sealed class UserAuthenticator
     {
-        private const string PREFS_KEY = "UserData";
+        private const string USER_KEY = "UserData";
 
         private BackendServer server;
 
@@ -21,62 +24,85 @@ namespace Game.App
             this.client = client;
         }
 
-        public void Authenticate(Action<bool> callback = null)
+        public Task<bool> Authenticate()
         {
-            if (PlayerPreferences.TryLoad(PREFS_KEY, out UserData user))
+            if (ES3.KeyExists(USER_KEY))
             {
-                this.SignIn(user.id, user.password, callback);
+                var user = ES3.Load<UserData>(USER_KEY);
+                return this.SignIn(user.id, user.password);
             }
-            else
-            {
-                this.SignUp(callback);
-            }
+
+            return this.SignUp();
         }
 
-        private async void SignIn(string userId, string password, Action<bool> callback)
+        private async Task<bool> SignIn(string userId, string password)
         {
-            var request = new SignInRequest
+            var bodyJson = JsonConvert.SerializeObject(new SignInRequest
             {
                 userId = userId,
                 password = password
-            };
-            
-            await this.server.RequestPost<SignInRequest, SignInResponse>("signIn", request,
-                onSuccess: response =>
+            });
+
+            using (var request = this.server.Post("signIn", bodyJson))
+            {
+                await request.SendWebRequest();
+
+                if (request.result is ConnectionError or ProtocolError)
                 {
-                    this.client.UserId = userId;
-                    this.client.Token = response.token;
-                    callback?.Invoke(true);
-                },
-                onError: _ =>
+                    return false;
+                }
+                
+                var responseJson = request.downloadHandler.text;
+                if (responseJson == null)
                 {
-                    callback?.Invoke(false);
-                });
+                    return false;
+                }
+                
+                var response = JsonConvert.DeserializeObject<SignInResponse>(responseJson);
+                
+                this.client.UserId = userId;
+                this.client.Token = response.token;
+                
+                return true;
+            }
         }
-        
-        public async void SignUp(Action<bool> callback)
+
+        private async Task<bool> SignUp()
         {
             var deviceId = SystemInfo.deviceUniqueIdentifier;
-            
-            var url = $"signUp/?deviceId={deviceId}";
-            await this.server.RequestGet<SignUpResponse>(url,
-                onSuccess : response =>
-                {
-                    this.client.UserId = response.userId;
-                    this.client.Token = response.token;
 
-                    PlayerPreferences.Save(PREFS_KEY, new UserData
-                    {
-                        id = response.userId,
-                        password = response.password
-                    });
-                    
-                    callback?.Invoke(true);
-                },
-                onError: _ =>
+            using (var request = this.server.Get($"signUp/?deviceId={deviceId}"))
+            {
+                await request.SendWebRequest();
+                
+                if (request.result is ConnectionError or ProtocolError)
                 {
-                    callback?.Invoke(false);
+                    return false;
+                }
+
+                var responseJson = request.downloadHandler.text;
+                if (responseJson == null)
+                {
+                    return false;
+                }
+
+                var response = JsonConvert.DeserializeObject<SignUpResponse>(responseJson);
+
+                var userId = response.userId;
+                var password = response.password;
+                var token = response.token;
+
+                this.client.UserId = userId;
+                this.client.Token = token;
+
+                ES3.Save(USER_KEY, new UserData
+                {
+                    id = userId,
+                    password = password
                 });
+
+                return true;
+            }
         }
 
         private struct SignInRequest
@@ -84,7 +110,7 @@ namespace Game.App
             public string userId;
             public string password;
         }
-        
+
         private struct SignInResponse
         {
             public string token;

@@ -1,8 +1,4 @@
-using System;
 using System.Text;
-using System.Threading.Tasks;
-using Asyncoroutine;
-using Newtonsoft.Json;
 using UnityEngine.Networking;
 
 namespace Game.App
@@ -19,119 +15,33 @@ namespace Game.App
             this.port = port;
         }
 
-        public async Task RequestGet<RES>(string rest, Action<RES> onSuccess, Action<string> onError)
+        public UnityWebRequest Get(string route)
         {
-            var url = this.CombineUrl(rest);
-
-            using (var request = UnityWebRequest.Get(url))
-            {
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    var data = request.downloadHandler.text;
-                    var response = JsonConvert.DeserializeObject<RES>(data);
-                    onSuccess?.Invoke(response);
-                }
-            }
+            var url = this.CombineUrl(route);
+            return UnityWebRequest.Get(url);
         }
 
-        public async Task RequestGet(string rest, Action<string> onSuccess, Action<string> onError)
+        public UnityWebRequest Post(string route, string bodyJson)
         {
-            var url = this.CombineUrl(rest);
-
-            using (var request = UnityWebRequest.Get(url))
-            {
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke(request.downloadHandler.text);
-                }
-            }
+            var url = this.CombineUrl(route);
+            var request = UnityWebRequest.Post(url, "POST");
+            request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(bodyJson));
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            return request;
         }
 
-        public async Task RequestPost<REQ, RES>(string rest, REQ req, Action<RES> onSuccess, Action<string> onError)
+        public UnityWebRequest Put(string route, string data)
         {
-            var url = this.CombineUrl(rest);
-            var json = JsonConvert.SerializeObject(req);
-
-            using (var request = UnityWebRequest.Post(url, "POST"))
-            {
-                var bodyRaw = Encoding.UTF8.GetBytes(json);
-                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-                request.downloadHandler = new DownloadHandlerBuffer();
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    var data = request.downloadHandler.text;
-                    var response = JsonConvert.DeserializeObject<RES>(data);
-                    onSuccess?.Invoke(response);
-                }
-            }
+            var url = this.CombineUrl(route);
+            var request = UnityWebRequest.Put(url, data);
+            request.SetRequestHeader("Content-Type", "application/json");
+            return request;
         }
 
-        public async Task RequestPut<REQ>(string rest, REQ req, Action onSuccess, Action<string> onError)
+        private string CombineUrl(string route)
         {
-            var url = this.CombineUrl(rest);
-            var json = JsonConvert.SerializeObject(req);
-
-            using (UnityWebRequest request = UnityWebRequest.Put(url, json))
-            {
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke();
-                }
-            }
-        }
-        
-        public async Task RequestPut(string rest, string json, Action onSuccess, Action<string> onError)
-        {
-            var url = this.CombineUrl(rest);
-
-            using (UnityWebRequest request = UnityWebRequest.Put(url, json))
-            {
-                request.SetRequestHeader("Content-Type", "application/json");
-
-                await request.SendWebRequest();
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    onError?.Invoke(request.error);
-                }
-                else
-                {
-                    onSuccess?.Invoke();
-                }
-            }
-        }
-
-        private string CombineUrl(string rest)
-        {
-            return $"{this.url}:{this.port}/{rest}";
+            return $"{this.url}:{this.port}/{route}";
         }
     }
 }

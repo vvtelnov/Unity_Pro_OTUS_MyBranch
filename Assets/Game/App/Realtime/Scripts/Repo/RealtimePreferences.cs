@@ -6,9 +6,9 @@ namespace Game.App
      
         public bool LoadData(out RealtimeData data)
         {
-            if (PlayerPreferences.KeyExists(PREFS_KEY))
+            if (ES3.KeyExists(PREFS_KEY))
             {
-                data = PlayerPreferences.Load<RealtimeData>(PREFS_KEY);
+                data = ES3.Load<RealtimeData>(PREFS_KEY);
                 return true;
             }
 
@@ -18,7 +18,7 @@ namespace Game.App
 
         public void SaveData(RealtimeData data)
         {
-            PlayerPreferences.Save(PREFS_KEY, data);
+            ES3.Save(PREFS_KEY, data);
         }
     }
 }

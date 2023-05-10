@@ -27,8 +27,9 @@ namespace Game.App
 
         private void LoadSettings()
         {
-            if (PlayerPreferences.TryLoad(PREFS_KEY, out AudioSettingsData data))
+            if (ES3.KeyExists(PREFS_KEY))
             {
+                var data = ES3.Load<AudioSettingsData>(PREFS_KEY);
                 AudioSettingsManager.SetMusicVolume(data.musicVolume);
                 AudioSettingsManager.SetSoundVolume(data.soundVolume);
             }
@@ -47,7 +48,7 @@ namespace Game.App
                 soundVolume = AudioSettingsManager.SoundVolume
             };
             
-            PlayerPreferences.Save(PREFS_KEY, data);
+            ES3.Save(PREFS_KEY, data);
         }
     }
 }

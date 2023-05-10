@@ -12,9 +12,6 @@ namespace Game.App
     {
         private const string CONFIG_PATH = "LanguageCatalog";
 
-        [ServiceInject]
-        private LanguageRepository repository;
-
         void IAppInitListener.Init()
         {
             var language = this.LoadLanguage();
@@ -33,12 +30,12 @@ namespace Game.App
 
         private SystemLanguage LoadLanguage()
         {
-            if (this.repository.LoadLanguage(out var language))
+            if (ES3.KeyExists(nameof(LanguageData)))
             {
-                return language;
+                return ES3.Load<SystemLanguage>(nameof(LanguageData));
             }
             
-            language = Application.systemLanguage;
+            var language = Application.systemLanguage;
             
             var catalog = Resources.Load<LanguageCatalog>(CONFIG_PATH);
             if (!catalog.LanguageExists(language))
@@ -51,7 +48,7 @@ namespace Game.App
 
         private void SaveLanguage(SystemLanguage language)
         {
-            this.repository.SaveLanguage(language);
+            ES3.Save(nameof(LanguageData), language);
         }
     }
 }

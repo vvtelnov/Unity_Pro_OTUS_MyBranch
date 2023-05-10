@@ -1,77 +1,67 @@
-using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
+using Asyncoroutine;
+using Services;
+using static UnityEngine.Networking.UnityWebRequest.Result;
+
+// ReSharper disable UnusedParameter.Local
 
 namespace Game.App
 {
     public sealed class PlayerClient
     {
+        public bool IsAuthorized()
+        {
+            return this.UserId != null && this.Token != null;
+        }
+
         public string UserId { get; set; }
 
         public string Token { get; set; }
 
-        public long LastTime { get; set; }
+        private BackendServer server;
 
-        private Dictionary<string, object> playerState = new();
-
-        public T GetData<T>(string key)
+        [ServiceInject]
+        public void Construct(BackendServer server)
         {
-            return (T) this.playerState[key];
+            this.server = server;
         }
 
-        public bool TryGetData<T>(string key, out T tValue)
+        public async Task<(bool, string)> DownloadState()
         {
-            if (this.playerState.TryGetValue(key, out var value))
+            if (!this.IsAuthorized())
             {
-                tValue = (T) value;
-                return true;
+                throw new Exception("Player client is not authorized!");
             }
 
-            tValue = default;
-            return false;
+            var route = $"load_player?userId={this.UserId}&token={this.Token}";
+            using (var request = this.server.Get(route))
+            {
+                await request.SendWebRequest();
+
+                if (request.result is ConnectionError or ProtocolError)
+                {
+                    return (false, null);
+                }
+
+                var playerState = request.downloadHandler.text;
+                return (true, playerState);
+            }
         }
 
-        public object GetData(string key)
+        public async Task<bool> UploadState(string data)
         {
-            return this.playerState[key];
-        }
+            if (!this.IsAuthorized())
+            {
+                throw new Exception("Player client is not authorized!");
+            }
 
-        public bool TryGetData(string key, out object value)
-        {
-            return this.playerState.TryGetValue(key, out value);
-        }
-
-        public void SetData<T>(string key, T value)
-        {
-            this.playerState[key] = value;
-        }
-
-        public void SetData(string key, object value)
-        {
-            this.playerState[key] = value;
-        }
-
-        public bool ContainsData(string key)
-        {
-            return this.playerState.ContainsKey(key);
-        }
-
-        public void RemoveData(string key)
-        {
-            this.playerState.Remove(key);
-        }
-
-        internal void SetPlayerState(Dictionary<string, object> playerData)
-        {
-            this.playerState = playerData;
-        }
-
-        internal Dictionary<string, object> GetPlayerState()
-        {
-            return new Dictionary<string, object>(this.playerState);
-        }
-
-        internal bool IsAuthorized()
-        {
-            return this.UserId != null && this.Token != null;
+            var route = $"save_player?userId={this.UserId}&token={this.Token}";
+            using (var request = this.server.Put(route, data))
+            {
+                await request.SendWebRequest();
+                return request.result == Success;
+            }
         }
     }
 }
