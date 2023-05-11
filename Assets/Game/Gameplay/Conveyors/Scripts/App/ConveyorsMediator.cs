@@ -1,8 +1,10 @@
 using Game.App;
 using Game.GameEngine.Mechanics;
+using JetBrains.Annotations;
 
 namespace Game.Gameplay.Conveyors
 {
+    [UsedImplicitly]
     public sealed class ConveyorsMediator : GameMediator<ConveyorData[], ConveyorsService>
     {
         protected override void SetupFromData(ConveyorsService service, ConveyorData[] dataSet)

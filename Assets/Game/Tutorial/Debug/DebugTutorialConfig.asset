@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d5117294044816b4a97e09ac825a75, type: 3}
   m_Name: DebugTutorialConfig
   m_EditorClassIdentifier: 
-  isDebug: 1
+  isDebug: 0
   isCompleted: 0
   currentStep: 0

@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Game.Gameplay.Player
 {
     [UsedImplicitly]
-    public sealed class DebugMoneyDataConverter : MoneyDataConverter
+    public sealed class DebugMoneyMediator : MoneyMediator
     {
         protected override void SetupByDefault(MoneyStorage service)
         {

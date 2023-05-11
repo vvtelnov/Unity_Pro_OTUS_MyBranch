@@ -13,7 +13,7 @@ namespace Game.App
             this.gameFacade = gameFacade;
         }
 
-        public void Do(Action<LoadingResult> callback)
+        void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             this.gameFacade.InitGame();
             callback?.Invoke(LoadingResult.Success());

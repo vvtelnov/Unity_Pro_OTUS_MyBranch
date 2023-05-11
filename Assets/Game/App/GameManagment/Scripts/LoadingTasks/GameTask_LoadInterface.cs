@@ -7,7 +7,7 @@ namespace Game.App
 {
     public sealed class GameTask_LoadInterface : ILoadingTask
     {
-        public async void Do(Action<LoadingResult> callback)
+        async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             var gameSystem = GameObject.FindObjectOfType<GameContext>();
             await GameInterfaceDeployer.DeployInterface(gameSystem);

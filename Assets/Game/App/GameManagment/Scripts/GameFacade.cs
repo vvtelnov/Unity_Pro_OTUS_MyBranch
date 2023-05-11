@@ -17,7 +17,7 @@ namespace Game.App
             this.registeredElements = new List<IGameElement>();
         }
         
-        public void SetGame(GameContext context)
+        public void SetupGame(GameContext context)
         {
             for (int i = 0, count = this.registeredServices.Count; i < count; i++)
             {

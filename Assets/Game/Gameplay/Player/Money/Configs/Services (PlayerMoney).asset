@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85f62eb6a3254f4a952544068035af20, type: 3}
-  m_Name: Services (Money)
+  m_Name: Services (PlayerMoney)
   m_EditorClassIdentifier: 
   editorMode: 1
   releaseScripts:
-  - {fileID: 11500000, guid: 76aa38b978fa4e679600202c68208d80, type: 3}
+  - {fileID: 11500000, guid: e504642890774d46adc01d9d8fc07f97, type: 3}
   - {fileID: 11500000, guid: e504642890774d46adc01d9d8fc07f97, type: 3}
   editorScripts:
   - {fileID: 11500000, guid: 3c1bbdfdb6f04a6da70824abb415cd75, type: 3}

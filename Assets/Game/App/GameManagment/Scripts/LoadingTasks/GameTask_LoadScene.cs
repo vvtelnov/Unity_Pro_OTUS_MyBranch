@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using Asyncoroutine;
+using GameSystem;
+using Services;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.App
@@ -9,13 +12,25 @@ namespace Game.App
     {
         private const string GAME_SCENE = "GameScene";
         
-        public async void Do(Action<LoadingResult> callback)
+        private readonly GameFacade gameFacade;
+
+        [ServiceInject]
+        public GameTask_LoadScene(GameFacade gameFacade)
         {
-            await LoadSceneRoutine();
+            this.gameFacade = gameFacade;
+        }
+
+        async void ILoadingTask.Do(Action<LoadingResult> callback)
+        {
+            await LoadScene();
+            
+            var gameContext = GameObject.FindObjectOfType<GameContext>();
+            this.gameFacade.SetupGame(gameContext);
+            
             callback?.Invoke(LoadingResult.Success());
         }
 
-        private static IEnumerator LoadSceneRoutine()
+        private static IEnumerator LoadScene()
         {
             var operation = SceneManager.LoadSceneAsync(GAME_SCENE, LoadSceneMode.Single);
             while (!operation.isDone)

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85f62eb6a3254f4a952544068035af20, type: 3}
-  m_Name: Services (Conveyor)
+  m_Name: Services (Conveyors)
   m_EditorClassIdentifier: 
   editorMode: 0
   releaseScripts:
-  - {fileID: 11500000, guid: baaef6b099c64faba212f98fb9bba490, type: 3}
   - {fileID: 11500000, guid: 3bd69b94eba04a22bf64045ec375c0fa, type: 3}
   editorScripts: []
   releaseClassNames:

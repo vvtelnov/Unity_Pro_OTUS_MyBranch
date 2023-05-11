@@ -8,7 +8,7 @@ namespace Game.GameEngine
 {
     [CreateAssetMenu(
         fileName = "PopupCatalog",
-        menuName = "GameEngine/GUI/New PopupCatalog"
+        menuName = "GameEngine/New PopupCatalog"
     )]
     public sealed class PopupCatalog : ScriptableObject
     {

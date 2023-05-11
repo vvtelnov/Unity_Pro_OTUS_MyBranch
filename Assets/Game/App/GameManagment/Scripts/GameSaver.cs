@@ -10,16 +10,17 @@ namespace Game.App
 
         private ApplicationManager appManager;
 
-        private IGameMediator[] mediators;
-
         private GameRepository gameRepository;
+
+        private IGameMediator[] mediators;
         
         private float remainingSeconds;
 
         [ServiceInject]
-        public void Construct(ApplicationManager appManager, IGameMediator[] mediators)
+        public void Construct(ApplicationManager appManager, GameRepository gameRepository, IGameMediator[] mediators)
         {
             this.appManager = appManager;
+            this.gameRepository = gameRepository;
             this.mediators = mediators;
         }
 

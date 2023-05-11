@@ -7,15 +7,25 @@ namespace Game.App
     {
         private readonly GameFacade gameFacade;
 
+        private readonly IGameStartListener[] startListeners;
+        
         [ServiceInject]
-        public GameTask_StartGame(GameFacade gameFacade)
+        public GameTask_StartGame(GameFacade gameFacade, IGameStartListener[] startListeners)
         {
             this.gameFacade = gameFacade;
+            this.startListeners = startListeners;
         }
-    
-        public void Do(Action<LoadingResult> callback)
+
+        void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             this.gameFacade.StartGame();
+            
+            for (int i = 0, count = this.startListeners.Length; i < count; i++)
+            {
+                var listener = this.startListeners[i];
+                listener.OnStartGame(this.gameFacade);
+            }
+            
             callback?.Invoke(LoadingResult.Success());
         }
     }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d84982d34d47068872aa46069c56ba, type: 3}
-  m_Name: PlayerGameResourcesConfig
+  m_Script: {fileID: 11500000, guid: 13f576e242794072af38cdfd3f57f906, type: 3}
+  m_Name: MoneyStorageConfig
   m_EditorClassIdentifier: 
-  initialResources: []
+  initialMoney: 1000

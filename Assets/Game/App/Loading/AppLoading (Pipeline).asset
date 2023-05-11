@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf53119b3c3a4c44b513d52a1199a1a8, type: 3}
-  m_Name: LoadingPipeline
+  m_Name: AppLoading (Pipeline)
   m_EditorClassIdentifier: 
   tasks:
   - script: {fileID: 11500000, guid: 9fcf82f5c30a4561b525771c663a523d, type: 3}
@@ -25,18 +25,10 @@ MonoBehaviour:
     className: Game.App.LoadingTask_StartApplicationServices
   - script: {fileID: 11500000, guid: c645ef0cfa36494b9ddd27352aab750d, type: 3}
     className: Game.App.LoadingTask_InstallApplicationManager
-  - script: {fileID: 11500000, guid: 30328f7793d645ce88d6274fa3c111af, type: 3}
-    className: Game.App.LoadingTask_InstallDatabase
-  - script: {fileID: 11500000, guid: 309c86feea5b459ba8534e5c73f97605, type: 3}
-    className: Game.App.LoadingTask_ConnectToDatabase
-  - script: {fileID: 11500000, guid: e30f60150143456daea46113099de397, type: 3}
-    className: Game.App.LoadingTask_UpdateDatabase
   - script: {fileID: 11500000, guid: 18a12896f1b84bb3ab823c2902706fdb, type: 3}
     className: Game.App.LoadingTask_AuthenticateUser
-  - script: {fileID: 11500000, guid: 53c846c268f74ba98c4445450091dfa0, type: 3}
-    className: Game.App.LoadingTasks.LoadingTask_DownloadPlayer
-  - script: {fileID: 11500000, guid: 984529d06a924e8286601395231a6e8b, type: 3}
-    className: Game.App.LoadingTasks.LoadingTask_SyncRepositories
+  - script: {fileID: 11500000, guid: 611e5669eab54b3ea5243995319a6a18, type: 3}
+    className: Game.App.LoadingTask_LoadRepository
   - script: {fileID: 11500000, guid: 71012f7c0b744dc29f693d7e2f82469f, type: 3}
     className: Game.App.LoadingTask_LaunchGame
   - script: {fileID: 11500000, guid: 60402b1377534666ab35d1fd1b324398, type: 3}

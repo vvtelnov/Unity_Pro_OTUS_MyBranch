@@ -248,63 +248,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c171fd930b1044a5ad60370b0787e0d, type: 3}
---- !u!1 &352377682
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 352377684}
-  - component: {fileID: 352377683}
-  - component: {fileID: 352377685}
-  m_Layer: 0
-  m_Name: CLIENT_TEST
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &352377683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352377682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f270f911324e3a8dc029e74e0650a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &352377684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352377682}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &352377685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352377682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1cd87d67964519a07e4535c2148f2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &524355558 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2793373092189014474, guid: a9b19318ba27446ce844630701ea3192,
@@ -643,7 +586,7 @@ PrefabInstance:
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
       propertyPath: servicePacks.Array.size
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
@@ -680,6 +623,54 @@ PrefabInstance:
       propertyPath: monoServices.Array.data[6]
       value: 
       objectReference: {fileID: 1134119319}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: c9b77730b53974e9f9023eb09a87c672,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 00955dd518e114ee1b42100a4b918eb6,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ea0a77e4dc174e47976e1fa860a8b09,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a61af03a4929493e977326a6baaa6d5,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: e70a71b934bdb4342b909b3e7f41336a,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[16]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[18]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49cba4684d6964d8d9c476ed84cad743,
+        type: 2}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
       propertyPath: servicePacks.Array.data[19]

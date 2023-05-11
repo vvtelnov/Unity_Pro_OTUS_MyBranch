@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2bb109aaa74692b6afb1f7ae6852ee, type: 3}
-  m_Name: ServicePack (PlayerClient)
+  m_Script: {fileID: 11500000, guid: 93d84982d34d47068872aa46069c56ba, type: 3}
+  m_Name: ResourceStorageConfig
   m_EditorClassIdentifier: 
+  initialResources: []

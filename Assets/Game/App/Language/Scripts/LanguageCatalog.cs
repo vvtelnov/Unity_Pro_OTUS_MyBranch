@@ -52,5 +52,10 @@ namespace Game
 
             throw new Exception($"Language info {language} is not found!");
         }
+
+        public static LanguageCatalog LoadAsset()
+        {
+            return Resources.Load<LanguageCatalog>(nameof(LanguageCatalog));
+        }
     }
 }

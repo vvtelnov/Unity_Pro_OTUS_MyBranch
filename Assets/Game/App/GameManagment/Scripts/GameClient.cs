@@ -8,16 +8,16 @@ using static UnityEngine.Networking.UnityWebRequest.Result;
 
 namespace Game.App
 {
-    public sealed class PlayerClient
+    public sealed class GameClient
     {
         public bool IsAuthorized()
         {
             return this.UserId != null && this.Token != null;
         }
 
-        public string UserId { get; set; }
+        public string UserId { private get; set; }
 
-        public string Token { get; set; }
+        public string Token { private get; set; }
 
         private BackendServer server;
 
@@ -31,7 +31,7 @@ namespace Game.App
         {
             if (!this.IsAuthorized())
             {
-                throw new Exception("Player client is not authorized!");
+                return (false, null);
             }
 
             var route = $"load_player?userId={this.UserId}&token={this.Token}";
@@ -53,7 +53,7 @@ namespace Game.App
         {
             if (!this.IsAuthorized())
             {
-                throw new Exception("Player client is not authorized!");
+                return false;
             }
 
             var route = $"save_player?userId={this.UserId}&token={this.Token}";

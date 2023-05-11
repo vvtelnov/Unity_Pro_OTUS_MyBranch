@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 9ecbd453658542e6b25b8b4bbaae4e6c, type: 3}
   - {fileID: 11500000, guid: 476cded0b6d4496e8742306ec31407ce, type: 3}
   - {fileID: 11500000, guid: 567ebbd09a894b48bd1336cc0372bf56, type: 3}
-  - {fileID: 11500000, guid: 370f4309da124d0eba7aa4ac06b8e86e, type: 3}
   editorScripts: []
   releaseClassNames:
   - Game.Meta.MissionsAssetSupplier

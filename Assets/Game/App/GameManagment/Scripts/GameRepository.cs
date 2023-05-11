@@ -15,14 +15,14 @@ namespace Game.App
 
         private const string GAME_PREFS = "GameState";
         
-        private PlayerClient client;
+        private GameClient client;
         
         private Dictionary<string, string> gameState;
 
         private bool isSaving;
 
         [ServiceInject]
-        public void Construct(PlayerClient client)
+        public void Construct(GameClient client)
         {
             this.client = client;
         }
@@ -49,31 +49,41 @@ namespace Game.App
             long localSaveTime = -1; 
             if (PlayerPrefs.HasKey(GAME_PREFS))
             {
-                var json = PlayerPrefs.GetString(GAME_PREFS);
-                localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                var localJson = PlayerPrefs.GetString(GAME_PREFS);
+                Debug.Log($"LOCAL JSON {localJson}");
+                localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
                 localSaveTime = long.Parse(localState[SAVE_TIME_KEY]);
+            }
+            else
+            {
+                Debug.Log("Prefs is not exists!");
             }
 
             //Load remote game state:
             Dictionary<string, string> remoteState = new();
             long remoteSaveTime = -1;
-            if (this.client.IsAuthorized())
+            
+            var (success, remoteJson) = await this.client.DownloadState();
+            if (success)
             {
-                var (success, json) = await this.client.DownloadState();
-                if (success)
-                {
-                    remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                    remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);   
-                }
+                Debug.Log($"REMOTE JSON {remoteJson}");
+                remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
+                remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);   
+            }
+            else
+            {
+                Debug.Log("Client is not authorized!");
             }
 
             //Select recent game state:
             if (remoteSaveTime > localSaveTime)
             {
+                Debug.Log("SET REMOTE STATE");
                 this.gameState = remoteState;
             }
             else
             {
+                Debug.Log("SET PREFS STATE");
                 this.gameState = localState;
             }
         }
@@ -86,11 +96,11 @@ namespace Game.App
             }
             
             this.isSaving = true;
-
             
             //Update save time:
             var time = DateTime.Now.ToUniversalTime() - originTime;
-            this.gameState[SAVE_TIME_KEY] = time.TotalSeconds.ToString("F0");
+            var saveTime = time.TotalSeconds.ToString("F0");
+            this.gameState[SAVE_TIME_KEY] = saveTime;
             
             //Save game state:
             var json = JsonConvert.SerializeObject(this.gameState);

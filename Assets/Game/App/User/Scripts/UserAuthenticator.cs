@@ -15,10 +15,10 @@ namespace Game.App
 
         private BackendServer server;
 
-        private PlayerClient client;
+        private GameClient client;
 
         [ServiceInject]
-        public void Construct(BackendServer server, PlayerClient client)
+        public void Construct(BackendServer server, GameClient client)
         {
             this.server = server;
             this.client = client;

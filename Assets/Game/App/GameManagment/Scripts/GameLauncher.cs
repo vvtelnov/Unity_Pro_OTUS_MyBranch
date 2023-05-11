@@ -7,7 +7,7 @@ namespace Game.App
 {
     public sealed class GameLauncher
     {
-        private const string LAUNCH_PIPELINE = "GameLaunchPipeline";
+        private const string LAUNCH_PIPELINE = "GameLaunch (Pipeline)";
 
         public async Task LaunchGame()
         {
