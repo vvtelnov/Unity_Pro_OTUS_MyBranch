@@ -1,9 +1,8 @@
-using System;
 using System.Threading.Tasks;
 using Asyncoroutine;
 using Services;
 using static UnityEngine.Networking.UnityWebRequest.Result;
-
+// ReSharper disable UnusedMethodReturnValue.Global
 // ReSharper disable UnusedParameter.Local
 
 namespace Game.App
@@ -45,11 +44,16 @@ namespace Game.App
                 }
 
                 var playerState = request.downloadHandler.text;
+                if (playerState == "null")
+                {
+                    return (false, null);
+                }
+                
                 return (true, playerState);
             }
         }
 
-        public async Task<bool> UploadState(string data)
+        public async Task<bool> UploadState(string playerState)
         {
             if (!this.IsAuthorized())
             {
@@ -57,7 +61,7 @@ namespace Game.App
             }
 
             var route = $"save_player?userId={this.UserId}&token={this.Token}";
-            using (var request = this.server.Put(route, data))
+            using (var request = this.server.Put(route, playerState))
             {
                 await request.SendWebRequest();
                 return request.result == Success;

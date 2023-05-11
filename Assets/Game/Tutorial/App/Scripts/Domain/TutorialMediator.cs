@@ -26,7 +26,7 @@ namespace Game.Tutorial.App
         {
             var json = JsonConvert.SerializeObject(new TutorialData
             {
-                isCompleted = false,
+                isCompleted = this.tutorialManager.IsCompleted,
                 stepIndex = this.tutorialManager.CurrentIndex
             });
             

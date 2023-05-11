@@ -50,13 +50,8 @@ namespace Game.App
             if (PlayerPrefs.HasKey(GAME_PREFS))
             {
                 var localJson = PlayerPrefs.GetString(GAME_PREFS);
-                Debug.Log($"LOCAL JSON {localJson}");
                 localState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
                 localSaveTime = long.Parse(localState[SAVE_TIME_KEY]);
-            }
-            else
-            {
-                Debug.Log("Prefs is not exists!");
             }
 
             //Load remote game state:
@@ -66,24 +61,17 @@ namespace Game.App
             var (success, remoteJson) = await this.client.DownloadState();
             if (success)
             {
-                Debug.Log($"REMOTE JSON {remoteJson}");
                 remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
                 remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);   
-            }
-            else
-            {
-                Debug.Log("Client is not authorized!");
             }
 
             //Select recent game state:
             if (remoteSaveTime > localSaveTime)
             {
-                Debug.Log("SET REMOTE STATE");
                 this.gameState = remoteState;
             }
             else
             {
-                Debug.Log("SET PREFS STATE");
                 this.gameState = localState;
             }
         }
