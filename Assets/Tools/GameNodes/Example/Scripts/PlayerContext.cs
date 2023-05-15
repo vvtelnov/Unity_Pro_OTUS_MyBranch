@@ -18,9 +18,5 @@ namespace GameNodes
             yield return this.moveInput;
             yield return new MoveController();
         }
-
-        protected override void Construct()
-        {
-        }
     }
 }

@@ -12,25 +12,25 @@ namespace GameNodes
 
         private void OnEnable()
         {
-            this.Call<GameInit>();
-            this.Call<GameStart>();
+            this.Send<GameInit>();
+            this.Send<GameStart>();
         }
 
         private void OnApplicationPause(bool pauseStatus)
         {
             if (pauseStatus)
             {
-                this.Call<GamePause>();
+                this.Send<GamePause>();
             }
             else
             {
-                this.Call<GameResume>();
+                this.Send<GameResume>();
             }
         }
 
         private void OnDisable()
         {
-            this.Call<GameFinish>();
+            this.Send<GameFinish>();
         }
 
         // public async void Start()
