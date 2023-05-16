@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.GameSystem
 {
-    public sealed class CameraFollower : MonoBehaviour
+    public sealed class CameraFollower : MonoBehaviour, IGameLateUpdateListener
     {
         [SerializeField]
         private Camera targetCamera;
@@ -13,7 +13,7 @@ namespace Lessons.Architecture.GameSystem
         [SerializeField]
         private Vector3 offset;
 
-        private void LateUpdate()
+        void IGameLateUpdateListener.OnLateUpdate(float deltaTime)
         {
             this.targetCamera.transform.position = this.player.GetPosition() + this.offset;
         }

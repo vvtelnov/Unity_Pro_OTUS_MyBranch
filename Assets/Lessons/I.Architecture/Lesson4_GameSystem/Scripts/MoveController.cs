@@ -2,7 +2,9 @@ using UnityEngine;
 
 namespace Lessons.Architecture.GameSystem
 {
-    public sealed class MoveController : MonoBehaviour
+    public sealed class MoveController : MonoBehaviour,
+        IGameStartListener,
+        IGameFinishListener
     {
         [SerializeField]
         private Player player;
@@ -10,12 +12,12 @@ namespace Lessons.Architecture.GameSystem
         [SerializeField]
         private KeyboardInput input;
 
-        private void OnEnable()
+        void IGameStartListener.OnStartGame()
         {
             this.input.OnMove += this.OnMove;
         }
 
-        private void OnDisable()
+        void IGameFinishListener.OnFinishGame()
         {
             this.input.OnMove -= this.OnMove;
         }
