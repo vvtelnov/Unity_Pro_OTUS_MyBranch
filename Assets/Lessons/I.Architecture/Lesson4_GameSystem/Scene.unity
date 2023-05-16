@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788bbf37ff864333899c41af8d5b606d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2.5
 --- !u!1 &977480980
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +648,7 @@ GameObject:
   - component: {fileID: 1091293258}
   - component: {fileID: 1091293259}
   m_Layer: 0
-  m_Name: CameraController
+  m_Name: CameraFollower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
