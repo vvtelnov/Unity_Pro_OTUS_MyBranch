@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Lessons.Architecture.GameSystem
 {
-    public sealed class KeyboardInput : MonoBehaviour, IGameUpdateListener
+    public sealed class KeyboardInput : MonoBehaviour
     {
         public Action<Vector2> OnMove;
 
-        void IGameUpdateListener.OnUpdate(float deltaTime)
+        private void Update()
         {
             this.HandleKeyboard();
         }
-        
+
         private void HandleKeyboard()
         {
             if (Input.GetKey(KeyCode.UpArrow))
