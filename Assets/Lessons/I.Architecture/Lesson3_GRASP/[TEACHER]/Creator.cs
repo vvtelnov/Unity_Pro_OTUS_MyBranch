@@ -79,32 +79,32 @@
 
 
 
-
-public sealed class Player
-{
-    private int hitPoints;
-    private int damage;
-    private int speed;
-
-    public PlayerSnapshot MakeSnapshoot() {
-        return new PlayerSnapshot {
-            hitPoints = this.hitPoints,
-            damage = this.damage,
-            speed = this.speed
-        };
-    }
-
-    public void Restore(PlayerSnapshot snapshot) {
-        this.hitPoints = snapshot.hitPoints;
-        this.damage = snapshot.damage;
-        this.speed = snapshot.speed;
-    }
-}
-
-public sealed class PlayerSnapshot {
-    public int hitPoints;
-    public int damage;
-    public int speed;
-}
+//
+// public sealed class Player
+// {
+//     private int hitPoints;
+//     private int damage;
+//     private int speed;
+//
+//     public PlayerSnapshot MakeSnapshoot() {
+//         return new PlayerSnapshot {
+//             hitPoints = this.hitPoints,
+//             damage = this.damage,
+//             speed = this.speed
+//         };
+//     }
+//
+//     public void Restore(PlayerSnapshot snapshot) {
+//         this.hitPoints = snapshot.hitPoints;
+//         this.damage = snapshot.damage;
+//         this.speed = snapshot.speed;
+//     }
+// }
+//
+// public sealed class PlayerSnapshot {
+//     public int hitPoints;
+//     public int damage;
+//     public int speed;
+// }
 
 

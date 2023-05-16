@@ -1,7 +1,7 @@
 using System;
 using Entities;
 using Lessons.Architecture.Components;
-using Lessons.Architecture.GameContexts;
+using Lessons.Architecture.GameSystem;
 using UnityEngine;
 
 // ReSharper disable UnusedType.Global
