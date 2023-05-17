@@ -4,6 +4,10 @@ namespace GameNodes
     {
     }
 
+    public sealed class EngineReady : GameEvent
+    {
+    }
+
     public sealed class GameStart : GameEvent
     {
     }

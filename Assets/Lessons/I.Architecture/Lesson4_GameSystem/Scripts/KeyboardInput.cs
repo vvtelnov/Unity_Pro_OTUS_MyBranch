@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Lessons.Architecture.GameSystem
 {
-    public sealed class KeyboardInput : MonoBehaviour
+    public sealed class KeyboardInput : MonoBehaviour, IGameUpdateListener
     {
         public Action<Vector2> OnMove;
 
-        private void Update()
+        void IGameUpdateListener.OnUpdate(float deltaTime)
         {
             this.HandleKeyboard();
         }

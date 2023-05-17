@@ -155,7 +155,7 @@ namespace GameNodes
             }
         }
 
-        private void InvokeServices<T>() where T : Attribute
+        private void InvokeServices<T>() where T : GameEvent
         {
             for (int i = 0, count = this.services.Count; i < count; i++)
             {
@@ -164,7 +164,7 @@ namespace GameNodes
             }
         }
 
-        private void InvokeService<T>(object service) where T : Attribute
+        private void InvokeService<T>(object service) where T : GameEvent
         {
             var type = service.GetType();
             while (type != null && type != typeof(object) && type != typeof(MonoBehaviour))
