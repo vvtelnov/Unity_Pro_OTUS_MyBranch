@@ -1,53 +1,40 @@
 using Game.App;
-using Game.GameEngine.InventorySystem;
 using Services;
 
 namespace Game.Meta
 {
-    public sealed class InventoryItemsMediator :
-        IGameLoadDataListener,
-        IGameSaveDataListener
+    public sealed class InventoryItemsMediator : GameMediator<InventoryItemData[], InventoryService>
     {
-        [ServiceInject]
-        private InventoryItemsRepository repository;
-
         [ServiceInject]
         private InventoryItemsAssetSupplier assetSupplier;
 
-        private StackableInventory playerInventory;
-
-        void IGameLoadDataListener.OnLoadData(GameFacade gameFacade)
+        protected override void SetupFromData(InventoryService service, InventoryItemData[] dataSet)
         {
-            this.playerInventory = gameFacade.GetService<InventoryService>().GetInventory();
-            if (this.repository.LoadItems(out var itemsData))
+            var inventory = service.GetInventory();
+
+            for (int i = 0, count = dataSet.Length; i < count; i++)
             {
-                this.SetupItems(itemsData);
-            }
-        }
-
-        void IGameSaveDataListener.OnSaveData(GameSaveReason reason)
-        {
-            this.SaveItems();
-        }
-
-        private void SetupItems(InventoryItemData[] itemsData)
-        {
-            for (int i = 0, count = itemsData.Length; i < count; i++)
-            {
-                var data = itemsData[i];
+                var data = dataSet[i];
                 var config = this.assetSupplier.GetItem(data.name);
-                this.playerInventory.AddItemsByPrototype(config.Prototype, data.count);
+                inventory.AddItemsByPrototype(config.Prototype, data.count);
             }
         }
 
-        private void SaveItems()
+        protected override void SetupByDefault(InventoryService service)
         {
-            var inventoryItems = this.playerInventory.CountAllItemsInDictionary();
-            var count = inventoryItems.Count;
-            var itemsData = new InventoryItemData[count];
+            //Do nothing...
+        }
+
+        protected override InventoryItemData[] ConvertToData(InventoryService service)
+        {
+            var inventory = service.GetInventory();
+            var items = inventory.CountAllItemsInDictionary();
+            var count = items.Count;
+
+            var dataSet = new InventoryItemData[count];
             var index = 0;
 
-            foreach (var (name, amount) in inventoryItems)
+            foreach (var (name, amount) in items)
             {
                 var data = new InventoryItemData
                 {
@@ -55,11 +42,11 @@ namespace Game.Meta
                     count = amount
                 };
 
-                itemsData[index] = data;
+                dataSet[index] = data;
                 index++;
             }
 
-            this.repository.SaveItems(itemsData);
+            return dataSet;
         }
     }
 }

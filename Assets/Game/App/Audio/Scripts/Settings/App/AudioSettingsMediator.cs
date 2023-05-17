@@ -1,14 +1,14 @@
-using Services;
+using JetBrains.Annotations;
 
 namespace Game.App
 {
+    [UsedImplicitly]
     public sealed class AudioSettingsMediator : 
         IAppInitListener,
         IAppPauseListener,
         IAppQuitListener
     {
-        [ServiceInject]
-        private AudioSettingsRepository repository;
+        private const string PREFS_KEY = "AudioSettingsData";
 
         void IAppInitListener.Init()
         {
@@ -27,8 +27,9 @@ namespace Game.App
 
         private void LoadSettings()
         {
-            if (this.repository.LoadSettings(out AudioSettingsData data))
+            if (ES3.KeyExists(PREFS_KEY))
             {
+                var data = ES3.Load<AudioSettingsData>(PREFS_KEY);
                 AudioSettingsManager.SetMusicVolume(data.musicVolume);
                 AudioSettingsManager.SetSoundVolume(data.soundVolume);
             }
@@ -46,7 +47,8 @@ namespace Game.App
                 musicVolume = AudioSettingsManager.MusicVolume,
                 soundVolume = AudioSettingsManager.SoundVolume
             };
-            this.repository.SaveSettings(data);
+            
+            ES3.Save(PREFS_KEY, data);
         }
     }
 }

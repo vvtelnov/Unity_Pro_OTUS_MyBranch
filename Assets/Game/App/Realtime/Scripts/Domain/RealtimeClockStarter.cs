@@ -12,11 +12,11 @@ namespace Game.App
         private RealtimeClock realtimeClock;
 
         [ServiceInject]
-        private RealtimeRepository repository;
+        private RealtimePreferences preferences;
         
         public async Task StartClockAsync()
         {
-            if (this.repository.LoadSession(out RealtimeData previousSession))
+            if (this.preferences.LoadData(out RealtimeData previousSession))
             {
                 await this.StartByPrevious(previousSession.nowSeconds);
             }

@@ -9,8 +9,6 @@ namespace Game.Gameplay.Player
     )]
     public sealed class ResourceStorageConfig : ScriptableObject
     {
-        private const string CONFIG_PATH = "PlayerGameResourcesConfig";
-
         public ResourceData[] InitialResources
         {
             get { return this.initialResources; }
@@ -21,7 +19,7 @@ namespace Game.Gameplay.Player
 
         public static ResourceStorageConfig LoadAsset()
         {
-            return Resources.Load<ResourceStorageConfig>(CONFIG_PATH);
+            return Resources.Load<ResourceStorageConfig>(nameof(ResourceStorageConfig));
         }
     }
 }

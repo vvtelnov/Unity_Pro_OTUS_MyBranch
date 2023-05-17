@@ -585,11 +585,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
-      propertyPath: monoServices.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
-        type: 3}
       propertyPath: servicePacks.Array.size
       value: 16
       objectReference: {fileID: 0}
@@ -630,9 +625,57 @@ PrefabInstance:
       objectReference: {fileID: 1134119319}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
+      propertyPath: servicePacks.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: c9b77730b53974e9f9023eb09a87c672,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 00955dd518e114ee1b42100a4b918eb6,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ea0a77e4dc174e47976e1fa860a8b09,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a61af03a4929493e977326a6baaa6d5,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[14]
+      value: 
+      objectReference: {fileID: 11400000, guid: e70a71b934bdb4342b909b3e7f41336a,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
       propertyPath: servicePacks.Array.data[16]
       value: 
-      objectReference: {fileID: 11400000, guid: 2330c1ed1b39147e799155cd2c2d63d2,
+      objectReference: {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[18]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49cba4684d6964d8d9c476ed84cad743,
+        type: 2}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
+      propertyPath: servicePacks.Array.data[19]
+      value: 
+      objectReference: {fileID: 11400000, guid: 49cba4684d6964d8d9c476ed84cad743,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed760b4861c1a4ef3b603ae0e39de5c3, type: 3}
@@ -1240,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: 3372915681754760699, guid: a59de8a63e23e4bff9a05c58591b9460,
         type: 3}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59de8a63e23e4bff9a05c58591b9460, type: 3}

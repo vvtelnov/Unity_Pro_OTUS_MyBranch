@@ -3,13 +3,11 @@ using UnityEngine;
 namespace Game.Gameplay.Player
 {
     [CreateAssetMenu(
-        fileName = "MoneyConfig",
+        fileName = "MoneyStorageConfig",
         menuName = "Gameplay/Player/New MoneyStorageConfig"
     )]
     public sealed class MoneyStorageConfig : ScriptableObject
     {
-        public const string CONFIG_PATH = "PlayerMoneyConfig";
-
         public int InitialMoney
         {
             get { return this.initialMoney; }
@@ -20,7 +18,7 @@ namespace Game.Gameplay.Player
 
         public static MoneyStorageConfig LoadAsset()
         {
-            return Resources.Load<MoneyStorageConfig>(CONFIG_PATH);
+            return Resources.Load<MoneyStorageConfig>(nameof(MoneyStorageConfig));
         }
     }
 }

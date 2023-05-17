@@ -5,13 +5,14 @@ namespace Game.App
 {
     public sealed class RealtimeGameSynchronizer : 
         IAppStartListener,
-        IAppQuitListener,
-        IGameLoadDataListener
+        IAppQuitListener
     {
+        [ServiceInject]
+        private GameFacade gameFacade;
+        
         [ServiceInject]
         private RealtimeClock realtimeClock;
 
-        private TimeShiftEmitter timeShiftEmitter;
         
         void IAppStartListener.Start()
         {
@@ -25,16 +26,13 @@ namespace Game.App
             this.realtimeClock.OnResumed -= this.OnSessionResumed;
         }
 
-        void IGameLoadDataListener.OnLoadData(GameFacade gameFacade)
-        {
-            this.timeShiftEmitter = gameFacade.GetService<TimeShiftEmitter>();
-        }
-
         private void OnSessionStarted(long pauseSeconds)
         {
             if (pauseSeconds > 0)
             {
-                this.timeShiftEmitter.EmitEvent(TimeShiftReason.START_GAME, pauseSeconds);
+                this.gameFacade
+                    .GetService<TimeShiftEmitter>()
+                    .EmitEvent(TimeShiftReason.START_GAME, pauseSeconds);
             }
         }
 
@@ -42,7 +40,9 @@ namespace Game.App
         {
             if (pauseSeconds > 0)
             {
-                this.timeShiftEmitter.EmitEvent(TimeShiftReason.RESUME_GAME, pauseSeconds);
+                this.gameFacade
+                    .GetService<TimeShiftEmitter>()
+                    .EmitEvent(TimeShiftReason.RESUME_GAME, pauseSeconds);
             }
         }
     }

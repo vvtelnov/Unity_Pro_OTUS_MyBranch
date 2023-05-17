@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Game.GameEngine.AI
 {
-    public sealed class Task_Entity_MoveByNavMesh : Task_MoveByNavMesh
+    public sealed class Task_Entity_MoveByNavMesh : AITask_MoveByNavMesh
     {
-        protected override Task_MoveByPoints<Vector3> MoveTask
+        protected override AITask_MoveByPoints<Vector3> MoveTask
         {
             get { return this.moveTask; }
         }

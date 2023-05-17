@@ -5,38 +5,30 @@ using Services;
 namespace Game.Meta
 {
     [UsedImplicitly]
-    public sealed class BoostersMediator : BaseMediator<BoostersRepository, BoostersManager>
+    public sealed class BoostersMediator : GameMediator<BoosterData[], BoostersManager>
     {
         [ServiceInject]
         private BoostersAssetSupplier assetSupplier;
 
-        protected override void OnLoadData(BoostersRepository repository, BoostersManager manager)
+        protected override void SetupFromData(BoostersManager service, BoosterData[] dataSet)
         {
-            if (repository.LoadBoosters(out var boostersData))
+            for (int i = 0, count = dataSet.Length; i < count; i++)
             {
-                this.SetupBoosters(manager, boostersData);
-            }
-        }
-
-        private void SetupBoosters(BoostersManager manager, BoosterData[] boostersData)
-        {
-            for (int i = 0, count = boostersData.Length; i < count; i++)
-            {
-                var data = boostersData[i];
+                var data = dataSet[i];
                 var config = this.assetSupplier.GetBooster(data.id);
-                var booster = manager.SetupBooster(config);
+                var booster = service.SetupBooster(config);
                 booster.RemainingTime = data.remainingTime;
             }
         }
 
-        protected override void OnSaveData(BoostersRepository repository, BoostersManager manager)
+        protected override void SetupByDefault(BoostersManager service)
         {
-            this.SaveBoosters(repository, manager);
+            //Do nothing...
         }
 
-        private void SaveBoosters(BoostersRepository repository, BoostersManager manager)
+        protected override BoosterData[] ConvertToData(BoostersManager service)
         {
-            var boosters = manager.GetActiveBoosters();
+            var boosters = service.GetActiveBoosters();
             var count = boosters.Length;
             var boostersData = new BoosterData[count];
 
@@ -52,7 +44,7 @@ namespace Game.Meta
                 boostersData[i] = data;
             }
 
-            repository.SaveBoosters(boostersData);
+            return boostersData;
         }
     }
 }

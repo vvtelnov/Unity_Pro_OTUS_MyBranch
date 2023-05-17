@@ -3,7 +3,7 @@ using AI.Commands;
 
 namespace Game.GameEngine.AI
 {
-    public class Command_BTNode<T> : Command<T>, IBehaviourCallback
+    public class Command_BTNode<T> : AICommand<T>, IBehaviourCallback
     {
         public IBehaviourNode BehaviourNode
         {

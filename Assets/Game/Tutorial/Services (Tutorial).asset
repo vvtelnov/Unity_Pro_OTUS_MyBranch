@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorMode: 1
   releaseScripts:
-  - {fileID: 11500000, guid: 67ccb1adb4354176a9dfb07837bc9178, type: 3}
   - {fileID: 11500000, guid: 7032b9f80b7b419094f2a5d234b90edc, type: 3}
   - {fileID: 11500000, guid: 0371f5cb6cd3463188acc2464db2370d, type: 3}
   - {fileID: 11500000, guid: 0673139518b741a49e70e9f50c464ac9, type: 3}
   - {fileID: 11500000, guid: 4c59e3d27630458c8cea698a101b5d27, type: 3}
   editorScripts:
-  - {fileID: 11500000, guid: 67ccb1adb4354176a9dfb07837bc9178, type: 3}
   - {fileID: 11500000, guid: 7032b9f80b7b419094f2a5d234b90edc, type: 3}
   - {fileID: 11500000, guid: 3268fccdc33b49ca883b7d39746c9542, type: 3}
   - {fileID: 11500000, guid: 0673139518b741a49e70e9f50c464ac9, type: 3}

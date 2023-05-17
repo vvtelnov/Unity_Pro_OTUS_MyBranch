@@ -1,4 +1,5 @@
 using Game.App;
+using UnityEngine;
 
 namespace Game.Tutorial.App
 {
@@ -19,13 +20,13 @@ namespace Game.Tutorial.App
         public static void LogEventAndCache(string eventName)
         {
             var key = "tutorial_analytics/" + eventName;
-            if (PlayerPreferences.KeyExists(key))
+            if (PlayerPrefs.HasKey(key))
             {
                 return;
             }
 
             AnalyticsManager.LogEvent(eventName);
-            PlayerPreferences.Save(key, 1);
+            PlayerPrefs.SetInt(key, 1);
         }
     }
 }

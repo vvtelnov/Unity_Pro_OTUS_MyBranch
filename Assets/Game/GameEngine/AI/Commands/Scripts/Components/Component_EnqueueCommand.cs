@@ -10,9 +10,9 @@ namespace Game.GameEngine.AI
             get { return this.enqueuer.IsRunning; }
         }
 
-        private readonly ICommandEnqueuer<Type> enqueuer;
+        private readonly IAICommandEnqueuer<Type> enqueuer;
 
-        public Component_EnqueueCommand(ICommandEnqueuer<Type> enqueuer)
+        public Component_EnqueueCommand(IAICommandEnqueuer<Type> enqueuer)
         {
             this.enqueuer = enqueuer;
         }

@@ -1,7 +1,7 @@
 using GameSystem;
 using Sirenix.OdinInspector;
 
-namespace Game.GameEngine
+namespace Game.Meta
 {
     public sealed class DialogueModule : GameModule
     {

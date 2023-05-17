@@ -1,5 +1,5 @@
 using System;
-using DialogueSystem;
+using Game.GameEngine;
 using UnityEngine;
 using static Game.Meta.IDialoguePresentationModel;
 
@@ -13,7 +13,7 @@ namespace Game.Meta
 
         public Sprite Icon
         {
-            get { return this.icon; }
+            get { return this.dialogue.Icon; }
         }
 
         public string CurrentMessage
@@ -26,16 +26,13 @@ namespace Game.Meta
             get { return this.currentOptions; }
         }
 
-        private readonly Sprite icon;
-
-        private readonly DialogueTree dialogue;
+        private readonly Dialogue dialogue;
 
         private IOption[] currentOptions;
 
-        public DialoguePresentationModel(ScriptableDialogue config)
+        public DialoguePresentationModel(Dialogue dialogue)
         {
-            this.icon = config.icon;
-            this.dialogue = config.InstantiateDialog();
+            this.dialogue = dialogue;
 
             this.UpdateOptions();
         }
@@ -49,14 +46,14 @@ namespace Game.Meta
             for (var i = 0; i < count; i++)
             {
                 var choice = choices[i];
-                var option = new Option(this, choice);
+                var option = new Option(this, choice, i);
                 this.currentOptions[i] = option;
             }
         }
 
-        private void MoveNext(DialogueChoice choice)
+        private void SelectChoice(int choiceIndex)
         {
-            if (this.dialogue.MoveNext(choice))
+            if (this.dialogue.MoveNext(choiceIndex))
             {
                 this.UpdateOptions();
                 this.OnStateChanged?.Invoke();
@@ -71,22 +68,25 @@ namespace Game.Meta
         {
             string IOption.Text
             {
-                get { return this.choice.Text; }
+                get { return this.choice; }
             }
 
             private readonly DialoguePresentationModel parent;
 
-            private readonly DialogueChoice choice;
+            private readonly string choice;
             
-            public Option(DialoguePresentationModel parent, DialogueChoice choice)
+            private readonly int index;
+            
+            public Option(DialoguePresentationModel parent, string choice, int index)
             {
                 this.parent = parent;
                 this.choice = choice;
+                this.index = index;
             }
 
             void IOption.OnSelected()
             {
-                this.parent.MoveNext(this.choice);
+                this.parent.SelectChoice(this.index);
             }
         }
     }

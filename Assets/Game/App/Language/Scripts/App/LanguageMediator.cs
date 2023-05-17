@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Services;
 using UnityEngine;
 
 namespace Game.App
@@ -10,11 +9,6 @@ namespace Game.App
         IAppStartListener,
         IAppQuitListener
     {
-        private const string CONFIG_PATH = "LanguageCatalog";
-
-        [ServiceInject]
-        private LanguageRepository repository;
-
         void IAppInitListener.Init()
         {
             var language = this.LoadLanguage();
@@ -33,14 +27,14 @@ namespace Game.App
 
         private SystemLanguage LoadLanguage()
         {
-            if (this.repository.LoadLanguage(out var language))
+            if (ES3.KeyExists(nameof(LanguageData)))
             {
-                return language;
+                return ES3.Load<SystemLanguage>(nameof(LanguageData));
             }
             
-            language = Application.systemLanguage;
+            var language = Application.systemLanguage;
             
-            var catalog = Resources.Load<LanguageCatalog>(CONFIG_PATH);
+            var catalog = LanguageCatalog.LoadAsset();
             if (!catalog.LanguageExists(language))
             {
                 language = catalog.defaultLanguage;
@@ -51,7 +45,7 @@ namespace Game.App
 
         private void SaveLanguage(SystemLanguage language)
         {
-            this.repository.SaveLanguage(language);
+            ES3.Save(nameof(LanguageData), language);
         }
     }
 }

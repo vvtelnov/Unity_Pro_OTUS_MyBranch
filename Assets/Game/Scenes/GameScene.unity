@@ -975,8 +975,8 @@ MonoBehaviour:
   - {fileID: 1184749257350313961}
   - {fileID: 202893121}
   - {fileID: 4779866875772001729}
-  - {fileID: 1458722303}
   - {fileID: 764317632}
+  - {fileID: 1458722303}
   constructTasks:
   - {fileID: 11400000, guid: 5a5e865bc07124816b0db66ae1871c0f, type: 2}
   - {fileID: 11400000, guid: ada6ba95d377a4f8eb0ddb2ba1c1b4e5, type: 2}
@@ -15498,7 +15498,7 @@ PrefabInstance:
     - target: {fileID: 727717441783854553, guid: dcbf67a7764454c21b529190dca1a5cb,
         type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 727717441783854555, guid: dcbf67a7764454c21b529190dca1a5cb,
         type: 3}
@@ -15936,17 +15936,17 @@ PrefabInstance:
     - target: {fileID: 7876374721192186923, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 7876374721192186923, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18
+      value: 16.4
       objectReference: {fileID: 0}
     - target: {fileID: 7876374721192186923, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.5
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7876374721192186923, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}
@@ -15986,7 +15986,7 @@ PrefabInstance:
     - target: {fileID: 7876374721192186924, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}
       propertyPath: field of view
-      value: 28
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7876374721192186926, guid: 8484ab73e91d849caacbacd66096ffb6,
         type: 3}

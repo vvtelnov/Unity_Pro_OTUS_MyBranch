@@ -7,7 +7,7 @@ namespace Game.App
         IAppQuitListener
     {
         [ServiceInject]
-        private RealtimeRepository repository;
+        private RealtimePreferences preferences;
 
         [ServiceInject]
         private RealtimeClock realtimeClock;
@@ -30,7 +30,7 @@ namespace Game.App
             {
                 nowSeconds = this.realtimeClock.RealtimeSeconds
             };
-            this.repository.SaveSession(data);
+            this.preferences.SaveData(data);
         }
     }
 }

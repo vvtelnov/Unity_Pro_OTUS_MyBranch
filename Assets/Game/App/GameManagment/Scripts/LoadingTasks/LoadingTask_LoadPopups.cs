@@ -6,7 +6,7 @@ namespace Game.App
 {
     public sealed class LoadingTask_LoadPopups : ILoadingTask
     {
-        public async void Do(Action<LoadingResult> callback)
+        async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             var popupCatalog = Resources.Load<PopupCatalog>(nameof(PopupCatalog));
             await popupCatalog.PreloadPrefabs();

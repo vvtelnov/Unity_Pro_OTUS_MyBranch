@@ -13,7 +13,7 @@ namespace Game.App
             this.gameLauncher = gameLauncher;
         }
 
-        public async void Do(Action<LoadingResult> callback)
+        async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             await this.gameLauncher.LaunchGame();
             callback?.Invoke(LoadingResult.Success());

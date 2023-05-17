@@ -89,14 +89,12 @@ namespace GameNodes
                 return;
             }
 
-            this.installed = true;
-            
-            foreach (var service in this.ProvideServices())
+            foreach (var service in this.LoadServices())
             {
-                this.InstallService(service);
+                this.SetupService(service);
             }
 
-            this.Construct();
+            this.installed = true;
 
             for (int i = 0, count = this.children.Count; i < count; i++)
             {
@@ -106,16 +104,12 @@ namespace GameNodes
             }
         }
 
-        protected virtual IEnumerable<object> ProvideServices()
+        protected virtual IEnumerable<object> LoadServices()
         {
             yield break;
         }
 
-        protected virtual void Construct()
-        {
-        }
-
-        private void InstallService(object service)
+        private void SetupService(object service)
         {
             this.services.Add(service);
 
@@ -137,14 +131,14 @@ namespace GameNodes
 
         #endregion
 
-        #region Call
+        #region Send
 
-        public Task CallAsync<T>() where T : GameEvent
+        public Task SendAsync<T>() where T : GameEvent
         {
-            return Task.Run(this.Call<T>);
+            return Task.Run(this.Send<T>);
         }
 
-        public void Call<T>() where T : GameEvent
+        public void Send<T>() where T : GameEvent
         {
             if (!this.installed)
             {
@@ -152,25 +146,25 @@ namespace GameNodes
                 return;
             }
 
-            this.CallServices<T>();
+            this.InvokeServices<T>();
 
             for (int i = 0, count = this.children.Count; i < count; i++)
             {
                 var node = this.children[i];
-                node.Call<T>();
+                node.Send<T>();
             }
         }
 
-        private void CallServices<T>() where T : Attribute
+        private void InvokeServices<T>() where T : GameEvent
         {
             for (int i = 0, count = this.services.Count; i < count; i++)
             {
                 var service = this.services[i];
-                this.CallService<T>(service);
+                this.InvokeService<T>(service);
             }
         }
 
-        private void CallService<T>(object service) where T : Attribute
+        private void InvokeService<T>(object service) where T : GameEvent
         {
             var type = service.GetType();
             while (type != null && type != typeof(object) && type != typeof(MonoBehaviour))
@@ -187,15 +181,15 @@ namespace GameNodes
                     var method = methods[i];
                     if (method.GetCustomAttribute<T>() != null)
                     {
-                        this.CallMethod(service, method);
+                        this.InvokeServiceMethod(service, method);
                     }
                 }
 
                 type = type.BaseType;
             }
         }
-
-        private void CallMethod(object service, MethodInfo method)
+        
+        private void InvokeServiceMethod(object service, MethodInfo method)
         {
             var parameters = method.GetParameters();
             var count = parameters.Length;
@@ -205,7 +199,7 @@ namespace GameNodes
             {
                 var parameter = parameters[i];
                 var parameterType = parameter.ParameterType;
-                args[i] = this.ResolveService(parameterType);
+                args[i] = this.Service(parameterType);
             }
 
             method.Invoke(service, args);
@@ -214,19 +208,13 @@ namespace GameNodes
         #endregion
 
         #region Services
-
-        protected object ResolveService(Type serviceType)
+        
+        public object Service(Type type)
         {
-            //TODO: THINK ABOUT>>>
-            // if (typeof(GameNode).IsAssignableFrom(serviceType))
-            // {
-            //     return this;
-            // }
-            
             var node = this;
             while (node != null)
             {
-                if (node.TryGetService(serviceType, out var service))
+                if (node.FindService(type, out var service))
                 {
                     return service;
                 }
@@ -234,15 +222,15 @@ namespace GameNodes
                 node = node.parent;
             }
 
-            throw new Exception($"Can't find service {serviceType.Name}!");
+            throw new Exception($"Can't find service {type.Name}!");
         }
 
-        protected T ResolveService<T>()
+        public T Service<T>()
         {
             var node = this;
             while (node != null)
             {
-                if (node.TryGetService<T>(out var service))
+                if (node.FindService<T>(out var service))
                 {
                     return service;
                 }
@@ -252,22 +240,22 @@ namespace GameNodes
 
             throw new Exception($"Can't find service {typeof(T).Name}!");
         }
-
-        public T GetService<T>()
+        
+        public IEnumerable<T> Services<T>()
         {
-            for (int i = 0, count = this.services.Count; i < count; i++)
+            var node = this;
+            while (node != null)
             {
-                var service = this.services[i];
-                if (service is T result)
+                if (node.FindService<T>(out var service))
                 {
-                    return result;
+                    yield return service;
                 }
+
+                node = node.parent;
             }
-            
-            throw new Exception($"Service of type {typeof(T).Name} is not found!");
         }
 
-        public bool TryGetService<T>(out T service)
+        private bool FindService<T>(out T service)
         {
             for (int i = 0, count = this.services.Count; i < count; i++)
             {
@@ -283,35 +271,7 @@ namespace GameNodes
             return false;
         }
 
-        public IEnumerable<T> GetServices<T>()
-        {
-            for (int i = 0, count = this.services.Count; i < count; i++)
-            {
-                var service = this.services[i];
-                if (service is T tService)
-                {
-                    yield return tService;
-                }
-            }
-        }
-
-        public object GetService(Type serviceType)
-        {
-            for (int i = 0, count = this.services.Count; i < count; i++)
-            {
-                var currentService = this.services[i];
-                var currentType = currentService.GetType(); 
-                
-                if (serviceType.IsAssignableFrom(currentType))
-                {
-                    return currentService;
-                }
-            }
-
-            throw new Exception($"Service {serviceType.Name} is not found!");
-        }
-
-        public bool TryGetService(Type targetType, out object service)
+        private bool FindService(Type targetType, out object service)
         {
             for (int i = 0, count = this.services.Count; i < count; i++)
             {
@@ -325,20 +285,6 @@ namespace GameNodes
 
             service = default;
             return false;
-        }
-        
-        public IEnumerable<object> GetServices(Type serviceType)
-        {
-            for (int i = 0, count = this.services.Count; i < count; i++)
-            {
-                var service = this.services[i];
-                var currentType = service.GetType(); 
-                
-                if (serviceType.IsAssignableFrom(currentType))
-                {
-                    yield return service;
-                }
-            }
         }
 
         #endregion

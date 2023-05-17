@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdcdf2bc45e44aa84926b80c1a097bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 3
+  step: 3
   config: {fileID: 11400000, guid: 69ff9f175d99e4ea78e74bed70869a1c, type: 2}
   questCursor: {fileID: 1230194219}
   fading: {fileID: 1379657010}

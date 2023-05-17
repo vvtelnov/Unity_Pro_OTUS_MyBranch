@@ -12,7 +12,7 @@ namespace GameNodes
         [SerializeField]
         private MoveInput moveInput;
         
-        protected override IEnumerable<object> ProvideServices()
+        protected override IEnumerable<object> LoadServices()
         {
             yield return this.heroService;
             yield return this.moveInput;

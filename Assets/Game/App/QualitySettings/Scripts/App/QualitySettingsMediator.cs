@@ -1,5 +1,3 @@
-using Services;
-
 namespace Game.App
 {
     public sealed class QualitySettingsMediator :
@@ -7,14 +5,13 @@ namespace Game.App
         IAppStartListener,
         IAppQuitListener
     {
-        [ServiceInject]
-        private QualitySettingsRepository repository;
+        private const string PREFS_KEY = "QualitySettingsData";
 
-        
         void IAppInitListener.Init()
         {
-            if (this.repository.LoadSettings(out var data))
+            if (ES3.KeyExists(PREFS_KEY))
             {
+                var data = ES3.Load<QualitySettingsData>(PREFS_KEY);
                 QualitySettingsManager.SetLevel(data.qualityLevel);
             }
         }
@@ -35,7 +32,8 @@ namespace Game.App
             {
                 qualityLevel = level
             };
-            this.repository.SaveSettings(data);
+
+            ES3.Save(PREFS_KEY, data);
         }
     }
 }

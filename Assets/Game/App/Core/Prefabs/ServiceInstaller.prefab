@@ -52,7 +52,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   servicePacks:
   - {fileID: 11400000, guid: 1faf868afa4c243d987f7dcf07754034, type: 2}
   - {fileID: 11400000, guid: ab47d453b8d884e1bbbbfd2c678abfde, type: 2}
@@ -70,3 +69,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ea0a77e4dc174e47976e1fa860a8b09, type: 2}
   - {fileID: 11400000, guid: 8a61af03a4929493e977326a6baaa6d5, type: 2}
   - {fileID: 11400000, guid: f6f52e12f2e3e4a98b58c5c6e681ce80, type: 2}
+  - {fileID: 11400000, guid: e70a71b934bdb4342b909b3e7f41336a, type: 2}
+  - {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4, type: 2}
+  - {fileID: 11400000, guid: e5aa930c1d477434fb077dc5b8134807, type: 2}

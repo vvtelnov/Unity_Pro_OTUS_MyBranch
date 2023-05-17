@@ -10,9 +10,9 @@ namespace Game.GameEngine.AI
             get { return this.executor.IsRunning; }
         }
 
-        private readonly ICommandExecutor<Type> executor;
+        private readonly IAICommandExecutor<Type> executor;
 
-        public Component_ExecuteCommand(ICommandExecutor<Type> executor)
+        public Component_ExecuteCommand(IAICommandExecutor<Type> executor)
         {
             this.executor = executor;
         }

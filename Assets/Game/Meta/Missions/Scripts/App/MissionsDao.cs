@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Services;
 using SqliteModule;
 
 namespace Game.Meta
 {
+    //EXAMPLE OF SQLITE ORM
+    [UsedImplicitly]
     public sealed class MissionsDao
     {
         private SqliteDatabase database;

@@ -1,27 +1,34 @@
-using Entities;
 using Game.App;
 using Game.GameEngine.Mechanics;
+using JetBrains.Annotations;
 
 namespace Game.Gameplay.Conveyors
 {
-    public sealed class ConveyorsMediator : BaseMediator<ConveyorsRepository, ConveyorsService>
+    [UsedImplicitly]
+    public sealed class ConveyorsMediator : GameMediator<ConveyorData[], ConveyorsService>
     {
-        protected override void OnLoadData(ConveyorsRepository repository, ConveyorsService service)
+        protected override void SetupFromData(ConveyorsService service, ConveyorData[] dataSet)
         {
-            if (!repository.LoadConveyors(out var conveyorsData))
+            for (int i = 0, count = dataSet.Length; i < count; i++)
             {
-                return;
-            }
-
-            for (int i = 0, count = conveyorsData.Length; i < count; i++)
-            {
-                var data = conveyorsData[i];
+                var data = dataSet[i];
                 var conveyor = service.FindConveyor(data.id);
-                SetupConveyor(conveyor, data);
+
+                conveyor
+                    .Get<IComponent_LoadZone>()
+                    .SetupAmount(data.inputAmount);
+                conveyor
+                    .Get<IComponent_UnloadZone>()
+                    .SetupAmount(data.outputAmount);
             }
         }
 
-        protected override void OnSaveData(ConveyorsRepository repository, ConveyorsService service)
+        protected override void SetupByDefault(ConveyorsService service)
+        {
+            //Do nothing...
+        }
+
+        protected override ConveyorData[] ConvertToData(ConveyorsService service)
         {
             var conveyors = service.GetAllConveyors();
             var count = conveyors.Length;
@@ -30,32 +37,16 @@ namespace Game.Gameplay.Conveyors
             for (var i = 0; i < count; i++)
             {
                 var conveyor = conveyors[i];
-                var data = ConvertToData(conveyor);
+                var data = new ConveyorData
+                {
+                    id = conveyor.Get<IComponent_GetId>().Id,
+                    inputAmount = conveyor.Get<IComponent_LoadZone>().CurrentAmount,
+                    outputAmount = conveyor.Get<IComponent_UnloadZone>().CurrentAmount
+                };
                 dataArray[i] = data;
             }
 
-            repository.SaveConveyors(dataArray);
-        }
-
-        private static void SetupConveyor(IEntity conveyor, ConveyorData data)
-        {
-            conveyor
-                .Get<IComponent_LoadZone>()
-                .SetupAmount(data.inputAmount);
-            conveyor
-                .Get<IComponent_UnloadZone>()
-                .SetupAmount(data.outputAmount);
-        }
-
-        private static ConveyorData ConvertToData(IEntity conveyor)
-        {
-            var data = new ConveyorData
-            {
-                id = conveyor.Get<IComponent_GetId>().Id,
-                inputAmount = conveyor.Get<IComponent_LoadZone>().CurrentAmount,
-                outputAmount = conveyor.Get<IComponent_UnloadZone>().CurrentAmount
-            };
-            return data;
+            return dataArray;
         }
     }
 }
