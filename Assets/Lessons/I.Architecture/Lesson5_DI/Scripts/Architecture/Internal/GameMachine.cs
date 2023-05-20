@@ -4,18 +4,10 @@ using UnityEngine;
 
 namespace Lessons.Architecture.DI
 {
-    public enum GameState
-    {
-        OFF = 0,
-        PLAYING = 1,
-        PAUSED = 2,
-        FINISHED = 3
-    }
-
-    public sealed class GameManager : MonoBehaviour
+    internal sealed class GameMachine
     {
         [ShowInInspector, ReadOnly]
-        public GameState State
+        internal GameState State
         {
             get { return this.state; }
         }
@@ -30,7 +22,7 @@ namespace Lessons.Architecture.DI
         
         private readonly List<IGameLateUpdateListener> lateUpdateListeners = new();
 
-        private void Update()
+        internal void Update()
         {
             if (this.state != GameState.PLAYING)
             {
@@ -45,7 +37,7 @@ namespace Lessons.Architecture.DI
             }
         }
 
-        private void FixedUpdate()
+        internal void FixedUpdate()
         {
             if (this.state != GameState.PLAYING)
             {
@@ -60,7 +52,7 @@ namespace Lessons.Architecture.DI
             }
         }
 
-        private void LateUpdate()
+        internal void LateUpdate()
         {
             if (this.state != GameState.PLAYING)
             {
@@ -75,7 +67,15 @@ namespace Lessons.Architecture.DI
             }
         }
         
-        public void AddListener(IGameListener listener)
+        internal void AddListeners(IEnumerable<IGameListener> gameListeners)
+        {
+            foreach (var listener in gameListeners)
+            {
+                this.AddListener(listener);
+            }
+        }
+        
+        internal void AddListener(IGameListener listener)
         {
             if (listener == null)
             {
@@ -101,7 +101,7 @@ namespace Lessons.Architecture.DI
         }
 
 
-        public void RemoveListener(IGameListener listener)
+        internal void RemoveListener(IGameListener listener)
         {
             if (listener == null)
             {
@@ -126,8 +126,18 @@ namespace Lessons.Architecture.DI
             }
         }
 
-        [Button]
-        public void StartGame()
+        internal void InitGame()
+        {
+            foreach (var listener in this.listeners)
+            {
+                if (listener is IGameInitListener initListener)
+                {
+                    initListener.OnInit();
+                }
+            }
+        }
+
+        internal void StartGame()
         {
             foreach (var listener in this.listeners)
             {
@@ -140,8 +150,7 @@ namespace Lessons.Architecture.DI
             this.state = GameState.PLAYING;
         }
 
-        [Button]
-        public void PauseGame()
+        internal void PauseGame()
         {
             foreach (var listener in this.listeners)
             {
@@ -154,8 +163,7 @@ namespace Lessons.Architecture.DI
             this.state = GameState.PAUSED;
         }
 
-        [Button]
-        public void ResumeGame()
+        internal void ResumeGame()
         {
             foreach (var listener in this.listeners)
             {
@@ -168,8 +176,7 @@ namespace Lessons.Architecture.DI
             this.state = GameState.PLAYING;
         }
 
-        [Button]
-        public void FinishGame()
+        internal void FinishGame()
         {
             foreach (var listener in this.listeners)
             {
@@ -181,5 +188,7 @@ namespace Lessons.Architecture.DI
             
             this.state = GameState.FINISHED;
         }
+
+   
     }
 }
