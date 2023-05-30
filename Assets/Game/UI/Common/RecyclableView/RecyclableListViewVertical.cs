@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.UI
 {
-    public sealed class RecyclableViewListVertical : RecyclableViewList
+    public sealed class RecyclableListViewVertical : RecyclableListView
     {
         private static readonly Vector2 zeroVector = Vector2.zero;
 

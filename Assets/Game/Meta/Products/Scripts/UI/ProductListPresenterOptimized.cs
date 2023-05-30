@@ -11,10 +11,10 @@ namespace Game.Meta
 {
     public sealed class ProductListPresenterOptimized : MonoWindow,
         IGameConstructElement,
-        RecyclableViewList.IAdapter
+        RecyclableListView.IAdapter
     {
         [SerializeField]
-        private RecyclableViewList recycleViewList;
+        private RecyclableListView recycleViewList;
 
         [Space]
         [SerializeField]
@@ -44,12 +44,12 @@ namespace Game.Meta
             this.recycleViewList.Terminate();
         }
 
-        int RecyclableViewList.IAdapter.GetDataCount()
+        int RecyclableListView.IAdapter.GetDataCount()
         {
             return this.productCatalog.ProductCount;
         }
 
-        void RecyclableViewList.IAdapter.OnCreateView(RectTransform view, int index)
+        void RecyclableListView.IAdapter.OnCreateView(RectTransform view, int index)
         {
             var viewComponent = view.GetComponent<ProductView>();
             var presenter = new ProductPresenter(viewComponent);
@@ -67,14 +67,14 @@ namespace Game.Meta
             presenter.Start();
         }
 
-        void RecyclableViewList.IAdapter.OnUpdateView(RectTransform view, int index)
+        void RecyclableListView.IAdapter.OnUpdateView(RectTransform view, int index)
         {
             var presenter = this.presenterMap[view];
             var productConfig = this.productCatalog.GetProduct(index);
             presenter.SetProduct(productConfig.Prototype);
         }
 
-        void RecyclableViewList.IAdapter.OnDestroyView(RectTransform view)
+        void RecyclableListView.IAdapter.OnDestroyView(RectTransform view)
         {
             var presenter = this.presenterMap[view];
             presenter.Stop();

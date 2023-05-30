@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.UI
 {
-    public abstract class RecyclableViewList : MonoBehaviour
+    public abstract class RecyclableListView : MonoBehaviour
     {
         [SerializeField]
         protected GameObject viewPrefab;
