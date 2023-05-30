@@ -1,7 +1,7 @@
 using GameSystem;
 using UnityEngine;
 
-namespace Lessons.Architecture.MVA
+namespace Lessons.Architecture.MVO
 {
     //ADAPTER
     public sealed class MoneyPanelAdapter : MonoBehaviour, 

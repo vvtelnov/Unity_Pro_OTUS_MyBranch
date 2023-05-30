@@ -1,5 +1,5 @@
 using GameSystem;
-using Lessons.Architecture.MVA;
+using Lessons.Architecture.MVO;
 using UnityEngine;
 
 namespace Lessons.Architecture.PresentationModel

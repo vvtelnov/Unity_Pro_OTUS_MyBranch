@@ -15,11 +15,13 @@ namespace Elementary
             get { return this.value; }
             set { this.SetValue(value); }
         }
-        
+
+#if ODIN_INSPECTOR
         [OnValueChanged("SetValue")]
+#endif
         [SerializeField]
         private int value;
-        
+
         private ActionComposite<int> onValueChanged;
 
         public void AddListener(IAction<int> listener)

@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace Lessons.Architecture.MVA
+namespace Lessons.Architecture.MVO
 {
     //VIEW
     public sealed class CurrencyPanel : MonoBehaviour

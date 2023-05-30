@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.Architecture.MVA
+namespace Lessons.Architecture.MVO
 {
     public sealed class GemsStorage : MonoBehaviour
     {

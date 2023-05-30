@@ -1,6 +1,6 @@
 using System;
 using GameSystem;
-using Lessons.Architecture.MVA;
+using Lessons.Architecture.MVO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

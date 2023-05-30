@@ -36,6 +36,7 @@ MonoBehaviour:
     - GOAP
     - Assembly-CSharp
     - BehaviourTree
+    - GameSystemLesson
     - Windows
     - Products
     - GameSystem
