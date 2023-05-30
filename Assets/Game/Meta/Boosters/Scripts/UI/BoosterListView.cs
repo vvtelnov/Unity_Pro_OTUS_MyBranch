@@ -41,7 +41,7 @@ namespace Game.Meta
             this.boosters.Remove(booster);
         }
         
-        private sealed class ViewHolder
+        private struct ViewHolder
         {
             public readonly BoosterView view;
             public readonly BoosterViewAdapter adapter;
