@@ -22,6 +22,6 @@ namespace Lessons.Architecture.PresentationModel
         
         [Space]
         [SerializeField]
-        public BigNumber price;
+        public int price;
     }
 }

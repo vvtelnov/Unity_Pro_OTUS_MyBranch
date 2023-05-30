@@ -6,32 +6,32 @@ namespace Lessons.Architecture.MVO
 {
     public sealed class GemsStorage : MonoBehaviour
     {
-        public event Action<int> OnGemsChanged;
+        public event Action<short> OnGemsChanged;
 
-        public int Gems
+        public short Gems
         {
             get { return this.gems; }
         }
 
         [ReadOnly]
         [ShowInInspector]
-        private int gems;
+        private short gems;
 
         [Button]
-        public void SetupGems(int gems)
+        public void SetupGems(short gems)
         {
             this.gems = gems;
         }
 
         [Button]
-        public void AddGems(int range)
+        public void AddGems(short range)
         {
             this.gems += range;
             this.OnGemsChanged?.Invoke(this.gems);
         }
 
         [Button]
-        public void SpendGems(int range)
+        public void SpendGems(short range)
         {
             this.gems -= range;
             this.OnGemsChanged?.Invoke(this.gems);

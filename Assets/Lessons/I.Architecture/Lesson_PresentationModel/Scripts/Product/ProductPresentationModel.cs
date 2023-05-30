@@ -61,7 +61,7 @@ namespace Lessons.Architecture.PresentationModel
             this.productBuyer.Buy(this.product);
         }
 
-        private void OnMoneyChanged(BigNumber money)
+        private void OnMoneyChanged(int money)
         {
             var canBuy = this.productBuyer.CanBuy(this.product);
             this.OnBuyButtonStateChanged?.Invoke(canBuy);

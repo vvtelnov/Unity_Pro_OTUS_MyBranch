@@ -6,32 +6,32 @@ namespace Lessons.Architecture.MVO
 {
     public sealed class MoneyStorage : MonoBehaviour
     {
-        public event Action<BigNumber> OnMoneyChanged;
+        public event Action<int> OnMoneyChanged;
 
-        public BigNumber Money
+        public int Money
         {
             get { return this.money; }
         }
 
         [ReadOnly]
         [ShowInInspector]
-        private BigNumber money;
+        private int money;
 
         [Button]
-        public void SetupMoney(BigNumber money)
+        public void SetupMoney(int money)
         {
             this.money = money;
         }
 
         [Button]
-        public void AddMoney(BigNumber range)
+        public void AddMoney(int range)
         {
             this.money += range;
             this.OnMoneyChanged?.Invoke(this.money);
         }
 
         [Button]
-        public void SpendMoney(BigNumber range)
+        public void SpendMoney(int range)
         {
             this.money -= range;
             this.OnMoneyChanged?.Invoke(this.money);
