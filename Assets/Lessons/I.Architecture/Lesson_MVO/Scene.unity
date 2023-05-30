@@ -384,7 +384,6 @@ MonoBehaviour:
   autoRun: 1
   gameServices:
   - {fileID: 1834647275}
-  - {fileID: 0}
   gameElements:
   - {fileID: 4944239383083523500}
   constructTasks: []
