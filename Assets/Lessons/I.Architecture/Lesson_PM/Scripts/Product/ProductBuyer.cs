@@ -3,7 +3,7 @@ using Lessons.Architecture.MVO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PM
+namespace Lessons.Architecture.PM
 {
     public sealed class ProductBuyer : MonoBehaviour
     {

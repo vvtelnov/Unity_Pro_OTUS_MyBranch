@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace PM
+namespace Lessons.Architecture.PM
 {
     public class Popup : MonoBehaviour
     {

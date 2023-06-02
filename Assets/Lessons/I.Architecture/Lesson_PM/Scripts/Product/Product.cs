@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PM
+namespace Lessons.Architecture.PM
 {
     [CreateAssetMenu(
         fileName = "Product",

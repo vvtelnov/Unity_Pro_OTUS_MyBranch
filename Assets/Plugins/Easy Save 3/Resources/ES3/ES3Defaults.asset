@@ -39,7 +39,6 @@ MonoBehaviour:
     - GameSystemLesson
     - Windows
     - Products
-    - GameSystem
     - Cinemachine
     - InventorySystem
     - Iterators
@@ -50,6 +49,7 @@ MonoBehaviour:
     - GameNodes
     - AITasks
     - CustomParticles
+    - GameSystem
     - Entities
     - AICommands
     - Blackboards

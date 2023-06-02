@@ -1,8 +1,7 @@
-namespace PM
+namespace Lessons.Architecture.PM
 {
     public enum PopupName
     {
-        WELCOME = 0,
-        PRODUCT = 1
+        PRODUCT = 0
     }
 }

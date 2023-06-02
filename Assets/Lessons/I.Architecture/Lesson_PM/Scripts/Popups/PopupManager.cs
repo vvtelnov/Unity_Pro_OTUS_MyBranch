@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PM
+namespace Lessons.Architecture.PM
 {
     public sealed class PopupManager : MonoBehaviour, Popup.ICallback
     {
