@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d5117294044816b4a97e09ac825a75, type: 3}
-  m_Name: DebugTutorialConfig
+  m_Script: {fileID: 11500000, guid: c572248d8b2d4b04860a61977d717f6b, type: 3}
+  m_Name: Product (Simple Sword)
   m_EditorClassIdentifier: 
-  isDebug: 1
-  isCompleted: 1
-  currentStep: 0
+  icon: {fileID: 21300000, guid: bde8c09b493bc465a98a7db64653e784, type: 3}
+  title: Simple Sword
+  description: Increases the damage of the hero by 25%
+  price: 100

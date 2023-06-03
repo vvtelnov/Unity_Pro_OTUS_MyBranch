@@ -36,9 +36,9 @@ MonoBehaviour:
     - GOAP
     - Assembly-CSharp
     - BehaviourTree
+    - GameSystemLesson
     - Windows
     - Products
-    - GameSystem
     - Cinemachine
     - InventorySystem
     - Iterators
@@ -49,6 +49,7 @@ MonoBehaviour:
     - GameNodes
     - AITasks
     - CustomParticles
+    - GameSystem
     - Entities
     - AICommands
     - Blackboards
