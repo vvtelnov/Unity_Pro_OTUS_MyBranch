@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 8923337091865154735}
   - component: {fileID: 8923337091865154732}
   - component: {fileID: 7030345653401844949}
-  - component: {fileID: 6855578277616810568}
+  - component: {fileID: 539527700}
   m_Layer: 5
   m_Name: ViewProduct
   m_TagString: Untagged
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &6855578277616810568
+--- !u!114 &539527700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,13 +326,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8923337091865154730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979ec6c3d630499f85d69943d6d3b89a, type: 3}
+  m_Script: {fileID: 11500000, guid: 872cc82947594629b37a8d5ad3971951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 3444450009731628994}
   titleText: {fileID: 8923337091771418060}
   descriptionText: {fileID: 8923337092346037487}
   iconImage: {fileID: 8923337092327245241}
+  buyButton: {fileID: 3444450009731628994}
 --- !u!1 &8923337092327245239
 GameObject:
   m_ObjectHideFlags: 0

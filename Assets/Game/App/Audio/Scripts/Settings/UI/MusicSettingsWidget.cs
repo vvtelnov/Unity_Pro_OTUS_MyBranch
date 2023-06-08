@@ -26,6 +26,5 @@ namespace Game.App
         {
             return AudioSettingsManager.MusicVolume;
         }
-
     }
 }

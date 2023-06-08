@@ -240,10 +240,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupMarket
       objectReference: {fileID: 0}
+    - target: {fileID: 5038978001852309871, guid: 1daa64146fff64eda80d841f3746f44f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5038978002398704905, guid: 1daa64146fff64eda80d841f3746f44f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -973.35864
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1daa64146fff64eda80d841f3746f44f, type: 3}
