@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Lessons.Architecture.PM
 {
@@ -6,15 +7,23 @@ namespace Lessons.Architecture.PM
     {
         private ICallback callback;
 
+        [SerializeField]
+        private UnityEvent<object> onShow;
+
+        [SerializeField]
+        private UnityEvent onHide;
+        
         public void Show(object args = null, ICallback callback = null)
         {
             this.callback = callback;
             this.OnShow(args);
+            this.onShow?.Invoke(args);
         }
 
         public void Hide()
         {
             this.OnHide();
+            this.onHide?.Invoke();
         }
 
         protected virtual void OnShow(object args)
