@@ -1,22 +1,22 @@
 // namespace Lessons.I.Architecture.Lesson_Loading._TEACHER_
 // {
-//     public class Snippets
-//     {
-//         [SerializeField]
-//         private LoadingTask[] loadingTasks;
-//         
-//         public async void Start()
-//         {
-//             foreach (var task in this.loadingTasks)
-//             {
-//                 var result = await task.Do();
-//                 if (!result.success)
-//                 {
-//                     LoadingScreen.ReportError(result.error);
-//                     break;
-//                 }
-//             }
-//         }
+     // public class Snippets
+     // {
+     //     [SerializeField]
+     //     private LoadingTask[] loadingTasks;
+     //     
+     //     public async void Start()
+     //     {
+     //         foreach (var task in this.loadingTasks)
+     //         {
+     //             var result = await task.Do();
+     //             if (!result.success)
+     //             {
+     //                 LoadingScreen.ReportError(result.error);
+     //                 break;
+     //             }
+     //         }
+     //     }
 
 
 

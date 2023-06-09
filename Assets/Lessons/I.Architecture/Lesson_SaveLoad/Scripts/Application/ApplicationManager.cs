@@ -36,7 +36,7 @@ namespace Lessons.Architecture.SaveLoad
 
         private void InstallServices()
         {
-            this.serviceInstaller.InstallServices();
+            this.serviceInstaller.Install();
             ServiceInjector.ResolveDependencies();
         }
 
