@@ -6,14 +6,10 @@ using UnityEngine.Serialization;
 
 namespace Game.UI
 {
-    public sealed class LanguageSettingsWidget : MonoBehaviour
+    public sealed class LanguageSettingsAdapter : MonoBehaviour
     {
         [SerializeField]
         private TMP_Dropdown dropdown;
-
-        [FormerlySerializedAs("config")]
-        [SerializeField]
-        private LanguageCatalog catalog;
 
         private void Awake()
         {
@@ -32,22 +28,21 @@ namespace Game.UI
 
         private void OnLanguageChanged(int languageIndex)
         {
-            LanguageInfo info = this.catalog.GetLanguage(languageIndex);
-            LanguageManager.CurrentLanguage = info.language;
+            LanguageManager.SetCurrentLanguage(languageIndex); 
         }
         
         private void InitDropdown()
         {
-            var languagesConfigs = this.catalog.GetLanguages();
+            var languages = LanguageManager.GetLanguages();
             var currentLanguage = LanguageManager.CurrentLanguage;
-            var count = languagesConfigs.Length;
+            var count = languages.Length;
 
             var options = new List<string>(count);
             var targetIndex = 0;
 
             for (var i = 0; i < count; i++)
             {
-                LanguageInfo info = languagesConfigs[i];
+                LanguageInfo info = languages[i];
                 options.Add(info.title.ToUpper());
 
                 if (info.language == currentLanguage)

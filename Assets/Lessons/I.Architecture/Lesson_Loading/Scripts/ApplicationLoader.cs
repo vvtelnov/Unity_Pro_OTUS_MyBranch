@@ -1,7 +1,7 @@
 using Asyncoroutine;
+using Game.GameEngine;
 using Game.UI;
 using GameSystem;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,12 +9,14 @@ namespace Lessons.Architecture.Loading
 {
     public sealed class ApplicationLoader : MonoBehaviour
     {
-        [Button]
-        public async void LoadApp()
+        public async void Start()
         {
             await SceneManager.LoadSceneAsync("Game/Scenes/GameScene");
-            
-            var ctx = GameObject.FindWithTag("GameContext").GetComponent<GameContext>();
+
+            var popupCatalog = Resources.Load<PopupCatalog>(nameof(PopupCatalog));
+            await popupCatalog.LoadAssets();
+
+            var ctx = GameObject.FindWithTag(nameof(GameContext)).GetComponent<GameContext>();
             ctx.ConstructGame();
             ctx.InitGame();
             ctx.ReadyGame();
