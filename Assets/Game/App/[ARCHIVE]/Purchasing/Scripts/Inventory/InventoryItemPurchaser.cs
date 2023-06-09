@@ -38,7 +38,7 @@ namespace Game.App
         private void AddItemInInventory(InventoryItem prototype)
         {
             ServiceLocator
-                .GetService<GameContainer>()
+                .GetService<GameFacade>()
                 .GetService<InventoryService>()
                 .GetInventory()
                 .AddItemsByPrototype(prototype, 1);
