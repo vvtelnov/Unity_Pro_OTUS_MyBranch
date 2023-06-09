@@ -14,10 +14,6 @@ namespace Lessons.Architecture.Loading
     {
         public async void Start()
         {
-            //Внедрение зависимостей:
-            FindObjectOfType<ServiceInstaller>().InstallServices();
-            ServiceInjector.ResolveDependencies();
-
             //Запуск плагинов:
             AppsFlyer.startSDK();
             FB.Init();
@@ -61,8 +57,7 @@ namespace Lessons.Architecture.Loading
             ctx.ConstructGame();
             
             //Загрузка данных:
-            var dataLoader = ServiceLocator.GetService<DataLoader>();
-            dataLoader.LoadData(ctx);
+            await GameDataLoader.LoadData(ctx);
 
             ctx.InitGame();
             ctx.ReadyGame();

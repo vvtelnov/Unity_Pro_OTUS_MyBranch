@@ -1,15 +1,21 @@
+using System.Threading.Tasks;
+using Asyncoroutine;
 using Game.GameEngine.GameResources;
 using Game.Gameplay.Player;
 using GameSystem;
+using UnityEngine;
 
 namespace Lessons.Architecture.Loading
 {
-    public sealed class DataLoader
+    public static class GameDataLoader
     {
-        public void LoadData(GameContext context)
+        public static async Task LoadData(GameContext context)
         {
-            context.GetService<MoneyStorage>().SetupMoney(100);
+            //Тяжелая операция...
+            await new WaitForSeconds(2.0f);
             
+            
+            context.GetService<MoneyStorage>().SetupMoney(100);
             context.GetService<ResourceStorage>().Setup(new[]
             {
                 new ResourceData(ResourceType.WOOD, 10),
