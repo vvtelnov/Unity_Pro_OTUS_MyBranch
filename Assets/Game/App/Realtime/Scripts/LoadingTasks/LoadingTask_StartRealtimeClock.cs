@@ -1,4 +1,5 @@
 using System;
+using Game.UI;
 using Services;
 
 namespace Game.App
@@ -9,6 +10,7 @@ namespace Game.App
         {
             var sessionStarter = ServiceLocator.GetService<RealtimeClockStarter>();
             await sessionStarter.StartClockAsync();
+            LoadingScreen.ReportProgress(0.95f);
             callback?.Invoke(LoadingResult.Success());
         }
     }

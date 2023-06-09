@@ -1,4 +1,5 @@
 using System;
+using Game.UI;
 using Services;
 
 namespace Game.App
@@ -24,6 +25,7 @@ namespace Game.App
                 mediator.SetupData(this.repository);
             }
             
+            LoadingScreen.ReportProgress(0.9f);
             callback?.Invoke(LoadingResult.Success());
         }
     }

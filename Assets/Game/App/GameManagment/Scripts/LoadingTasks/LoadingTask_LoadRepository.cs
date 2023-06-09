@@ -1,4 +1,5 @@
 using System;
+using Game.UI;
 using Services;
 
 namespace Game.App
@@ -16,6 +17,7 @@ namespace Game.App
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             await this.repository.LoadState();
+            LoadingScreen.ReportProgress(0.25f);
             callback?.Invoke(LoadingResult.Success());
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Asyncoroutine;
+using Game.UI;
 using GameSystem;
 using Services;
 using UnityEngine;
@@ -33,10 +34,14 @@ namespace Game.App
         private static IEnumerator LoadScene()
         {
             var operation = SceneManager.LoadSceneAsync(GAME_SCENE, LoadSceneMode.Single);
+            
             while (!operation.isDone)
             {
+                LoadingScreen.ReportProgress(0.3f + operation.progress / 2);
                 yield return null;
             }
+            
+            LoadingScreen.ReportProgress(0.8f);
         }
     }
 }
