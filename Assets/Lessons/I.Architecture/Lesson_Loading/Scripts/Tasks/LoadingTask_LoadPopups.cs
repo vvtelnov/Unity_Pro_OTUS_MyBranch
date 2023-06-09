@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.GameEngine;
 using Game.UI;
 using UnityEngine;
@@ -11,15 +12,10 @@ namespace Lessons.Architecture.Loading
     )]
     public sealed class LoadingTask_LoadPopups : LoadingTask
     {
-        [Range(0, 1)]
-        [SerializeField]
-        private float progress = 0.8f;
-        
-        public async override Task<Result> Do()
+        public async override UniTask<Result> Do()
         {
             var popupCatalog = Resources.Load<PopupCatalog>(nameof(PopupCatalog));
             await popupCatalog.LoadAssets();
-            LoadingScreen.ReportProgress(this.progress);
 
             return await Task.FromResult(new Result
             {

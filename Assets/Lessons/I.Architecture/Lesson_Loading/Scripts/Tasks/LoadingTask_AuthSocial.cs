@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.UI;
 using UnityEngine;
 
@@ -17,13 +18,13 @@ namespace Lessons.Architecture.Loading
         [SerializeField]
         private float progress = 0.2f;
         
-        public override Task<Result> Do()
+        public override UniTask<Result> Do()
         {
-            var tcs = new TaskCompletionSource<Result>();
+            var tcs = new UniTaskCompletionSource<Result>();
             
             Social.localUser.Authenticate(success =>
             {
-                tcs.SetResult(new Result
+                tcs.TrySetResult(new Result
                 {
                     success = success,
                     error = this.error,

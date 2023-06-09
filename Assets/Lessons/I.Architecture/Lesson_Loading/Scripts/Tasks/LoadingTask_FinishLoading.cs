@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Asyncoroutine;
+using Cysharp.Threading.Tasks;
 using Game.UI;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Lessons.Architecture.Loading
         [SerializeField]
         private float delay = 0.5f;
         
-        public override async Task<Result> Do()
+        public override async UniTask<Result> Do()
         {
             LoadingScreen.ReportProgress(1f);
             await new WaitForSeconds(this.delay);

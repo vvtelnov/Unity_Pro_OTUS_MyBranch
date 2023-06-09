@@ -69,6 +69,11 @@ MonoBehaviour:
     - SystemTime
     - Sirenix.OdinInspector.CompatibilityLayer
     - Input
+    - UniTask.Linq
+    - UniTask
+    - UniTask.TextMeshPro
+    - UniTask.DOTween
+    - UniTask.Addressables
     - PPv2URPConverters
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
@@ -79,6 +84,7 @@ MonoBehaviour:
     - SimpleFolderIcon
     - Pathfinding (EditMode)
     - LessonCrafting
+    - UniTask.Editor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

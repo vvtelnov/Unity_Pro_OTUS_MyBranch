@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.UI;
 using GameSystem;
+using Services;
 using UnityEngine;
 
 namespace Lessons.Architecture.Loading
@@ -14,10 +16,16 @@ namespace Lessons.Architecture.Loading
         [Range(0, 1)]
         [SerializeField]
         private float progress = 0.9f;
-
-        private readonly GameDataLoader dataLoader = new();
         
-        public async override Task<Result> Do()
+        private GameDataLoader dataLoader;
+
+        [ServiceInject]
+        public void Construct(GameDataLoader dataLoader)
+        {
+            this.dataLoader = dataLoader;
+        }
+        
+        public async override UniTask<Result> Do()
         {
             //Инициализация игровой системы:
             var ctx = GameObject.FindWithTag(nameof(GameContext)).GetComponent<GameContext>();
@@ -32,7 +40,7 @@ namespace Lessons.Architecture.Loading
             ctx.ReadyGame();
             ctx.StartGame();
 
-            return await Task.FromResult(new Result
+            return await UniTask.FromResult(new Result
             {
                 success = true
             });

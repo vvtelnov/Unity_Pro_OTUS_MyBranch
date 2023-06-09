@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Lessons.Architecture.Loading
@@ -9,18 +10,18 @@ namespace Lessons.Architecture.Loading
     )]
     public sealed class LoadingTask_StartPlugins : LoadingTask
     {
-        public override Task<Result> Do()
+        public override UniTask<Result> Do()
         {
             AppsFlyer.startSDK();
 
-            var tcs = new TaskCompletionSource<Result>();
+            var tcs = new UniTaskCompletionSource<Result>();
             
             FB.Init(
-                onSuccess: () => tcs.SetResult(new Result
+                onSuccess: () => tcs.TrySetResult(new Result
                 {
                     success = true,
                 }),
-                onError: err => tcs.SetResult(new Result
+                onError: err => tcs.TrySetResult(new Result
                 {
                     success = false,
                     error = err,

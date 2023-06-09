@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using Asyncoroutine;
+using Cysharp.Threading.Tasks;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,7 @@ namespace Lessons.Architecture.Loading
     )]
     public sealed class LoadingTask_LoadGameScene : LoadingTask
     {
-        public async override Task<Result> Do()
+        public async override UniTask<Result> Do()
         {
             await this.LoadGameScene();
             return await Task.FromResult(new Result

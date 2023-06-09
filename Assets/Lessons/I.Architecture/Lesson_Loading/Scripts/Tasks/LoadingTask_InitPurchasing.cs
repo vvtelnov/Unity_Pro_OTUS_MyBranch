@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.UI;
 using Purchasing;
+using Services;
 using Unity.Services.Core;
 using UnityEngine;
 
@@ -19,13 +21,20 @@ namespace Lessons.Architecture.Loading
         [SerializeField]
         private float progress = 0.1f;
 
-        private readonly PurchaseManager purchaseManager = new();
+        private PurchaseManager purchaseManager;
 
-        public async override Task<Result> Do()
+        [ServiceInject]
+        public void Construct(PurchaseManager purchaseManager)
+        {
+            this.purchaseManager = purchaseManager;
+        }
+
+        public async override UniTask<Result> Do()
         {
             await UnityServices.InitializeAsync();
 
             var tcs = new TaskCompletionSource<Result>();
+            
             this.purchaseManager.Initialize(result =>
             {
                 tcs.SetResult(new Result
