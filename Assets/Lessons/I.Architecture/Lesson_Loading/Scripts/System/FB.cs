@@ -6,10 +6,19 @@ namespace Lessons.Architecture.Loading
     //Facebook Plugin
     public class FB
     {
-        public static void Init(Action success = null)
+        private const bool success = true;
+
+        public static void Init(Action onSuccess, Action<string> onError)
         {
-            Debug.Log("<color=blue>Init Facebook</color>");
-            success?.Invoke();
+            if (FB.success)
+            {
+                Debug.Log("<color=blue>Init Facebook</color>");
+                onSuccess?.Invoke();
+            }
+            else
+            {
+                onError?.Invoke("Facebook init failed!");
+            }
         }
     }
 }

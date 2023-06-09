@@ -8,6 +8,9 @@ namespace Services
         [SerializeField]
         private bool installOnAwake;
 
+        [SerializeField]
+        private bool resolveDependencies;   
+
         [Space, SerializeField]
         private MonoBehaviour[] monoServices;
 
@@ -18,14 +21,19 @@ namespace Services
         {
             if (this.installOnAwake)
             {
-                this.InstallServices();
+                this.Install();
             }
         }
 
-        public void InstallServices()
+        public void Install()
         {
             this.InstallServicesFromBehaviours();
             this.InstallServicesFromPacks();
+
+            if (this.resolveDependencies)
+            {
+                ServiceInjector.ResolveDependencies();
+            }
         }
 
         private void InstallServicesFromBehaviours()

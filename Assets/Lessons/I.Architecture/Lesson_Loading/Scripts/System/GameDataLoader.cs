@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Lessons.Architecture.Loading
 {
-    public static class GameDataLoader
+    public class GameDataLoader
     {
-        public static async Task LoadData(GameContext context)
+        public async Task LoadData(GameContext context)
         {
             //Тяжелая операция...
             await new WaitForSeconds(2.0f);

@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 55203067}
   - component: {fileID: 55203068}
-  - component: {fileID: 55203069}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -168,22 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621fd4da33ab4201b831b358d9fe7a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &55203069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55203066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508d1e5ed99c4f499d4d65e7b83da2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  installOnAwake: 0
-  monoServices: []
-  servicePacks:
-  - {fileID: 11400000, guid: bbfbeb406ff0b4f899ff6f93993687c3, type: 2}
+  loadingTasks:
+  - {fileID: 11400000, guid: c3e06a2911574472ba25359632851b23, type: 2}
+  - {fileID: 11400000, guid: a6117eefbf10e42f187a93f8b1efba4f, type: 2}
+  - {fileID: 11400000, guid: eee6b8da6c0cc4cc2aa2f47f4052a7e8, type: 2}
+  - {fileID: 11400000, guid: ea4a261023b0a413d9b3ef7595fd2d50, type: 2}
+  - {fileID: 11400000, guid: 45fd83d4873a44504ad928c951c7a921, type: 2}
+  - {fileID: 11400000, guid: 70f751de846b64a1a8748eed8ee3fce5, type: 2}
+  - {fileID: 11400000, guid: 20afcabe7450944eabf2b05706f030c4, type: 2}
 --- !u!1001 &635666205
 PrefabInstance:
   m_ObjectHideFlags: 0

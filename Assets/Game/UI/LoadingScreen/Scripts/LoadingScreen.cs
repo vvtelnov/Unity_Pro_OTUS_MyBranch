@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace Game.UI
@@ -7,11 +8,15 @@ namespace Game.UI
         private static LoadingScreen instance;
 
         [SerializeField]
+        private TMP_Text errorText;
+
+        [SerializeField]
         private LoadingProgressBar progressBar;
         
         private void Awake()
         {
             instance = this;
+            this.errorText.text = string.Empty;
             this.progressBar.SetProgress(0.0f);
         }
 
@@ -33,6 +38,11 @@ namespace Game.UI
         public static void Hide()
         {
             instance.gameObject.SetActive(false);
+        }
+
+        public static void ReportError(string message)
+        {
+            instance.errorText.text = message;
         }
     }
 }
