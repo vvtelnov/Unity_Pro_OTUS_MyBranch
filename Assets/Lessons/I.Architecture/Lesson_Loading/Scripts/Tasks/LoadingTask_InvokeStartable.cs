@@ -7,7 +7,7 @@ namespace Lessons.Architecture.Loading
 {
     [CreateAssetMenu(
         fileName = "LoadingTask_InvokeStartable",
-        menuName = "Lesson/Tasks/New LoadingTask_InvokeStartable"
+        menuName = "Lessons/Tasks/New LoadingTask_InvokeStartable"
     )]
     public sealed class LoadingTask_InvokeStartable : LoadingTask
     {

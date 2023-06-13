@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class MoneyStorage : MonoBehaviour
+    public sealed class MoneyStorage
     {
         public event Action<int> OnMoneyChanged;
 

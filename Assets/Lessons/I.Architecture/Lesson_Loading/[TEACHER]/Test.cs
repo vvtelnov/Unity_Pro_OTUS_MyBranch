@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Lessons.I.Architecture.Lesson_Loading._TEACHER_
 {
     public sealed class Test : MonoBehaviour
-    {
+    { 
         private async void Start()
         {
             var obj = await Task.Factory

@@ -1,27 +1,20 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Game.UI;
 using GameSystem;
-using Services;
 using UnityEngine;
 
 namespace Lessons.Architecture.Loading
 {
     [CreateAssetMenu(
-        fileName = "LoadingTask_LaunchGame",
-        menuName = "Lessons/Tasks/New LoadingTask_LaunchGame"
+        fileName = "LoadingTask_InitGame",
+        menuName = "Lessons/Tasks/New LoadingTask_InitGame"
     )]
-    public sealed class LoadingTask_LaunchGame : LoadingTask
+    public sealed class LoadingTask_InitGame : LoadingTask
     {
         public override UniTask<Result> Do()
         {
+            //Инициализация игровой системы:
             var ctx = GameObject.FindWithTag(nameof(GameContext)).GetComponent<GameContext>();
-
-            //Запуск игры:
-            ctx.InitGame();
-            ctx.ReadyGame();
-            ctx.StartGame();
-
+            ctx.ConstructGame();
             return UniTask.FromResult(new Result
             {
                 success = true
