@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorMode: 0
   releaseScripts:
-  - {fileID: 11500000, guid: ff85f0a2806f47c39a8ec87e47810d77, type: 3}
-  - {fileID: 11500000, guid: ba4a8ce8a61645dc869fa17fe770fcb2, type: 3}
+  - {fileID: 11500000, guid: 79163c58234840b3bacf038124f7e310, type: 3}
+  - {fileID: 11500000, guid: c059ae895c264ded97b2dfeb6860f42e, type: 3}
+  - {fileID: 11500000, guid: 7bf4596845634b368f1e197c74a04577, type: 3}
   editorScripts: []
   releaseClassNames: []
