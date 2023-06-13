@@ -15921,6 +15921,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be92d8661e54e91951a924b1dc1c368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1184749257350313963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3166467579270526522, guid: d56977ac1e4cd4ff09107c5f0fcc2db3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1184749257350313960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f912de23011d4ef88c6de852e587d71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1190984135610142373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19106,6 +19118,80 @@ Transform:
   m_Father: {fileID: 376855696609834025}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8929177400316846413
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8929177399465980348, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_Name
+      value: MoneySaveLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980350, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929177399465980351, guid: e2887dc429e134628b7ca88c7aba62fe,
+        type: 3}
+      propertyPath: moneyStorage
+      value: 
+      objectReference: {fileID: 1184749257350313963}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2887dc429e134628b7ca88c7aba62fe, type: 3}
 --- !u!1001 &9146675580527999231
 PrefabInstance:
   m_ObjectHideFlags: 0
