@@ -12,6 +12,7 @@ namespace Lessons.Architecture.Loading
     {
         public override UniTask<Result> Do()
         {
+            Debug.Log("INIT GAME");
             //Инициализация игровой системы:
             var ctx = GameObject.FindWithTag(nameof(GameContext)).GetComponent<GameContext>();
             ctx.ConstructGame();

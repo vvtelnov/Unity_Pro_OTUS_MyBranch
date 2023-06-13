@@ -3,23 +3,22 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class MoneySaveLoader : MonoBehaviour
+    public sealed class MoneySaveLoader : SaveLoader<MoneyData, MoneyStorage>
     {
-        [SerializeField]
-        private MoneyStorage moneyStorage;
-
-        private void Awake()
+        protected override void SetupData(MoneyStorage moneyStorage, MoneyData data)
         {
-            var money = PlayerPrefs.GetInt("Lesson/Money");
-            this.moneyStorage.SetupMoney(money);
-            Debug.Log($"<color=green>Money loaded: {money}!</color>");
+            moneyStorage.SetupMoney(data.money);
+            Debug.Log($"<color=green>Money loaded: {data.money}!</color>");
         }
 
-        private void OnApplicationQuit()
+        protected override MoneyData ConvertToData(MoneyStorage moneyStorage)
         {
-            var money = this.moneyStorage.Money;
-            PlayerPrefs.SetInt("Lesson/Money", money);
-            Debug.Log($"<color=green>Money saved: {money}!</color>");
+            Debug.Log($"<color=green>Money saved: {moneyStorage.Money}!</color>");
+
+            return new MoneyData
+            {
+                money = moneyStorage.Money
+            };
         }
     }
 }
