@@ -16,7 +16,7 @@ namespace Game.GameEngine
         [SerializeField]
         private PopupInfo[] popups = Array.Empty<PopupInfo>();
 
-        public async Task PreloadPrefabs()
+        public async Task LoadAssets()
         {
             var count = this.popups.Length;
             var tasks = new Task<GameObject>[count];

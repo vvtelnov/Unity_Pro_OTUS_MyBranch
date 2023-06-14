@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8c2900fac543fea364c2b3fdec8ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSystemLanguage: 1
-  initialLanguage: 0
+  languageCatalog: {fileID: 11400000, guid: 8ca43596eb7304e7dae39a929b8216af, type: 2}

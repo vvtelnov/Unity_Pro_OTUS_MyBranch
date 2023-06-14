@@ -22,12 +22,41 @@ namespace Game.App
         private SystemLanguage currentLanguage = default;
 
         [SerializeField]
-        private bool useSystemLanguage;
+        private LanguageCatalog languageCatalog;
 
-        [HideIf("useSystemLanguage")]
-        [SerializeField]
-        private SystemLanguage initialLanguage;
-        
+        public static void SetCurrentLanguage(int index)
+        {
+            if (instance == null)
+            {
+                return;
+            }
+
+            var languageInfo = instance.languageCatalog.GetLanguage(index);
+            var language = languageInfo.language;
+            instance.currentLanguage = language;
+            OnLanguageChanged?.Invoke(language);
+        }
+
+        public static LanguageInfo[] GetLanguages()
+        {
+            if (instance != null)
+            {
+                return instance.languageCatalog.GetLanguages();
+            }
+
+            return new LanguageInfo[0];
+        }
+
+        public static LanguageInfo GetLanguage(int index)
+        {
+            if (instance == null)
+            {
+                return default;
+            }
+
+            return instance.languageCatalog.GetLanguage(index);
+        }
+
         private void Awake()
         {
             if (instance != null)
@@ -36,7 +65,7 @@ namespace Game.App
             }
 
             instance = this;
-            this.InitLanguage();
+            this.Initialize();
         }
 
         private void OnDestroy()
@@ -44,30 +73,41 @@ namespace Game.App
             instance = null;
         }
 
-        private void InitLanguage()
+        private void Initialize()
         {
-            if (this.useSystemLanguage)
+            var systemLanguage = Application.systemLanguage;
+            if (this.languageCatalog.LanguageExists(systemLanguage))
             {
-                this.currentLanguage = Application.systemLanguage;
+                this.currentLanguage = systemLanguage;
             }
             else
             {
-                this.currentLanguage = this.initialLanguage;
+                this.currentLanguage = this.languageCatalog.defaultLanguage;
             }
         }
 
         private static SystemLanguage GetCurrentLanguage()
         {
-            if (!ReferenceEquals(instance, null))
+            if (instance == null)
             {
-                return instance.currentLanguage;
+                return default;
             }
 
-            return default;
+            return instance.currentLanguage;
         }
 
-        public static void SetCurrentLanguage(SystemLanguage language)
+        private static void SetCurrentLanguage(SystemLanguage language)
         {
+            if (instance == null)
+            {
+                return;
+            }
+
+            if (!instance.languageCatalog.LanguageExists(language))
+            {
+                throw new Exception($"Language {language} is not supported!");
+            }
+
             instance.currentLanguage = language;
             OnLanguageChanged?.Invoke(language);
         }

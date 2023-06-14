@@ -1,5 +1,6 @@
 using System;
 using Game.GameEngine;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.App
@@ -9,7 +10,8 @@ namespace Game.App
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
             var popupCatalog = Resources.Load<PopupCatalog>(nameof(PopupCatalog));
-            await popupCatalog.PreloadPrefabs();
+            await popupCatalog.LoadAssets();
+            LoadingScreen.ReportProgress(0.85f);
             callback.Invoke(LoadingResult.Success());
         }
     }

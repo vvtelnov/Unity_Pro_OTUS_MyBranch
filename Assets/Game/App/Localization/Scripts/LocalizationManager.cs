@@ -36,7 +36,18 @@ namespace Game.Localization
                 return instance.textTranslator.GetTranslation(key, language);
             }
 
-            throw new Exception("Localization Manager doesn't exist");
+            return GetDefaultText(key);
+        }
+
+        private static string GetDefaultText(string key)
+        {
+            var chunks = key.Split("|");
+            if (chunks.Length == 2)
+            {
+                return chunks[1];                
+            }
+
+            return key;
         }
 
         public static string GetCurrentText(string key)
@@ -51,7 +62,7 @@ namespace Game.Localization
                 return instance.spriteTranslator.GetTranslation(key, language);
             }
 
-            throw new Exception("Localization Manager doesn't exist");
+            return null;
         }
 
         public static Sprite GetCurrentSprite(string key)
@@ -66,7 +77,7 @@ namespace Game.Localization
                 return instance.audioClipTranslator.GetTranslation(key, language);
             }
 
-            throw new Exception("Localization Manager doesn't exist");
+            return null;
         }
 
         public static AudioClip GetCurrentAudioClip(string key)

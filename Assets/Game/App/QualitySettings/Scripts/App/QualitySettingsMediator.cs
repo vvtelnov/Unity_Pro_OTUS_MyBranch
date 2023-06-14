@@ -1,5 +1,8 @@
+using JetBrains.Annotations;
+
 namespace Game.App
 {
+    [UsedImplicitly]
     public sealed class QualitySettingsMediator :
         IAppInitListener,
         IAppStartListener,

@@ -30,9 +30,11 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assets
+    - UniTask
     - Elementary
     - ES3
     - Tween
+    - UniTask.Linq
     - GOAP
     - Assembly-CSharp
     - BehaviourTree
@@ -42,6 +44,7 @@ MonoBehaviour:
     - Cinemachine
     - InventorySystem
     - Iterators
+    - UniTask.DOTween
     - Localization
     - PathFinding
     - Declarative
@@ -66,12 +69,15 @@ MonoBehaviour:
     - GameResources
     - Purchasing
     - Waypoints
+    - UniTask.Addressables
     - SystemTime
     - Sirenix.OdinInspector.CompatibilityLayer
+    - UniTask.TextMeshPro
     - Input
     - PPv2URPConverters
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - UniTask.Editor
     - NavMeshComponentsEditor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - InventorySystem (EditMode)

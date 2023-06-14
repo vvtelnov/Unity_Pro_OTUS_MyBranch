@@ -11,7 +11,12 @@ namespace Game.App
     {
         void IAppInitListener.Init()
         {
-            var language = this.LoadLanguage();
+            if (!ES3.KeyExists(nameof(LanguageData)))
+            {
+                return;
+            }
+
+            var language = ES3.Load<SystemLanguage>(nameof(LanguageData));
             LanguageManager.CurrentLanguage = language;
         }
 
@@ -23,24 +28,6 @@ namespace Game.App
         void IAppQuitListener.OnQuit()
         {
             LanguageManager.OnLanguageChanged -= this.SaveLanguage;
-        }
-
-        private SystemLanguage LoadLanguage()
-        {
-            if (ES3.KeyExists(nameof(LanguageData)))
-            {
-                return ES3.Load<SystemLanguage>(nameof(LanguageData));
-            }
-            
-            var language = Application.systemLanguage;
-            
-            var catalog = LanguageCatalog.LoadAsset();
-            if (!catalog.LanguageExists(language))
-            {
-                language = catalog.defaultLanguage;
-            }
-
-            return language;
         }
 
         private void SaveLanguage(SystemLanguage language)

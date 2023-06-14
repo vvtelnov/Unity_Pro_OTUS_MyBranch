@@ -1,12 +1,11 @@
 #if UNITY_PURCHASING
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Purchasing;
 
 namespace Purchasing
 {
-    public sealed class PurchaseManager : MonoBehaviour, IStoreListener
+    public sealed class PurchaseManager : IStoreListener
     {
         public bool IsInitialized { get; private set; }
 

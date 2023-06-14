@@ -9,7 +9,7 @@ namespace Game.App
         public void Do(Action<LoadingResult> callback)
         {
             var serviceInstaller = GameObject.FindObjectOfType<ServiceInstaller>();
-            serviceInstaller.InstallServices();
+            serviceInstaller.Install();
             callback.Invoke(LoadingResult.Success());
         }
     }
