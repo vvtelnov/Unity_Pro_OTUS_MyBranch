@@ -36,7 +36,6 @@ namespace Lessons.Gameplay.States
             [Construct]
             public void Construct(Life life)
             {
-                Application.targetFrameRate = 60;
                 this.onMove += direction =>
                 {
                     if (life.isDeath.Value)
