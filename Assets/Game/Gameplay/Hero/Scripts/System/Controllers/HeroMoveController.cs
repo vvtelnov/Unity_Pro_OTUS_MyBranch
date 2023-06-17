@@ -1,11 +1,12 @@
+using System;
 using Game.GameEngine.Mechanics;
 using GameSystem;
 using InputModule;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Gameplay.Hero
 {
+    [Serializable]
     public sealed class HeroMoveController : 
         IGameInitElement,
         IGameStartElement,
@@ -41,6 +42,7 @@ namespace Game.Gameplay.Hero
 
         private void OnDirectionMoved(Vector2 screenDirection)
         {
+            Debug.Log(screenDirection);
             var worldDirection = new Vector3(screenDirection.x, 0.0f, screenDirection.y);
             this.heroComponent.Move(worldDirection);
         }
