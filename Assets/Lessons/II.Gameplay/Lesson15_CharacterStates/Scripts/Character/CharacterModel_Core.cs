@@ -8,10 +8,16 @@ namespace Lessons.Gameplay.States
     public sealed class CharacterModel_Core
     {
         [Section]
-        public Move move = new();
+        public Life life = new();
 
         [Section]
-        public Life life = new();
+        public Move move = new();
+
+        [Serializable]
+        public sealed class Life
+        {
+            public AtomicVariable<bool> isDeath;
+        }
 
         [Serializable]
         public sealed class Move
@@ -50,12 +56,6 @@ namespace Lessons.Gameplay.States
                     }
                 });
             }
-        }
-
-        [Serializable]
-        public sealed class Life
-        {
-            public AtomicVariable<bool> isDeath;
         }
     }
 }

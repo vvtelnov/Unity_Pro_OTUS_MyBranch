@@ -8,9 +8,9 @@ namespace Lessons.Gameplay.States
     {
         private void Awake()
         {
-            var heroModel = this.GetComponent<CharacterModel>();
-            this.Add(new MoveComponent(heroModel.core.move.onMove));
-            this.Add(new DeathComponent(heroModel.core.life.isDeath));
+            var characterModel = this.GetComponent<CharacterModel>();
+            this.Add(new MoveComponent(characterModel.core.move.onMove));
+            this.Add(new DeathComponent(characterModel.core.life.isDeath));
         }
     }
 }
