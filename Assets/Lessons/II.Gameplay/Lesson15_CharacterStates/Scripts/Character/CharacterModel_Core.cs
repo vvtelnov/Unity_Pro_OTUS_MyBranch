@@ -12,6 +12,9 @@ namespace Lessons.Gameplay.States
 
         [Section]
         public Move move = new();
+        
+        [Section]
+        public States states = new ();
 
         [Serializable]
         public sealed class Life
@@ -30,11 +33,10 @@ namespace Lessons.Gameplay.States
             public AtomicVariable<Vector3> moveDirection = new();
             public AtomicVariable<float> speed = new();
 
-            public FixedUpdateMechanics fixedUpdate = new FixedUpdateMechanics();
-
             [Construct]
             public void Construct(Life life)
             {
+                Application.targetFrameRate = 60;
                 this.onMove += direction =>
                 {
                     if (life.isDeath.Value)
@@ -45,16 +47,38 @@ namespace Lessons.Gameplay.States
                     this.moveDirection.Value = direction;
                     this.moveRequired.Value = true;
                 };
+            }
+        }
+        
+        [Serializable]
+        public sealed class States
+        {
+            public StateMachine<CharacterStateType> fsm;
+            
+            public CharacterStateIdle idle = new();
+            public CharacterStateMove move = new();
+            public CharacterDeathState death = new();
 
-                this.fixedUpdate.Do(deltaTime =>
-                {
-                    if (this.moveRequired.Value)
-                    {
-                        this.moveTransform.position += this.moveDirection.Value * (this.speed.Value * deltaTime);
-                        this.moveTransform.rotation = Quaternion.LookRotation(this.moveDirection.Value, Vector3.up);
-                        this.moveRequired.Value = false;
-                    }
-                });
+            [Construct]
+            public void Construct(Move move, Life life)
+            {
+                this.fsm.SetupStates(
+                    (CharacterStateType.IDLE, this.idle),
+                    (CharacterStateType.MOVE, this.move),
+                    (CharacterStateType.DEATH, this.death)
+                );
+                
+                var isDeath = life.isDeath;
+                var moveRequired = move.moveRequired;
+                var moveDirection = move.moveDirection;
+                var speed = move.speed;
+                var transform = move.moveTransform;
+                
+                this.idle.Construct(this.fsm, isDeath, moveRequired);
+                this.move.Construct(moveRequired, moveDirection, speed, transform);
+                this.move.Construct(this.fsm, isDeath);
+                
+                this.death.Construct(this.fsm, moveRequired, isDeath);
             }
         }
     }

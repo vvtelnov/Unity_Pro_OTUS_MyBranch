@@ -7,7 +7,7 @@ namespace Lessons.Gameplay.States
     [Serializable]
     public class AtomicVariable<T> : IAtomicVariable<T>
     {
-        public AtomicEvent<T> OnChanged { get; set; }
+        public AtomicEvent<T> OnChanged { get; set; } = new();
 
         public T Value
         {

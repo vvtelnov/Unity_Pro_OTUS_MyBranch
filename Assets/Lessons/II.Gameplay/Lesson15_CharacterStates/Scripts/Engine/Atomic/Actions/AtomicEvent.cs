@@ -5,46 +5,50 @@ namespace Lessons.Gameplay.States
 {
     public sealed class AtomicEvent : IAtomicAction
     {
-        private readonly List<IAtomicAction> actions;
-
-        public AtomicEvent()
-        {
-            this.actions = new List<IAtomicAction>(1);
-        }
+        private readonly List<IAtomicAction> actions = new();
+        private readonly List<IAtomicAction> cache = new();
+        private readonly Dictionary<System.Action, IAtomicAction> delegates = new();
 
         public static AtomicEvent operator +(AtomicEvent composite, IAtomicAction action)
         {
-            if (composite == null)
-            {
-                composite = new AtomicEvent();
-            }
-
             composite.actions.Add(action);
             return composite;
         }
 
         public static AtomicEvent operator -(AtomicEvent composite, IAtomicAction action)
         {
-            if (composite == null)
-            {
-                return null;
-            }
-
             composite.actions.Remove(action);
             return composite;
         }
 
-        public static AtomicEvent operator +(AtomicEvent composite, System.Action action)
+        public static AtomicEvent operator +(AtomicEvent composite, System.Action @delegate)
         {
-            composite += new AtomicAction(action);
+            var action = new AtomicAction(@delegate);
+            composite.actions.Add(action);
+            composite.delegates[@delegate] = action;
             return composite;
         }
-        
+
+        public static AtomicEvent operator -(AtomicEvent composite, System.Action @delegate)
+        {
+            if (composite.delegates.TryGetValue(@delegate, out var action))
+            {
+                composite.delegates.Remove(@delegate);
+                composite.actions.Remove(action);
+            }
+
+            return composite;
+        }
+
         [Button]
         public void Invoke()
         {
-            foreach (var action in this.actions)
+            this.cache.Clear();
+            this.cache.AddRange(this.actions);
+
+            for (int i = 0, count = this.cache.Count; i < count; i++)
             {
+                var action = this.cache[i];
                 action.Invoke();
             }
         }
@@ -52,52 +56,51 @@ namespace Lessons.Gameplay.States
 
     public class AtomicEvent<T> : IAtomicAction<T>
     {
-        protected List<IAtomicAction<T>> actions;
-
-        public AtomicEvent()
-        {
-            this.actions = new List<IAtomicAction<T>>(1);
-        }
-
-        public AtomicEvent(params IAtomicAction<T>[] actions)
-        {
-            this.actions = new List<IAtomicAction<T>>(actions);
-        }
+        private readonly List<IAtomicAction<T>> actions = new();
+        private readonly Dictionary<System.Action<T>, IAtomicAction<T>> delegates = new();
+        private readonly List<IAtomicAction<T>> cache = new();
 
         public static AtomicEvent<T> operator +(AtomicEvent<T> composite, IAtomicAction<T> action)
         {
-            if (composite == null)
-            {
-                composite = new AtomicEvent<T>();
-            }
-
             composite.actions.Add(action);
             return composite;
         }
-        
-        public static AtomicEvent<T> operator +(AtomicEvent<T> composite, System.Action<T> action)
-        {
-            composite += new AtomicAction<T>(action);
-            return composite;
-        }
-        
+
         public static AtomicEvent<T> operator -(AtomicEvent<T> composite, IAtomicAction<T> action)
         {
-            if (composite == null)
+            composite.actions.Remove(action);
+            return composite;
+        }
+
+        public static AtomicEvent<T> operator +(AtomicEvent<T> composite, System.Action<T> @delegate)
+        {
+            var action = new AtomicAction<T>(@delegate);
+            composite.actions.Add(action);
+            composite.delegates[@delegate] = action;
+            return composite;
+        }
+
+        public static AtomicEvent<T> operator -(AtomicEvent<T> composite, System.Action<T> @delegate)
+        {
+            if (composite.delegates.TryGetValue(@delegate, out var action))
             {
-                return null;
+                composite.delegates.Remove(@delegate);
+                composite.actions.Remove(action);
             }
 
-            composite.actions.Remove(action);
             return composite;
         }
 
         [Button]
         public void Invoke(T args)
         {
-            foreach (var listener in this.actions)
+            this.cache.Clear();
+            this.cache.AddRange(this.actions);
+
+            for (int i = 0, count = this.cache.Count; i < count; i++)
             {
-                listener.Invoke(args);
+                var action = this.cache[i];
+                action.Invoke(args);
             }
         }
     }
