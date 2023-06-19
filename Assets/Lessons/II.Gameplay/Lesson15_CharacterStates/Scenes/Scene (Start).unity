@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18018606, g: 0.22559257, b: 0.30678663, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 379299913}
+  - component: {fileID: 379299915}
   - component: {fileID: 379299914}
   m_Layer: 0
   m_Name: Controller
@@ -167,7 +168,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae9f851fac74a3a86c2fecde907f4f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementInput: {fileID: 379299915}
   character: {fileID: 2553572461016865610}
+--- !u!114 &379299915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379299912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d659c0e2d8ba4f3b882990b64459acb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &547416707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3159,22 +3173,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initOnAwake: 1
   core:
-    life:
-      isDeath:
-        value: 0
     move:
-      moveTransform: {fileID: 2553572461016865608}
-      moveRequired:
-        value: 0
-      moveDirection:
+      targetTransform: {fileID: 2553572461016865608}
+      movementSpeed:
+        value: 6
+      rotationSpeed:
+        value: 10
+      movementDirection:
         value: {x: 0, y: 0, z: 0}
-      speed:
-        value: 5
-    states:
-      fsm:
-        currentKey: 0
-        enterOnStart: 1
-  view:
+  visual:
     animator: {fileID: 887803968580046966}
 --- !u!4 &2629166795136661382
 Transform:

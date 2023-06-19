@@ -1,8 +1,9 @@
 using System;
+using Lessons.Gameplay.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.Gameplay.States
+namespace Lessons.Engine.Atomic.Values
 {
     [Serializable]
     public class AtomicVariable<T> : IAtomicVariable<T>
@@ -11,17 +12,23 @@ namespace Lessons.Gameplay.States
 
         public T Value
         {
-            get { return this.value; }
-            set
-            {
-                this.value = value;
-                this.OnChanged?.Invoke(value);
-            }
+            get => this.value;
+            set => SetValue(value);
         }
 
         [OnValueChanged("OnValueChanged")]
         [SerializeField]
         private T value;
+
+        public static implicit operator T(AtomicVariable<T> value)
+        {
+            return value.value;
+        }
+
+        public static implicit operator AtomicVariable<T>(T value)
+        {
+            return new AtomicVariable<T>(value);
+        }
 
         public AtomicVariable()
         {
@@ -33,10 +40,16 @@ namespace Lessons.Gameplay.States
             this.value = value;
         }
 
+        protected virtual void SetValue(T value)
+        {
+            this.value = value;
+            OnChanged?.Invoke(value);
+        }
+        
 #if UNITY_EDITOR
         private void OnValueChanged(T value)
         {
-            this.OnChanged?.Invoke(value);
+            OnChanged?.Invoke(this.value);
         }
 #endif
     }
