@@ -1,4 +1,5 @@
 using System;
+using Lessons.Character;
 using Lessons.Character.Engines;
 using Lessons.Character.Variables;
 using Lessons.Engine.Atomic.Values;
@@ -41,7 +42,7 @@ namespace Lessons.States
 
         void IState.Enter()
         {
-            animator.SetInteger("State", (int) PlayerStateType.Move);
+            animator.SetInteger("State", (int) AnimatorState.Move);
             
             _movementDirection.OnChanged += UpdateDirection;
 
