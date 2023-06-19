@@ -3173,6 +3173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initOnAwake: 1
   core:
+    life:
+      isAlive:
+        value: 1
     move:
       targetTransform: {fileID: 2553572461016865608}
       movementSpeed:
@@ -3183,6 +3186,18 @@ MonoBehaviour:
         value: {x: 0, y: 0, z: 0}
   visual:
     animator: {fileID: 887803968580046966}
+  states:
+    stateMachine:
+      enterOnStart: 1
+      currentStateType: 0
+    idleState:
+      animator: {fileID: 887803968580046966}
+    moveState:
+      animator: {fileID: 887803968580046966}
+      movementSpeed: 6
+      rotationSpeed: 10
+    deadState:
+      animator: {fileID: 887803968580046966}
 --- !u!4 &2629166795136661382
 Transform:
   m_ObjectHideFlags: 0

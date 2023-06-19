@@ -1,8 +1,10 @@
 using System;
 using Declarative;
+using Elementary;
 using Lessons.Character.Engines;
 using Lessons.Character.Variables;
 using Lessons.Engine.Atomic.Values;
+using Lessons.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,6 +17,9 @@ namespace Lessons.Character
 
         [Section]
         public Visual visual;
+
+        [Section]
+        public States states;
 
         [Serializable]
         public sealed class Core
@@ -53,23 +58,23 @@ namespace Lessons.Character
                     movementEngine.Construct(targetTransform, movementSpeed);
                     rotationEngine.Construct(targetTransform, rotationSpeed);
 
-                    // MoveInDirection mechanic
-                    movementDirection.OnChanged += direction =>
-                    {
-                        if (life.isAlive)
-                        {
-                            movementEngine.SetDirection(direction);
-                        }
-                    };
-                    
-                    // RotateInDirection mechanic
-                    movementDirection.OnChanged += direction =>
-                    {
-                        if (life.isAlive)
-                        {
-                            rotationEngine.SetDirection(direction);
-                        }
-                    };
+                    // // MoveInDirection mechanic
+                    // movementDirection.OnChanged += direction =>
+                    // {
+                    //     if (life.isAlive)
+                    //     {
+                    //         movementEngine.SetDirection(direction);
+                    //     }
+                    // };
+                    //
+                    // // RotateInDirection mechanic
+                    // movementDirection.OnChanged += direction =>
+                    // {
+                    //     if (life.isAlive)
+                    //     {
+                    //         rotationEngine.SetDirection(direction);
+                    //     }
+                    // };
                 }
             }
         }
@@ -84,38 +89,57 @@ namespace Lessons.Character
             [Construct]
             public void Construct(Core core)
             {
-                core.life.isAlive.OnChanged += isAlive =>
-                {
-                    SetAnimatorState(isAlive ? AnimatorState.Idle : AnimatorState.Dead);
-                };
-                    
-                core.move.movementDirection.MovementStarted += () => 
-                {
-                    if (core.life.isAlive)
-                    {
-                        SetAnimatorState(AnimatorState.Move);
-                    }
-                };
-
-                core.move.movementDirection.MovementFinished += () =>
-                {
-                    if (core.life.isAlive)
-                    {
-                        SetAnimatorState(AnimatorState.Idle);
-                    }
-                };
+                // core.life.isAlive.OnChanged += isAlive =>
+                // {
+                //     SetAnimatorState(isAlive ? AnimatorState.Idle : AnimatorState.Dead);
+                // };
+                //     
+                // core.move.movementDirection.MovementStarted += () => 
+                // {
+                //     if (core.life.isAlive)
+                //     {
+                //         SetAnimatorState(AnimatorState.Move);
+                //     }
+                // };
+                //
+                // core.move.movementDirection.MovementFinished += () =>
+                // {
+                //     if (core.life.isAlive)
+                //     {
+                //         SetAnimatorState(AnimatorState.Idle);
+                //     }
+                // };
             }
 
             private void SetAnimatorState(AnimatorState state)
             {
                 animator.SetInteger(_state, (int) state);
             }
+        }
 
-            private enum AnimatorState
+        [Serializable]
+        public sealed class States
+        {
+            public StateMachine stateMachine;
+
+            public IdleState idleState;
+            public MoveState moveState;
+            public DeadState deadState;
+            
+            [Construct]
+            public void Construct(Core core)
             {
-                Idle = 0,
-                Move = 1,
-                Dead = 5
+                idleState.Construct(stateMachine, core.life.isAlive, core.move.movementDirection);
+                
+                moveState.Construct(core.move.movementDirection, core.move.movementEngine, core.move.rotationEngine);
+                moveState.Construct(stateMachine, core.life.isAlive);
+                
+                deadState.Construct(stateMachine, core.life.isAlive);
+
+                stateMachine.Construct(
+                    new StateInfo(PlayerStateType.Idle, idleState),
+                    new StateInfo(PlayerStateType.Move, moveState), 
+                    new StateInfo(PlayerStateType.Dead, deadState));
             }
         }
     }
