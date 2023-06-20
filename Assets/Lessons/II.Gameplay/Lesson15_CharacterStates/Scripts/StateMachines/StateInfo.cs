@@ -1,4 +1,6 @@
-namespace Lessons.States
+using Lessons.StateMachines.States;
+
+namespace Lessons.StateMachines
 {
     public sealed class StateInfo
     {
@@ -7,7 +9,6 @@ namespace Lessons.States
             this.stateType = stateType;
             this.state = state;
         }
-        
         
         public readonly PlayerStateType stateType;
         public readonly IState state;

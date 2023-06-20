@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Declarative;
 using Elementary;
 using Lessons.Character.Engines;
 using Lessons.Character.Variables;
 using Lessons.Engine.Atomic.Values;
-using Lessons.States;
+using Lessons.StateMachines;
+using Lessons.StateMachines.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using IState = Lessons.StateMachines.IState;
 
 namespace Lessons.Character
 {
@@ -111,9 +114,9 @@ namespace Lessons.Character
                 // };
             }
 
-            private void SetAnimatorState(AnimatorState state)
+            private void SetAnimatorState(AnimatorStateType stateType)
             {
-                animator.SetInteger(_state, (int) state);
+                animator.SetInteger(_state, (int) stateType);
             }
         }
 
@@ -122,24 +125,52 @@ namespace Lessons.Character
         {
             public StateMachine stateMachine;
 
+            [Section]
             public IdleState idleState;
+            
+            [Section]
             public MoveState moveState;
+            
+            [Section]
             public DeadState deadState;
             
             [Construct]
             public void Construct(Core core)
             {
-                idleState.Construct(stateMachine, core.life.isAlive, core.move.movementDirection);
+                // idleState.Construct(stateMachine, core.life.isAlive, core.move.movementDirection);
                 
                 moveState.Construct(core.move.movementDirection, core.move.movementEngine, core.move.rotationEngine);
-                moveState.Construct(stateMachine, core.life.isAlive);
+                // moveState.Construct(stateMachine, core.life.isAlive);
                 
-                deadState.Construct(stateMachine, core.life.isAlive);
+                // deadState.Construct(stateMachine, core.life.isAlive);
 
                 stateMachine.Construct(
                     new StateInfo(PlayerStateType.Idle, idleState),
-                    new StateInfo(PlayerStateType.Move, moveState), 
+                    new StateInfo(PlayerStateType.Moving, moveState), 
                     new StateInfo(PlayerStateType.Dead, deadState));
+            }
+
+            [Construct]
+            private void ConstructTransitions(Core core)
+            {
+                core.life.isAlive.OnChanged += isAlive =>
+                    stateMachine.SwitchState(isAlive ? PlayerStateType.Idle : PlayerStateType.Dead);
+                
+                core.move.movementDirection.MovementStarted += () =>
+                {
+                    if (core.life.isAlive)
+                    {
+                        stateMachine.SwitchState(PlayerStateType.Moving);
+                    }
+                };
+
+                core.move.movementDirection.MovementFinished += () =>
+                {
+                    if (core.life.isAlive)
+                    {
+                        stateMachine.SwitchState(PlayerStateType.Idle);
+                    }
+                };
             }
         }
     }

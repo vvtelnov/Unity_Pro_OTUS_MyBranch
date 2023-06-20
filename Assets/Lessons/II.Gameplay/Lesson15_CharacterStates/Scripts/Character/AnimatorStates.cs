@@ -1,6 +1,6 @@
 namespace Lessons.Character
 {
-    public enum AnimatorState
+    public enum AnimatorStateType
     {
         Idle = 0,
         Move = 1,

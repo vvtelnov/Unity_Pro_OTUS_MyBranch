@@ -1,4 +1,4 @@
-namespace Lessons.States
+namespace Lessons.StateMachines
 {
     public interface IState
     {

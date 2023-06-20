@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Declarative;
+using Lessons.StateMachines.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.States
+namespace Lessons.StateMachines
 {
     [Serializable]
     public sealed class StateMachine : IState, IStartListener

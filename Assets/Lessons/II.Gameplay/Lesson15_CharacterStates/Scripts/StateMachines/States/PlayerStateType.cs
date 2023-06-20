@@ -1,9 +1,9 @@
-namespace Lessons.States
+namespace Lessons.StateMachines.States
 {
     public enum PlayerStateType
     {
         Idle,
-        Move,
+        Moving,
         Dead
     }
 }
