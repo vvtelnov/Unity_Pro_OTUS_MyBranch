@@ -8,7 +8,7 @@ namespace Lessons.Character.Controllers
     {
         [SerializeField]
         private MovementInput movementInput;
-        
+         
         [SerializeField]
         private MonoEntity character;
 

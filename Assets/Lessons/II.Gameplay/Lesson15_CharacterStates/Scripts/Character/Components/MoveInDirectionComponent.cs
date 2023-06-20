@@ -1,4 +1,4 @@
-using Lessons.Character.Variables;
+using Lessons.Utils;
 using UnityEngine;
 
 namespace Lessons.Character.Components
