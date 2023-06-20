@@ -45,7 +45,10 @@ namespace Lessons.CharacterStateMachine.States
 
         private void OnIsAliveChanged(bool isAlive)
         {
-            _stateMachine.SwitchState(PlayerStateType.Dead);
+            if (!isAlive)
+            {
+                _stateMachine.SwitchState(PlayerStateType.Dead);
+            }
         }
 
         private void OnMovementStarted()

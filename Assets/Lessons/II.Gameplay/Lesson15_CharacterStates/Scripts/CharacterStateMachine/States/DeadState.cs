@@ -41,7 +41,10 @@ namespace Lessons.CharacterStateMachine.States
 
         private void OnIsAliveChanged(bool isAlive)
         {
-            _stateMachine.SwitchState(PlayerStateType.Idle);
+            if (isAlive)
+            {
+                _stateMachine.SwitchState(PlayerStateType.Idle);
+            }
         }
     }
 }
