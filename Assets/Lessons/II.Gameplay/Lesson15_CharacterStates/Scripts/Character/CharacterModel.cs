@@ -10,5 +10,8 @@ namespace Lessons.Character
 
         [Section]
         public CharacterVisual visual;
+
+        [Section]
+        public CharacterStates states;
     }
 }
