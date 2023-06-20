@@ -20,6 +20,8 @@ namespace Lessons.CharacterStateMachine.States
         private AtomicVariable<bool> _isAlive;
         private MovementDirectionVariable _movementDirection;
 
+        private Animator _animator;
+
         [Construct]
         public void Construct(CharacterCore core, CharacterStates states)
         {
@@ -30,13 +32,22 @@ namespace Lessons.CharacterStateMachine.States
             _isAlive = core.life.isAlive;
             _movementDirection = core.movement.movementDirection;
         }
+        
+        [Construct]
+        public void Construct(CharacterVisual visual)
+        {
+            _animator = visual.animator;
+        }
 
         void IState.Enter()
         {
+            _animator.SetInteger("State", (int) AnimatorStateType.Moving);
+            
             _isAlive.ValueChanged += OnIsAliveValueChanged;
             _movementDirection.MovementFinished += OnMovementFinished;
 
             _movementDirection.ValueChanged += UpdateMovement;
+            UpdateMovement(_movementDirection);
         }
 
         void IState.Exit()
