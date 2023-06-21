@@ -13,24 +13,19 @@ namespace Lessons.CharacterStateMachine.States
         public AtomicVariable<float> movementSpeed = 6f;
         public AtomicVariable<float> rotationSpeed = 10f;
 
+        private MovementDirectionVariable _movementDirection;
         private MoveInDirectionEngine _moveInDirectionEngine = new();
         private RotateInDirectionEngine _rotateInDirectionEngine = new();
         
-        private StateMachine _stateMachine;
-        private AtomicVariable<bool> _isAlive;
-        private MovementDirectionVariable _movementDirection;
 
         private Animator _animator;
 
         [Construct]
         public void Construct(CharacterCore core, CharacterStates states)
         {
+            _movementDirection = core.movement.movementDirection;
             _moveInDirectionEngine.Construct(core.movement.transform, movementSpeed);
             _rotateInDirectionEngine.Construct(core.movement.transform, rotationSpeed);
-            
-            _stateMachine = states.stateMachine;
-            _isAlive = core.life.isAlive;
-            _movementDirection = core.movement.movementDirection;
         }
         
         [Construct]
@@ -43,35 +38,16 @@ namespace Lessons.CharacterStateMachine.States
         {
             _animator.SetInteger("State", (int) AnimatorStateType.Moving);
             
-            _isAlive.ValueChanged += OnIsAliveValueChanged;
-            _movementDirection.MovementFinished += OnMovementFinished;
-
             _movementDirection.ValueChanged += UpdateMovement;
             UpdateMovement(_movementDirection);
         }
 
         void IState.Exit()
         {
-            _isAlive.ValueChanged -= OnIsAliveValueChanged;
-            _movementDirection.MovementFinished -= OnMovementFinished;
-            
             _movementDirection.ValueChanged -= UpdateMovement;
             UpdateMovement(Vector3.zero);
         }
-        
-        private void OnIsAliveValueChanged(bool isAlive)
-        {
-            if (!isAlive)
-            {
-                _stateMachine.SwitchState(PlayerStateType.Dead);
-            }
-        }
-        
-        private void OnMovementFinished()
-        {
-            _stateMachine.SwitchState(PlayerStateType.Idle);
-        }
-        
+
         private void UpdateMovement(Vector3 direction)
         {
             _moveInDirectionEngine.SetDirection(direction);

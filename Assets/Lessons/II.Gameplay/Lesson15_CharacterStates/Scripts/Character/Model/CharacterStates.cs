@@ -20,10 +20,31 @@ namespace Lessons.Character.Model
         public DeadState deadState;
         
         [Construct]
-        public void Construct()
+        public void Construct(CharacterCore core)
         {
             stateMachine.Construct((PlayerStateType.Idle, idleState), (PlayerStateType.Moving, movingState),
                 (PlayerStateType.Dead, deadState));
+
+            core.life.isAlive.ValueChanged += isAlive =>
+            {
+                stateMachine.SwitchState(isAlive ? PlayerStateType.Idle : PlayerStateType.Dead);
+            };
+
+            core.movement.movementDirection.MovementStarted += () =>
+            {
+                if (core.life.isAlive)
+                {
+                    stateMachine.SwitchState(PlayerStateType.Moving);
+                }
+            };
+
+            core.movement.movementDirection.MovementFinished += () =>
+            {
+                if (core.life.isAlive)
+                {
+                    stateMachine.SwitchState(PlayerStateType.Idle);
+                }
+            };
         }
     }
 }
