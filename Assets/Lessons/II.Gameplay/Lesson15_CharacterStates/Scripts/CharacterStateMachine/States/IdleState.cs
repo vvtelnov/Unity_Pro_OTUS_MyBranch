@@ -7,24 +7,17 @@ using UnityEngine;
 namespace Lessons.CharacterStateMachine.States
 {
     [Serializable]
-    public sealed class IdleState : IState
+    public sealed class IdleState : CompositeState
     {
-        private Animator _animator;
+        [SerializeField]
+        private AnimatorState animatorState;
 
         [Construct]
         public void Construct(CharacterVisual visual)
         {
-            _animator = visual.animator;
-        }
-        
-        void IState.Enter()
-        {
-            _animator.SetInteger("State", (int) AnimatorStateType.Idle);
-        }
-
-        void IState.Exit()
-        {
+            animatorState.Construct(visual.animator);
             
+            SetStates(animatorState);
         }
     }
 }

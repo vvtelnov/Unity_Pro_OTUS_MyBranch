@@ -1,30 +1,22 @@
 using System;
 using Declarative;
 using Lessons.Character.Model;
-using Lessons.Utils;
 using UnityEngine;
 
 namespace Lessons.CharacterStateMachine.States
 {
     [Serializable]
-    public sealed class DeadState : IState
+    public sealed class DeadState : CompositeState
     {
-        private Animator _animator;
+        [SerializeField]
+        private AnimatorState animatorState;
         
         [Construct]
         public void Construct(CharacterVisual visual)
         {
-            _animator = visual.animator;
-        }
-
-        void IState.Enter()
-        {
-            _animator.SetInteger("State", (int) AnimatorStateType.Dead);
-        }
-
-        void IState.Exit()
-        {
+            animatorState.Construct(visual.animator);
             
+            SetStates(animatorState);
         }
     }
 }
