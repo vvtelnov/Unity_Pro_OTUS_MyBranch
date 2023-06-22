@@ -10,16 +10,7 @@ namespace Lessons.Character.Model
     public sealed class CharacterCore
     {
         [Section]
-        public CharacterLife life;
-
-        [Section]
         public CharacterMovement movement;
-    }
-    
-    [Serializable]
-    public sealed class CharacterLife
-    {
-        public AtomicVariable<bool> isAlive = true;
     }
 
     [Serializable]
@@ -39,6 +30,12 @@ namespace Lessons.Character.Model
         {
             moveInDirectionEngine.Construct(transform, movementSpeed);
             rotateInDirectionEngine.Construct(transform, rotationSpeed);
+
+            movementDirection.ValueChanged += direction =>
+            {
+                moveInDirectionEngine.SetDirection(direction);
+                rotateInDirectionEngine.SetDirection(direction);
+            };
         }
     }
 }
