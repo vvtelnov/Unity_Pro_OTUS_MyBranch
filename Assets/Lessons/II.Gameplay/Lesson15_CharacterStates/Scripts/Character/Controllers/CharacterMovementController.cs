@@ -29,9 +29,9 @@ namespace Lessons.Character.Controllers
             movementInput.MovementDirectionChanged -= OnMovementDirectionChanged;
         }
 
-        private void OnMovementDirectionChanged(Vector3 movement)
+        private void OnMovementDirectionChanged(Vector3 direction)
         {
-            _moveInDirection.MoveInDirection(movement);
+            _moveInDirection.MoveInDirection(direction);
         }
     }
 }
