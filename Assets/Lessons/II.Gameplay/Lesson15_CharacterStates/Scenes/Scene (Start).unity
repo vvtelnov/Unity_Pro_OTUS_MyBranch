@@ -3282,20 +3282,24 @@ MonoBehaviour:
         value: 10
       movementDirection:
         value: {x: 0, y: 0, z: 0}
+    states:
+      stateMachine:
+        currentStateType: 0
+        enterOnStart: 1
+      idleState:
+        animatorState:
+          stateType: 0
+          stateName: State
+      runState:
+        animatorState:
+          stateType: 1
+          stateName: State
+      deadState:
+        animatorState:
+          stateType: 5
+          stateName: State
   visual:
     animator: {fileID: 887803968580046966}
-  states:
-    stateMachine:
-      currentStateType: 0
-    idleState:
-      animatorState:
-        stateType: 0
-    movingState:
-      animatorState:
-        stateType: 1
-    deadState:
-      animatorState:
-        stateType: 5
 --- !u!4 &2629166795136661382
 Transform:
   m_ObjectHideFlags: 0
