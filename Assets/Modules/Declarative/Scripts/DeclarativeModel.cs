@@ -10,14 +10,14 @@ namespace Declarative
 
         private MonoContext monoContext;
 
-        protected Action onAwake;
-        protected Action onEnable;
-        protected Action onStart;
-        protected Action<float> onUpdate;
-        protected Action<float> onFixedUpdate;
-        protected Action<float> onLateUpdate;
-        protected Action onDisable;
-        protected Action onDestroy;
+        public Action onAwake;
+        public Action onEnable;
+        public Action onStart;
+        public Action<float> onUpdate;
+        public Action<float> onFixedUpdate;
+        public Action<float> onLateUpdate;
+        public Action onDisable;
+        public Action onDestroy;
 
         internal object GetSection(Type type)
         {
