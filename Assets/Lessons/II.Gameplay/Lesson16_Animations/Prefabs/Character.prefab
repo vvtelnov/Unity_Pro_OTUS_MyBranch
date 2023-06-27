@@ -2412,7 +2412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774857683106680183}
   - component: {fileID: 1774857683114308937}
-  - component: {fileID: 1774857683106975812}
+  - component: {fileID: 5003219656088802255}
   m_Layer: 0
   m_Name: Character_Knight_01_Blue
   m_TagString: Untagged
@@ -2457,7 +2457,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1774857683106975812
+--- !u!114 &5003219656088802255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2466,7 +2466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774857683106975813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e96082e93c945f9a6eeb53c5aa759d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d07801e68904893b377c357f99f80bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1774857683106977473
@@ -3017,7 +3017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3e85742db47a3b992f1dce7cb4956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initOnAwake: 1
   core:
     life:
       isAlive:
@@ -3053,10 +3052,15 @@ MonoBehaviour:
           stateName: State
       gatherState:
         animatorState:
-          stateType: 2
           stateName: State
   visual:
     animator: {fileID: 1774857683114308937}
+    animatorDispatcher: {fileID: 5003219656088802255}
+    chopVFX: {fileID: 4070609419850998413}
+    mineVFX: {fileID: 6932534938962282865}
+    audioSource: {fileID: 1300613100250328380}
+    chopSFX: {fileID: 8300000, guid: 0a25df2311b5f4bd3ad50c91c0332d78, type: 3}
+    mineSFX: {fileID: 8300000, guid: 8a1e08faeb86c42afa6f6932701ab33c, type: 3}
 --- !u!1 &9109367515452250079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,6 +3378,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1363290720474106750}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &6932534938962282865 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8277104172498076175, guid: 36b4c9e3e971542e8b436e0e98142db6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1363290720474106750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1363290720629982081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3498,6 +3508,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a7f74e51a9848698d42c9e3c9ffcc9, type: 3}
+--- !u!198 &4070609419850998413 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3068873415796416780, guid: 82a7f74e51a9848698d42c9e3c9ffcc9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1363290720629982081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4070609419850998415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3068873415796416782, guid: 82a7f74e51a9848698d42c9e3c9ffcc9,

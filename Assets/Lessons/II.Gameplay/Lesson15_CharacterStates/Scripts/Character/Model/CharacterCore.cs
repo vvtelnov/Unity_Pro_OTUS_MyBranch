@@ -55,8 +55,8 @@ namespace Lessons.Character.Model
     {
         public AtomicVariable<float> duration = new(3);
         public AtomicEvent<ResourceObject> onStart;
-        public AtomicVariable<ResourceObject> target;
         public AtomicEvent onComplete;
+        public AtomicVariable<ResourceObject> target;
 
         [Construct]
         public void Construct()
@@ -80,7 +80,7 @@ namespace Lessons.Character.Model
     [Serializable]
     public sealed class CharacterStates
     {
-        public StateMachine stateMachine;
+        public StateMachine<CharacterStateType> stateMachine;
 
         [Section]
         public IdleState idleState;
@@ -95,8 +95,10 @@ namespace Lessons.Character.Model
         public GatherCompositeState gatherState;
 
         [Construct]
-        public void Construct()
+        public void Construct(CharacterModel root)
         {
+            root.onStart += () => this.stateMachine.Enter();
+        
             stateMachine.Construct(
                 (CharacterStateType.Idle, idleState),
                 (CharacterStateType.Run, runState),

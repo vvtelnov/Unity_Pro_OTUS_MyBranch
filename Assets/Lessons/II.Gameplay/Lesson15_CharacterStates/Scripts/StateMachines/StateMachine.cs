@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Declarative;
 using Lessons.StateMachines.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,32 +7,26 @@ using UnityEngine;
 namespace Lessons.StateMachines
 {
     [Serializable]
-    public sealed class StateMachine : IState, IStartListener
+    public class StateMachine<T> : IState
     {
-        [SerializeField]
-        private CharacterStateType currentStateType;
+        public T CurrentState
+        {
+            get { return this.currentStateType; }
+        }
 
         [SerializeField]
-        private bool enterOnStart = true;
-        
+        protected T currentStateType;
+
         [ShowInInspector, ReadOnly]
         private IState _currentState;
 
-        private List<(CharacterStateType, IState)> _states = new();
+        private List<(T, IState)> _states = new();
 
-        public void Construct(params (CharacterStateType, IState)[] states)
+        public void Construct(params (T, IState)[] states)
         {
-            _states = new List<(CharacterStateType, IState)>(states);
+            _states = new List<(T, IState)>(states);
         }
-        
-        void IStartListener.Start()
-        {
-            if (enterOnStart)
-            {
-                Enter();
-            }
-        }
-        
+
         public void Enter()
         {
             _currentState = FindState(currentStateType);
@@ -46,18 +39,18 @@ namespace Lessons.StateMachines
             _currentState = null;
         }
 
-        public void SwitchState(CharacterStateType stateType)
+        public virtual void SwitchState(T stateType)
         {
             Exit();
             currentStateType = stateType;
             Enter();
         }
 
-        private IState FindState(CharacterStateType stateType)
+        private IState FindState(T stateType)
         {
             foreach (var state in _states)
             {
-                if (state.Item1 == stateType)
+                if (state.Item1.Equals(stateType))
                 {
                     return state.Item2;
                 }
