@@ -9,22 +9,16 @@ namespace Declarative
         private Dictionary<Type, object> sections;
 
         private MonoContext monoContext;
-        
-        [SerializeField]
-        private bool initOnAwake = true;
 
-        public virtual void Initialize()
-        {
-            this.monoContext = new MonoContext(this);
-            this.sections = SectionScanner.ScanSections(this);
+        protected Action onAwake;
+        protected Action onEnable;
+        protected Action onStart;
+        protected Action<float> onUpdate;
+        protected Action<float> onFixedUpdate;
+        protected Action<float> onLateUpdate;
+        protected Action onDisable;
+        protected Action onDestroy;
 
-            foreach (var section in this.sections.Values)
-            {
-                MonoContextInstaller.InstallElements(section, this.monoContext);
-                SectionConstructor.ConstructSection(section, this);
-            }
-        }
-        
         internal object GetSection(Type type)
         {
             return this.sections[type];
@@ -37,56 +31,79 @@ namespace Declarative
 
         private void Awake()
         {
-            if (this.initOnAwake)
+            this.onAwake = null;
+            this.onEnable = null;
+            this.onStart = null;
+            this.onUpdate = null;
+            this.onFixedUpdate = null;
+            this.onLateUpdate = null;
+            this.onDisable = null;
+            this.onDestroy = null;
+
+            this.monoContext = new MonoContext(this);
+            this.sections = SectionScanner.ScanSections(this);
+
+            foreach (var section in this.sections.Values)
             {
-                this.Initialize();
+                MonoContextInstaller.InstallElements(section, this.monoContext);
+                SectionConstructor.ConstructSection(section, this);
             }
-            
+
             this.monoContext.Awake();
+            this.onAwake?.Invoke();
         }
 
         private void OnEnable()
         {
             this.monoContext.OnEnable();
+            this.onEnable?.Invoke();
         }
 
         private void Start()
         {
             this.monoContext.Start();
+            this.onStart?.Invoke();
         }
 
         private void FixedUpdate()
         {
-            this.monoContext.FixedUpdate(Time.fixedDeltaTime);
+            var deltaTime = Time.fixedDeltaTime;
+            this.monoContext.FixedUpdate(deltaTime);
+            this.onFixedUpdate?.Invoke(deltaTime);
         }
 
         private void Update()
         {
-            this.monoContext.Update(Time.deltaTime);
+            var deltaTime = Time.deltaTime;
+            this.monoContext.Update(deltaTime);
+            this.onUpdate?.Invoke(deltaTime);
         }
 
         private void LateUpdate()
         {
-            this.monoContext.LateUpdate(Time.deltaTime);
+            var deltaTime = Time.deltaTime;
+            this.monoContext.LateUpdate(deltaTime);
+            this.onLateUpdate?.Invoke(deltaTime);
         }
 
         private void OnDisable()
         {
             this.monoContext.OnDisable();
+            this.onDisable?.Invoke();
         }
 
         private void OnDestroy()
         {
             this.monoContext.OnDestroy();
+            this.onDestroy?.Invoke();
         }
 
 #if UNITY_EDITOR
         [ContextMenu("Construct")]
         private void Construct()
         {
-            this.Initialize();
-            this.monoContext.Awake();
-            this.monoContext.OnEnable();
+            this.Awake();
+            this.OnEnable();
             Debug.Log($"<color=#FF6235>: {this.name} successfully constructed!</color>");
         }
 
@@ -96,8 +113,9 @@ namespace Declarative
             if (this.monoContext != null)
             {
                 this.monoContext.OnDisable();
-                this.monoContext.OnDestroy();   
+                this.monoContext.OnDestroy();
             }
+
             Debug.Log($"<color=#FF6235>: {this.name} successfully destructed!</color>");
         }
 #endif
