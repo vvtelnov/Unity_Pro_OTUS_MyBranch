@@ -53,7 +53,6 @@ namespace Lessons.Character.Model
     [Serializable]
     public sealed class CharacterGathering
     {
-
         public AtomicVariable<float> duration = new(3);
         public AtomicEvent<ResourceObject> onStart;
         public AtomicVariable<ResourceObject> target;
@@ -72,8 +71,8 @@ namespace Lessons.Character.Model
             {
                 var resource = this.target.Value;
                 resource.gameObject.SetActive(false);
-                Debug.Log($"<color=green>Complete gathering {resource.resourceType} {resource.amount}</color>");
                 this.target.Value = null;
+                Debug.Log($"<color=green>Complete gathering {resource.resourceType} {resource.amount}</color>");
             };
         }
     }
@@ -93,7 +92,7 @@ namespace Lessons.Character.Model
         public DeadState deadState;
 
         [Section]
-        public GatherResourceState gatherState;
+        public GatherCompositeState gatherState;
 
         [Construct]
         public void Construct()

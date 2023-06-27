@@ -29,7 +29,6 @@ namespace Lessons.StateMachines.States
 
         void IState.Exit()
         {
-            
         }
     }
 }

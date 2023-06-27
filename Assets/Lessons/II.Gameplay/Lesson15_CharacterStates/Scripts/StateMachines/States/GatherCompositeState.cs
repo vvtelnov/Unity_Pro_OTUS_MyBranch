@@ -5,7 +5,7 @@ using Lessons.Character.Model;
 namespace Lessons.StateMachines.States
 {
     [Serializable]
-    public sealed class GatherResourceState : CompositeState
+    public sealed class GatherCompositeState : CompositeState
     {
         public AnimatorState animatorState;
         public HarvestState harvestState;
