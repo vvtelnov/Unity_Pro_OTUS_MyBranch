@@ -4,6 +4,7 @@ namespace Lessons.StateMachines.States
     {
         Idle,
         Run,
-        Dead
+        Dead,
+        Gathering
     }
 }

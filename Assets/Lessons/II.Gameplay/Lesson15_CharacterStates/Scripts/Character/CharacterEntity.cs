@@ -12,6 +12,7 @@ namespace Lessons.Character
          {
              var characterModel = GetComponent<CharacterModel>();
              Add(new MoveInDirectionComponent(characterModel.core.movement.movementDirection));
+             Add(new GatherResourceComponent(characterModel.core.gathering.onStart));
          }
     }
 }

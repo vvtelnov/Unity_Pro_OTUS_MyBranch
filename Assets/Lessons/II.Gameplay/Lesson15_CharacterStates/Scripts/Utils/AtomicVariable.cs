@@ -24,11 +24,6 @@ namespace Lessons.Utils
             return value.value;
         }
 
-        public static implicit operator AtomicVariable<T>(T value)
-        {
-            return new AtomicVariable<T>(value);
-        }
-
         public AtomicVariable()
         {
             value = default;

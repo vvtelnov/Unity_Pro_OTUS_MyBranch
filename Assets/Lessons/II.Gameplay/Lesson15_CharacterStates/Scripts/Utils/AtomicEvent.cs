@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace Lessons.Utils
 {
+    [Serializable]
     public sealed class AtomicEvent
     {
         private readonly List<Action> _actions = new();
@@ -22,6 +24,7 @@ namespace Lessons.Utils
             return atomicEvent;
         }
 
+        [Button]
         public void Invoke()
         {
             for (_index = 0; _index < _actions.Count; ++_index)
@@ -32,6 +35,7 @@ namespace Lessons.Utils
         }
     }
 
+    [Serializable]
     public sealed class AtomicEvent<T>
     {
         private readonly List<Action<T>> _actions = new();
@@ -51,6 +55,7 @@ namespace Lessons.Utils
             return atomicEvent;
         }
 
+        [Button]
         public void Invoke(T arg)
         {
             for (_index = 0; _index < _actions.Count; ++_index)

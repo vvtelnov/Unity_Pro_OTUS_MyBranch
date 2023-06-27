@@ -18,9 +18,12 @@ namespace Lessons.Character.Model
         public CharacterMovement movement;
 
         [Section]
+        public CharacterGathering gathering;
+
+        [Section]
         public CharacterStates states;
     }
-    
+
     [Serializable]
     public sealed class CharacterLife
     {
@@ -32,8 +35,8 @@ namespace Lessons.Character.Model
     {
         public Transform transform;
 
-        public AtomicVariable<float> movementSpeed = 6f;
-        public AtomicVariable<float> rotationSpeed = 10f;
+        public AtomicVariable<float> movementSpeed = new(6f);
+        public AtomicVariable<float> rotationSpeed = new(10f);
         public MovementDirectionVariable movementDirection;
 
         public MoveInDirectionEngine moveInDirectionEngine;
@@ -48,20 +51,49 @@ namespace Lessons.Character.Model
     }
 
     [Serializable]
+    public sealed class CharacterGathering
+    {
+
+        public AtomicVariable<float> duration = new(3);
+        public AtomicEvent<ResourceObject> onStart;
+        public AtomicVariable<ResourceObject> target;
+        public AtomicEvent onComplete;
+
+        [Construct]
+        public void Construct()
+        {
+            this.onStart += resource =>
+            {
+                Debug.Log($"Start gathering {resource.resourceType}");
+                this.target.Value = resource;
+            };
+
+            this.onComplete += () =>
+            {
+                var resource = this.target.Value;
+                resource.gameObject.SetActive(false);
+                Debug.Log($"<color=green>Complete gathering {resource.resourceType} {resource.amount}</color>");
+                this.target.Value = null;
+            };
+        }
+    }
+
+    [Serializable]
     public sealed class CharacterStates
     {
         public StateMachine stateMachine;
 
         [Section]
         public IdleState idleState;
-        
+
         [Section]
         public RunState runState;
 
         [Section]
         public DeadState deadState;
-        
-        
+
+        [Section]
+        public GatherResourceState gatherState;
 
         [Construct]
         public void Construct()
@@ -69,15 +101,20 @@ namespace Lessons.Character.Model
             stateMachine.Construct(
                 (CharacterStateType.Idle, idleState),
                 (CharacterStateType.Run, runState),
-                (CharacterStateType.Dead, deadState));
+                (CharacterStateType.Dead, deadState),
+                (CharacterStateType.Gathering, gatherState)
+            );
         }
 
         [Construct]
-        public void ConstructTransitions(CharacterLife life, CharacterMovement movement)
+        public void ConstructTransitions(CharacterLife life, CharacterMovement movement, CharacterGathering gathering)
         {
             life.isAlive.ValueChanged += isAlive =>
-                stateMachine.SwitchState(isAlive ? CharacterStateType.Idle : CharacterStateType.Dead);
-            
+            {
+                var stateType = isAlive ? CharacterStateType.Idle : CharacterStateType.Dead;
+                stateMachine.SwitchState(stateType);
+            };
+
             movement.movementDirection.MovementStarted += () =>
             {
                 if (life.isAlive)
@@ -85,8 +122,24 @@ namespace Lessons.Character.Model
                     stateMachine.SwitchState(CharacterStateType.Run);
                 }
             };
-            
+
             movement.movementDirection.MovementFinished += () =>
+            {
+                if (life.isAlive)
+                {
+                    stateMachine.SwitchState(CharacterStateType.Idle);
+                }
+            };
+
+            gathering.onStart += _ =>
+            {
+                if (life.isAlive)
+                {
+                    stateMachine.SwitchState(CharacterStateType.Gathering);
+                }
+            };
+
+            gathering.onComplete += () =>
             {
                 if (life.isAlive)
                 {

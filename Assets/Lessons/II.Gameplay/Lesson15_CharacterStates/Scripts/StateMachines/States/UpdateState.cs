@@ -38,22 +38,4 @@ namespace Lessons.StateMachines.States
 
         protected abstract void OnUpdate(float deltaTime);
     }
-    
-    public sealed class NewState : UpdateState
-    {
-        protected override void OnEnter()
-        {
-            
-        }
-
-        protected override void OnExit()
-        {
-            
-        }
-
-        protected override void OnUpdate(float deltaTime)
-        {
-             
-        }
-    }
 }
