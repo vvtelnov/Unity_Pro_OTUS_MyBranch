@@ -1585,6 +1585,11 @@ PrefabInstance:
       propertyPath: amount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1764117082258990006, guid: 100aa7a41604f49aa99603e30410150c,
+        type: 3}
+      propertyPath: resourceType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1764117082258990007, guid: 100aa7a41604f49aa99603e30410150c,
         type: 3}
       propertyPath: m_Name
@@ -1593,7 +1598,7 @@ PrefabInstance:
     - target: {fileID: 1764117082258990007, guid: 100aa7a41604f49aa99603e30410150c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8279054018101705789, guid: 100aa7a41604f49aa99603e30410150c,
         type: 3}
