@@ -97,6 +97,7 @@ namespace Game.Gameplay.Hero
 
                 var checkDistance = new HarvestResourceCondition_CheckDistance(transform, config.harvestDistance);
                 var checkTarget = new HarvestResourceCondition_CheckEntity(config.harvestConditions);
+                
                 this.harvestOperator.AddCondition(checkDistance);
                 this.harvestOperator.AddCondition(checkTarget);
                 this.harvestOperator.AddCondition(_ => life.hitPoints.IsExists());

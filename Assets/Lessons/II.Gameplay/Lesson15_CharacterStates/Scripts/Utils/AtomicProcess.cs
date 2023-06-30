@@ -1,5 +1,4 @@
 using System;
-using Declarative;
 using Sirenix.OdinInspector;
 
 namespace Lessons.Utils
@@ -30,7 +29,7 @@ namespace Lessons.Utils
     }
     
     [Serializable]
-    public sealed class AtomicProcess : IAtomicProcess, IDisposable
+    public sealed class AtomicProcess : IAtomicProcess
     {
         public event Action OnStarted
         {
@@ -96,12 +95,6 @@ namespace Lessons.Utils
 
             this.isPlaying = false;
             this.onStopped?.Invoke();
-        }
-
-        public void Dispose()
-        {
-            DelegateUtils.Dispose(ref this.onStarted);
-            DelegateUtils.Dispose(ref this.onStopped);
         }
     }
 
@@ -183,12 +176,6 @@ namespace Lessons.Utils
             var state = this.state;
             this.state = default;
             this.onStopped?.Invoke(state);
-        }
-        
-        public void Dispose()
-        {
-            DelegateUtils.Dispose(ref this.onStarted);
-            DelegateUtils.Dispose(ref this.onStopped);
         }
     }
 }

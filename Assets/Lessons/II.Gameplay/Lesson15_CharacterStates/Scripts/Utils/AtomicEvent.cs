@@ -10,6 +10,16 @@ namespace Lessons.Utils
         private readonly List<Action> _actions = new();
         private int _index;
         
+        public void Subscribe(Action action)
+        {
+            _actions.Add(action);
+        }
+        
+        public void Unsubscribe(Action action)
+        {
+            _actions.Remove(action);
+        }
+        
         public static AtomicEvent operator+(AtomicEvent atomicEvent, Action action)
         {
             atomicEvent._actions.Add(action);
