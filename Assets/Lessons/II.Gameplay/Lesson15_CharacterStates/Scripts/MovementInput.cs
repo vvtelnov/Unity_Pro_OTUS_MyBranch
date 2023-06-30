@@ -1,15 +1,16 @@
 using System;
+using GameSystem;
 using UnityEngine;
 
 namespace Lessons
 {
-    public sealed class MovementInput : MonoBehaviour
+    public sealed class MovementInput : MonoBehaviour, IGameUpdateElement
     {
         public event Action<Vector3> MovementDirectionChanged;
         
         private Vector3 _previousMovement;
-        
-        private void Update()
+
+        void IGameUpdateElement.OnUpdate(float deltaTime)
         {
             var movement = new Vector3();
             

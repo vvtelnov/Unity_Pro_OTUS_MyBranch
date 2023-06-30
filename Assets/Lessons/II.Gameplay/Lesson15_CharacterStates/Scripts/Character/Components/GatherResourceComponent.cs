@@ -1,18 +1,18 @@
-using Lessons.StateMachines.States;
+using Entities;
 using Lessons.Utils;
 
 namespace Lessons.Character.Components
 {
     public sealed class GatherResourceComponent
     {
-        private readonly AtomicEvent<ResourceObject> onRequest;
+        private readonly AtomicEvent<IEntity> onRequest;
 
-        public GatherResourceComponent(AtomicEvent<ResourceObject> onRequest)
+        public GatherResourceComponent(AtomicEvent<IEntity> onRequest)
         {
             this.onRequest = onRequest;
         }
 
-        public void StartGather(ResourceObject resourceObject)
+        public void StartGather(IEntity resourceObject)
         {
             this.onRequest.Invoke(resourceObject);
         }

@@ -1,28 +1,26 @@
-using System;
 using Entities;
+using GameSystem;
 using Lessons.Character.Components;
-using Lessons.StateMachines.States;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Character.Controllers
 {
-    public sealed class CharacterGatheringController : MonoBehaviour
+    public sealed class CharacterGatheringController : MonoBehaviour, IGameInitElement, IGameUpdateElement
     {
         [SerializeField]
         private MonoEntity character;
 
         [SerializeField]
-        private ResourceObject resourceObject;
+        private MonoEntity resourceObject;
 
         private GatherResourceComponent _gatherResourceComponent;
 
-        private void Start()
+        void IGameInitElement.InitGame()
         {
             _gatherResourceComponent = character.Get<GatherResourceComponent>();
         }
 
-        private void Update()
+        void IGameUpdateElement.OnUpdate(float deltaTime)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

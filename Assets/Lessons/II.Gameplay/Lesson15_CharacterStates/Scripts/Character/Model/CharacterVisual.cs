@@ -69,11 +69,11 @@ namespace Lessons.Character.Model
 
             this.animatorMachine.AddTransition(AnimatorStateType.Chop, () =>
                 coreFSM.CurrentState == CharacterStateType.Gathering &&
-                resourceObject.Value.resourceType == ResourceType.WOOD);
+                resourceObject.Value.Get<IComponent_GetResourceType>().Type == ResourceType.WOOD);
 
             this.animatorMachine.AddTransition(AnimatorStateType.Mine, () =>
                 coreFSM.CurrentState == CharacterStateType.Gathering &&
-                resourceObject.Value.resourceType == ResourceType.STONE);
+                resourceObject.Value.Get<IComponent_GetResourceType>().Type == ResourceType.STONE);
         }
 
         [Construct]

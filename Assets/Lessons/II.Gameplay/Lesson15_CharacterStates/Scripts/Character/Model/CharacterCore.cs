@@ -1,5 +1,8 @@
 using System;
 using Declarative;
+using Entities;
+using Game.GameEngine.GameResources;
+using Game.GameEngine.Mechanics;
 using Lessons.Character.Engines;
 using Lessons.StateMachines;
 using Lessons.StateMachines.States;
@@ -54,25 +57,28 @@ namespace Lessons.Character.Model
     public sealed class CharacterGathering
     {
         public AtomicVariable<float> duration = new(3);
-        public AtomicEvent<ResourceObject> onStart;
+        public AtomicEvent<IEntity> onStart;
         public AtomicEvent onComplete;
-        public AtomicVariable<ResourceObject> target;
+        public AtomicVariable<IEntity> target;
 
         [Construct]
         public void Construct()
         {
             this.onStart += resource =>
             {
-                Debug.Log($"Start gathering {resource.resourceType}");
+                
+                Debug.Log($"Start gathering {resource.Get<IComponent_GetResourceType>()}");
                 this.target.Value = resource;
             };
 
             this.onComplete += () =>
             {
                 var resource = this.target.Value;
-                resource.gameObject.SetActive(false);
+                resource.Get<IComponent_Destoy>().Destroy();
+                var resourceType = resource.Get<IComponent_GetResourceType>().Type;
+                var resourceAmount = resource.Get<IComponent_GetResourceCount>().Count;
                 this.target.Value = null;
-                Debug.Log($"<color=green>Complete gathering {resource.resourceType} {resource.amount}</color>");
+                Debug.Log($"<color=green>Complete gathering {resourceType} {resourceAmount}</color>");
             };
         }
     }

@@ -1,10 +1,13 @@
 using Entities;
+using GameSystem;
 using Lessons.Character.Components;
 using UnityEngine;
 
 namespace Lessons.Character.Controllers
 {
-    public sealed class CharacterMovementController : MonoBehaviour
+    public sealed class CharacterMovementController : MonoBehaviour,
+        IGameInitElement,
+        IGameFinishElement
     {
         [SerializeField]
         private MovementInput movementInput;
@@ -14,17 +17,13 @@ namespace Lessons.Character.Controllers
 
         private MoveInDirectionComponent _moveInDirection;
 
-        private void Start()
+        void IGameInitElement.InitGame()
         {
             _moveInDirection = character.Get<MoveInDirectionComponent>();
-        }
-
-        private void OnEnable()
-        {
             movementInput.MovementDirectionChanged += OnMovementDirectionChanged;
         }
 
-        private void OnDisable()
+        void IGameFinishElement.FinishGame()
         {
             movementInput.MovementDirectionChanged -= OnMovementDirectionChanged;
         }
