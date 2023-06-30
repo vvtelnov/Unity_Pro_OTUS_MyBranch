@@ -1,6 +1,7 @@
 using System;
 using Declarative;
 using Game.GameEngine.GameResources;
+using Game.GameEngine.Mechanics;
 using Lessons.Character.Animations;
 using Lessons.StateMachines.States;
 using UnityEngine;
@@ -56,7 +57,7 @@ namespace Lessons.Character.Model
         public void ConstructTransitions(CharacterStates states, CharacterGathering gathering)
         {
             var coreFSM = states.stateMachine;
-            var resourceObject = gathering.target;
+            var process = gathering.process;
 
             this.animatorMachine.AddTransition(AnimatorStateType.Idle, () =>
                 coreFSM.CurrentState == CharacterStateType.Idle);
@@ -69,15 +70,15 @@ namespace Lessons.Character.Model
 
             this.animatorMachine.AddTransition(AnimatorStateType.Chop, () =>
                 coreFSM.CurrentState == CharacterStateType.Gathering &&
-                resourceObject.Value.Get<IComponent_GetResourceType>().Type == ResourceType.WOOD);
+                process.State.Type == ResourceType.WOOD);
 
             this.animatorMachine.AddTransition(AnimatorStateType.Mine, () =>
                 coreFSM.CurrentState == CharacterStateType.Gathering &&
-                resourceObject.Value.Get<IComponent_GetResourceType>().Type == ResourceType.STONE);
+                process.State.Type == ResourceType.STONE);
         }
 
         [Construct]
-        public void Construct()
+        public void Construct(CharacterGathering gathering)
         {
             this.animatorMachine.OnMessageReceived += message =>
             {
@@ -85,6 +86,11 @@ namespace Lessons.Character.Model
                 {
                     this.chopVFX.Play();
                     this.audioSource.PlayOneShot(this.chopSFX);
+                    
+                    if (gathering.process.State != null)
+                    {
+                        gathering.process.State.Resource.Get<IComponent_Hit>().Hit();
+                    }
                 }
                 else if (message == "mine")
                 {

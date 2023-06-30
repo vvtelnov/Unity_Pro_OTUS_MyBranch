@@ -1,25 +1,34 @@
-using Entities;
+using System;
+using Lessons.Gameplay.Interaction;
 using Lessons.Utils;
 
 namespace Lessons.Character.Components
 {
     public interface IGatherResourceComponent
     {
-        void StartGather(IEntity resourceObject);
+        event Action<GatherResourceCommand> OnStopped;
+        
+        void StartGather(GatherResourceCommand command);
     }
     
     public sealed class GatherResourceComponent : IGatherResourceComponent
     {
-        private readonly AtomicEvent<IEntity> onRequest;
-
-        public GatherResourceComponent(AtomicEvent<IEntity> onRequest)
+        public event Action<GatherResourceCommand> OnStopped
         {
-            this.onRequest = onRequest;
+            add { this.process.OnStopped += value; }
+            remove { this.process.OnStopped -= value; }
         }
 
-        public void StartGather(IEntity resourceObject)
+        private readonly IAtomicProcess<GatherResourceCommand> process;
+
+        public GatherResourceComponent(IAtomicProcess<GatherResourceCommand> process)
         {
-            this.onRequest.Invoke(resourceObject);
+            this.process = process;
+        }
+
+        public void StartGather(GatherResourceCommand command)
+        {
+            this.process.Start(command);
         }
     }
 }

@@ -1,23 +1,24 @@
 using System;
+using Lessons.Gameplay.Interaction;
 using Lessons.Utils;
 
 namespace Lessons.StateMachines.States
 {
     [Serializable]
-    public sealed class HarvestState : UpdateState
+    public sealed class GatheringTimerState : UpdateState
     {
         private float currentTime;
 
         private AtomicVariable<float> duration;
-        private AtomicEvent onComplete;
+        private IAtomicProcess<GatherResourceCommand> process;
 
         public void Construct(
             AtomicVariable<float> duration,
-            AtomicEvent onComplete
+            IAtomicProcess<GatherResourceCommand> process
         )
         {
             this.duration = duration;
-            this.onComplete = onComplete;
+            this.process = process;
         }
 
         protected override void OnEnter()
@@ -30,7 +31,8 @@ namespace Lessons.StateMachines.States
             this.currentTime += deltaTime;
             if (this.currentTime >= this.duration)
             {
-                this.onComplete.Invoke();
+                this.process.State.Complete();
+                this.process.Stop();
             }
         }
     }

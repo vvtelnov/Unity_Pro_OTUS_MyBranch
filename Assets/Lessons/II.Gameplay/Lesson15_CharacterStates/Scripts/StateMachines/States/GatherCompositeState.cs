@@ -7,18 +7,20 @@ namespace Lessons.StateMachines.States
     [Serializable]
     public sealed class GatherCompositeState : CompositeState
     {
-        public HarvestState harvestState;
+        public GatheringTimerState timerState;
+        public GatheringDistanceState distanceState;
 
         [Construct]
         public void ConstructSelf()
         {
-            SetStates(harvestState);
+            SetStates(timerState, distanceState);
         }
         
         [Construct]
-        public void ConstructSubStates(CharacterGathering gathering, CharacterVisual visual)
+        public void ConstructSubStates(CharacterMovement movement, CharacterGathering gathering)
         {
-            harvestState.Construct(gathering.duration, gathering.onComplete);
+            timerState.Construct(gathering.duration, gathering.process);
+            distanceState.Construct(movement.transform, gathering.process, gathering.minDistance);
         }
     }
 }

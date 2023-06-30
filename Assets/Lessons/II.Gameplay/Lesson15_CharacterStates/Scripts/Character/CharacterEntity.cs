@@ -11,7 +11,7 @@ namespace Lessons.Character
          {
              var characterModel = this.GetComponent<CharacterModel>();
              Add(new MoveInDirectionComponent(characterModel.core.movement.movementDirection));
-             Add(new GatherResourceComponent(characterModel.core.gathering.onStart));
+             Add(new GatherResourceComponent(characterModel.core.gathering.process));
              Add(new CollisionComponent(characterModel.core.collision.sensor));
          }
     }

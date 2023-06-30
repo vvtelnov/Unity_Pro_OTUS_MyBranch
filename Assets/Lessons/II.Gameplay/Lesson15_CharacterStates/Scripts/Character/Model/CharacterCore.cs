@@ -62,28 +62,26 @@ namespace Lessons.Character.Model
     public sealed class CharacterGathering
     {
         public AtomicVariable<float> duration = new(3);
-        public AtomicEvent<IEntity> onStart;
-        public AtomicEvent onComplete;
-        public AtomicVariable<IEntity> target;
+        public AtomicVariable<float> minDistance = new(1.25f);
+
+        public AtomicProcess<GatherResourceCommand> process;
 
         [Construct]
-        public void Construct()
+        public void Construct(CharacterMovement movement)
         {
-            this.onStart += resource =>
+            this.process.Condition = cmd =>
             {
-                
-                Debug.Log($"Start gathering {resource.Get<IComponent_GetResourceType>()}");
-                this.target.Value = resource;
+                var myPosition = movement.transform.position;
+                var resourcePosition = cmd.Position;
+                return Vector3.Distance(myPosition, resourcePosition) <= this.minDistance.Value;
             };
-
-            this.onComplete += () =>
+                
+            this.process.OnStarted += cmd =>
             {
-                var resource = this.target.Value;
-                resource.Get<IComponent_Destoy>().Destroy();
-                var resourceType = resource.Get<IComponent_GetResourceType>().Type;
-                var resourceAmount = resource.Get<IComponent_GetResourceCount>().Count;
-                this.target.Value = null;
-                Debug.Log($"<color=green>Complete gathering {resourceType} {resourceAmount}</color>");
+                var myPosition = movement.transform.position;
+                var resourcePosition = cmd.Position;
+                var direction = (resourcePosition - myPosition).normalized;
+                movement.transform.rotation = Quaternion.LookRotation(direction);
             };
         }
     }
@@ -150,15 +148,15 @@ namespace Lessons.Character.Model
                 }
             };
 
-            gathering.onStart += _ =>
+            gathering.process.OnStarted += _ =>
             {
                 if (life.isAlive)
                 {
                     stateMachine.SwitchState(CharacterStateType.Gathering);
                 }
             };
-
-            gathering.onComplete += () =>
+            
+            gathering.process.OnStopped += success =>
             {
                 if (life.isAlive)
                 {
