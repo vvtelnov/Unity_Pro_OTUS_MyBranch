@@ -3,7 +3,12 @@ using Lessons.Utils;
 
 namespace Lessons.Character.Components
 {
-    public sealed class GatherResourceComponent
+    public interface IGatherResourceComponent
+    {
+        void StartGather(IEntity resourceObject);
+    }
+    
+    public sealed class GatherResourceComponent : IGatherResourceComponent
     {
         private readonly AtomicEvent<IEntity> onRequest;
 

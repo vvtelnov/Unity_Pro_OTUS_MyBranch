@@ -4,10 +4,12 @@ using Entities;
 using Game.GameEngine.GameResources;
 using Game.GameEngine.Mechanics;
 using Lessons.Character.Engines;
+using Lessons.Gameplay.Interaction;
 using Lessons.StateMachines;
 using Lessons.StateMachines.States;
 using Lessons.Utils;
 using UnityEngine;
+using TransformSynchronizer = Lessons.Utils.TransformSynchronizer;
 
 namespace Lessons.Character.Model
 {
@@ -22,6 +24,9 @@ namespace Lessons.Character.Model
 
         [Section]
         public CharacterGathering gathering;
+
+        [Section]
+        public CharacterCollision collision;
 
         [Section]
         public CharacterStates states;
@@ -84,6 +89,13 @@ namespace Lessons.Character.Model
     }
 
     [Serializable]
+    public sealed class CharacterCollision
+    {
+        public CollisionSensor sensor;
+        public TransformSynchronizer synchronizer;
+    }
+
+    [Serializable]
     public sealed class CharacterStates
     {
         public StateMachine<CharacterStateType> stateMachine;
@@ -132,7 +144,7 @@ namespace Lessons.Character.Model
 
             movement.movementDirection.MovementFinished += () =>
             {
-                if (life.isAlive)
+                if (life.isAlive && stateMachine.CurrentState == CharacterStateType.Run)
                 {
                     stateMachine.SwitchState(CharacterStateType.Idle);
                 }

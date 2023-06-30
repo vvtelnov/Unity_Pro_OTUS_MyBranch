@@ -1,6 +1,5 @@
 using Entities;
 using Lessons.Character.Components;
-using Lessons.Character.Model;
 using UnityEngine;
 
 namespace Lessons.Character
@@ -10,9 +9,10 @@ namespace Lessons.Character
     {
         private void Awake()
          {
-             var characterModel = GetComponent<CharacterModel>();
+             var characterModel = this.GetComponent<CharacterModel>();
              Add(new MoveInDirectionComponent(characterModel.core.movement.movementDirection));
              Add(new GatherResourceComponent(characterModel.core.gathering.onStart));
+             Add(new CollisionComponent(characterModel.core.collision.sensor));
          }
     }
 }
