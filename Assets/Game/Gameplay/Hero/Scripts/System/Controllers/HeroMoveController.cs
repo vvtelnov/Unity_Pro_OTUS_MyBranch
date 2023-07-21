@@ -42,7 +42,6 @@ namespace Game.Gameplay.Hero
 
         private void OnDirectionMoved(Vector2 screenDirection)
         {
-            Debug.Log(screenDirection);
             var worldDirection = new Vector3(screenDirection.x, 0.0f, screenDirection.y);
             this.heroComponent.Move(worldDirection);
         }
