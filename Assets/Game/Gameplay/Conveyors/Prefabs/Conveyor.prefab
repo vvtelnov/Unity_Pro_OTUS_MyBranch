@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 321564266908410341}
   - component: {fileID: 4592308181767518299}
-  - component: {fileID: 4874250557079199805}
+  - component: {fileID: 5626702111366088865}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Untagged
@@ -192,9 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 00776abad06fc4fe09d39f4efb3e9c1f, type: 2}
   resourceCatalog: {fileID: 11400000, guid: 93f89b4c0ea3d4332913afbc977628c2, type: 2}
-  components:
-    entity: {fileID: 4874250557079199805}
-    unloadPoint: {fileID: 3592597322540976107}
   core:
     enableVariable:
       value: 0
@@ -206,16 +203,13 @@ MonoBehaviour:
       maxValue: 12
     workTimer:
       duration: 4
-    triggers:
-    - {fileID: 321564266152428157}
-    - {fileID: 321564267964894809}
   visual:
     conveyorView: {fileID: 7106291979801008790}
     loadZoneView: {fileID: 321564267737984864}
     unloadZoneView: {fileID: 321564267706328395}
   canvas:
     infoView: {fileID: 7939323285475915952}
---- !u!114 &4874250557079199805
+--- !u!114 &5626702111366088865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,15 +218,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 321564266908410342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20ec5d50041547e09cfa3e0be086bf92, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f85f4f8290645e2aef6d4ffd2d6ab27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monoElements: []
-  scriptableElements: []
-  referenceElements: []
-  references:
-    version: 2
-    RefIds: []
+  unloadPoint: {fileID: 3592597322540976107}
 --- !u!1 &321564267379348655
 GameObject:
   m_ObjectHideFlags: 0

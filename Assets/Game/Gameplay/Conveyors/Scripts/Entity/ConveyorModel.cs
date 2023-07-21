@@ -1,9 +1,6 @@
 using System;
 using Elementary;
-using Entities;
-using Game.GameEngine;
 using Game.GameEngine.GameResources;
-using Game.GameEngine.Mechanics;
 using Declarative;
 using UnityEngine;
 
@@ -13,7 +10,7 @@ namespace Game.Gameplay.Conveyors
     {
         [Section]
         [SerializeField]
-        private ScriptableConveyour config;
+        public ScriptableConveyour config;
 
         [Section]
         [SerializeField]
@@ -21,11 +18,7 @@ namespace Game.Gameplay.Conveyors
 
         [Section]
         [SerializeField, Space]
-        private Core core;
-
-        [Section]
-        [SerializeField]
-        private Components components;
+        public Core core;
 
         [Section]
         [SerializeField]
@@ -52,9 +45,6 @@ namespace Game.Gameplay.Conveyors
 
             public WorkMechanics workMechanics = new();
 
-            [SerializeField, Space]
-            public ConveyorTrigger[] triggers;
-
             [Construct]
             private void ConstructStorages(ScriptableConveyour config)
             {
@@ -73,41 +63,8 @@ namespace Game.Gameplay.Conveyors
                     workTimer: this.workTimer
                 );
             }
-
-            [Construct]
-            private void ConstructTriggers(Components components)
-            {
-                var entity = components.entity;
-                for (int i = 0, count = this.triggers.Length; i < count; i++)
-                {
-                    var trigger = this.triggers[i];
-                    trigger.Setup(entity);
-                }
-            }
         }
-
-        [Serializable]
-        public sealed class Components
-        {
-            [SerializeField]
-            public MonoEntityStd entity;
-
-            [SerializeField]
-            private Transform unloadPoint;
-            
-            [Construct]
-            private void Construct(ScriptableConveyour config, Core core)
-            {
-                this.entity.AddRange(
-                    new Component_Id(config.id),
-                    new Component_ObjectType(config.objectType),
-                    new Component_Enable(core.enableVariable),
-                    new Component_LoadZone(core.loadStorage, config.inputResourceType),
-                    new Component_UnloadZone(core.unloadStorage, config.outputResourceType, this.unloadPoint)
-                );
-            }
-        }
-
+        
         [Serializable]
         public sealed class Visual
         {
