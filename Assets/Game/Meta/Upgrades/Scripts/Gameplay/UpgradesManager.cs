@@ -12,7 +12,7 @@ namespace Game.Meta
         public event Action<Upgrade> OnLevelUp;
         
         [ReadOnly, ShowInInspector]
-        private Dictionary<string, Upgrade> upgrades = new ();
+        private Dictionary<string, Upgrade> upgrades = new();
 
         private MoneyStorage moneyStorage;
 
