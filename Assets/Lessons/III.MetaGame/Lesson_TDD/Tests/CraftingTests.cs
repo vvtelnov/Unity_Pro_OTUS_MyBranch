@@ -1,100 +1,106 @@
-using System.Collections.Generic;
-using Lessons.MetaGame.Lesson_Inventory;
-using Lessons.MetaGame.Lesson_TDD;
+using Lessons.TDD;
 using NUnit.Framework;
-using UnityEngine;
 
 [TestFixture]
 public sealed class CraftingTests
 {
-    [Test]
-    public void SuperBootsTest()
+    private TestInventory testInventory;
+    private ItemCrafter itemCrafter;
+
+    private readonly ItemReceipt axeReceipt = new ItemReceipt("Axe",
+        new ItemIngredient("Wood", 2),
+        new ItemIngredient("Stone", 1)
+    );
+    
+    private readonly ItemReceipt swordReceipt = new ItemReceipt("Sword",
+        new ItemIngredient("Wood", 1),
+        new ItemIngredient("Stone", 1),
+        new ItemIngredient("Steal", 1)
+    );
+
+    [SetUp]
+    public void Setup()
     {
-        //{P}: Inventory
-        //Boots - 1
-        //Stone - 3
-
-        //{Q}: Inventory
-        //Boots - 0
-        //Stone - 0
-        //SuperBoots - 1
-
-        //Arrange:
-        var inventory = new Inventory();
-        inventory.AddItem(new InventoryItem("Boots"));
-        inventory.AddItem(new InventoryItem("Stone"));
-        inventory.AddItem(new InventoryItem("Stone"));
-        inventory.AddItem(new InventoryItem("Stone"));
-
-        //Act: {S}
-        //Crafting:
-        var bootsCrafter = new Crafter();
-        var receipt = new Receipt("SuperBoots", new Ingredient("Stone", 3), new Ingredient("Boots", 1));
-        bootsCrafter.Craft(inventory, receipt);
-
-        //Assert:
-        Assert.True(inventory.CountItems("Boots") == 0);
-        Assert.True(inventory.CountItems("Stone") == 0);
-        Assert.True(inventory.CountItems("SuperBoots") == 1);
+        this.testInventory = new TestInventory();
+        this.itemCrafter = new ItemCrafter(this.testInventory);
     }
 
     [Test]
-    public void SwordTest()
+    public void CraftAxeTest()
     {
-        //{P}: Inventory
-        //Wood - 1
-        //Steal - 3
-
-        //{Q}: Inventory
-        //Wood - 0
-        //Steal - 0
-        //Sword - 1
-
         //Arrange:
-        var inventory = new Inventory();
-        inventory.AddItem(new InventoryItem("Wood"));
-        inventory.AddItem(new InventoryItem("Steal"));
+        this.testInventory.Setup(
+            "Wood",
+            "Wood",
+            "Wood",
+            "Wood",
+            "Wood",
+            "Stone",
+            "Stone"
+        );
 
-        //Act: {S}
-        //Crafting:
-        var bootsCrafter = new Crafter();
-        ;
-
-        var receipt = new Receipt("Sword", new Ingredient("Wood", 1), new Ingredient("Steal", 1));
-        var isSuccess = bootsCrafter.Craft(inventory, receipt);
+        //Act:
+        this.itemCrafter.Craft(this.axeReceipt);
 
         //Assert:
-        Assert.True(isSuccess);
-        Assert.True(inventory.CountItems("Wood") == 0);
-        Assert.True(inventory.CountItems("Steal") == 0);
-        Assert.True(inventory.CountItems("Sword") == 1);
+        Assert.True(this.testInventory.GetCount("Wood") == 3);
+        Assert.True(this.testInventory.GetCount("Stone") == 1);
+        Assert.True(this.testInventory.GetCount("Axe") == 1);
+    }
+
+
+    [Test]
+    public void CraftSwordTest()
+    {
+        //Arrange:
+        this.testInventory.Setup(
+            "Wood",
+            "Wood",
+            "Wood",
+            "Stone",
+            "Stone",
+            "Steal"
+        );
+
+        //Act:
+        this.itemCrafter.Craft(this.swordReceipt);
+
+        //Assert:
+        Assert.True(this.testInventory.GetCount("Wood") == 2);
+        Assert.True(this.testInventory.GetCount("Stone") == 1);
+        Assert.True(this.testInventory.GetCount("Steal") == 0);
+        Assert.True(this.testInventory.GetCount("Sword") == 1);
     }
     
     [Test]
-    public void IngedientsForSwordNotEnoughTest()
+    public void CanCraftSwordTest()
     {
-        //{P}: Inventory
-        //Wood - 1
-        //Steal - 0
-
-        //{Q}: Inventory
-        //Wood - 1
-        //Steal - 0
-        //Sword - 0
-
         //Arrange:
-        var inventory = new Inventory();
-        inventory.AddItem(new InventoryItem("Wood"));
+        this.testInventory.Setup(
+            "Wood",
+            "Stone",
+            "Steal"
+        );
 
-        //Act: {S}
-        //Crafting:
-        var bootsCrafter = new Crafter();
-        var receipt = new Receipt("Sword", new Ingredient("Wood", 1), new Ingredient("Steal", 1));
-        var isSuccess = bootsCrafter.Craft(inventory, receipt);
+        //Act:
+        var canCraft = this.itemCrafter.CanCraft(this.swordReceipt);
 
         //Assert:
-        Assert.False(isSuccess);
-        Assert.True(inventory.CountItems("Wood") == 1);
-        Assert.True(inventory.CountItems("Sword") == 0);
+        Assert.True(canCraft);
+    }
+    
+    [Test]
+    public void CannotCraftSwordTest()
+    {
+        //Arrange:
+        this.testInventory.Setup(
+            "Steal"
+        );
+
+        //Act:
+        var canCraft = this.itemCrafter.CanCraft(this.swordReceipt);
+
+        //Assert:
+        Assert.False(canCraft);
     }
 }

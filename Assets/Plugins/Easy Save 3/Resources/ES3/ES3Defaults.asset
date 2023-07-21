@@ -75,13 +75,13 @@ MonoBehaviour:
     - UniTask.TextMeshPro
     - Input
     - PPv2URPConverters
+    - LessonTDD
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - UniTask.Editor
     - NavMeshComponentsEditor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - InventorySystem (EditMode)
-    - LessonTDD
     - SimpleFolderIcon
     - Pathfinding (EditMode)
     - LessonCrafting
