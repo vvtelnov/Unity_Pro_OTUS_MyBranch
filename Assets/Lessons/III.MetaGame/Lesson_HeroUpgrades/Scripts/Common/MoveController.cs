@@ -1,4 +1,5 @@
 using Game.GameEngine.Mechanics;
+using Game.Gameplay.Hero;
 using GameSystem;
 using InputModule;
 using UnityEngine;
@@ -10,14 +11,14 @@ namespace Lessons.Meta.Upgrades
         IGameStartElement,
         IGameFinishElement
     {
-        private HeroService heroService;
+        private IHeroService heroService;
         
         private JoystickInput input;
         
         private IComponent_MoveInDirection heroComponent;
 
         [GameInject]
-        public void Construct(HeroService heroService, JoystickInput input)
+        public void Construct(IHeroService heroService, JoystickInput input)
         {
             this.heroService = heroService;
             this.input = input;

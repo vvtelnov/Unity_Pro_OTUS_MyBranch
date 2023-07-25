@@ -1572,7 +1572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoRun: 1
-  useInject: 1
   gameServices:
   - {fileID: 767349480}
   - {fileID: 1415117498}
@@ -1587,7 +1586,8 @@ MonoBehaviour:
   - {fileID: 1260199609}
   - {fileID: 656725484}
   - {fileID: 656725487}
-  constructTasks: []
+  constructTasks:
+  - {fileID: 11400000, guid: 85a3cded94d9c4dab9ac2cae378cab53, type: 2}
 --- !u!1 &1921276356
 GameObject:
   m_ObjectHideFlags: 0
