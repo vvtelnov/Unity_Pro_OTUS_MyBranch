@@ -6,9 +6,7 @@ namespace Lessons.Meta.Quests1
     public abstract class Quest
     {
         public event Action<Quest> OnStarted;
-
         public event Action<Quest, float> OnProgressChanged;
-
         public event Action<Quest> OnCompleted;
 
         [ReadOnly]
@@ -70,7 +68,6 @@ namespace Lessons.Meta.Quests1
         }
 
         protected abstract void OnStart();
-
         protected abstract void OnStop();
 
         //Derived classes
