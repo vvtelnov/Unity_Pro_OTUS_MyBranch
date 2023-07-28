@@ -8,9 +8,8 @@ namespace Game.GameEngine.InventorySystem
     {
         public event Action<InventoryItem> OnItemConsumed;
 
-        private readonly List<IInventoryItemConsumeHandler> handlers = new();
-
         private StackableInventory inventory;
+        private readonly List<IInventoryItemConsumeHandler> handlers = new();
 
         public InventoryItemConsumer(StackableInventory inventory)
         {

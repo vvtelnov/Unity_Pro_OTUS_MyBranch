@@ -8,7 +8,6 @@ namespace Game.GameEngine.InventorySystem
     public class StackableInventory
     {
         public event Action<InventoryItem> OnItemAdded;
-
         public event Action<InventoryItem> OnItemRemoved;
 
         private readonly ListInventory list;

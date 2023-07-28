@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 
 namespace Game.GameEngine.InventorySystem
 {
+    
+    
     public class ListInventory
     {
         public event Action<InventoryItem> OnItemAdded;
-
         public event Action<InventoryItem> OnItemRemoved;
 
         [ReadOnly]
@@ -20,7 +22,7 @@ namespace Game.GameEngine.InventorySystem
         }
 
         public void SetupItems(InventoryItem[] item)
-        {
+        {            
             this.items.Clear();
             this.items.AddRange(item);
         }

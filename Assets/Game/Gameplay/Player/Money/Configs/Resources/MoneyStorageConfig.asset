@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f576e242794072af38cdfd3f57f906, type: 3}
   m_Name: MoneyStorageConfig
   m_EditorClassIdentifier: 
-  initialMoney: 1000
+  initialMoney: 10000

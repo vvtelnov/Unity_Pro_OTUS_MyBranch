@@ -1,8 +1,7 @@
 using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.MetaGame.Lesson_Inventory
+namespace Lessons.MetaGame.Inventory
 {
     [Serializable]
     public sealed class InventoryItemMetadata
@@ -14,7 +13,6 @@ namespace Lessons.MetaGame.Lesson_Inventory
         [SerializeField]
         public string description;
 
-        [PreviewField]
         [SerializeField]
         public Sprite icon;
     }

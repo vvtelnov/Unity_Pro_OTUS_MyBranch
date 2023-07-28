@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Lessons.MetaGame.Lesson_Inventory
+namespace Lessons.MetaGame.Inventory
 {
     [CreateAssetMenu(
-        fileName = "Inventory Item",
-        menuName = "Lessons/New Inventory Item"
+        fileName = "InventoryItemConfig",
+        menuName = "Lessons/New InventoryItemConfig"
     )]
     public sealed class InventoryItemConfig : ScriptableObject
     {
         [SerializeField]
-        public InventoryItem prototype;
+        public InventoryItem item;
     }
 }

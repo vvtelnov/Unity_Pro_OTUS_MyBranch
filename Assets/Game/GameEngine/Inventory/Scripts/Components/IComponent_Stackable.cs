@@ -7,9 +7,7 @@ namespace Game.GameEngine.InventorySystem
         event Action<int> OnValueChanged;
 
         int Value { get; set; }
-
         int Size { get; }
-
         bool IsFull { get; }
     }
 }

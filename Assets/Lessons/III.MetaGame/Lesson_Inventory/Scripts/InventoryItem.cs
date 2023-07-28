@@ -1,25 +1,14 @@
 using System;
 using UnityEngine;
 
-namespace Lessons.MetaGame.Lesson_Inventory
+namespace Lessons.MetaGame.Inventory
 {
     [Serializable]
     public sealed class InventoryItem
     {
-        public string Name
-        {
-            get { return this.name; }
-        }
-
-        public InventoryItemFlags Flags
-        {
-            get { return this.flags; }
-        }
-
-        public InventoryItemMetadata Metadata
-        {
-            get { return this.metadata; }
-        }
+        public string Name => this.name;
+        public InventoryItemFlags Flags => this.flags;
+        public InventoryItemMetadata Metadata => this.metadata;
 
         [SerializeField]
         private string name;
@@ -32,14 +21,6 @@ namespace Lessons.MetaGame.Lesson_Inventory
 
         [SerializeReference]
         private object[] components;
-
-        public InventoryItem(string name)
-        {
-            this.name = name;
-            this.flags = InventoryItemFlags.NONE;
-            this.metadata = null;
-            this.components = new object[0];
-        }
 
         public InventoryItem(
             string name,
@@ -56,33 +37,23 @@ namespace Lessons.MetaGame.Lesson_Inventory
 
         public T GetComponent<T>()
         {
-            for (int i = 0, count = this.components.Length; i < count; i++)
+            foreach (var component in this.components)
             {
-                var component = this.components[i];
-                if (component is T result)
+                if (component is T tComponent)
                 {
-                    return result;
+                    return tComponent;
                 }
             }
 
-            throw new Exception($"Component of type {typeof(T)} is not found!");
+            throw new Exception($"Component of type {typeof(T).Name} is not found!");
         }
 
         public InventoryItem Clone()
         {
-            return new InventoryItem(
-                this.name,
-                this.flags,
-                this.metadata,
-                this.CloneComponents()
-            );
-        }
-
-        private object[] CloneComponents()
-        {
             var count = this.components.Length;
-            var result = new object[count];
-            for (var i = 0; i < count; i++)
+            var components = new object[count];
+
+            for (int i = 0; i < count; i++)
             {
                 var component = this.components[i];
                 if (component is ICloneable cloneable)
@@ -90,10 +61,10 @@ namespace Lessons.MetaGame.Lesson_Inventory
                     component = cloneable.Clone();
                 }
 
-                result[i] = component;
+                components[i] = component;
             }
-
-            return result;
+            
+            return new InventoryItem(this.name, this.flags, this.metadata, this.components);
         }
     }
 }
