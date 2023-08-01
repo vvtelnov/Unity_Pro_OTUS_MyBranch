@@ -8,10 +8,15 @@ namespace Lessons.MetaGame.Inventory
     public sealed class ListInventory
     {
         [ShowInInspector, ReadOnly]
-        private readonly List<InventoryItem> items;
+        private List<InventoryItem> items;
         private readonly List<IInventoryObserver> observers = new();
 
         public ListInventory(params InventoryItem[] items)
+        {
+            this.items = new List<InventoryItem>(items);
+        }
+
+        public void Setup(params InventoryItem[] items)
         {
             this.items = new List<InventoryItem>(items);
         }
@@ -30,6 +35,14 @@ namespace Lessons.MetaGame.Inventory
             if (this.items.Remove(item))
             {
                 this.OnItemRemoved(item);
+            }
+        }
+
+        public void RemoveItems(string name, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                this.RemoveItem(name);
             }
         }
 
@@ -85,6 +98,11 @@ namespace Lessons.MetaGame.Inventory
             {
                 observer.OnItemRemoved(item);
             }
+        }
+
+        public int GetCount(string item)
+        {
+            return this.items.Count(it => it.Name == item);
         }
     }
 }

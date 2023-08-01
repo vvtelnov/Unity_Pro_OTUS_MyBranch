@@ -1,16 +1,12 @@
-// using System;
-// using Lessons.MetaGame.Lesson_Inventory;
-// using UnityEngine;
-//
-// namespace Lessons.III.MetaGame.Lesson_Crafing
-// {
-//     [Serializable]
-//     public struct InventoryItemIngredient
-//     {
-//         [SerializeField]
-//         public InventoryItemConfig itemInfo;
-//
-//         [SerializeField]
-//         public int requiredCount;
-//     }
-// }
+using System;
+using Lessons.MetaGame.Inventory;
+
+namespace Lessons.MetaGame.Crafting
+{
+    [Serializable]
+    public struct InventoryItemIngredient
+    {
+        public InventoryItemConfig item;
+        public int amount;
+    }
+}

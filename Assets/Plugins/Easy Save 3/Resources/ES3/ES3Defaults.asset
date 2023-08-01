@@ -74,6 +74,7 @@ MonoBehaviour:
     - Sirenix.OdinInspector.CompatibilityLayer
     - UniTask.TextMeshPro
     - Input
+    - Tests
     - PPv2URPConverters
     - LessonTDD
     - GOAP (EditMode)
@@ -84,7 +85,7 @@ MonoBehaviour:
     - InventorySystem (EditMode)
     - SimpleFolderIcon
     - Pathfinding (EditMode)
-    - LessonCrafting
+    - LessonCraftingTest
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
