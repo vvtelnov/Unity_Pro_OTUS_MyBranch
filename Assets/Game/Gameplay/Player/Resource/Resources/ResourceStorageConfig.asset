@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d84982d34d47068872aa46069c56ba, type: 3}
   m_Name: ResourceStorageConfig
   m_EditorClassIdentifier: 
-  initialResources: []
+  initialResources:
+  - type: 0
+    amount: 50
+  - type: 1
+    amount: 50
+  - type: 2
+    amount: 50
