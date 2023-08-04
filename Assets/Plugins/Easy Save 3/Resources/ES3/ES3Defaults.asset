@@ -74,18 +74,17 @@ MonoBehaviour:
     - Sirenix.OdinInspector.CompatibilityLayer
     - UniTask.TextMeshPro
     - Input
-    - Tests
     - PPv2URPConverters
     - LessonTDD
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - UniTask.Editor
     - NavMeshComponentsEditor
+    - LessonCraftingTest
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - InventorySystem (EditMode)
     - SimpleFolderIcon
     - Pathfinding (EditMode)
-    - LessonCraftingTest
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
