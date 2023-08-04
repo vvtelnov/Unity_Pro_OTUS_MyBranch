@@ -7,20 +7,23 @@ using UnityEngine;
 
 namespace Lessons.MetaGame
 {
-    public sealed class TimeRewardModule : MonoBehaviour, IGameConstructElement, IGameServiceGroup, IGameElementGroup
+    public sealed class TimeRewardModule : MonoBehaviour, 
+        IGameServiceGroup,
+        IGameElementGroup,
+        IGameConstructElement
     {
         [ShowInInspector]
         public readonly TimeReward timeReward = new();
 
         [SerializeField]
         private TimeRewardConfig config;
-        
-        public IEnumerable<IGameElement> GetElements()
+
+        IEnumerable<object> IGameServiceGroup.GetServices()
         {
             yield return this.timeReward;
         }
 
-        public IEnumerable<object> GetServices()
+        IEnumerable<IGameElement> IGameElementGroup.GetElements()
         {
             yield return this.timeReward;
         }

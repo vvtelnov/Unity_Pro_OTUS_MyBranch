@@ -9,13 +9,9 @@ namespace Elementary
     public sealed class Countdown : ICountdown, ISerializationCallbackReceiver
     {
         public event Action OnStarted;
-
         public event Action OnTimeChanged;
-
         public event Action OnStopped;
-
         public event Action OnEnded;
-
         public event Action OnReset;
 
         [ReadOnly]
