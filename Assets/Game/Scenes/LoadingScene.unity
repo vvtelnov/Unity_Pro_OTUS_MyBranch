@@ -395,6 +395,7 @@ Transform:
   - {fileID: 876199553}
   - {fileID: 761514514}
   - {fileID: 524355558}
+  - {fileID: 1014330388}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -497,6 +498,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1691101718728756221}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1014330387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1014330388}
+  - component: {fileID: 1014330389}
+  m_Layer: 0
+  m_Name: TimeRewardSaveLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1014330388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014330387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 731124470}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1014330389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014330387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1392b20ab57f450fab605845ed2790d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1164959112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,6 +611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
+      propertyPath: monoServices.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
+        type: 3}
       propertyPath: servicePacks.Array.size
       value: 16
       objectReference: {fileID: 0}
@@ -603,7 +653,7 @@ PrefabInstance:
         type: 3}
       propertyPath: monoServices.Array.data[6]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1014330389}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}
       propertyPath: servicePacks.Array.data[10]
@@ -644,7 +694,7 @@ PrefabInstance:
         type: 3}
       propertyPath: servicePacks.Array.data[16]
       value: 
-      objectReference: {fileID: 11400000, guid: 0bab0db09c3f1452191d01f86f2a37e4,
+      objectReference: {fileID: 11400000, guid: 1076d968f6f1543549b77a8fb7314829,
         type: 2}
     - target: {fileID: 6331914471568751740, guid: ed760b4861c1a4ef3b603ae0e39de5c3,
         type: 3}

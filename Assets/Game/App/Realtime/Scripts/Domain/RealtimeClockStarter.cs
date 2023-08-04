@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Asyncoroutine;
@@ -30,7 +31,7 @@ namespace Game.App
         {
             yield return OnlineTime.RequestNowSeconds(nowSeconds =>
             {
-                var pauseTime = nowSeconds - previousSeconds;
+                var pauseTime = Math.Max(nowSeconds - previousSeconds, 0);
                 this.realtimeClock.Play(nowSeconds, pauseTime);
             });
         }

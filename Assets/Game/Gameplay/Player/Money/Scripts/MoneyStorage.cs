@@ -8,9 +8,7 @@ namespace Game.Gameplay.Player
     public sealed class MoneyStorage : MonoBehaviour
     {
         public event Action<int> OnMoneyChanged;
-
         public event Action<int> OnMoneyEarned;
-
         public event Action<int> OnMoneySpent;
         
         public int Money

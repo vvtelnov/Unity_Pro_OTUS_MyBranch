@@ -13,7 +13,6 @@ namespace Game.App
         [ServiceInject]
         private RealtimeClock realtimeClock;
 
-        
         void IAppStartListener.Start()
         {
             this.realtimeClock.OnStarted += this.OnSessionStarted;

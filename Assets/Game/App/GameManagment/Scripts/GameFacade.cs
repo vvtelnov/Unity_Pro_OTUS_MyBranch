@@ -59,11 +59,16 @@ namespace Game.App
             return this.context.GetService<T>();
         }
 
+        public T[] GetServices<T>()
+        {
+            return this.context.GetServices<T>();
+        }
+
         public bool TryGetService<T>(out T result)
         {
             return this.context.TryGetService(out result);
         }
-        
+
         public void RegisterService(object service)
         {
             this.registeredServices.Add(service);
@@ -81,7 +86,7 @@ namespace Game.App
                 this.context.UnregisterService(service);
             }
         }
-        
+
         public void RegisterElement(IGameElement element)
         {
             this.registeredElements.Add(element);

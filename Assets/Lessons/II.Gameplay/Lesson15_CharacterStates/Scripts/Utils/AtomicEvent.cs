@@ -8,6 +8,7 @@ namespace Lessons.Utils
     public sealed class AtomicEvent
     {
         private readonly List<Action> _actions = new();
+        
         private int _index;
         
         public void Subscribe(Action action)
