@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Game.GameEngine.UnityEditor
 {
-    public static class DialogueManager
+    public static class DialogueSaveLoader
     {
         public static void Load(DialogueGraph graphView, DialogueConfig dialogue)
         {
-            ClearGraph(graphView);
+            graphView.Reset();
 
             if (dialogue == null)
             {
@@ -64,18 +64,7 @@ namespace Game.GameEngine.UnityEditor
             graphView.generatedId = dialogue.generatedId;
         }
 
-        private static void ClearGraph(GraphView graphView)
-        {
-            foreach (var edge in graphView.edges)
-            {
-                graphView.RemoveElement(edge);
-            }
-
-            foreach (var node in graphView.nodes)
-            {
-                graphView.RemoveElement(node);
-            }
-        }
+      
 
         public static void Create(DialogueGraph graphView, out DialogueConfig dialogue)
         {

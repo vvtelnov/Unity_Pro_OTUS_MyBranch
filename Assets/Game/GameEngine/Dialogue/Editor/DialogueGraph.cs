@@ -113,6 +113,19 @@ namespace Game.GameEngine.UnityEditor
 
             throw new Exception("Entry node is not found!");
         }
+        
+        public void Reset()
+        {
+            foreach (var edge in this.edges)
+            {
+                this.RemoveElement(edge);
+            }
+
+            foreach (var node in this.nodes)
+            {
+                this.RemoveElement(node);
+            }
+        }
     }
 }
 #endif

@@ -25,15 +25,4 @@
     padding: 8px;
 }
 
-/*.dialogue_node_id > .unity-text-field__input{*/
-/*    background-color: #1e1c1c;*/
-/*    min-width: 200px;*/
-/*    max-height: 32px;*/
-/*    border-radius: 8px;*/
-/*    -unity-text-align: middle-center;*/
-/*}*/
-
-/*.dialogue_node_port {*/
-/*}*/
-
 

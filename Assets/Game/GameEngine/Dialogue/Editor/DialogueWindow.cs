@@ -43,7 +43,7 @@ namespace Game.GameEngine.UnityEditor
                 text = "Load",
                 clickable = new Clickable(() =>
                 {
-                    DialogueManager.Load(this.graphView, this.dialogField.value as DialogueConfig);
+                    DialogueSaveLoader.Load(this.graphView, this.dialogField.value as DialogueConfig);
                 })
             };
 
@@ -55,11 +55,11 @@ namespace Game.GameEngine.UnityEditor
                     var config = this.dialogField.value as DialogueConfig;
                     if (config != null)
                     {
-                        DialogueManager.Save(this.graphView, config);
+                        DialogueSaveLoader.Save(this.graphView, config);
                     }
                     else
                     {
-                        DialogueManager.Create(this.graphView, out config);
+                        DialogueSaveLoader.Create(this.graphView, out config);
                         this.dialogField.value = config;
                     }
                 })
