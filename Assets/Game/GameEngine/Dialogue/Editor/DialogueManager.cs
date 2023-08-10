@@ -8,9 +8,9 @@ using UnityEngine;
 
 namespace Game.GameEngine.UnityEditor
 {
-    public static class DialogueSaveLoader
+    public static class DialogueManager
     {
-        public static void Load(DialogueGraph graphView, DialogueConfig dialogue)
+        public static void LoadDialog(DialogueGraph graphView, DialogueConfig dialogue)
         {
             graphView.Reset();
 
@@ -64,20 +64,18 @@ namespace Game.GameEngine.UnityEditor
             graphView.generatedId = dialogue.generatedId;
         }
 
-      
-
-        public static void Create(DialogueGraph graphView, out DialogueConfig dialogue)
+        public static void CreateDialog(DialogueGraph graphView, out DialogueConfig dialogue)
         {
             var path = EditorUtility.SaveFilePanelInProject("Save file", "Dialog", "asset", "");
             
             dialogue = ScriptableObject.CreateInstance<DialogueConfig>();
-            Save(graphView, dialogue);
+            SaveDialog(graphView, dialogue);
             
             AssetDatabase.CreateAsset(dialogue, path);
             AssetDatabase.SaveAssets();
         }
 
-        public static void Save(DialogueGraph graphView, DialogueConfig dialogue)
+        public static void SaveDialog(DialogueGraph graphView, DialogueConfig dialogue)
         {
             dialogue.nodes = ConvertNodesData(graphView);
             dialogue.edges = ConvertEdgesToData(graphView);

@@ -11,19 +11,12 @@ namespace Lessons.MetaGame.Dialogs
     public sealed class DialogueGraph : GraphView
     {
         private const string STYLES_PATH = "Assets/Lessons/III.MetaGame/Lesson_Dialogs/Styles/";
-        
+
         public DialogueGraph()
         {
             this.AddManipulators();
             this.AddGridBackground();
             this.AddStyles();
-            this.CreateNode();
-        }
-
-        private void CreateNode()
-        {
-            var node = new DialogueNode();
-            this.AddElement(node);
         }
 
         private void AddManipulators()
@@ -55,15 +48,13 @@ namespace Lessons.MetaGame.Dialogs
 
         private void OnCreateNode(DropdownMenuAction menuAction)
         {
-            var node = new DialogueNode();
-            node.SetPosition(new Rect(menuAction.eventInfo.mousePosition, Vector2.zero));
-            this.AddElement(node);
+            this.CreateNode(menuAction.eventInfo.mousePosition);
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             var compatiblePorts = new List<Port>();
-            
+
             foreach (var port in this.ports)
             {
                 if (port == startPort)
@@ -80,11 +71,42 @@ namespace Lessons.MetaGame.Dialogs
                 {
                     continue;
                 }
-                
+
                 compatiblePorts.Add(port);
             }
 
             return compatiblePorts;
+        }
+
+        public DialogueNode CreateNode(Vector2 posiiton)
+        {
+            var node = new DialogueNode(posiiton);
+            this.AddElement(node);
+            return node;
+        }
+        
+        public void CreateEdge(Port inputPort, Port outputPort)
+        {
+            var edge = new Edge
+            {
+                output = outputPort,
+                input = inputPort
+            };
+
+            this.AddElement(edge);
+        }
+
+        public void Reset()
+        {
+            foreach (var edge in this.edges)
+            {
+                this.RemoveElement(edge);
+            }
+
+            foreach (var node in this.nodes)
+            {
+                this.RemoveElement(node);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,26 +7,54 @@ namespace Lessons.MetaGame.Dialogs
 {
     public sealed class DialogueNode : Node
     {
-        public DialogueNode()
+        public string Id
         {
-            this.AddTitle();
+            get { return this.idText.value; }
+            set { this.idText.value = value; }
+        }
+
+        public string MessageText
+        {
+            get { return this.messageText.value; }
+            set { this.messageText.value = value; }
+        }
+
+        public List<DialogueChoice> Choices
+        {
+            get { return this.choices; }
+        }
+
+        public Port InputPort
+        {
+            get { return this.inputPort; }
+        }
+
+        private readonly List<DialogueChoice> choices = new List<DialogueChoice>();
+        private TextField idText;
+        private TextField messageText;
+        private Port inputPort;
+
+        public DialogueNode(Vector2 posiiton)
+        {
+            this.SetPosition(new Rect(posiiton, Vector2.zero));
+            this.AddId();
             this.AddChoiceButton();
             this.AddInputPort();
             this.AddMessage();
-            this.AddChoices();
             this.RefreshExpandedState();
         }
 
-        private void AddTitle()
+        private void AddId()
         {
-            TextField title = new TextField
+            TextField idText = new TextField
             {
-                value = "Dialogue Title",
+                value = "Dialogue Id",
                 multiline = false
             };
-            
-            title.AddToClassList("node_title");
-            this.titleContainer.Insert(0, title);
+
+            idText.AddToClassList("node_id");
+            this.titleContainer.Insert(0, idText);
+            this.idText = idText;
         }
 
         private void AddChoiceButton()
@@ -33,29 +62,21 @@ namespace Lessons.MetaGame.Dialogs
             var button = new Button
             {
                 text = "Add Choice",
-                clickable = new Clickable(this.CreateChoice),
+                clickable = new Clickable(this.CreateChoiceByDefault),
             };
 
             this.mainContainer.Insert(1, button);
         }
 
-        private void AddChoices()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                this.CreateChoice();
-            }
-        }
-
         private void AddInputPort()
         {
-            Port inputPort = this.InstantiatePort(
+            this.inputPort = Port.Create<Edge>(
                 Orientation.Horizontal,
                 Direction.Input,
                 Port.Capacity.Multi,
                 typeof(bool)
             );
-            inputPort.portName = "Input Connection";
+            this.inputPort.portName = "Input Connection";
             this.inputContainer.Add(inputPort);
         }
 
@@ -66,40 +87,32 @@ namespace Lessons.MetaGame.Dialogs
                 value = "Dialogue Message",
                 multiline = true
             };
-            
+
             message.AddToClassList("node_message");
 
             this.extensionContainer.Add(message);
+            this.messageText = message;
         }
-        
-        private void CreateChoice()
+
+        public void CreateChoiceByDefault()
         {
-            Port port = this.InstantiatePort(
-                Orientation.Horizontal,
-                Direction.Output,
-                Port.Capacity.Multi,
-                typeof(bool)
-            );
+            Debug.Log("CREATE NEW CHOICE");
+            this.CreateChoice("Dialogue Choice");
+        }
 
-            port.portName = string.Empty;
-            port.portColor = Color.cyan;
+        public void CreateChoice(string value)
+        {
+            var choice = new DialogueChoice(value, onRemoved: this.DeleteChoice);
+            this.outputContainer.Add(choice.Port);
+            this.choices.Add(choice);
+            this.RefreshExpandedState();
+        }
 
-            TextField choiceText = new TextField
-            {
-                value = "Dialogue Choice",
-                multiline = false
-            };
-
-            Button deleteButton = new Button
-            {
-                text = "X",
-                clickable = new Clickable(() => this.outputContainer.Remove(port))
-            };
-
-            port.Add(choiceText);
-            port.Add(deleteButton);
-
-            this.outputContainer.Add(port);
+        public void DeleteChoice(DialogueChoice choice)
+        {
+            this.outputContainer.Remove(choice.Port);
+            this.choices.Remove(choice);
+            this.RefreshExpandedState();
         }
     }
 }

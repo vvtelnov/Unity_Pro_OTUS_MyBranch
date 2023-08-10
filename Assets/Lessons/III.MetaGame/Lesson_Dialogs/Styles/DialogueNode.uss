@@ -1,3 +1,10 @@
+.node_id > .unity-text-field__input{
+    min-width: 240px;
+    max-width: 240px;
+    background-color: #1f1f21;
+    padding: 8px;
+}
+
 .node_message > .unity-text-field__input 
 {  
     background-color: #282a2d;
@@ -8,9 +15,8 @@
     padding: 8px;
 }
 
-.node_title > .unity-text-field__input{
+.node_choice > .unity-text-field__input{
     min-width: 240px;
     max-width: 240px;
     background-color: #1f1f21;
-    padding: 8px;
 }
