@@ -50,12 +50,12 @@ namespace Game.GameEngine.UnityEditor
         public static DialogueNode Instantiate(Vector2 position)
         {
             var node = new DialogueNode();
-            node.SetPosition(new Rect(position, Vector2.zero));
             node.InitTitle();
             node.InitBody();
             node.InitButton_AddChoice();
             node.InitStyleSheets();
             node.RefreshExpandedState();
+            node.SetPosition(new Rect(position, Vector2.zero));
             return node;
         }
 

@@ -62,7 +62,7 @@ namespace Lessons.MetaGame.Dialogs
             var button = new Button
             {
                 text = "Add Choice",
-                clickable = new Clickable(this.CreateChoiceByDefault),
+                clickable = new Clickable(this.CreateChoice),
             };
 
             this.mainContainer.Insert(1, button);
@@ -94,9 +94,8 @@ namespace Lessons.MetaGame.Dialogs
             this.messageText = message;
         }
 
-        public void CreateChoiceByDefault()
+        public void CreateChoice()
         {
-            Debug.Log("CREATE NEW CHOICE");
             this.CreateChoice("Dialogue Choice");
         }
 

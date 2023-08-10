@@ -25,7 +25,6 @@ namespace Lessons.MetaGame.Dialogs
             this.AddPort();
             this.AddChoiceText(value);
             this.AddDeleteButton(onRemoved);
-            Debug.Log("CREATED NEW CHOICE");
         }
 
         private void AddPort()
