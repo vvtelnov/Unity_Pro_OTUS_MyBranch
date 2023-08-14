@@ -4,31 +4,32 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-#if UNITY_EDITOR
-
 namespace Lessons.MetaGame.Dialogs
 {
     public sealed class DialogueGraph : GraphView
     {
-        private const string STYLES_PATH = "Assets/Lessons/III.MetaGame/Lesson_Dialogs/Styles/";
-
         public DialogueGraph()
         {
-            this.AddManipulators();
-            this.AddGridBackground();
+            this.AddBackground();
             this.AddStyles();
+            this.AddManipulators();
         }
 
         private void AddManipulators()
         {
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new ContentZoomer());
-            this.AddManipulator(new ContextualMenuManipulator(this.OnMenuEvent));
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new SelectionDragger());
+            this.AddManipulator(new ContextualMenuManipulator(this.OnMenuEvent));
         }
 
-        private void AddGridBackground()
+        private void OnMenuEvent(ContextualMenuPopulateEvent menuEvent)
+        {
+            menuEvent.menu.AppendAction("Create Node", this.OnCreateNode);
+        }
+
+        private void AddBackground()
         {
             GridBackground background = new GridBackground();
             background.StretchToParentSize();
@@ -37,18 +38,30 @@ namespace Lessons.MetaGame.Dialogs
 
         private void AddStyles()
         {
-            this.styleSheets.Add((StyleSheet) EditorGUIUtility.Load(STYLES_PATH + "DialogueGraph.uss"));
-            this.styleSheets.Add((StyleSheet) EditorGUIUtility.Load(STYLES_PATH + "DialogueNode.uss"));
-        }
+            StyleSheet graphStyle = (StyleSheet) EditorGUIUtility.Load(
+                "Assets/Lessons/III.MetaGame/Lesson_Dialogs/Styles/DialogueGraph.uss"
+            );
 
-        private void OnMenuEvent(ContextualMenuPopulateEvent menuPopulateEvent)
-        {
-            menuPopulateEvent.menu.AppendAction("Create Node", this.OnCreateNode);
+            StyleSheet nodeStyle = (StyleSheet) EditorGUIUtility.Load(
+                "Assets/Lessons/III.MetaGame/Lesson_Dialogs/Styles/DialogueNode.uss"
+            );
+
+            this.styleSheets.Add(graphStyle);
+            this.styleSheets.Add(nodeStyle);
         }
 
         private void OnCreateNode(DropdownMenuAction menuAction)
         {
-            this.CreateNode(menuAction.eventInfo.mousePosition);
+            var nodePosition = menuAction.eventInfo.localMousePosition;
+            this.CreateNode(nodePosition);
+        }
+
+        public DialogueNode CreateNode(Vector2 position)
+        {
+            DialogueNode node = new DialogueNode();
+            node.SetPosition(new Rect(position, Vector2.zero));
+            this.AddElement(node);
+            return node;
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -78,21 +91,13 @@ namespace Lessons.MetaGame.Dialogs
             return compatiblePorts;
         }
 
-        public DialogueNode CreateNode(Vector2 posiiton)
-        {
-            var node = new DialogueNode(posiiton);
-            this.AddElement(node);
-            return node;
-        }
-        
         public void CreateEdge(Port inputPort, Port outputPort)
         {
-            var edge = new Edge
+            Edge edge = new Edge
             {
-                output = outputPort,
-                input = inputPort
+                input = inputPort,
+                output = outputPort
             };
-
             this.AddElement(edge);
         }
 
@@ -110,5 +115,3 @@ namespace Lessons.MetaGame.Dialogs
         }
     }
 }
-
-#endif

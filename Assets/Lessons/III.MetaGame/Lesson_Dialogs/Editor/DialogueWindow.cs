@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -7,32 +6,30 @@ namespace Lessons.MetaGame.Dialogs
     public sealed class DialogueWindow : EditorWindow
     {
         private DialogueGraph graph;
-        private DialogueToolbar toolbar;
         
-        [MenuItem("Lessons/Dialogue Window")]
-        public static void ShowWindow()
-        {
-            GetWindow<DialogueWindow>("Dialogue Window");
-        }
-
         private void OnEnable()
         {
-            this.AddGraphView();
+            this.AddDialogueGraph();
             this.AddToolbar();
         }
 
-        private void AddGraphView()
+        private void AddDialogueGraph()
         {
-            this.graph = new DialogueGraph();
-            this.graph.StretchToParentSize();
-            this.rootVisualElement.Add(this.graph);
+            graph = new DialogueGraph();
+            graph.StretchToParentSize();
+            this.rootVisualElement.Add(graph);
         }
 
         private void AddToolbar()
         {
-            this.toolbar = new DialogueToolbar(this.graph);
-            this.rootVisualElement.Add(this.toolbar);
+            DialogueToolbar toolbar = new DialogueToolbar(graph);
+            this.rootVisualElement.Add(toolbar);
+        }
+
+        [MenuItem("Lessons/Show Dialogue Window")]
+        public static void ShowDialogueWindow()
+        {
+            GetWindow<DialogueWindow>("Dialogue Window");
         }
     }
 }
-#endif

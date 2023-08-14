@@ -6,16 +6,15 @@ namespace Lessons.MetaGame.Dialogs
     {
         [SerializeField]
         private DialogueConfig config;
+        private Dialogue dialogue;
 
         [SerializeField]
         private int choiceIndex;
-        
-        private Dialogue dialogue;
-        
+
         private void Start()
         {
             this.dialogue = new Dialogue(this.config);
-            this.PrintDialogue();
+            this.PrintDialog();
         }
 
         [ContextMenu("Select Choice")]
@@ -23,19 +22,25 @@ namespace Lessons.MetaGame.Dialogs
         {
             if (this.dialogue.MoveNext(this.choiceIndex))
             {
-                this.PrintDialogue();
+                this.PrintDialog();
             }
             else
             {
                 Debug.Log("Dialog finished!");
             }
         }
-
-        private void PrintDialogue()
+        
+        private void PrintDialog()
         {
-            Debug.Log($"MESSAGE: {this.dialogue.CurrentMessage}");
-            Debug.Log($"CHOICES {string.Join('/', this.dialogue.CurrentChoices)}");
+            Debug.Log("----");
+            Debug.Log($"Message: {this.dialogue.CurrentMessage}");
+
+            foreach (var choice in dialogue.CurrentChoices)
+            {
+                Debug.Log($"Choice: {choice}");
+            }
             
+            Debug.Log("----");
         }
     }
 }

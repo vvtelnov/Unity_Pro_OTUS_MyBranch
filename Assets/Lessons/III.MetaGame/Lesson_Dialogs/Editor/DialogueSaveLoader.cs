@@ -8,7 +8,7 @@ namespace Lessons.MetaGame.Dialogs
 {
     public sealed class DialogueSaveLoader
     {
-        public static void LoadDialog(DialogueGraph graphView, DialogueConfig config)
+        public static void LoadDialog(DialogueConfig config, DialogueGraph graphView)
         {
             if (config == null)
             {
@@ -21,7 +21,7 @@ namespace Lessons.MetaGame.Dialogs
             {
                 var node = graphView.CreateNode(serializedNode.editorPosition);
                 node.Id = serializedNode.id;
-                node.MessageText = serializedNode.message;
+                node.Message = serializedNode.message;
 
                 foreach (var serializedChoice in serializedNode.choices)
                 {
@@ -33,13 +33,13 @@ namespace Lessons.MetaGame.Dialogs
 
             foreach (var serializedEdge in config.edges)
             {
-                var outputId = serializedEdge.sourceNodeId;
-                var outputNode = nodes.First(it => it.Id == outputId);
-                var outputPort = outputNode.Choices[serializedEdge.index].Port;
+                string outputId = serializedEdge.sourceNode;
+                DialogueNode outputNode = nodes.First(it => it.Id == outputId);
+                Port outputPort = outputNode.Choices[serializedEdge.index].Port;
 
-                var inputId = serializedEdge.targetNodeId;
-                var inputNode = nodes.First(it => it.Id == inputId);
-                var inputPort = inputNode.InputPort;
+                string inputId = serializedEdge.targetNode;
+                DialogueNode inputNode = nodes.First(it => it.Id == inputId);
+                Port inputPort = inputNode.InputPort;
 
                 graphView.CreateEdge(inputPort, outputPort);
             }
@@ -73,7 +73,7 @@ namespace Lessons.MetaGame.Dialogs
                 var serializedNode = new DialogueNodeSerialized
                 {
                     id = dialogueNode.Id,
-                    message = dialogueNode.MessageText,
+                    message = dialogueNode.Message,
                     editorPosition = dialogueNode.GetPosition().center,
                     choices = ConvertChoicesToData(dialogueNode)
                 };
@@ -89,29 +89,29 @@ namespace Lessons.MetaGame.Dialogs
             var serializedChoices = new List<string>();
             foreach (var choice in nodeView.Choices)
             {
-                var serializedChoice = choice.Text;
+                var serializedChoice = choice.Choice;
                 serializedChoices.Add(serializedChoice);
             }
             
             return serializedChoices;
         }
 
-        private static List<DialogueEdgeSerialzied> ConvertEdgesToData(GraphView graphView)
+        private static List<DialogueEdgeSerialized> ConvertEdgesToData(GraphView graphView)
         {
-            var serializedEdges = new List<DialogueEdgeSerialzied>();
+            var serializedEdges = new List<DialogueEdgeSerialized>();
             
             foreach (var edge in graphView.edges)
             {
-                var outputPort = edge.output;
-                var inputPort = edge.input;
+                Port outputPort = edge.output;
+                Port inputPort = edge.input;
                 
                 var outputNode = (DialogueNode) outputPort.node;
                 var inputNode = (DialogueNode) inputPort.node;
 
-                var serializedEdge = new DialogueEdgeSerialzied
+                var serializedEdge = new DialogueEdgeSerialized
                 {
-                    sourceNodeId = outputNode.Id,
-                    targetNodeId = inputNode.Id,
+                    sourceNode = outputNode.Id,
+                    targetNode = inputNode.Id,
                     index = outputNode.Choices.FindIndex(it => it.Port == outputPort)
                 };
 

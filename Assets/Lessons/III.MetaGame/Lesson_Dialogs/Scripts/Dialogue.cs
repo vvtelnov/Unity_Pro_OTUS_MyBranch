@@ -4,6 +4,9 @@ namespace Lessons.MetaGame.Dialogs
 {
     public sealed class Dialogue
     {
+        private readonly DialogueConfig config;
+        private DialogueNodeSerialized currentNode;
+        
         public string CurrentMessage
         {
             get { return this.currentNode.message; }
@@ -13,9 +16,6 @@ namespace Lessons.MetaGame.Dialogs
         {
             get { return this.currentNode.choices.ToArray(); }
         }
-
-        private readonly DialogueConfig config;
-        private DialogueNodeSerialized currentNode;
 
         public Dialogue(DialogueConfig config)
         {

@@ -16,9 +16,7 @@ namespace Lessons.MetaGame.Dialogs
             this.AddSaveButton();
             this.AddResetButton();
         }
-
         
-
         private void AddDialogField()
         {
             this.dialogField = new ObjectField("Selected Dialog")
@@ -61,15 +59,12 @@ namespace Lessons.MetaGame.Dialogs
             };
             
             this.Add(button);
-
         }
-
-      
 
         private void OnLoadDialog()
         {
             this.graph.Reset();
-            DialogueSaveLoader.LoadDialog(this.graph, this.dialogField.value as DialogueConfig);
+            DialogueSaveLoader.LoadDialog(this.dialogField.value as DialogueConfig, this.graph);
         }
 
         private void OnSaveDialog()

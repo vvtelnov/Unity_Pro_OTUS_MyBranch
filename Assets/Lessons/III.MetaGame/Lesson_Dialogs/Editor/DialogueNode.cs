@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Lessons.MetaGame.Dialogs
             set { this.idText.value = value; }
         }
 
-        public string MessageText
+        public string Message
         {
             get { return this.messageText.value; }
             set { this.messageText.value = value; }
@@ -34,35 +35,21 @@ namespace Lessons.MetaGame.Dialogs
         private TextField messageText;
         private Port inputPort;
 
-        public DialogueNode(Vector2 posiiton)
+        public DialogueNode()
         {
-            this.SetPosition(new Rect(posiiton, Vector2.zero));
-            this.AddId();
-            this.AddChoiceButton();
+            this.AddIdText();
+            this.AddMessageText();
+            this.AddCreateChoiceButton();
             this.AddInputPort();
-            this.AddMessage();
             this.RefreshExpandedState();
         }
 
-        private void AddId()
+        private void AddCreateChoiceButton()
         {
-            TextField idText = new TextField
+            Button button = new Button
             {
-                value = "Dialogue Id",
-                multiline = false
-            };
-
-            idText.AddToClassList("node_id");
-            this.titleContainer.Insert(0, idText);
-            this.idText = idText;
-        }
-
-        private void AddChoiceButton()
-        {
-            var button = new Button
-            {
-                text = "Add Choice",
-                clickable = new Clickable(this.CreateChoice),
+                text = "Create Choice",
+                clickable = new Clickable(this.CreateChoice)
             };
 
             this.mainContainer.Insert(1, button);
@@ -70,46 +57,53 @@ namespace Lessons.MetaGame.Dialogs
 
         private void AddInputPort()
         {
-            this.inputPort = Port.Create<Edge>(
-                Orientation.Horizontal,
-                Direction.Input,
-                Port.Capacity.Multi,
-                typeof(bool)
-            );
-            this.inputPort.portName = "Input Connection";
+            inputPort = Port.Create<Edge>(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(bool));
+            inputPort.portName = "Input Connection";
+            inputPort.portColor = Color.white;
             this.inputContainer.Add(inputPort);
         }
 
-        private void AddMessage()
+        private void AddIdText()
         {
-            TextField message = new TextField
+            idText = new TextField
+            {
+                value = "Dialogue Id",
+                multiline = false
+            };
+
+            idText.AddToClassList("node_id");
+            this.titleContainer.Insert(0, idText);
+        }
+
+        private void AddMessageText()
+        {
+            messageText = new TextField
             {
                 value = "Dialogue Message",
                 multiline = true
             };
-
-            message.AddToClassList("node_message");
-
-            this.extensionContainer.Add(message);
-            this.messageText = message;
+            messageText.AddToClassList("node_message");
+            this.extensionContainer.Add(messageText);
         }
 
         public void CreateChoice()
         {
-            this.CreateChoice("Dialogue Choice");
+            this.CreateChoice("Choice Text");
         }
 
-        public void CreateChoice(string value)
+        public void CreateChoice(string option)
         {
-            var choice = new DialogueChoice(value, onRemoved: this.DeleteChoice);
-            this.outputContainer.Add(choice.Port);
+            DialogueChoice choice = new DialogueChoice(option);
+            choice.OnDeleteEvent += this.DeleteChoice;
             this.choices.Add(choice);
+            this.outputContainer.Add(choice);
             this.RefreshExpandedState();
         }
 
-        public void DeleteChoice(DialogueChoice choice)
+        private void DeleteChoice(DialogueChoice choice)
         {
-            this.outputContainer.Remove(choice.Port);
+            choice.OnDeleteEvent -= this.DeleteChoice;
+            this.outputContainer.Remove(choice);
             this.choices.Remove(choice);
             this.RefreshExpandedState();
         }

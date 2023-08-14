@@ -9,13 +9,13 @@ namespace Lessons.MetaGame.Dialogs
     )]
     public sealed class DialogueConfig : ScriptableObject
     {
-        public string startNodeId;
+        public string startNode;
         public List<DialogueNodeSerialized> nodes;
-        public List<DialogueEdgeSerialzied> edges;
-        
+        public List<DialogueEdgeSerialized> edges;
+
         public bool FindStartNode(out DialogueNodeSerialized node)
         {
-            return this.FindNode(this.startNodeId, out node);
+            return this.FindNode(this.startNode, out node);
         }
 
         private bool FindNode(string id, out DialogueNodeSerialized result)
@@ -28,23 +28,23 @@ namespace Lessons.MetaGame.Dialogs
                     return true;
                 }
             }
-        
+
             result = default;
             return false;
         }
 
-        public bool FindNextNode(string sourceNodeId, int choiceIndex, out DialogueNodeSerialized nextNode)
+        public bool FindNextNode(string sourceNode, int choiceIndex, out DialogueNodeSerialized nextNode)
         {
             for (int i = 0, count = this.edges.Count; i < count; i++)
             {
                 var edge = this.edges[i];
-                if (edge.sourceNodeId == sourceNodeId && edge.index == choiceIndex)
+                if (edge.sourceNode == sourceNode && edge.index == choiceIndex)
                 {
-                    if (this.FindNode(edge.targetNodeId, out nextNode))
+                    if (this.FindNode(edge.targetNode, out nextNode))
                     {
                         return true;
                     }
-        
+
                     return false;
                 }
             }

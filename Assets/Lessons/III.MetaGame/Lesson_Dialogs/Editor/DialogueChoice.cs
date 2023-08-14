@@ -5,14 +5,16 @@ using UnityEngine.UIElements;
 
 namespace Lessons.MetaGame.Dialogs
 {
-    public sealed class DialogueChoice
+    public sealed class DialogueChoice : VisualElement
     {
+        public event Action<DialogueChoice> OnDeleteEvent;
+
         public Port Port
         {
             get { return this.port; }
         }
 
-        public string Text
+        public string Choice
         {
             get { return this.choiceText.value; }
         }
@@ -20,47 +22,40 @@ namespace Lessons.MetaGame.Dialogs
         private Port port;
         private TextField choiceText;
 
-        public DialogueChoice(string value, Action<DialogueChoice> onRemoved)
+        public DialogueChoice(string option)
         {
             this.AddPort();
-            this.AddChoiceText(value);
-            this.AddDeleteButton(onRemoved);
+            this.AddDeleteButton();
+            this.AddChoiceText(option);
+        }
+
+        private void AddDeleteButton()
+        {
+            Button button = new Button
+            {
+                text = "X",
+                clickable = new Clickable(() => this.OnDeleteEvent?.Invoke(this))
+            };
+            this.port.Add(button);
+        }
+
+        private void AddChoiceText(string option)
+        {
+            choiceText = new TextField
+            {
+                value = option,
+                multiline = false
+            };
+            choiceText.AddToClassList("node_choice");
+            this.port.Add(choiceText);
         }
 
         private void AddPort()
         {
-            this.port = Port.Create<Edge>(
-                Orientation.Horizontal,
-                Direction.Output,
-                Port.Capacity.Multi,
-                typeof(bool)
-            );
-
-            this.port.portName = string.Empty;
+            this.port = Port.Create<Edge>(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+            this.port.portName = "";
             this.port.portColor = Color.cyan;
-        }
-
-        private void AddChoiceText(string value)
-        {
-            this.choiceText = new TextField
-            {
-                value = value,
-                multiline = false
-            };
-
-            this.choiceText.AddToClassList("node_choice");
-            this.port.Add(this.choiceText);
-        }
-
-        private void AddDeleteButton(Action<DialogueChoice> onRemoved)
-        {
-            var deleteButton = new Button
-            {
-                text = "X",
-                clickable = new Clickable(() => onRemoved?.Invoke(this))
-            };
-
-            this.port.Add(deleteButton);
+            this.Add(this.port);
         }
     }
 }
