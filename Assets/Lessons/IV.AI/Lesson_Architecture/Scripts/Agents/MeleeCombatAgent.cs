@@ -77,13 +77,10 @@ namespace Lessons.AI.Architecture
 
         private void StartCombat()
         {
-            if (this.combatComponent.IsCombat)
+            if (!this.combatComponent.IsCombat)
             {
-                return;
+                this.combatComponent.StartCombat(new CombatOperation(this.target));
             }
-
-            var combatOperation = new CombatOperation(this.target);
-            this.combatComponent.StartCombat(combatOperation);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -6,9 +5,6 @@ namespace Lessons.AI.Architecture
 {
     public abstract class Agent : SerializedMonoBehaviour
     {
-        public event Action OnStarted;
-        public event Action OnStopped;
-
         [ShowInInspector, ReadOnly]
         public bool IsPlaying
         {
@@ -28,7 +24,6 @@ namespace Lessons.AI.Architecture
             
             this.isPlaying = true;
             this.OnStart();
-            this.OnStarted?.Invoke();
         }
 
         [Button]
@@ -42,7 +37,6 @@ namespace Lessons.AI.Architecture
 
             this.isPlaying = false;
             this.OnStop();
-            this.OnStopped?.Invoke();
         }
 
         protected abstract void OnStart();

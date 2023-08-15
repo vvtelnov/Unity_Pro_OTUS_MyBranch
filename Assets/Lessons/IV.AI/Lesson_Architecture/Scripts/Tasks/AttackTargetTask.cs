@@ -23,8 +23,7 @@ namespace Lessons.AI.Architecture
         [Button]
         public void SetTarget(IEntity target)
         {
-            var targetPosition = target.Get<IComponent_GetPosition>().Position;
-            this.moveTask.SetTargetPosition(targetPosition);
+            this.moveTask.SetTargetPosition(target.Get<IComponent_GetPosition>().Position);
             this.combatTask.SetTarget(target);
         }
 
