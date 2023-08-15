@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Lessons.AI.Lesson_GOAP
 {
-    public sealed class OpponentDetection : ColliderDetectionHandler
+    public sealed class OpponentDetection : ColliderDetectionObserver
     {
         [Space]
         [SerializeField]

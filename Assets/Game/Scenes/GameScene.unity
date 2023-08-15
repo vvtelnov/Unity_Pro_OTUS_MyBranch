@@ -848,7 +848,7 @@ PrefabInstance:
     - target: {fileID: 3396278850083190881, guid: af26329561cb04c92a3f7afe2f58277d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.01
       objectReference: {fileID: 0}
     - target: {fileID: 3396278850083190881, guid: af26329561cb04c92a3f7afe2f58277d,
         type: 3}
@@ -858,7 +858,7 @@ PrefabInstance:
     - target: {fileID: 3396278850083190881, guid: af26329561cb04c92a3f7afe2f58277d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 3396278850083190881, guid: af26329561cb04c92a3f7afe2f58277d,
         type: 3}
@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d81c3c6418194b6290affd2c186ac72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoRun: 0
+  autoRun: 1
   gameServices:
   - {fileID: 1978780328}
   - {fileID: 250814244}
@@ -1084,6 +1084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyWarrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 6069451536692206549, guid: bfc750052e22f4d839641f6e781bc2c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfc750052e22f4d839641f6e781bc2c4, type: 3}
@@ -7325,6 +7330,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 300477517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1015660216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6925007613358538535, guid: c41d1d09372b641c088bfec35a465f6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 161151139031021814}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ec5d50041547e09cfa3e0be086bf92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1031887527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15274,6 +15291,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6544888098181758181}
     m_Modifications:
+    - target: {fileID: 2210323436646639257, guid: c41d1d09372b641c088bfec35a465f6a,
+        type: 3}
+      propertyPath: external.unit
+      value: 
+      objectReference: {fileID: 188978598}
+    - target: {fileID: 2210323436646639257, guid: c41d1d09372b641c088bfec35a465f6a,
+        type: 3}
+      propertyPath: external.waypointsPath
+      value: 
+      objectReference: {fileID: 6544888099924454131}
+    - target: {fileID: 2210323436646639257, guid: c41d1d09372b641c088bfec35a465f6a,
+        type: 3}
+      propertyPath: external.surfacePolygonName
+      value: EnemyPolygon
+      objectReference: {fileID: 0}
     - target: {fileID: 6406540996059204332, guid: c41d1d09372b641c088bfec35a465f6a,
         type: 3}
       propertyPath: m_RootOrder
@@ -16109,7 +16141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7324539064200285902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.36, y: 0, z: 9.26}
+  m_LocalPosition: {x: 5.46, y: 0, z: 3.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16354,7 +16386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5026359061043208554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.77, y: 0, z: 3.91}
+  m_LocalPosition: {x: 3.28, y: 0, z: -2.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16456,7 +16488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147797946455283193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10.01, y: 0, z: -1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17121,7 +17153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 188978598}
-  ai: {fileID: 0}
+  ai: {fileID: 1015660216}
   respawnTime: 5
 --- !u!1 &6544888098181758180
 GameObject:
@@ -17140,7 +17172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6544888098181758181
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Elementary
 {
-    public abstract class ColliderDetectionHandler : MonoBehaviour
+    public abstract class ColliderDetectionObserver : MonoBehaviour
     {
         [SerializeField]
         private ColliderDetectionOverlapSphere sensor;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.GameEngine.Mechanics
 {
-    public abstract class UColliderDetectionHandler_TargetEntity : ColliderDetectionHandler
+    public abstract class UColliderDetectionHandler_TargetEntity : ColliderDetectionObserver
     {
         [SerializeField]
         private ScriptableEntityCondition[] conditions;

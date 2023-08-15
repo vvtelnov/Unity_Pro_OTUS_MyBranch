@@ -32,9 +32,11 @@ namespace Lessons.MetaGame
         {
             var moneyStorage = context.GetService<MoneyStorageDecorator>();
             this.timeReward.Construct(moneyStorage, this.config);
-            
-            var saveLoader = ServiceLocator.GetService<RealtimeSaveLoader>();
-            saveLoader.RegisterTimer(this.timeReward);
+
+            if (ServiceLocator.TryGetService<RealtimeSaveLoader>(out var saveLoader))
+            {
+                saveLoader.RegisterTimer(this.timeReward);
+            }
         }
     }
 }

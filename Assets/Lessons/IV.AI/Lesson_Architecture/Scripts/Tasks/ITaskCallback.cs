@@ -1,4 +1,4 @@
-namespace Lessons.AI.Lesson_Architecture
+namespace Lessons.AI.Architecture
 {
     public interface ITaskCallback
     {

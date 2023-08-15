@@ -2,7 +2,7 @@ using System.Collections;
 using AI.Blackboards;
 using Entities;
 using Game.GameEngine.Mechanics;
-using Lessons.AI.Lesson_Architecture;
+using Lessons.AI.Architecture;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
 using Blackboard = Lessons.AI.Architecture2.Blackboard;
@@ -12,7 +12,7 @@ namespace Lessons.AI.Lesson_BehaviourTree2
     public sealed class FollowTargetNode : BehaviourNode, ITaskCallback
     {
         [SerializeField]
-        private MoveTask moveTask;
+        private MoveToPositionTask moveTask;
 
         [Space]
         [SerializeField]

@@ -3,12 +3,12 @@ using Game.GameEngine.Mechanics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.AI.Lesson_Architecture
+namespace Lessons.AI.Architecture
 {
-    public sealed class AttackTask : Task, ITaskCallback
+    public sealed class AttackTargetTask : Task, ITaskCallback
     {
         [SerializeField]
-        private MoveTask moveTask;
+        private MoveToPositionTask moveTask;
 
         [SerializeField]
         private MeleeCombatTask combatTask;

@@ -1,11 +1,11 @@
 using Elementary;
 using Entities;
-using Lessons.AI.Lesson_Architecture;
+using Lessons.AI.Architecture;
 using UnityEngine;
 
 namespace Lessons.AI.Architecture
 {
-    public sealed class SensorObserver_AttackEnemy : ColliderDetectionHandler
+    public sealed class EnemyDetectionObserver : ColliderDetectionObserver
     {
         [SerializeField]
         private AttackAgent attackAgent;

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.AI.Lesson_Architecture
+namespace Lessons.AI.Architecture
 {
     public abstract class Task : MonoBehaviour
     {

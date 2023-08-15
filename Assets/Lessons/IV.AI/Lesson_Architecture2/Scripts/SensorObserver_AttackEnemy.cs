@@ -6,7 +6,7 @@ using Blackboard = Lessons.AI.Architecture2.Blackboard;
 
 namespace Lessons.AI.Lesson_Architecture2
 {
-    public sealed class SensorObserver_AttackEnemy : ColliderDetectionHandler
+    public sealed class SensorObserver_AttackEnemy : ColliderDetectionObserver
     {
         [Space]
         [SerializeField]

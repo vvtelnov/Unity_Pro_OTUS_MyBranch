@@ -4,9 +4,9 @@ using Game.GameEngine.Mechanics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.AI.Lesson_Architecture
+namespace Lessons.AI.Architecture
 {
-    public sealed class MoveAgent : Agent
+    public sealed class MoveToPositionAgent : Agent
     {
         [ShowInInspector, ReadOnly]
         private IEntity unit;

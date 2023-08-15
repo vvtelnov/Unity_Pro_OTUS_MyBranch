@@ -4,7 +4,7 @@ using Game.GameEngine.Mechanics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.AI.Lesson_Architecture
+namespace Lessons.AI.Architecture
 {
     public sealed class MeleeCombatAgent : Agent
     {
