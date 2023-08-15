@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Elementary
 {
-    [AddComponentMenu("Elementary/Physics/Colliders Detection «Overlap Sphere»")]
+    [AddComponentMenu("Elementary/Physics/Collider Detection «Overlap Sphere»")]
     public sealed class ColliderDetectionOverlapSphere : ColliderDetection
     {
         [Space]

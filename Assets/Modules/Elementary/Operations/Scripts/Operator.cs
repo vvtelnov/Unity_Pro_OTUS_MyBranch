@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 
 namespace Elementary
 {
+    [Serializable]
     public sealed class Operator<T> : IOperator<T>
     {
         public event Action<T> OnStarted;

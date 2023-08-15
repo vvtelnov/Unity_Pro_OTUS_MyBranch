@@ -1,6 +1,5 @@
 using Elementary;
 using Entities;
-using Lessons.AI.Architecture;
 using UnityEngine;
 
 namespace Lessons.AI.Architecture
@@ -10,21 +9,18 @@ namespace Lessons.AI.Architecture
         [SerializeField]
         private AttackAgent attackAgent;
 
-        private IEntity target;
-
         protected override void OnCollidersUpdated(Collider[] buffer, int size)
         {
-            if (size > 0 && this.target == null)
+            if (size > 0 && this.attackAgent.Target == null)
             {
-                this.target = buffer[0].GetComponent<IEntity>();
-                this.attackAgent.SetTarget(this.target);
+                var target = buffer[0].GetComponent<IEntity>();
+                this.attackAgent.SetTarget(target);
                 return;
             }
 
-            if (size <= 0 && this.target != null)
+            if (size <= 0 && this.attackAgent.Target != null)
             {
                 this.attackAgent.SetTarget(null);
-                this.target = null;
             }
         }
     }

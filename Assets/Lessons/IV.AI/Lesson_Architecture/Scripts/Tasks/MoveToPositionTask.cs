@@ -25,7 +25,6 @@ namespace Lessons.AI.Architecture
             this.targetPosition = point.position;
         }
 
-        [Button]
         public void SetTargetPosition(Vector3 targetPosition)
         {
             this.targetPosition = targetPosition;

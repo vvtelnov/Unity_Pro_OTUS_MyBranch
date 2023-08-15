@@ -18,7 +18,6 @@ namespace Lessons.AI.Architecture
         private Vector3 targetPosiiton;
 
         private IComponent_GetPosition positionComponent;
-
         private IComponent_MoveInDirection moveComponent;
         
         private Coroutine moveCoroutine;
@@ -29,7 +28,6 @@ namespace Lessons.AI.Architecture
             this.targetPosiiton = point.position;
         }
 
-        [Button]
         public void SetTargetPosiiton(Vector3 position)
         {
             this.targetPosiiton = position;

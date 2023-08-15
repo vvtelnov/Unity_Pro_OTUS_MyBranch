@@ -5,7 +5,7 @@ namespace Elementary
     public abstract class ColliderDetectionObserver : MonoBehaviour
     {
         [SerializeField]
-        private ColliderDetectionOverlapSphere sensor;
+        private ColliderDetection sensor;
 
         protected virtual void OnEnable()
         {

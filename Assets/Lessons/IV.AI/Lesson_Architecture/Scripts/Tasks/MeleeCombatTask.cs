@@ -30,9 +30,8 @@ namespace Lessons.AI.Architecture
 
         protected override void Do()
         {
-            var combatOperation = new CombatOperation(this.target);
             this.combatComponent.OnCombatStopped += this.OnCombatFinished;
-            this.combatComponent.StartCombat(combatOperation);
+            this.combatComponent.StartCombat(new CombatOperation(this.target));
         }
 
         protected override void OnCancel()

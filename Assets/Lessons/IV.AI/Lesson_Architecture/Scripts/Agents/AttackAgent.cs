@@ -8,6 +8,11 @@ namespace Lessons.AI.Architecture
 {
     public sealed class AttackAgent : Agent
     {
+        public IEntity Target
+        {
+            get { return this.target; }
+        }
+        
         [SerializeField]
         private MoveToPositionAgent moveAgent;
 
@@ -26,9 +31,8 @@ namespace Lessons.AI.Architecture
         private Coroutine attackCoroutine;
 
         private IComponent_GetPosition unitComponent;
-
         private IComponent_GetPosition targetComponent;
-
+        
         [Button]
         public void SetUnit(IEntity unit)
         {
@@ -73,15 +77,14 @@ namespace Lessons.AI.Architecture
         private IEnumerator AttackRoutine()
         {
             var period = new WaitForFixedUpdate();
-            
-            
+
             while (true)
             {
                 if (this.targetComponent != null && this.unitComponent != null)
                 {
                     var unitPosition = this.unitComponent.Position;
                     var targetPosition = this.targetComponent.Position;
-                    
+
                     this.moveAgent.SetTargetPosiiton(targetPosition);
                     this.UpdateState(unitPosition, targetPosition);
                 }
@@ -90,7 +93,7 @@ namespace Lessons.AI.Architecture
                     this.moveAgent.Stop();
                     this.meleeCombatAgent.Stop();
                 }
-                
+
                 yield return period;
             }
         }

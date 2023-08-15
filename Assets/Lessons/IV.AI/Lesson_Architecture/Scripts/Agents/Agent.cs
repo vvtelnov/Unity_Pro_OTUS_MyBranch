@@ -7,7 +7,6 @@ namespace Lessons.AI.Architecture
     public abstract class Agent : SerializedMonoBehaviour
     {
         public event Action OnStarted;
-
         public event Action OnStopped;
 
         [ShowInInspector, ReadOnly]
@@ -47,7 +46,6 @@ namespace Lessons.AI.Architecture
         }
 
         protected abstract void OnStart();
-
         protected abstract void OnStop();
     }
 }
