@@ -20,6 +20,7 @@ namespace Lessons.AI.HierarchicalStateMachine
         public override void OnEnter()
         {
             this.moveToPositionState.OnEnter();
+            this.pauseTime = 0.0f;
         }
 
         public override void OnUpdate()

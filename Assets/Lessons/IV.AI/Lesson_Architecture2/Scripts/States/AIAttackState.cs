@@ -12,6 +12,9 @@ namespace Lessons.AI.HierarchicalStateMachine
         [SerializeField]
         private AIMoveToPositionState moveToPositionState;
 
+        [SerializeField]
+        private AICombatState combatState;
+
         public override void OnEnter()
         {
             this.moveToPositionState.OnEnter();
@@ -28,38 +31,18 @@ namespace Lessons.AI.HierarchicalStateMachine
 
             if (this.moveToPositionState.IsReached)
             {
-                this.StartAttack(target);
+                this.combatState.OnEnter();
             }
             else
             {
-                this.StopAttack();
+                this.combatState.OnExit();
             }
         }
 
         public override void OnExit()
         {
             this.moveToPositionState.OnExit();
-            this.StopAttack();
-        }
-
-        private void StartAttack(IEntity target)
-        {
-            var unit = this.blackboard.GetVariable<IEntity>(BlackboardKeys.UNIT);
-            var combatComponent = unit.Get<IComponent_MeleeCombat>();
-            if (!combatComponent.IsCombat)
-            {
-                combatComponent.StartCombat(new CombatOperation(target));
-            }
-        }
-
-        private void StopAttack()
-        {
-            var unit = this.blackboard.GetVariable<IEntity>(BlackboardKeys.UNIT);
-            var combatComponent = unit.Get<IComponent_MeleeCombat>();
-            if (combatComponent.IsCombat)
-            {
-                combatComponent.StopCombat();
-            }
+            this.combatState.OnExit();
         }
     }
 }
