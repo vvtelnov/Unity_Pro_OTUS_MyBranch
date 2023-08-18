@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using AI.Blackboards;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_BehaviourTree2
 {
@@ -29,11 +29,11 @@ namespace Lessons.AI.Lesson_BehaviourTree2
             
             if (this.blackboard.HasVariable(this.movePositionKey))
             {
-                this.blackboard.ChangeVariable(this.movePositionKey, targetPosition);
+                this.blackboard.SetVariable(this.movePositionKey, targetPosition);
             }
             else
             {
-                this.blackboard.AddVariable(this.movePositionKey, targetPosition);
+                this.blackboard.SetVariable(this.movePositionKey, targetPosition);
             }
             
             this.Return(true);

@@ -1,7 +1,7 @@
 using AI.Blackboards;
 using Entities;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_Commands1
 {
@@ -26,8 +26,8 @@ namespace Lessons.AI.Lesson_Commands1
 
         private void Awake()
         {
-            this.blackboard.AddVariable(this.unitKey, this.unit);
-            this.blackboard.AddVariable(this.stoppingDistanceKey, this.stoppingDistance);
+            this.blackboard.SetVariable(this.unitKey, this.unit);
+            this.blackboard.SetVariable(this.stoppingDistanceKey, this.stoppingDistance);
         }
     }
 }

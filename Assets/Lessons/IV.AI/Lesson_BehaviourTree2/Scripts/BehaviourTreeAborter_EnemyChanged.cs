@@ -1,7 +1,7 @@
 using AI.Blackboards;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_BehaviourTree2
 {
@@ -18,14 +18,14 @@ namespace Lessons.AI.Lesson_BehaviourTree2
 
         private void OnEnable()
         {
-            this.blackboard.OnVariableAdded += this.OnVariableChanged;
+            // this.blackboard.OnVariableAdded += this.OnVariableChanged;
             this.blackboard.OnVariableRemoved += this.OnVariableChanged;
             this.blackboard.OnVariableChanged += this.OnVariableChanged;
         }
         
         private void OnDisable()
         {
-            this.blackboard.OnVariableAdded -= this.OnVariableChanged;
+            // this.blackboard.OnVariableAdded -= this.OnVariableChanged;
             this.blackboard.OnVariableRemoved -= this.OnVariableChanged;
             this.blackboard.OnVariableChanged -= this.OnVariableChanged;
         }

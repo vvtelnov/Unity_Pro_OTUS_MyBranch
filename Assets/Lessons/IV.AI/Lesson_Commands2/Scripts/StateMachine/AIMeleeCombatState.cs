@@ -4,7 +4,7 @@ using Game.GameEngine.Mechanics;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_Commands2
 {
@@ -35,8 +35,8 @@ namespace Lessons.AI.Lesson_Commands2
 
         public override void Enter()
         {
-            this.blackboard.AddVariable(this.targetKey, this.meleeCombatOperator.Current.targetEntity);
-            this.blackboard.AddVariable(this.stoppingDistanceKey, this.stoppingDistance.Current);
+            this.blackboard.SetVariable(this.targetKey, this.meleeCombatOperator.Current.targetEntity);
+            this.blackboard.SetVariable(this.stoppingDistanceKey, this.stoppingDistance.Current);
             this.attackNode.Run(callback: this);
         }
 

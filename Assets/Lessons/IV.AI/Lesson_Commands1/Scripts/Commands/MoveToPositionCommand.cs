@@ -2,7 +2,7 @@ using AI.Blackboards;
 using Lessons.AI.Lesson_BehaviourTree1;
 using Lessons.AI.Lesson_Commands1;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_TaskManager
 {
@@ -22,7 +22,7 @@ namespace Lessons.AI.Lesson_TaskManager
 
         protected override void Execute(Args args)
         {
-            this.blackboard.AddVariable(this.movePositionKey, args.targetPosition);
+            this.blackboard.SetVariable(this.movePositionKey, args.targetPosition);
             this.moveNode.Run(callback: this);
         }
 

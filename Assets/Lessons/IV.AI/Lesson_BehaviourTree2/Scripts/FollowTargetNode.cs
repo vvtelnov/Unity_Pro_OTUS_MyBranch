@@ -5,7 +5,7 @@ using Game.GameEngine.Mechanics;
 using Lessons.AI.Architecture;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_BehaviourTree2
 {

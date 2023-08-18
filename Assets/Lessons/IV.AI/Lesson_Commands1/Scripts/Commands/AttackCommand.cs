@@ -2,7 +2,7 @@ using AI.Blackboards;
 using Entities;
 using Lessons.AI.Lesson_BehaviourTree1;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_Commands1
 {
@@ -21,7 +21,7 @@ namespace Lessons.AI.Lesson_Commands1
 
         protected override void Execute(Args args)
         {
-            this.blackboard.AddVariable(this.enemyKey, args.target);
+            this.blackboard.SetVariable(this.enemyKey, args.target);
             this.attackNode.Run(callback: this);
         }
 

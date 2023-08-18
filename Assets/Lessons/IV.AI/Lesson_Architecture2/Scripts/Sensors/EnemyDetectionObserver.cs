@@ -1,42 +1,29 @@
-using AI.Blackboards;
 using Elementary;
 using Entities;
 using UnityEngine;
-using Blackboard = Lessons.AI.Architecture2.Blackboard;
+using static Lessons.AI.HierarchicalStateMachine.BlackboardKeys;
 
-namespace Lessons.AI.Lesson_Architecture2
+namespace Lessons.AI.HierarchicalStateMachine
 {
-    public sealed class SensorObserver_AttackEnemy : ColliderDetectionObserver
+    public sealed class EnemyDetectionObserver : ColliderDetectionObserver
     {
-        [Space]
         [SerializeField]
         private Blackboard blackboard;
 
-        [BlackboardKey]
-        [SerializeField]
-        private string enemyKey;
-
-        [Space]
-        [SerializeReference]
-        private IEntityCondition enemyCondition;
-        
-        private IEntity enemy;
-
         protected override void OnCollidersUpdated(Collider[] buffer, int size)
         {
-            if (this.enemy == null)
+            if (!this.blackboard.HasVariable(ENEMY))
             {
-                if (this.FindTarget(buffer, size, out this.enemy))
+                if (this.FindTarget(buffer, size, out var enemy))
                 {
-                    this.blackboard.AddVariable(this.enemyKey, this.enemy);
+                    this.blackboard.SetVariable(ENEMY, enemy);
                 }
             }
             else
             {
-                if (!this.IsTargetExists(buffer, size, this.enemy))
+                if (!this.IsTargetExists(buffer, size, this.blackboard.GetVariable<IEntity>(ENEMY)))
                 {
-                    this.blackboard.RemoveVariable(this.enemyKey);
-                    this.enemy = null;
+                    this.blackboard.RemoveVariable(ENEMY);
                 }
             }
         }
@@ -46,7 +33,7 @@ namespace Lessons.AI.Lesson_Architecture2
             for (var i = 0; i < size; i++)
             {
                 var collder = buffer[i];
-                if (collder.TryGetComponent(out IEntity entity) && this.enemyCondition.IsTrue(entity))
+                if (collder.TryGetComponent(out IEntity entity))
                 {
                     target = entity;
                     return true;

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.AI.Architecture2
+namespace Lessons.AI.HierarchicalStateMachine
 {
     public sealed class Blackboard : MonoBehaviour
     {
-        public event Action<string, object> OnVariableAdded;
-        
-        public event Action<string, object> OnVariableRemoved;
-
         public event Action<string, object> OnVariableChanged;
+        public event Action<string, object> OnVariableRemoved;
 
         [ShowInInspector, ReadOnly]
         private readonly Dictionary<string, object> variables = new();
@@ -38,42 +35,22 @@ namespace Lessons.AI.Architecture2
             return this.variables.ContainsKey(key);
         }
         
-
-        
         [Title("Methods")]
         [Button]
-        public void AddVariable(string key, object value)
+        public void SetVariable(string key, object value)
         {
-            if (this.variables.ContainsKey(key))
-            {
-                throw new Exception($"Variable {key} is already added!");
-            }
-            
-            this.variables.Add(key, value);
-            this.OnVariableAdded?.Invoke(key, value);
+            this.variables[key] = value;
+            this.OnVariableChanged?.Invoke(key, value);
         }
-
+        
         [Button]
         public void RemoveVariable(string key)
         {
-            if (!this.variables.TryGetValue(key, out var value))
+            if (this.variables.TryGetValue(key, out var value))
             {
-                return;
+                this.variables.Remove(key);
+                this.OnVariableRemoved?.Invoke(key, value);
             }
-
-            this.variables.Remove(key);
-            this.OnVariableRemoved?.Invoke(key, value);
-        }
-
-        public void ChangeVariable(string key, object value)
-        {
-            if (!this.variables.ContainsKey(key))
-            {
-                throw new Exception($"Variable {key} is not found!");
-            }
-            
-            this.variables[key] = value;
-            this.OnVariableChanged?.Invoke(key, value);
         }
     }
 }
