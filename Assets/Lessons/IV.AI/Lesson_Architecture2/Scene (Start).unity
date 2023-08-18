@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18018606, g: 0.22559257, b: 0.30678663, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a614841e3b47009107c4ca612d8f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 1
+  playOnStart: 1
   minScanPeriod: 0.1
   maxScanPeriod: 0.2
   bufferCapacity: 4
@@ -1310,6 +1310,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: 0.34202012
       objectReference: {fileID: 0}
+    - target: {fileID: 7744766621047107631, guid: 1d55ea73e611446748d59ffb1ad902de,
+        type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: 387c05842222a414a99cf357288d8258,
+        type: 2}
+    - target: {fileID: 7744766621047107631, guid: 1d55ea73e611446748d59ffb1ad902de,
+        type: 3}
+      propertyPath: core.isEnable.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8410758663611158238, guid: 1d55ea73e611446748d59ffb1ad902de,
         type: 3}
       propertyPath: m_RootOrder
@@ -1380,14 +1391,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1037061989721041198 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8266124384397626110, guid: 1d55ea73e611446748d59ffb1ad902de,
+  m_CorrespondingSourceObject: {fileID: 6196672209863689762, guid: 1d55ea73e611446748d59ffb1ad902de,
     type: 3}
   m_PrefabInstance: {fileID: 1037061989721041196}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca926eb25714fb0a00db26c2acfe81c, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ec5d50041547e09cfa3e0be086bf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1037061989721041199 stripped
