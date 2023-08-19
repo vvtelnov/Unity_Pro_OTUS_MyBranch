@@ -14,14 +14,15 @@ namespace Lessons.AI.HierarchicalStateMachine
         {
             if (!this.blackboard.HasVariable(ENEMY))
             {
-                if (this.FindTarget(buffer, size, out var enemy))
+                if (this.FindTarget(buffer, size, out IEntity enemy))
                 {
                     this.blackboard.SetVariable(ENEMY, enemy);
                 }
             }
             else
             {
-                if (!this.IsTargetExists(buffer, size, this.blackboard.GetVariable<IEntity>(ENEMY)))
+                IEntity enemy = this.blackboard.GetVariable<IEntity>(ENEMY);
+                if (!this.IsTargetExists(buffer, size, enemy))
                 {
                     this.blackboard.RemoveVariable(ENEMY);
                 }

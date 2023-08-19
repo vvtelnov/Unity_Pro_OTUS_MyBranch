@@ -5,21 +5,21 @@ namespace Lessons.AI.HierarchicalStateMachine
     public sealed class AIStateController : MonoBehaviour
     {
         [SerializeField]
-        private AIState state;
-        
+        private AIState rootState;
+
         private void OnEnable()
         {
-            this.state.OnEnter();
+            this.rootState.OnEnter();
         }
 
         private void FixedUpdate()
         {
-            this.state.OnUpdate();
+            this.rootState.OnUpdate();
         }
 
         private void OnDisable()
         {
-            this.state.OnExit();
+            this.rootState.OnExit();
         }
     }
 }

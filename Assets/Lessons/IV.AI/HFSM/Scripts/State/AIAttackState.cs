@@ -8,28 +8,30 @@ namespace Lessons.AI.HierarchicalStateMachine
     {
         [SerializeField]
         private Blackboard blackboard;
-
+        
+        [Space]
         [SerializeField]
-        private AIMoveToPositionState moveToPositionState;
+        private AIMoveToPositionState moveState;
 
         [SerializeField]
         private AICombatState combatState;
 
+        private IComponent_GetPosition targetComponent;
+
         public override void OnEnter()
         {
-            this.moveToPositionState.OnEnter();
+            IEntity target = this.blackboard.GetVariable<IEntity>(BlackboardKeys.ENEMY);
+            this.targetComponent = target.Get<IComponent_GetPosition>(); 
         }
 
         public override void OnUpdate()
         {
-            var target = this.blackboard.GetVariable<IEntity>(BlackboardKeys.ENEMY);
-            var targetPosition = target.Get<IComponent_GetPosition>().Position;
-            
+            Vector3 targetPosition = this.targetComponent.Position;
             this.blackboard.SetVariable(BlackboardKeys.MOVE_POSITION, targetPosition);
             
-            this.moveToPositionState.OnUpdate();
+            this.moveState.OnUpdate();
 
-            if (this.moveToPositionState.IsReached)
+            if (this.moveState.IsReached)
             {
                 this.combatState.OnEnter();
             }
@@ -41,8 +43,8 @@ namespace Lessons.AI.HierarchicalStateMachine
 
         public override void OnExit()
         {
-            this.moveToPositionState.OnExit();
             this.combatState.OnExit();
+            this.moveState.OnExit();
         }
     }
 }
