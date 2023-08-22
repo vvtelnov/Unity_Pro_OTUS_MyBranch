@@ -9,9 +9,7 @@ namespace AI.BTree
         IBehaviourCallback
     {
         public event Action OnStarted;
-    
         public event Action<bool> OnFinished;
-
         public event Action OnAborted;
 
         public bool IsEnable
