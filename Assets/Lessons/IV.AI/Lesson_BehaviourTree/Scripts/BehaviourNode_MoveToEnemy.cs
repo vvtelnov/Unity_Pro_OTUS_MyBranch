@@ -2,50 +2,38 @@ using System.Collections;
 using Entities;
 using Game.GameEngine.Mechanics;
 using Lessons.AI.HierarchicalStateMachine;
+using Lessons.AI.LessonBehaviourTree;
 using UnityEngine;
-using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
-namespace Lessons.AI.LessonBehaviourTree
+namespace Lessons.AI.Lesson_BehaviourTree
 {
     public sealed class BehaviourNode_MoveToEnemy : BehaviourNode, IBehaviourCallback
     {
-        [SerializeField,Space]
+        [SerializeField]
         private Blackboard blackboard;
-
-        [SerializeField,Space]
-        private BehaviourNode moveToPositionNode;
+        
+        [SerializeField]
+        private BehaviourNode_MoveToPosition moveNode;
 
         private Coroutine coroutine;
-
+        
         protected override void Run()
         {
-            if (!this.blackboard.TryGetVariable(BlackboardKeys.ENEMY, out IEntity target))
+            if (!this.blackboard.TryGetVariable(BlackboardKeys.ENEMY, out IEntity enemy))
             {
                 this.Return(false);
                 return;
             }
 
-            this.coroutine = this.StartCoroutine(this.UpdateEnemyPosition(target));
-            this.moveToPositionNode.Run(callback: this);
-        }
-
-        private IEnumerator UpdateEnemyPosition(IEntity target)
-        {
-            var enemyTransform = target.Get<IComponent_GetPosition>();
-            var period = new WaitForFixedUpdate();
-
-            while (true)
-            {
-                this.blackboard.SetVariable(BlackboardKeys.MOVE_POSITION, enemyTransform.Position);
-                yield return period;
-            }
+            this.coroutine = this.StartCoroutine(this.UpdateEnemyPosition(enemy));
+            this.moveNode.Run(callback: this);
         }
 
         protected override void OnAbort()
         {
-            if (this.moveToPositionNode.IsRunning)
+            if (this.moveNode.IsRunning)
             {
-                this.moveToPositionNode.Abort();
+                this.moveNode.Abort();
             }
         }
 
@@ -54,10 +42,22 @@ namespace Lessons.AI.LessonBehaviourTree
             if (this.coroutine != null)
             {
                 this.StopCoroutine(this.coroutine);
-                this.coroutine = null;
             }
             
             this.blackboard.RemoveVariable(BlackboardKeys.MOVE_POSITION);
+        }
+
+        private IEnumerator UpdateEnemyPosition(IEntity enemy)
+        {
+            IComponent_GetPosition enemyComponent = enemy.Get<IComponent_GetPosition>();
+            var period = new WaitForSeconds(0.2f);
+
+            while (true)
+            {
+                var enemyPosition = enemyComponent.Position;
+                this.blackboard.SetVariable(BlackboardKeys.MOVE_POSITION, enemyPosition);
+                yield return period;
+            }
         }
 
         void IBehaviourCallback.Invoke(BehaviourNode node, bool success)

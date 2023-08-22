@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lessons.AI.LessonBehaviourTree
@@ -20,7 +19,6 @@ namespace Lessons.AI.LessonBehaviourTree
             }
 
             this.pointer = 0;
-
             this.currentNode = orderedNodes[this.pointer];
             this.currentNode.Run(callback: this);
         }
