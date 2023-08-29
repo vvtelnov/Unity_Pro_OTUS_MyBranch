@@ -12,11 +12,8 @@ namespace AI.GOAP
     public class GoalOrientedAgent : MonoBehaviour, IActor.Callback
     {
         public event Action OnStarted;
-
         public event Action OnFailed;
-
         public event Action OnCanceled;
-
         public event Action OnCompleted;
 
         [SerializeField, PropertyOrder(-11)]

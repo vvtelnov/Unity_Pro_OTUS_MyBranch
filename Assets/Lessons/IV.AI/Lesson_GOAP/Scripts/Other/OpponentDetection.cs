@@ -1,6 +1,7 @@
 using AI.Blackboards;
 using Elementary;
 using Entities;
+using Game.GameEngine;
 using UnityEngine;
 
 namespace Lessons.AI.Lesson_GOAP
@@ -14,10 +15,6 @@ namespace Lessons.AI.Lesson_GOAP
         [BlackboardKey]
         [SerializeField]
         private string enemyKey;
-
-        [Space]
-        [SerializeReference]
-        private IEntityCondition enemyCondition;
 
         private IEntity enemy;
 
@@ -47,7 +44,8 @@ namespace Lessons.AI.Lesson_GOAP
             for (var i = 0; i < size; i++)
             {
                 var collder = buffer[i];
-                if (collder.TryGetComponent(out IEntity entity) && this.enemyCondition.IsTrue(entity))
+                if (collder.TryGetComponent(out IEntity entity) && 
+                    entity.Get<IComponent_GetObjectType>().ObjectType == ObjectType.ENEMY)
                 {
                     target = entity;
                     return true;

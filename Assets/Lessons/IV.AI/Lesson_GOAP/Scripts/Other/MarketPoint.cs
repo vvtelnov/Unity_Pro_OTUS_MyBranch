@@ -15,7 +15,7 @@ namespace Lessons.AI.Lesson_GOAP
             {
                 Debug.Log("SELL RESOURCES");
                 resourceSource.Clear();
-                moneyComponent.EarnMoney(100);
+                moneyComponent.EarnMoney(50);
             }
         }
     }
