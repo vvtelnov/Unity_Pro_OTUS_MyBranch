@@ -1777,7 +1777,7 @@ PrefabInstance:
     - target: {fileID: 2925950132958583030, guid: 7d035fcd145f2497ca5636d9255a9d2c,
         type: 3}
       propertyPath: plannerMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2925950133924335019, guid: 7d035fcd145f2497ca5636d9255a9d2c,
         type: 3}

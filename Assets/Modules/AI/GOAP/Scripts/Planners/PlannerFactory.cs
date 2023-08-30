@@ -9,7 +9,7 @@ namespace AI.GOAP
         {
             if (mode == PlannerMode.Greedy)
             {
-                return new DFSPlanner(allActions);
+                return new GreedyPlanner(allActions);
             }
 
             if (mode == PlannerMode.AStar)

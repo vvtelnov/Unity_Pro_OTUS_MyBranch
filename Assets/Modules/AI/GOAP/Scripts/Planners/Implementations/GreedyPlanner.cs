@@ -6,6 +6,8 @@ namespace AI.GOAP
     public sealed class GreedyPlanner : IPlanner
     {
         private readonly IEnumerable<IActor> allActions;
+        private IEnumerable<IActor> validActions;
+        private IFactState worldState;
 
         public GreedyPlanner(IEnumerable<IActor> allActions)
         {
@@ -14,18 +16,23 @@ namespace AI.GOAP
 
         public bool MakePlan(IFactState worldState, IFactState goal, out List<IActor> plan)
         {
-            plan = new List<IActor>(0);
             if (goal.EqualsTo(worldState))
             {
+                plan = new List<IActor>();
                 return true;
             }
 
-            var actions = this.allActions.Where(it => it.IsValid());
+            this.validActions = this.allActions.Where(it => it.IsValid());
+            this.worldState = worldState;
 
-            while (this.FindCheapestAction(goal, actions, out var nextAction))
+            plan = new List<IActor>();
+
+            while (this.FindNextAction(goal, out var nextAction))
             {
                 plan.Add(nextAction);
+                
                 goal = nextAction.RequiredState;
+                
                 if (goal.EqualsTo(worldState))
                 {
                     plan.Reverse();
@@ -37,27 +44,28 @@ namespace AI.GOAP
             return false;
         }
 
-        private bool FindCheapestAction(IFactState requiredState, IEnumerable<IActor> actions, out IActor result)
+        private bool FindNextAction(IFactState goal, out IActor cheapestAction)
         {
-            result = null;
+            cheapestAction = null;
             var currentCost = int.MaxValue;
 
-            foreach (var action in actions)
+            foreach (var action in this.validActions)
             {
-                if (!requiredState.EqualsTo(action.ResultState))
+                if (!PlannerExtensions.MatchesAction(goal, this.worldState, action))
                 {
                     continue;
                 }
 
                 var cost = action.EvaluateCost();
-                if (result == null || currentCost > cost)
+                
+                if (cheapestAction == null || currentCost > cost)
                 {
-                    result = action;
+                    cheapestAction = action;
                     currentCost = cost;
                 }
             }
 
-            return result != null;
+            return cheapestAction != null;
         }
     }
 }

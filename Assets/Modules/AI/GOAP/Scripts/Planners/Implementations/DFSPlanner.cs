@@ -66,33 +66,13 @@ namespace AI.GOAP
             
             foreach (var action in this.validActions)
             {
-                if (this.MatchesAction(goal, action))
+                if (PlannerExtensions.MatchesAction(goal, this.worldState, action))
                 {
                     result.Add(action);
                 }
             }
 
             return result;
-        }
-
-        private bool MatchesAction(IFactState goal, IActor action)
-        {
-            foreach (var (conditionName, conditionValue) in goal)
-            {
-                if (this.worldState.TryGetFact(conditionName, out var worldValue) && 
-                    worldValue == conditionValue)
-                {
-                    continue;
-                }
-
-                if (!action.ResultState.TryGetFact(conditionName, out var actionValue) ||
-                    actionValue != conditionValue)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private List<IActor> CreatePlan(Node endNode)
