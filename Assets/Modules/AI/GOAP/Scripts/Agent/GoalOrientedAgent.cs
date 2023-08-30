@@ -161,7 +161,7 @@ namespace AI.GOAP
             return false;
         }
         
-        public void Synchronize()
+        public void SynchronizeGoal()
         {
             var actualGoal = this.goals
                 .Where(it => it.IsValid())

@@ -42,3 +42,5 @@ MonoBehaviour:
   - PatrolPause
   - Waypoints
   - Beer
+  - AtEnemyDistance
+  - NearEnemyDistance

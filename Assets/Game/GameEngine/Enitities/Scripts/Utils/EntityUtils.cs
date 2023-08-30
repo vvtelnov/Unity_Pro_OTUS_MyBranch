@@ -17,6 +17,11 @@ namespace Game.GameEngine.Entities
             return vector;
         }
 
+        public static Vector3 Direction(IEntity start, IEntity end)
+        {
+            return DistanceVector(start, end).normalized;
+        }
+
         public static float Distance(IEntity start, IEntity end)
         {
             var vector = DistanceVector(start, end);

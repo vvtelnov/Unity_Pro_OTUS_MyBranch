@@ -22,7 +22,7 @@ namespace Game.Gameplay.Enemies
 
         [Section]
         [SerializeField, Space]
-        private Core core = new();
+        public Core core = new();
 
         [Section]
         [SerializeField]
@@ -34,7 +34,7 @@ namespace Game.Gameplay.Enemies
 
         [Section]
         [SerializeField]
-        private Animations animations = new();
+        public Animations animations = new();
 
         [Section]
         [SerializeField]
@@ -45,7 +45,7 @@ namespace Game.Gameplay.Enemies
         private Canvas canvas = new();
 
         [Serializable]
-        private sealed class Core
+        public sealed class Core
         {
             [SerializeField]
             public TransformEngine transformEngine = new();

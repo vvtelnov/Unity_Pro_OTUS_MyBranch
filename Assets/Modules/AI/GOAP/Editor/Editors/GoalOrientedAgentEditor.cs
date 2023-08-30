@@ -106,7 +106,7 @@ namespace AI.GOAP.UnityEditor
 
             if (GUILayout.Button("Synchronize"))
             {
-                this.agent.Synchronize();
+                this.agent.SynchronizeGoal();
             }
         }
     }

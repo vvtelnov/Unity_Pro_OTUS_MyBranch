@@ -1,4 +1,5 @@
 using System.Collections;
+using AI.Blackboards;
 using AI.GOAP;
 using Entities;
 using Game.GameEngine.Entities;
@@ -6,6 +7,7 @@ using Game.GameEngine.Mechanics;
 using Lessons.AI.Architecture;
 using Lessons.AI.HierarchicalStateMachine;
 using UnityEngine;
+using Blackboard = Lessons.AI.HierarchicalStateMachine.Blackboard;
 
 namespace Lessons.AI.Lesson_GOAP2
 {
@@ -16,6 +18,10 @@ namespace Lessons.AI.Lesson_GOAP2
 
         [SerializeField]
         private MoveToPositionAgent moveToPositionAgent;
+
+        [Space]
+        [SerializeField, BlackboardKey]
+        private string stoppingDistanceKey;
 
         private Coroutine coroutine;
         
@@ -29,20 +35,22 @@ namespace Lessons.AI.Lesson_GOAP2
         {
             var unit = this.blackboard.GetVariable<IEntity>(BlackboardKeys.UNIT);
             var enemy = this.blackboard.GetVariable<IEntity>(BlackboardKeys.ENEMY);
-            var distance = EntityUtils.Distance(unit, enemy);
+            var stoppingDistance = this.blackboard.GetVariable<float>(this.stoppingDistanceKey);
+            
+            var distance = Mathf.Max(EntityUtils.Distance(unit, enemy) - stoppingDistance, 0);
             return Mathf.RoundToInt(distance);
         }
 
         protected override void Play()
         {
             var unit = this.blackboard.GetVariable<IEntity>(BlackboardKeys.UNIT);
-            var atEnemyDistance = this.blackboard.GetVariable<float>(BlackboardKeys.AT_ENEMY_DISTANCE);
+            var stoppingDistance = this.blackboard.GetVariable<float>(this.stoppingDistanceKey);
             
             var enemy = this.blackboard.GetVariable<IEntity>(BlackboardKeys.ENEMY);
             var enemyTransform = enemy.Get<IComponent_GetPosition>();
             
             this.moveToPositionAgent.SetUnit(unit);
-            this.moveToPositionAgent.SetStoppingDistance(atEnemyDistance);
+            this.moveToPositionAgent.SetStoppingDistance(stoppingDistance);
             this.moveToPositionAgent.SetTargetPosiiton(enemyTransform.Position);
             this.moveToPositionAgent.Play();
 

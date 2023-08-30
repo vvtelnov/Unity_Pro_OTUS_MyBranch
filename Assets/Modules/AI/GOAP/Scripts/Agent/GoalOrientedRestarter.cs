@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace AI.GOAP
 {
-    [AddComponentMenu("AI/GOAP/Goal Oriented Checker")]
+    [AddComponentMenu("AI/GOAP/Goal Oriented Restarter")]
     [RequireComponent(typeof(GoalOrientedAgent))]
     [DisallowMultipleComponent]
-    public sealed class GoalOrientedChecker : MonoBehaviour
+    public class GoalOrientedRestarter : MonoBehaviour
     {
         [Space]
         [SerializeField]
@@ -60,7 +59,7 @@ namespace AI.GOAP
             {
                 var period = Random.Range(this.minScanPeriod, this.maxScanPeriod);
                 yield return new WaitForSeconds(period);
-                this.agent.SynchronizeGoal();
+                this.agent.Replay();
             }
         }
     }
