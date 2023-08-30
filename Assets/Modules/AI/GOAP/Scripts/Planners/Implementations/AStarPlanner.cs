@@ -38,6 +38,11 @@ namespace AI.GOAP
             this.openList = new Dictionary<IActor, Node>();
             this.closedList = new HashSet<IActor>();
 
+            return this.MakePlanInternal(out plan);
+        }
+
+        private bool MakePlanInternal(out List<IActor> plan)
+        {
             this.VisitStartActions();
 
             if (this.CheckFinish(out var endNode))

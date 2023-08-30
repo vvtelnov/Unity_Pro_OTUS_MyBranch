@@ -26,61 +26,50 @@ namespace AI.GOAP
             this.goal = goal;
             this.actions = actions;
             
-            return this.MakePlan(out plan);
+            return this.MakePlanInternal(out plan);
         }
 
-        private bool MakePlan(out List<IActor> plan)
+        private bool MakePlanInternal(out List<IActor> plan)
         {
-            var graph = new Graph(this.actions);
+            var costMap = this.CreateCostMap();
+            var costComparer = new CostComparer(costMap);
+            
+            var openList = new List<IActor>(this.actions);
+            var actionGraph = PlannerUtils.CreateActionGraph(this.actions, this.worldState);
+            var actionConnections = new Dictionary<IActor, IActor>();
 
-            var distances = new Dictionary<IActor, int>();
-            var comparer = new DistanceComparer(distances);
-
-            var sequence = new Dictionary<IActor, IActor>();
-            var queue = new List<IActor>(this.actions);
-
-            // Initialize distances:
-            foreach (var action in this.actions)
+            while (openList.Count > 0)
             {
-                if (action.RequiredState.EqualsTo(this.worldState))
-                {
-                    distances[action] = action.EvaluateCost();
-                }
-                else
-                {
-                    distances[action] = int.MaxValue;
-                }
-            }
+                openList.Sort(costComparer);
+                
+                IActor current = openList[0];
+                
+                openList.RemoveAt(0);
 
-            while (queue.Count > 0)
-            {
-                // Get node with minimum distance:
-                queue.Sort(comparer);
-                var current = queue[0];
-                queue.RemoveAt(0);
-
-                // Check if reached goal:
-                if (current.ResultState.EqualsTo(this.goal))
+                // Check if reached start:
+                if (current.RequiredState.EqualsTo(this.worldState))
                 {
                     // Construct plan:
                     plan = new List<IActor> {current};
-                    while (sequence.TryGetValue(current, out current))
+                    while (actionConnections.TryGetValue(current, out current))
                     {
                         plan.Add(current);
                     }
 
-                    plan.Reverse();
                     return true;
                 }
 
                 // Update distances and sequence:
-                foreach (var neighbor in graph.GetNeighbours(current))
+                if (actionGraph.TryGetValue(current, out var neighbours))
                 {
-                    var cost = distances[current] + neighbor.EvaluateCost();
-                    if (cost < distances[neighbor])
+                    foreach (var neighbor in neighbours)
                     {
-                        distances[neighbor] = cost;
-                        sequence[neighbor] = current;
+                        var cost = costMap[current] + neighbor.EvaluateCost();
+                        if (cost < costMap[neighbor])
+                        {
+                            costMap[neighbor] = cost;
+                            actionConnections[neighbor] = current;
+                        }
                     }
                 }
             }
@@ -90,69 +79,37 @@ namespace AI.GOAP
             return false;
         }
 
-        private sealed class DistanceComparer : IComparer<IActor>
+        private Dictionary<IActor, int> CreateCostMap()
         {
-            private readonly Dictionary<IActor, int> distances;
-
-            public DistanceComparer(Dictionary<IActor, int> distances)
+            var result = new Dictionary<IActor, int>();
+            
+            foreach (var action in this.actions)
             {
-                this.distances = distances;
+                if (PlannerUtils.MatchesAction(action, this.goal, this.worldState))
+                {
+                    result[action] = action.EvaluateCost();
+                }
+                else
+                {
+                    result[action] = int.MaxValue;
+                }
+            }
+
+            return result;
+        }
+
+        private sealed class CostComparer : IComparer<IActor>
+        {
+            private readonly Dictionary<IActor, int> costMap;
+
+            public CostComparer(Dictionary<IActor, int> costMap)
+            {
+                this.costMap = costMap;
             }
 
             public int Compare(IActor a, IActor b)
             {
-                return this.distances[a!] - this.distances[b!];
-            }
-        }
-
-        private sealed class Graph
-        {
-            private readonly Dictionary<IActor, List<IActor>> graph;
-
-            public Graph(IActor[] actions)
-            {
-                this.graph = new Dictionary<IActor, List<IActor>>();
-                var count = actions.Length;
-
-                for (var i = 0; i < count; i++)
-                {
-                    var current = actions[i];
-                    var currentState = current.ResultState;
-
-                    for (var j = 0; j < count; j++)
-                    {
-                        var other = actions[j];
-                        if (other == current)
-                        {
-                            continue;
-                        }
-
-                        if (!currentState.IsNeighbourTo(other.RequiredState))
-                        {
-                            continue;
-                        }
-
-                        if (!this.graph.TryGetValue(current, out var neighbours))
-                        {
-                            neighbours = new List<IActor>();
-                            this.graph.Add(current, neighbours);
-                        }
-
-                        neighbours.Add(other);
-                    }
-                }
-            }
-
-            public List<IActor> GetNeighbours(IActor action)
-            {
-                if (this.graph.TryGetValue(action, out var neighbours))
-                {
-                    return neighbours;
-                }
-
-                neighbours = new List<IActor>(0);
-                this.graph.Add(action, neighbours);
-                return neighbours;
+                return this.costMap[a!] - this.costMap[b!];
             }
         }
     }

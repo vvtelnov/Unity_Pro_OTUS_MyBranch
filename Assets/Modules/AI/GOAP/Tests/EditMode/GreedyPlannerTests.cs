@@ -6,7 +6,7 @@ using static AI.GOAP.TestUtils;
 
 namespace AI.GOAP
 {
-    public class DFSPlannerTests
+    public class GreedyPlannerTests
     {
         private readonly GreedyPlanner planner = new();
         
