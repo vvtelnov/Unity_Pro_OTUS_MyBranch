@@ -19,8 +19,15 @@ namespace Lessons.AI.Architecture
 
         private IComponent_GetPosition positionComponent;
         private IComponent_MoveInDirection moveComponent;
-        
+
         private Coroutine moveCoroutine;
+
+        private bool isReached;
+
+        public bool IsReached
+        {
+            get { return this.isReached; }
+        }
 
         [Button]
         public void SetTargetPosiiton(Transform point)
@@ -71,7 +78,7 @@ namespace Lessons.AI.Architecture
                 {
                     this.DoMove();
                 }
-                
+
                 yield return period;
             }
         }
@@ -81,8 +88,9 @@ namespace Lessons.AI.Architecture
             var myPosition = this.positionComponent.Position;
             var distanceVector = this.targetPosiiton - myPosition;
 
-            var isReached = distanceVector.sqrMagnitude <= this.stoppingDistance * this.stoppingDistance;
-            if (!isReached)
+            this.isReached = distanceVector.sqrMagnitude <= this.stoppingDistance * this.stoppingDistance;
+
+            if (!this.isReached)
             {
                 var moveDirection = distanceVector.normalized;
                 this.moveComponent.Move(moveDirection);

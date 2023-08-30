@@ -2,7 +2,7 @@ using System;
 
 namespace Game.GameEngine.Mechanics
 {
-    public interface IComponent_MeleeCombat
+    public interface  IComponent_MeleeCombat
     {
         event Action<CombatOperation> OnCombatStarted;
 

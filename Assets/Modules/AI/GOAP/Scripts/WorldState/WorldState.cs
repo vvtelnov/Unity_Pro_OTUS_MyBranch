@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace AI.GOAP
@@ -28,16 +29,19 @@ namespace AI.GOAP
             return this.facts.ContainsKey(id);
         }
 
+        [Button]
         public void SetFact(string key, bool value)
         {
             this.facts[key] = value;
         }
 
+        [Button]
         public void RemoveFact(string key)
         {
             this.facts.Remove(key);
         }
 
+        [Button]
         public void UpdateFacts()
         {
             for (int i = 0, count = this.inspectors.Length; i < count; i++)

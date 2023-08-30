@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AI.GOAP
 {
-    [AddComponentMenu("AI/GOAP/World State Auto")]
-    public class WorldStateAuto : WorldState
+    [AddComponentMenu("AI/GOAP/World State Looper")]
+    [RequireComponent(typeof(WorldState))]
+    public sealed class WorldStateLooper : MonoBehaviour
     {
         [Space]
         [SerializeField]
@@ -16,10 +18,17 @@ namespace AI.GOAP
 
         [SerializeField]
         private float maxUpdatePeriod = 0.2f;
+
+        private WorldState worldState;
         
         private Coroutine coroutine;
 
-        protected virtual void Start()
+        private void Awake()
+        {
+            this.worldState = this.GetComponent<WorldState>();
+        }
+
+        private void Start()
         {
             if (this.playOnStart)
             {
@@ -50,7 +59,7 @@ namespace AI.GOAP
             {
                 var period = Random.Range(this.minUpdatePeriod, this.maxUpdatePeriod);
                 yield return new WaitForSeconds(period);
-                this.UpdateFacts();
+                this.worldState.UpdateFacts();
             }
         }
     }

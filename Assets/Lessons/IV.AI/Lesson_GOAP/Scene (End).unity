@@ -1626,69 +1626,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407563540}
     m_Modifications:
-    - target: {fileID: 68197097, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: priority
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184813957, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1184813958, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2060992614, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: enemyCondition
-      value: 1000098852064722965
-      objectReference: {fileID: 0}
-    - target: {fileID: 2060992614, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: managedReferences[1000098852064722964]
-      value: Entities Entities.EntityConditon
-      objectReference: {fileID: 0}
-    - target: {fileID: 2060992614, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
-      propertyPath: managedReferences[1000098852064722965]
-      value: Assets Game.GameEngine.Mechanics.EntityConditon_EqualsName
-      objectReference: {fileID: 0}
     - target: {fileID: 2060992615, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 7077470931760026292}
-    - target: {fileID: 2925950132058203814, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132058203814, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132198443688, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132198443688, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132418582612, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132418582612, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950132418582615, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: loop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2925950132602897072, guid: 7d035fcd145f2497ca5636d9255a9d2c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1774,21 +1715,6 @@ PrefabInstance:
       propertyPath: resourceObject
       value: 
       objectReference: {fileID: 2102078729}
-    - target: {fileID: 2925950132958583030, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: plannerMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950133924335019, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 2925950133924335019, guid: 7d035fcd145f2497ca5636d9255a9d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.77
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
 --- !u!1 &2972060213882671890

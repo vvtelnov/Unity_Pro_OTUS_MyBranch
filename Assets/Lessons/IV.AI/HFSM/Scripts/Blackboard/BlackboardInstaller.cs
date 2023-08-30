@@ -17,7 +17,7 @@ namespace Lessons.AI.HierarchicalStateMachine
         {
             var blackboard = this.GetComponent<Blackboard>();
             blackboard.SetVariable(UNIT, this.unit);
-            blackboard.SetVariable(STOPPING_DISTANCE, 0.25f);
+            blackboard.SetVariable(STOPPING_DISTANCE, 0.35f);
             blackboard.SetVariable(WAYPOINTS, this.waypoints);
             blackboard.SetVariable(WAYPOINT_INDEX, 0);
             blackboard.SetVariable(PATROL_IDLE_TIME, 1.0f);
