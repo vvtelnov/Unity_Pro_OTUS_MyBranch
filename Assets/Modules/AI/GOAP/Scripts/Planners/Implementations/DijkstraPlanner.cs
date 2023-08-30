@@ -7,7 +7,7 @@ namespace AI.GOAP
         private IFactState worldState;
         private IFactState goal;
         private IActor[] actions;
-
+        
         public bool MakePlan(IFactState worldState, IFactState goal, IActor[] actions, out List<IActor> plan)
         {
             if (goal == null)
@@ -33,10 +33,11 @@ namespace AI.GOAP
         {
             var costMap = this.CreateCostMap();
             var costComparer = new CostComparer(costMap);
-            
+
             var openList = new List<IActor>(this.actions);
             var actionGraph = PlannerUtils.CreateActionGraph(this.actions, this.worldState);
             var actionConnections = new Dictionary<IActor, IActor>();
+            var endActions = new List<IActor>();
 
             while (openList.Count > 0)
             {
@@ -49,14 +50,8 @@ namespace AI.GOAP
                 // Check if reached start:
                 if (current.RequiredState.EqualsTo(this.worldState))
                 {
-                    // Construct plan:
-                    plan = new List<IActor> {current};
-                    while (actionConnections.TryGetValue(current, out current))
-                    {
-                        plan.Add(current);
-                    }
-
-                    return true;
+                    endActions.Add(current);
+                    continue;
                 }
 
                 // Update distances and sequence:
@@ -75,8 +70,24 @@ namespace AI.GOAP
             }
 
             //Plan not found:
-            plan = default;
-            return false;
+            if (endActions.Count <= 0)
+            {
+                plan = default;
+                return false;
+            }
+            
+            //Pick end action
+            endActions.Sort(costComparer);
+            IActor endAction = endActions[0];
+            
+            // Construct plan:
+            plan = new List<IActor> {endAction};
+            while (actionConnections.TryGetValue(endAction, out endAction))
+            {
+                plan.Add(endAction);
+            }
+
+            return true;
         }
 
         private Dictionary<IActor, int> CreateCostMap()
