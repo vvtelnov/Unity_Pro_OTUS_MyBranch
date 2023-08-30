@@ -70,8 +70,6 @@ namespace AI.GOAP
 
             while (this.SelectNextAction(out var node))
             {
-                Debug.Log($"SELECTED ACTION {node.action}");
-                
                 this.closedList.Add(node.action);
                 this.ProcessNeighbourActions(graph, node);
 
@@ -103,7 +101,6 @@ namespace AI.GOAP
         {
             if (!graph.TryGetNeighbours(node.action, out var neighbours))
             {
-                Debug.Log($"NO NEIGHBOURS FOR {node.action}");
                 return;
             }
 
@@ -137,8 +134,6 @@ namespace AI.GOAP
                 node = new Node(action, baseNode, pathCost, heuristic);
                 this.openList.Add(action, node);
             }
-            
-            Debug.Log($"NODE {node.action} C: {node.cost}, H: {node.heuristic} WEIGHT: {node.EvaluateWeight()}");
         }
 
         private bool FindFinish(out Node result)

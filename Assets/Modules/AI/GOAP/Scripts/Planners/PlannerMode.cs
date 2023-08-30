@@ -4,6 +4,7 @@ namespace AI.GOAP
     {
         Greedy = 0,
         AStar = 1,
-        Dijkstra = 2
+        Dijkstra = 2,
+        DFS = 3
     }
 }

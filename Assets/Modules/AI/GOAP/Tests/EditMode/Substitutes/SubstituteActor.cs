@@ -1,9 +1,8 @@
 namespace AI.GOAP
 {
-    public class TestActor : IActor
+    public sealed class SubstituteActor : IActor
     {
         public IFactState RequiredState { get; }
-
         public IFactState ResultState { get; }
         
         public bool IsPlaying
@@ -12,10 +11,9 @@ namespace AI.GOAP
         }
 
         private readonly string id;
-
         private readonly int cost;
         
-        public TestActor(string id, int cost, IFactState requiredState, IFactState resultState)
+        public SubstituteActor(string id, int cost, IFactState requiredState, IFactState resultState)
         {
             this.id = id;
             this.cost = cost;

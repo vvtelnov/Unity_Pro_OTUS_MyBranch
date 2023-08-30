@@ -9,7 +9,7 @@ namespace AI.GOAP
         {
             if (mode == PlannerMode.Greedy)
             {
-                return new GreedyPlanner(allActions);
+                return new DFSPlanner(allActions);
             }
 
             if (mode == PlannerMode.AStar)
@@ -20,6 +20,11 @@ namespace AI.GOAP
             if (mode == PlannerMode.Dijkstra)
             {
                 return new DijkstraPlanner(allActions);
+            }
+
+            if (mode == PlannerMode.DFS)
+            {
+                return new DFSPlanner(allActions);
             }
 
             throw new Exception($"Undefined planner mode {mode}!");

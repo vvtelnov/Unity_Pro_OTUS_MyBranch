@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEngine;
 using static AI.GOAP.SubstituteActions;
 using static AI.GOAP.TestUtils;
 
 namespace AI.GOAP
 {
-    public sealed class AStarPlannerTests
+    public class DFSPlannerTests
     {
         [Test]
         public void MakeHealPlanTest()
@@ -23,9 +24,9 @@ namespace AI.GOAP
             {
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
+            var actionPlanner = new DFSPlanner(actions);
             var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
 
             //Assert:
@@ -60,9 +61,9 @@ namespace AI.GOAP
                 MoveAtEnemyAction,
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
+            var actionPlanner = new DFSPlanner(actions);
             var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
 
             //Assert:
@@ -75,7 +76,7 @@ namespace AI.GOAP
             };
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
         }
-        
+
         [Test]
         public void RangeCombatPlanTest()
         {
@@ -101,9 +102,9 @@ namespace AI.GOAP
                 MoveToResourceAction,
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
+            var actionPlanner = new DFSPlanner(actions);
             var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
 
             //Assert:
@@ -115,6 +116,8 @@ namespace AI.GOAP
                 BowCombatAction
             };
 
+            Debug.Log(string.Join(',', actualPlan));
+            
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
         }
 
@@ -148,9 +151,8 @@ namespace AI.GOAP
                 GoBeerAction
             };
 
-
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
+            var actionPlanner = new DFSPlanner(actions);
             var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
 
             //Assert:

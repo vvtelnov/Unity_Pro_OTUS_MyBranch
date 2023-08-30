@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using static AI.GOAP.TestUtils;
 
 namespace AI.GOAP
 {
     public sealed class DijkstraPlannerTests
     {
-        private readonly IActor moveAtEnemyAction = new TestActor(
+        private readonly IActor moveAtEnemyAction = new SubstituteActor(
             id: "moveAtEnemyAction",
             cost: 10,
             requiredState: new FactState(
@@ -18,7 +19,7 @@ namespace AI.GOAP
             )
         );
         
-        private readonly IActor moveNearEnemyAction = new TestActor(
+        private readonly IActor moveNearEnemyAction = new SubstituteActor(
             id: "moveNearEnemyAction",
             cost: 3,
             requiredState: new FactState(
@@ -29,7 +30,7 @@ namespace AI.GOAP
             )
         );
 
-        private readonly IActor swordCombatAction = new TestActor(
+        private readonly IActor swordCombatAction = new SubstituteActor(
             id: "swordCombatAction",
             cost: 3,
             requiredState: new FactState(
@@ -40,7 +41,7 @@ namespace AI.GOAP
             )
         );
         
-        private readonly IActor bowCombatAction = new TestActor(
+        private readonly IActor bowCombatAction = new SubstituteActor(
             id: "bowCombatAction",
             cost: 6,
             requiredState: new FactState(
@@ -52,35 +53,35 @@ namespace AI.GOAP
             )
         );
 
-        private readonly IActor makeHealAction = new TestActor(
+        private readonly IActor makeHealAction = new SubstituteActor(
             id: "makeHealAction",
             cost: 5,
             resultState: new FactState(new Fact("isInjured", false)),
             requiredState: new FactState()
         );
 
-        private readonly IActor moveToResourceAction = new TestActor(
+        private readonly IActor moveToResourceAction = new SubstituteActor(
             id: "moveToResourceAction",
             cost: 12,
             resultState: new FactState(new Fact("atResource", true)),
             requiredState: new FactState()
         );
 
-        private readonly IActor harvestResourceAction = new TestActor(
+        private readonly IActor harvestResourceAction = new SubstituteActor(
             id: "harvestResourceAction",
             cost: 5,
             resultState: new FactState(new Fact("resourceExists", true)),
             requiredState: new FactState(new Fact("atResource", true))
         );
 
-        private readonly IActor goToMarketAction = new TestActor(
+        private readonly IActor goToMarketAction = new SubstituteActor(
             id: "goToMarketAction",
             cost: 6,
             resultState: new FactState(new Fact("moneyEnough", true)),
             requiredState: new FactState(new Fact("resourceExists", true))
         );
 
-        private readonly IActor goBeerAction = new TestActor(
+        private readonly IActor goBeerAction = new SubstituteActor(
             id: "goBeerAction",
             cost: 9,
             resultState: new FactState(new Fact("happy", true)),
@@ -248,24 +249,6 @@ namespace AI.GOAP
                 goBeerAction
             };
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
-        }
-
-        private static bool EqualsPlans(List<IActor> expected, List<IActor> actual)
-        {
-            if (expected.Count != actual.Count)
-            {
-                return false;
-            }
-
-            for (int i = 0, count = expected.Count; i < count; i++)
-            {
-                if (expected[i] != actual[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
