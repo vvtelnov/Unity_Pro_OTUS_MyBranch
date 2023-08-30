@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace AI.GOAP
 {
@@ -66,7 +65,7 @@ namespace AI.GOAP
             
             foreach (var action in this.validActions)
             {
-                if (PlannerExtensions.MatchesAction(goal, this.worldState, action))
+                if (PlannerUtils.MatchesAction(action, goal, this.worldState))
                 {
                     result.Add(action);
                 }

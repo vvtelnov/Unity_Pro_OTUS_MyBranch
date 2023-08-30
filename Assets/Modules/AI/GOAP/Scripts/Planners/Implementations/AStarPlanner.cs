@@ -1,22 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+
 // ReSharper disable MemberCanBePrivate.Local
 
 namespace AI.GOAP
 {
     public sealed class AStarPlanner : IPlanner
     {
-        ///Change consts for your planner
-        private const int DISTANCE_BETWEEN_FACTS = 1;
-        private const int HEURISTIC_BETWEEN_FACTS = 3;
-        private const float HEURISTIC_COEFFICIENT = 1.0f;
-        
+        private const int UNDEFINED_HEURISTIC_DISTANCE = 3;
+
         private static readonly CostComparer costComparer = new();
 
         private readonly IEnumerable<IActor> allActions;
-        
+
         private IEnumerable<IActor> validActions;
+        private Dictionary<IActor, List<IActor>> actionGraph;
         private Dictionary<IActor, Node> openList;
         private HashSet<IActor> closedList;
 
@@ -60,28 +58,28 @@ namespace AI.GOAP
                 plan = new List<IActor> {endNode.action};
                 return true;
             }
-            
+
             return this.MakePlanByGraph(out plan);
         }
-        
+
         private bool MakePlanByGraph(out List<IActor> plan)
         {
-            var graph = new ActionGraph(this.validActions.ToArray());
+            this.actionGraph = this.CreateActionGraph();
 
             while (this.SelectNextAction(out var node))
             {
                 this.closedList.Add(node.action);
-                this.ProcessNeighbourActions(graph, node);
+                this.ProcessNeighbourActions(node);
 
                 if (this.FindFinish(out var endNode))
                 {
                     plan = this.CreatePlan(endNode);
                     return true;
                 }
-                
+
                 this.openList.Remove(node.action);
             }
-            
+
             plan = default;
             return false;
         }
@@ -90,16 +88,16 @@ namespace AI.GOAP
         {
             foreach (var action in this.validActions)
             {
-                if (this.goal.EqualsTo(action.ResultState))
+                if (PlannerUtils.MatchesAction(action, this.goal, this.worldState))
                 {
                     this.ProcessAction(action, null);
                 }
             }
         }
 
-        private void ProcessNeighbourActions(ActionGraph graph, Node node)
+        private void ProcessNeighbourActions(Node node)
         {
-            if (!graph.TryGetNeighbours(node.action, out var neighbours))
+            if (!this.actionGraph.TryGetValue(node.action, out var neighbours))
             {
                 return;
             }
@@ -130,7 +128,7 @@ namespace AI.GOAP
             }
             else
             {
-                var heuristic = this.HeuristicDistance(action);
+                var heuristic = PlannerUtils.HeuristicDistance(action, this.worldState, UNDEFINED_HEURISTIC_DISTANCE);
                 node = new Node(action, baseNode, pathCost, heuristic);
                 this.openList.Add(action, node);
             }
@@ -168,7 +166,7 @@ namespace AI.GOAP
                 plan.Add(endNode.action);
                 endNode = endNode.baseNode;
             }
-            
+
             return plan;
         }
 
@@ -176,7 +174,7 @@ namespace AI.GOAP
         {
             result = null;
             var minWeight = int.MaxValue;
-            
+
             foreach (var node in this.openList.Values)
             {
                 var weight = node.EvaluateWeight();
@@ -190,28 +188,43 @@ namespace AI.GOAP
             return result != null;
         }
 
-        private int HeuristicDistance(IActor action)
+        private Dictionary<IActor, List<IActor>> CreateActionGraph()
         {
-            var result = 0;
+            var actions = this.validActions.ToArray();
+            var graph = new Dictionary<IActor, List<IActor>>();
 
-            foreach (var (requiredCond, requiredValue) in action.RequiredState)
+            var count = actions.Length;
+            for (var i = 0; i < count; i++)
             {
-                if (this.worldState.TryGetFact(requiredCond, out var currentValue))
+                var action = actions[i];
+
+                for (var j = 0; j < count; j++)
                 {
-                    if (requiredValue != currentValue)
+                    var other = actions[j];
+                    if (other == action)
                     {
-                        result += DISTANCE_BETWEEN_FACTS;
+                        continue;
                     }
-                }
-                else
-                {
-                    result += HEURISTIC_BETWEEN_FACTS;
+
+                    var requiredState = action.RequiredState;
+                    if (!PlannerUtils.MatchesAction(other, requiredState, this.worldState))
+                    {
+                        continue;
+                    }
+
+                    if (!graph.TryGetValue(action, out var neighbours))
+                    {
+                        neighbours = new List<IActor>();
+                        graph.Add(action, neighbours);
+                    }
+
+                    neighbours.Add(other);
                 }
             }
 
-            return Mathf.RoundToInt(result * HEURISTIC_COEFFICIENT);
+            return graph;
         }
-        
+
         private sealed class Node
         {
             public readonly IActor action;
@@ -239,49 +252,6 @@ namespace AI.GOAP
             public int Compare(Node x, Node y)
             {
                 return x.cost.CompareTo(y.cost);
-            }
-        }
-        
-        private sealed class ActionGraph
-        {
-            private readonly Dictionary<IActor, List<IActor>> graph;
-
-            public ActionGraph(IActor[] actions)
-            {
-                this.graph = new Dictionary<IActor, List<IActor>>();
-                
-                var count = actions.Length;
-                for (var i = 0; i < count; i++)
-                {
-                    var action = actions[i];
-
-                    for (var j = 0; j < count; j++)
-                    {
-                        var other = actions[j];
-                        if (other == action)
-                        {
-                            continue;
-                        }
-
-                        if (!action.RequiredState.IsNeighbourTo(other.ResultState))
-                        {
-                            continue;
-                        }
-
-                        if (!this.graph.TryGetValue(action, out var neighbours))
-                        {
-                            neighbours = new List<IActor>();
-                            this.graph.Add(action, neighbours);
-                        }
-
-                        neighbours.Add(other);
-                    }
-                }
-            }
-            
-            public bool TryGetNeighbours(IActor action, out List<IActor> neighbours)
-            {
-                return this.graph.TryGetValue(action, out neighbours);
             }
         }
     }

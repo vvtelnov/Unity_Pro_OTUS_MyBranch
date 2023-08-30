@@ -44,14 +44,14 @@ namespace AI.GOAP
             return false;
         }
 
-        private bool FindNextAction(IFactState goal, out IActor cheapestAction)
+        private bool FindNextAction(IFactState requiredState, out IActor cheapestAction)
         {
             cheapestAction = null;
             var currentCost = int.MaxValue;
 
             foreach (var action in this.validActions)
             {
-                if (!PlannerExtensions.MatchesAction(goal, this.worldState, action))
+                if (!PlannerUtils.MatchesAction(action, requiredState, this.worldState))
                 {
                     continue;
                 }
