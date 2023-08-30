@@ -1632,11 +1632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184813957, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1184813958, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2060992614, guid: 7d035fcd145f2497ca5636d9255a9d2c, type: 3}
       propertyPath: enemyCondition
@@ -1774,6 +1774,11 @@ PrefabInstance:
       propertyPath: resourceObject
       value: 
       objectReference: {fileID: 2102078729}
+    - target: {fileID: 2925950132958583030, guid: 7d035fcd145f2497ca5636d9255a9d2c,
+        type: 3}
+      propertyPath: plannerMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2925950133924335019, guid: 7d035fcd145f2497ca5636d9255a9d2c,
         type: 3}
       propertyPath: m_LocalPosition.x

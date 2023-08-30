@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace AI.GOAP
 {
@@ -41,7 +42,7 @@ namespace AI.GOAP
         
         private readonly IActor bowCombatAction = new TestActor(
             id: "bowCombatAction",
-            cost: 6,
+            cost: 2,
             requiredState: new FactState(
                 new Fact("nearEnemy", true),
                 new Fact("arrowsExists", true)
@@ -193,6 +194,9 @@ namespace AI.GOAP
                 moveNearEnemyAction,
                 bowCombatAction
             };
+
+            Debug.Log(string.Join(',', actualPlan));
+            
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
         }
 
