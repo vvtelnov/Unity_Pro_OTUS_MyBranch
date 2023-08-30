@@ -4,20 +4,18 @@ using UnityEngine;
 
 namespace Lessons.AI.Lesson_GOAP2
 {
-    public sealed class MoveToWaypointGoal : Goal
+    public sealed class DestoyEnemyGoal : Goal
     {
         [SerializeField]
         private Blackboard blackboard;
 
-        [SerializeField, Space]
-        private int priority;
-
+        [SerializeField]
+        private int priority = 10;
+        
         public override bool IsValid()
         {
             return this.blackboard.HasVariable(BlackboardKeys.UNIT) &&
-                   this.blackboard.HasVariable(BlackboardKeys.WAYPOINTS) &&
-                   this.blackboard.HasVariable(BlackboardKeys.WAYPOINT_INDEX) &&
-                   this.blackboard.HasVariable(BlackboardKeys.STOPPING_DISTANCE);
+                   this.blackboard.HasVariable(BlackboardKeys.ENEMY);
         }
 
         public override int EvaluatePriority()

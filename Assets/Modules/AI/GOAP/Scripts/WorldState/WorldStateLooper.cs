@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 namespace AI.GOAP
 {
     [AddComponentMenu("AI/GOAP/World State Looper")]
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(WorldState))]
     public sealed class WorldStateLooper : MonoBehaviour
     {

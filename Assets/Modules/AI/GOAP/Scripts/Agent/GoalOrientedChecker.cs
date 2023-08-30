@@ -5,15 +5,15 @@ using Random = UnityEngine.Random;
 
 namespace AI.GOAP
 {
-    [AddComponentMenu("AI/GOAP/Goal Oriented Inspector")]
+    [AddComponentMenu("AI/GOAP/Goal Oriented Checker")]
     [RequireComponent(typeof(GoalOrientedAgent))]
     [DisallowMultipleComponent]
-    public sealed class GoalOrientedInspector : MonoBehaviour
+    public sealed class GoalOrientedChecker : MonoBehaviour
     {
         [Space]
         [SerializeField]
         private bool playOnStart = true;
-        
+
         [Space]
         [SerializeField]
         private float minScanPeriod = 0.1f;
@@ -22,9 +22,9 @@ namespace AI.GOAP
         private float maxScanPeriod = 0.2f;
 
         private GoalOrientedAgent agent;
-        
+
         private Coroutine coroutine;
-        
+
         private void Awake()
         {
             this.agent = this.GetComponent<GoalOrientedAgent>();
@@ -42,7 +42,7 @@ namespace AI.GOAP
         {
             if (this.coroutine == null)
             {
-                this.coroutine = this.StartCoroutine(this.InspectGoalsLoop());
+                this.coroutine = this.StartCoroutine(this.CheckState());
             }
         }
 
@@ -55,26 +55,13 @@ namespace AI.GOAP
             }
         }
 
-        private IEnumerator InspectGoalsLoop()
+        private IEnumerator CheckState()
         {
             while (true)
             {
                 var period = Random.Range(this.minScanPeriod, this.maxScanPeriod);
                 yield return new WaitForSeconds(period);
-                this.InspectGoals();
-            }
-        }
-
-        private void InspectGoals()
-        {
-            var actualGoal = this.agent.AllGoals
-                .Where(it => it.IsValid())
-                .OrderByDescending(it => it.EvaluatePriority())
-                .First();
-
-            if (!actualGoal.Equals(this.agent.CurrentGoal))
-            {
-                this.agent.Replay();
+                this.agent.Synchronize();
             }
         }
     }

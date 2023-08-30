@@ -56,6 +56,7 @@ namespace Lessons.AI.Architecture
 
         protected override void OnStart()
         {
+            this.isReached = false;
             this.moveCoroutine = this.StartCoroutine(this.MoveRoutine());
         }
 

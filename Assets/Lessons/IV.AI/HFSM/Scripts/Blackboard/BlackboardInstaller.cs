@@ -21,6 +21,8 @@ namespace Lessons.AI.HierarchicalStateMachine
             blackboard.SetVariable(WAYPOINTS, this.waypoints);
             blackboard.SetVariable(WAYPOINT_INDEX, 0);
             blackboard.SetVariable(PATROL_IDLE_TIME, 1.0f);
+            blackboard.SetVariable(NEAR_ENEMY_DISTANCE, 5.0f);
+            blackboard.SetVariable(AT_ENEMY_DISTANCE, 1.0f);
         }
     }
 }

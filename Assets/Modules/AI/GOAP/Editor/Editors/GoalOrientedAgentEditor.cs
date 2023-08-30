@@ -9,12 +9,12 @@ namespace AI.GOAP.UnityEditor
     [CustomEditor(typeof(GoalOrientedAgent))]
     public sealed class GoalOrientedAgentEditor : OdinEditor
     {
-        private GoalOrientedAgent planner;
+        private GoalOrientedAgent agent;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.planner = (GoalOrientedAgent) this.target;
+            this.agent = (GoalOrientedAgent) this.target;
         }
 
         public override void OnInspectorGUI()
@@ -40,7 +40,7 @@ namespace AI.GOAP.UnityEditor
         {
             EditorGUILayout.Space(4.0f);
             EditorGUILayout.LabelField("Active Goals");
-            var goals = this.planner.AllGoals
+            var goals = this.agent.Goals
                 .OrderByDescending(it => it.IsValid() ? it.EvaluatePriority() : -1);
 
             foreach (var goal in goals)
@@ -65,7 +65,7 @@ namespace AI.GOAP.UnityEditor
         {
             EditorGUILayout.Space(4.0f);
             EditorGUILayout.LabelField("Active Actions");
-            var actions = this.planner.AllActions
+            var actions = this.agent.Actions
                 .OrderByDescending(it => it.IsValid() ? it.EvaluateCost() : -1);
 
             foreach (var action in actions)
@@ -91,17 +91,22 @@ namespace AI.GOAP.UnityEditor
             EditorGUILayout.Space(8.0f);
             if (GUILayout.Button("Play"))
             {
-                this.planner.Play();
+                this.agent.Play();
             }
 
             if (GUILayout.Button("Replay"))
             {
-                this.planner.Replay();
+                this.agent.Replay();
             }
 
             if (GUILayout.Button("Cancel"))
             {
-                this.planner.Cancel();
+                this.agent.Cancel();
+            }
+
+            if (GUILayout.Button("Synchronize"))
+            {
+                this.agent.Synchronize();
             }
         }
     }

@@ -12,5 +12,8 @@ namespace Lessons.AI.HierarchicalStateMachine
         public const string PATROL_IDLE_TIME = "PatrolIdleTime";
 
         public const string ENEMY = "Enemy";
+        public const string NEAR_ENEMY_DISTANCE = "NearEnemyDistance";
+        public const string AT_ENEMY_DISTANCE = "AtEnemyDistance";
+
     }
 }

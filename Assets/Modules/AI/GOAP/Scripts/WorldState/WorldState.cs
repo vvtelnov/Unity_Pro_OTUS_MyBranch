@@ -6,6 +6,7 @@ using UnityEngine;
 namespace AI.GOAP
 {
     [AddComponentMenu("AI/GOAP/World State")]
+    [DisallowMultipleComponent]
     public class WorldState : MonoBehaviour, IFactState
     {
         private readonly Dictionary<string, bool> facts = new();
