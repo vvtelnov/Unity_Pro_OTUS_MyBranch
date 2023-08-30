@@ -1,22 +1,14 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AI.GOAP
 {
     public sealed class DijkstraPlanner : IPlanner
     {
-        private readonly IEnumerable<IActor> allActions;
-
         private IFactState worldState;
-
         private IFactState goal;
+        private IActor[] actions;
 
-        public DijkstraPlanner(IEnumerable<IActor> allActions)
-        {
-            this.allActions = allActions;
-        }
-
-        public bool MakePlan(IFactState worldState, IFactState goal, out List<IActor> plan)
+        public bool MakePlan(IFactState worldState, IFactState goal, IActor[] actions, out List<IActor> plan)
         {
             if (goal == null)
             {
@@ -32,22 +24,23 @@ namespace AI.GOAP
 
             this.worldState = worldState;
             this.goal = goal;
+            this.actions = actions;
+            
             return this.MakePlan(out plan);
         }
 
         private bool MakePlan(out List<IActor> plan)
         {
-            var actions = this.allActions.Where(it => it.IsValid()).ToArray();
-            var graph = new Graph(actions);
+            var graph = new Graph(this.actions);
 
             var distances = new Dictionary<IActor, int>();
             var comparer = new DistanceComparer(distances);
 
             var sequence = new Dictionary<IActor, IActor>();
-            var queue = new List<IActor>(actions);
+            var queue = new List<IActor>(this.actions);
 
             // Initialize distances:
-            foreach (var action in actions)
+            foreach (var action in this.actions)
             {
                 if (action.RequiredState.EqualsTo(this.worldState))
                 {

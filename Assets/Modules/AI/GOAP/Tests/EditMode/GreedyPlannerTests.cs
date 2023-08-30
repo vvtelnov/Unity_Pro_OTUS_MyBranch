@@ -8,6 +8,8 @@ namespace AI.GOAP
 {
     public class DFSPlannerTests
     {
+        private readonly GreedyPlanner planner = new();
+        
         [Test]
         public void MakeHealPlanTest()
         {
@@ -20,23 +22,22 @@ namespace AI.GOAP
                 new Fact("isInjured", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 MakeHealAction
             };
 
             //Act:
-            var actionPlanner = new DFSPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
 
-            var expectedPlan = new List<IActor>
+            var expectedPlan = new[]
             {
                 MakeHealAction
             };
-            Assert.True(EqualsPlans(expectedPlan, actualPlan));
+            Assert.True(EqualsPlans(expectedPlan, actualPlan.ToArray()));
         }
 
         [Test]
@@ -55,7 +56,7 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 MoveAtEnemyAction,
@@ -63,8 +64,8 @@ namespace AI.GOAP
             };
 
             //Act:
-            var actionPlanner = new DFSPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var actionPlanner = new GreedyPlanner();
+            var success = actionPlanner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -93,7 +94,7 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 BowCombatAction,
@@ -104,8 +105,8 @@ namespace AI.GOAP
             };
 
             //Act:
-            var actionPlanner = new DFSPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var actionPlanner = new GreedyPlanner();
+            var success = actionPlanner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -140,7 +141,7 @@ namespace AI.GOAP
                 new Fact("happy", true)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 MoveAtEnemyAction,
@@ -152,8 +153,8 @@ namespace AI.GOAP
             };
 
             //Act:
-            var actionPlanner = new DFSPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var actionPlanner = new GreedyPlanner();
+            var success = actionPlanner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);

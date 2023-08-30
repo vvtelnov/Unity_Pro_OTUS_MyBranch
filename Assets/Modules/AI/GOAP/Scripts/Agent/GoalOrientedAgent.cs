@@ -112,7 +112,8 @@ namespace AI.GOAP
                 .OrderByDescending(it => it.EvaluatePriority())
                 .First();
 
-            if (this.planner.MakePlan(this.worldState, goal.ResultState, out var plan))
+            var actions = this.actions.Where(it => it.IsValid()).ToArray<IActor>();
+            if (this.planner.MakePlan(this.worldState, goal.ResultState, actions, out var plan))
             {
                 this.currentGoal = goal;
                 this.currentPlan = plan;

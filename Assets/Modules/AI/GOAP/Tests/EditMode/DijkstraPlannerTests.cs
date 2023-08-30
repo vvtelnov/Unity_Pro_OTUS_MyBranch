@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
 using static AI.GOAP.TestUtils;
 
 namespace AI.GOAP
 {
     public sealed class DijkstraPlannerTests
     {
+        private readonly DijkstraPlanner planner = new();
+
         private readonly IActor moveAtEnemyAction = new SubstituteActor(
             id: "moveAtEnemyAction",
             cost: 10,
@@ -18,7 +19,7 @@ namespace AI.GOAP
                 new Fact("nearEnemy", true)
             )
         );
-        
+
         private readonly IActor moveNearEnemyAction = new SubstituteActor(
             id: "moveNearEnemyAction",
             cost: 3,
@@ -40,7 +41,7 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             )
         );
-        
+
         private readonly IActor bowCombatAction = new SubstituteActor(
             id: "bowCombatAction",
             cost: 6,
@@ -100,17 +101,13 @@ namespace AI.GOAP
                 new Fact("isInjured", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 makeHealAction
             };
-            
-            //Act:
-            var actionPlanner = new DijkstraPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
-            
-            Debug.Log($"ACTUAL PLAN>>> {string.Join(',', actualPlan)}");
 
+            //Act:
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -138,18 +135,15 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 swordCombatAction,
                 moveAtEnemyAction,
                 makeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new DijkstraPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
-            
-            Debug.Log($"ACTUAL PLAN>>> {string.Join(',', actualPlan)}");
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -161,7 +155,7 @@ namespace AI.GOAP
             };
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
         }
-        
+
         [Test]
         public void RangeCombatPlanTest()
         {
@@ -178,7 +172,7 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new []
             {
                 swordCombatAction,
                 bowCombatAction,
@@ -187,10 +181,9 @@ namespace AI.GOAP
                 moveToResourceAction,
                 makeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new DijkstraPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -222,7 +215,7 @@ namespace AI.GOAP
                 new Fact("happy", true)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 swordCombatAction,
                 moveAtEnemyAction,
@@ -235,8 +228,7 @@ namespace AI.GOAP
 
 
             //Act:
-            var actionPlanner = new DijkstraPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);

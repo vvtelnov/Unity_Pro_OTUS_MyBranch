@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -48,7 +49,8 @@ namespace AI.GOAP
         private bool CreatePlan(out List<IActor> plan)
         {
             this.worldState.UpdateFacts();
-            return this.planner.MakePlan(this.worldState, this.requiredState, out plan);
+            var actions = this.actions.Where(it => it.IsValid()).ToArray<IActor>();
+            return this.planner.MakePlan(this.worldState, this.requiredState, actions, out plan);
         }
 
         void IActor.Callback.Invoke(IActor action, bool success)

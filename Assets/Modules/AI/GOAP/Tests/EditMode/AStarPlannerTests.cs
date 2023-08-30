@@ -7,6 +7,8 @@ namespace AI.GOAP
 {
     public sealed class AStarPlannerTests
     {
+        private readonly AStarPlanner planner = new();
+
         [Test]
         public void MakeHealPlanTest()
         {
@@ -19,14 +21,13 @@ namespace AI.GOAP
                 new Fact("isInjured", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -54,16 +55,15 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 MoveAtEnemyAction,
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -75,7 +75,7 @@ namespace AI.GOAP
             };
             Assert.True(EqualsPlans(expectedPlan, actualPlan));
         }
-        
+
         [Test]
         public void RangeCombatPlanTest()
         {
@@ -92,7 +92,7 @@ namespace AI.GOAP
                 new Fact("enemyExists", false)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 BowCombatAction,
@@ -101,10 +101,9 @@ namespace AI.GOAP
                 MoveToResourceAction,
                 MakeHealAction
             };
-            
+
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);
@@ -137,7 +136,7 @@ namespace AI.GOAP
                 new Fact("happy", true)
             );
 
-            var actions = new List<IActor>
+            var actions = new[]
             {
                 SwordCombatAction,
                 MoveAtEnemyAction,
@@ -148,10 +147,8 @@ namespace AI.GOAP
                 GoBeerAction
             };
 
-
             //Act:
-            var actionPlanner = new AStarPlanner(actions);
-            var success = actionPlanner.MakePlan(worldState, goal, out var actualPlan);
+            var success = this.planner.MakePlan(worldState, goal, actions, out var actualPlan);
 
             //Assert:
             Assert.True(success);

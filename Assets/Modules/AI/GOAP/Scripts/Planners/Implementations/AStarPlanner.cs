@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 // ReSharper disable MemberCanBePrivate.Local
 
@@ -11,9 +10,7 @@ namespace AI.GOAP
 
         private static readonly CostComparer costComparer = new();
 
-        private readonly IEnumerable<IActor> allActions;
-
-        private IEnumerable<IActor> validActions;
+        private IActor[] actions;
         private Dictionary<IActor, List<IActor>> actionGraph;
         private Dictionary<IActor, Node> openList;
         private HashSet<IActor> closedList;
@@ -21,12 +18,7 @@ namespace AI.GOAP
         private IFactState worldState;
         private IFactState goal;
 
-        public AStarPlanner(IEnumerable<IActor> allActions)
-        {
-            this.allActions = allActions;
-        }
-
-        public bool MakePlan(IFactState worldState, IFactState goal, out List<IActor> plan)
+        public bool MakePlan(IFactState worldState, IFactState goal, IActor[] actions, out List<IActor> plan)
         {
             if (goal == null)
             {
@@ -42,36 +34,26 @@ namespace AI.GOAP
 
             this.worldState = worldState;
             this.goal = goal;
-            this.validActions = this.allActions.Where(it => it.IsValid());
+            this.actions = actions;
             this.openList = new Dictionary<IActor, Node>();
             this.closedList = new HashSet<IActor>();
 
-            return this.MakePlan(out plan);
-        }
+            this.VisitStartActions();
 
-        private bool MakePlan(out List<IActor> plan)
-        {
-            this.ProcessStartActions();
-
-            if (this.FindFinish(out var endNode))
+            if (this.CheckFinish(out var endNode))
             {
                 plan = new List<IActor> {endNode.action};
                 return true;
             }
 
-            return this.MakePlanByGraph(out plan);
-        }
-
-        private bool MakePlanByGraph(out List<IActor> plan)
-        {
-            this.actionGraph = this.CreateActionGraph();
+            this.actionGraph = PlannerUtils.CreateActionGraph(this.actions, this.worldState);
 
             while (this.SelectNextAction(out var node))
             {
                 this.closedList.Add(node.action);
-                this.ProcessNeighbourActions(node);
+                this.VisitNeighbourActions(node);
 
-                if (this.FindFinish(out var endNode))
+                if (this.CheckFinish(out endNode))
                 {
                     plan = this.CreatePlan(endNode);
                     return true;
@@ -84,18 +66,18 @@ namespace AI.GOAP
             return false;
         }
 
-        private void ProcessStartActions()
+        private void VisitStartActions()
         {
-            foreach (var action in this.validActions)
+            foreach (var action in this.actions)
             {
                 if (PlannerUtils.MatchesAction(action, this.goal, this.worldState))
                 {
-                    this.ProcessAction(action, null);
+                    this.VisitAction(action, null);
                 }
             }
         }
 
-        private void ProcessNeighbourActions(Node node)
+        private void VisitNeighbourActions(Node node)
         {
             if (!this.actionGraph.TryGetValue(node.action, out var neighbours))
             {
@@ -104,11 +86,11 @@ namespace AI.GOAP
 
             foreach (var action in neighbours)
             {
-                this.ProcessAction(action, node);
+                this.VisitAction(action, node);
             }
         }
 
-        private void ProcessAction(IActor action, Node baseNode)
+        private void VisitAction(IActor action, Node baseNode)
         {
             if (this.closedList.Contains(action))
             {
@@ -134,7 +116,7 @@ namespace AI.GOAP
             }
         }
 
-        private bool FindFinish(out Node result)
+        private bool CheckFinish(out Node result)
         {
             var endActions = new List<Node>();
             foreach (var (action, node) in this.openList)
@@ -188,42 +170,7 @@ namespace AI.GOAP
             return result != null;
         }
 
-        private Dictionary<IActor, List<IActor>> CreateActionGraph()
-        {
-            var actions = this.validActions.ToArray();
-            var graph = new Dictionary<IActor, List<IActor>>();
-
-            var count = actions.Length;
-            for (var i = 0; i < count; i++)
-            {
-                var action = actions[i];
-
-                for (var j = 0; j < count; j++)
-                {
-                    var other = actions[j];
-                    if (other == action)
-                    {
-                        continue;
-                    }
-
-                    var requiredState = action.RequiredState;
-                    if (!PlannerUtils.MatchesAction(other, requiredState, this.worldState))
-                    {
-                        continue;
-                    }
-
-                    if (!graph.TryGetValue(action, out var neighbours))
-                    {
-                        neighbours = new List<IActor>();
-                        graph.Add(action, neighbours);
-                    }
-
-                    neighbours.Add(other);
-                }
-            }
-
-            return graph;
-        }
+        
 
         private sealed class Node
         {

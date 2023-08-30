@@ -5,16 +5,10 @@ namespace AI.GOAP
 {
     public sealed class GreedyPlanner : IPlanner
     {
-        private readonly IEnumerable<IActor> allActions;
-        private IEnumerable<IActor> validActions;
+        private IActor[] actions;
         private IFactState worldState;
-
-        public GreedyPlanner(IEnumerable<IActor> allActions)
-        {
-            this.allActions = allActions;
-        }
-
-        public bool MakePlan(IFactState worldState, IFactState goal, out List<IActor> plan)
+        
+        public bool MakePlan(IFactState worldState, IFactState goal, IActor[] actions, out List<IActor> plan)
         {
             if (goal.EqualsTo(worldState))
             {
@@ -22,50 +16,74 @@ namespace AI.GOAP
                 return true;
             }
 
-            this.validActions = this.allActions.Where(it => it.IsValid());
             this.worldState = worldState;
+            this.actions = actions;
 
-            plan = new List<IActor>();
+            return this.MakePlanRecursively(goal, baseNode: null, out plan);
+        }
 
-            while (this.FindNextAction(goal, out var nextAction))
+        private bool MakePlanRecursively(IFactState goal, Node baseNode, out List<IActor> plan)
+        {
+            var neighbours = this.FindNeighbours(goal);
+            var orderedNeighbours = neighbours.OrderBy(it => it.EvaluateCost());
+
+            foreach (var action in orderedNeighbours)
             {
-                plan.Add(nextAction);
-                
-                goal = nextAction.RequiredState;
-                
-                if (goal.EqualsTo(worldState))
+                var node = new Node
                 {
-                    plan.Reverse();
+                    baseNode = baseNode,
+                    action = action
+                };
+                
+                var requiredState = action.RequiredState;
+                if (requiredState.EqualsTo(this.worldState))
+                {
+                    plan = this.CreatePlan(node);
+                    return true;
+                }
+
+                if (this.MakePlanRecursively(requiredState, node, out plan))
+                {
                     return true;
                 }
             }
 
-            plan = default;
+            plan = null;
             return false;
         }
 
-        private bool FindNextAction(IFactState requiredState, out IActor cheapestAction)
+        private List<IActor> FindNeighbours(IFactState goal)
         {
-            cheapestAction = null;
-            var currentCost = int.MaxValue;
-
-            foreach (var action in this.validActions)
+            var result = new List<IActor>();
+            
+            foreach (var action in this.actions)
             {
-                if (!PlannerUtils.MatchesAction(action, requiredState, this.worldState))
+                if (PlannerUtils.MatchesAction(action, goal, this.worldState))
                 {
-                    continue;
-                }
-
-                var cost = action.EvaluateCost();
-                
-                if (cheapestAction == null || currentCost > cost)
-                {
-                    cheapestAction = action;
-                    currentCost = cost;
+                    result.Add(action);
                 }
             }
 
-            return cheapestAction != null;
+            return result;
+        }
+
+        private List<IActor> CreatePlan(Node endNode)
+        {
+            var plan = new List<IActor>();
+
+            while (endNode != null)
+            {
+                plan.Add(endNode.action);
+                endNode = endNode.baseNode;
+            }
+            
+            return plan;
+        }
+
+        private sealed class Node
+        {
+            public Node baseNode;
+            public IActor action;
         }
     }
 }

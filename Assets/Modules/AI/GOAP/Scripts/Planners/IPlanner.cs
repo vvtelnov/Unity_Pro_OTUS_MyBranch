@@ -4,6 +4,6 @@ namespace AI.GOAP
 {
     public interface IPlanner
     {
-        bool MakePlan(IFactState worldState, IFactState goal, out List<IActor> plan);
+        bool MakePlan(IFactState worldState, IFactState goal, IActor[] actions, out List<IActor> plan);
     }
 }
