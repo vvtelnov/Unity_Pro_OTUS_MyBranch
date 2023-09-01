@@ -1,7 +1,6 @@
 using AI.GOAP;
 using Entities;
 using Game.GameEngine.Entities;
-using Game.GameEngine.Mechanics;
 using Lessons.AI.HierarchicalStateMachine;
 using UnityEngine;
 
