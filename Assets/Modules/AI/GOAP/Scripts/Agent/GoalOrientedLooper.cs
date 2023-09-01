@@ -16,7 +16,10 @@ namespace AI.GOAP
 
         private void FixedUpdate()
         {
-            this.agent.TryPlay();
+            if (!this.agent.IsPlaying)
+            {
+                this.agent.Play();
+            }
         }
     }
 }

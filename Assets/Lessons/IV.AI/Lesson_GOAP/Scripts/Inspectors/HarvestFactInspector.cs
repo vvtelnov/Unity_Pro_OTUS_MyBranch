@@ -24,29 +24,19 @@ namespace Lessons.AI.Lesson_GOAP
         private string resourceKey;
 
         [Header("World State")]
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string atResource;
-
-        public override void OnUpdate(WorldState worldState)
+        
+        public override void PopulateFacts(FactState state)
         {
-            if (this.Blackboard.HasVariable(this.unitKey) &&
-                this.Blackboard.HasVariable(this.resourceKey))
+            if (this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit) &&
+                this.Blackboard.TryGetVariable(this.resourceKey, out IEntity resource))
             {
-                worldState.SetFact(this.atResource, this.AtResource());
+                var distance = EntityUtils.Distance(resource, unit);
+                var atResource = distance <= this.minDistance.Current;
+                state.SetFact(this.atResource, atResource);
             }
-            else
-            {
-                worldState.RemoveFact(this.atResource);
-            }
-        }
-
-        private bool AtResource()
-        {
-            var unit = this.Blackboard.GetVariable<IEntity>(this.unitKey);
-            var resource = this.Blackboard.GetVariable<IEntity>(this.resourceKey);
-            var distance = EntityUtils.Distance(resource, unit);
-            return distance <= this.minDistance.Current;
         }
     }
 }

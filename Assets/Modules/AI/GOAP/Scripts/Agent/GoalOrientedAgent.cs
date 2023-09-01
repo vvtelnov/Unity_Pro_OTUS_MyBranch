@@ -5,6 +5,8 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+// ReSharper disable EventNeverSubscribedTo.Global
+
 namespace AI.GOAP
 {
     [AddComponentMenu("AI/GOAP/Goal Oriented Agent")]
@@ -19,8 +21,7 @@ namespace AI.GOAP
         [SerializeField, PropertyOrder(-11), HideInPlayMode]
         private PlannerMode plannerMode;
 
-        [SerializeField, Space, PropertyOrder(-10), HideInPlayMode]
-        private WorldState worldState;
+        private IPlanner planner;
 
         [SerializeField, Space, PropertyOrder(-9), HideInPlayMode]
         private Goal[] goals;
@@ -28,19 +29,25 @@ namespace AI.GOAP
         [SerializeField, Space, PropertyOrder(-8), HideInPlayMode]
         private Actor[] actions;
 
-        private IPlanner planner;
+        [SerializeField, Space, PropertyOrder(-7), HideInPlayMode]
+        private FactInspector[] factInspectors;
 
         [Title("Debug")]
-        [ShowInInspector, ReadOnly, PropertySpace, PropertyOrder(-7)]
+        [ShowInInspector, ReadOnly, PropertySpace, PropertyOrder(-6)]
         public bool IsPlaying
         {
             get { return this.currentPlan != null; }
         }
 
-        [ShowInInspector, ReadOnly, PropertyOrder(-6)]
+        [ShowInInspector, ReadOnly, PropertyOrder(-5)]
         public IGoal CurrentGoal
         {
             get { return this.currentGoal; }
+        }
+
+        public FactState WorldState
+        {
+            get { return this.GenerateWorldState(); }
         }
 
         public IEnumerable<IGoal> Goals
@@ -52,7 +59,7 @@ namespace AI.GOAP
         {
             get { return this.actions; }
         }
-
+        
         private IGoal currentGoal;
 
         [ShowInInspector, ReadOnly, PropertyOrder(-5)]
@@ -63,14 +70,11 @@ namespace AI.GOAP
 
         private void Awake()
         {
-            this.ConstuctActions();
-            this.ConstructPlanner();
+            this.planner = PlannerFactory.CreatePlanner(this.plannerMode);
         }
 
         public void Play()
         {
-            this.worldState.UpdateFacts();
-
             var goal = this.goals
                 .Where(it => it.IsValid())
                 .OrderByDescending(it => it.EvaluatePriority())
@@ -92,30 +96,75 @@ namespace AI.GOAP
                 return;
             }
 
-            if (!this.planner.MakePlan(this.worldState, goal.ResultState, actions, out var plan))
+            if (!this.planner.MakePlan(this.WorldState, goal.ResultState, actions, out var plan))
             {
                 Debug.LogWarning($"Can't make a plan for goal {goal.name}!");
                 return;
             }
-            
+
             if (plan.Count <= 0)
             {
                 Debug.LogWarning($"Plan for goal {goal.name} is empty!");
                 return;
             }
-            
+
             this.currentGoal = goal;
             this.currentPlan = plan;
 
             this.actionIndex = 0;
             this.OnStarted?.Invoke();
+
+            this.PlayAction();
+        }
+
+        public void Cancel()
+        {
+            this.StopAllCoroutines();
             
-            this.currentPlan[this.actionIndex].Play(callback: this);
+            if (this.currentPlan != null && 
+                this.actionIndex < this.currentPlan.Count)
+            {
+                this.currentPlan[this.actionIndex].Cancel();
+            }
+
+            this.currentPlan = null;
+            this.actionIndex = 0;
+            this.OnCancel();
+        }
+
+        public void Replay()
+        {
+            this.Cancel();
+            this.Play();
+        }
+        
+        private void PlayAction()
+        {
+            var action = this.currentPlan[this.actionIndex];
+            if (!action.IsValid())
+            {
+                this.Fail();
+                return;
+            }
+
+            if (!action.RequiredState.EqualsTo(this.WorldState))
+            {
+                this.Fail();
+                return;
+            }
+
+            action.Play(callback: this);
         }
 
         void IActor.Callback.Invoke(IActor action, bool success)
         {
             if (!success)
+            {
+                this.Fail();
+                return;
+            }
+
+            if (!action.ResultState.EqualsTo(this.WorldState))
             {
                 this.Fail();
                 return;
@@ -131,57 +180,11 @@ namespace AI.GOAP
             this.actionIndex++;
             this.StartCoroutine(this.PlayNextAction());
         }
-        
-        public void Cancel()
-        {
-            if (this.currentPlan != null)
-            {
-                this.currentPlan[this.actionIndex].Cancel();
-            }
-
-            this.currentPlan = null;
-            this.actionIndex = 0;
-            this.OnCancel();
-        }
-
-        public void Replay()
-        {
-            this.Cancel();
-            this.Play();
-        }
-
-        public bool TryPlay()
-        {
-            if (!this.IsPlaying)
-            {
-                this.Play();
-                return true;
-            }
-
-            return false;
-        }
-        
-        public void SynchronizeGoal()
-        {
-            var actualGoal = this.goals
-                .Where(it => it.IsValid())
-                .OrderByDescending(it => it.EvaluatePriority())
-                .FirstOrDefault();
-
-            if (actualGoal == null)
-            {
-                this.Cancel();
-            }
-            else if (!actualGoal.Equals(this.currentGoal))
-            {
-                this.Replay();
-            }
-        }
 
         private IEnumerator PlayNextAction()
         {
             yield return new WaitForFixedUpdate();
-            this.currentPlan[this.actionIndex].Play(callback: this);
+            this.PlayAction();
         }
 
         private void Fail()
@@ -197,6 +200,19 @@ namespace AI.GOAP
             this.actionIndex = 0;
             this.OnComplete();
         }
+        
+        private FactState GenerateWorldState()
+        {
+            var worldState = new FactState();
+            
+            for (int i = 0, count = this.factInspectors.Length; i < count; i++)
+            {
+                var inspector = this.factInspectors[i];
+                inspector.PopulateFacts(worldState);
+            }
+
+            return worldState;
+        }
 
         protected virtual void OnFail()
         {
@@ -211,19 +227,6 @@ namespace AI.GOAP
         protected virtual void OnCancel()
         {
             this.OnCanceled?.Invoke();
-        }
-
-        private void ConstuctActions()
-        {
-            foreach (var action in this.actions)
-            {
-                action.Construct(this.worldState);
-            }
-        }
-
-        private void ConstructPlanner()
-        {
-            this.planner = PlannerFactory.CreatePlanner(this.plannerMode, this.actions);
         }
     }
 }

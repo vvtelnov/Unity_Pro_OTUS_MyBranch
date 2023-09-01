@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Lessons.AI.Lesson_GOAP
 {
-    public sealed class CombatFactInspector : FactInspector, IBlackboardInjective
+    public sealed class EnemyFactInspector : FactInspector, IBlackboardInjective
     {
         public IBlackboard Blackboard { private get; set; }
 
@@ -29,34 +29,28 @@ namespace Lessons.AI.Lesson_GOAP
         private string targetKey;
 
         [Header("World State")]
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string enemyAlive;
 
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string nearEnemy;
 
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string atEnemy;
-
-        public override void OnUpdate(WorldState worldState)
+        
+        public override void PopulateFacts(FactState state)
         {
             if (this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit) &&
                 this.Blackboard.TryGetVariable(this.targetKey, out IEntity target))
             {
                 var distance = EntityUtils.Distance(unit, target);
-
-                worldState.SetFact(this.enemyAlive, target.Get<IComponent_IsAlive>().IsAlive);
-                worldState.SetFact(this.nearEnemy, distance <= this.rangeDistance.Current);
-                worldState.SetFact(this.atEnemy, distance <= this.meleeDistance.Current);
-            }
-            else
-            {
-                worldState.RemoveFact(this.enemyAlive);
-                worldState.RemoveFact(this.nearEnemy);
-                worldState.RemoveFact(this.atEnemy);
+            
+                state.SetFact(this.enemyAlive, target.Get<IComponent_IsAlive>().IsAlive);
+                state.SetFact(this.nearEnemy, distance <= this.rangeDistance.Current);
+                state.SetFact(this.atEnemy, distance <= this.meleeDistance.Current);
             }
         }
     }

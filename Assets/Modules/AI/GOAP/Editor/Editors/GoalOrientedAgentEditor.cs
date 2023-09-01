@@ -10,6 +10,8 @@ namespace AI.GOAP.UnityEditor
     public sealed class GoalOrientedAgentEditor : OdinEditor
     {
         private GoalOrientedAgent agent;
+        
+        private bool worldStateFoldout = true;
 
         protected override void OnEnable()
         {
@@ -32,6 +34,7 @@ namespace AI.GOAP.UnityEditor
             GUI.enabled = false;
             this.DrawGoals();
             this.DrawActions();
+            this.DrawWorldState();
             GUI.enabled = true;
             this.DrawButtons();
         }
@@ -86,6 +89,28 @@ namespace AI.GOAP.UnityEditor
             }
         }
 
+        private void DrawWorldState()
+        {
+            GUI.enabled = false;
+            EditorGUILayout.Space(16);
+
+            this.worldStateFoldout = EditorGUILayout.Foldout(this.worldStateFoldout, "WorldState");
+            if (this.worldStateFoldout)
+            {
+                EditorGUI.indentLevel++;
+
+                var worldState = this.agent.WorldState;
+                foreach (var (id, value) in worldState)
+                {
+                    EditorGUILayout.Toggle(id, value);
+                }
+
+                EditorGUI.indentLevel--;
+            }
+
+            GUI.enabled = true;
+        }
+
         private void DrawButtons()
         {
             EditorGUILayout.Space(8.0f);
@@ -102,11 +127,6 @@ namespace AI.GOAP.UnityEditor
             if (GUILayout.Button("Cancel"))
             {
                 this.agent.Cancel();
-            }
-
-            if (GUILayout.Button("Synchronize"))
-            {
-                this.agent.SynchronizeGoal();
             }
         }
     }

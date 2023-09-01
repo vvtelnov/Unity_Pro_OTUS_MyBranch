@@ -19,20 +19,5 @@ namespace AI.GOAP
 
             return true;
         }
-        
-        public static bool IsNeighbourTo(this IFactState target, IFactState other)
-        {
-            foreach (var (id, _) in target)
-            {
-                if (other.ContainsFact(id))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        
-       
     }
 }

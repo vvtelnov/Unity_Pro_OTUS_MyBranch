@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 
 namespace AI.GOAP
 {
     public static class PlannerFactory
     {
-        public static IPlanner CreatePlanner(PlannerMode mode, IEnumerable<IActor> allActions)
+        public static IPlanner CreatePlanner(PlannerMode mode)
         {
             if (mode == PlannerMode.Greedy)
             {

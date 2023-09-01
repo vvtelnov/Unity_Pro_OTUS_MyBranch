@@ -12,33 +12,27 @@ namespace Lessons.AI.Lesson_GOAP2
         private Blackboard blackboard;
 
         [Space]
-        [SerializeField, FactId]
+        [SerializeField, FactKey]
         private string hasEnemy;
 
-        [SerializeField, FactId]
+        [SerializeField, FactKey]
         private string nearEnemy;
 
-        [SerializeField, FactId]
+        [SerializeField, FactKey]
         private string atEnemy;
 
-        public override void OnUpdate(WorldState worldState)
+        public override void PopulateFacts(FactState state)
         {
             if (this.blackboard.TryGetVariable(BlackboardKeys.UNIT, out IEntity unit) &&
-                this.blackboard.TryGetVariable(BlackboardKeys.ENEMY, out IEntity enemy))
+                this.blackboard.TryGetVariable(BlackboardKeys.ENEMY, out IEntity enemy) &&
+                this.blackboard.TryGetVariable(BlackboardKeys.NEAR_ENEMY_DISTANCE, out float nearDistance) &&
+                this.blackboard.TryGetVariable(BlackboardKeys.AT_ENEMY_DISTANCE, out float atDistance))
             {
                 var currentDistance = EntityUtils.Distance(unit, enemy);
-                var nearDistance = this.blackboard.GetVariable<float>(BlackboardKeys.NEAR_ENEMY_DISTANCE);
-                var atDistance = this.blackboard.GetVariable<float>(BlackboardKeys.AT_ENEMY_DISTANCE);
-                
-                worldState.SetFact(this.hasEnemy, true);
-                worldState.SetFact(this.nearEnemy, currentDistance <= nearDistance);
-                worldState.SetFact(this.atEnemy, currentDistance <= atDistance);
-            }
-            else
-            {
-                worldState.RemoveFact(this.hasEnemy);
-                worldState.RemoveFact(this.nearEnemy);
-                worldState.RemoveFact(this.atEnemy);
+
+                state.SetFact(this.hasEnemy, true);
+                state.SetFact(this.nearEnemy, currentDistance <= nearDistance);
+                state.SetFact(this.atEnemy, currentDistance <= atDistance);
             }
         }
     }

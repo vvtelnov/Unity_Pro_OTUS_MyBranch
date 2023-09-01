@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -60,7 +61,24 @@ namespace AI.GOAP
             {
                 var period = Random.Range(this.minScanPeriod, this.maxScanPeriod);
                 yield return new WaitForSeconds(period);
-                this.agent.SynchronizeGoal();
+                this.SynchronizeGoal();
+            }
+        }
+
+        private void SynchronizeGoal()
+        {
+            var actualGoal = this.agent.Goals
+                .Where(it => it.IsValid())
+                .OrderByDescending(it => it.EvaluatePriority())
+                .FirstOrDefault();
+
+            if (actualGoal == null)
+            {
+                this.agent.Cancel();
+            }
+            else if (!actualGoal.Equals(this.agent.CurrentGoal))
+            {
+                this.agent.Replay();
             }
         }
     }

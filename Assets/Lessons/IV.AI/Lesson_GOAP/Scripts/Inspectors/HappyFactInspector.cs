@@ -1,21 +1,18 @@
 using AI.GOAP;
-using Entities;
-using Game.GameEngine.Mechanics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Lessons.AI.Lesson_GOAP
 {
     public sealed class HappyFactInspector : FactInspector
     {
         [Header("World State")]
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string isHappy;
 
-        public override void OnUpdate(WorldState worldState)
+        public override void PopulateFacts(FactState state)
         {
-            worldState.SetFact(this.isHappy, false);
+            state.SetFact(this.isHappy, false);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace AI.GOAP
 {
     public abstract class FactInspector : MonoBehaviour
     {
-        public abstract void OnUpdate(WorldState worldState);
+        public abstract void PopulateFacts(FactState state);
     }
 }

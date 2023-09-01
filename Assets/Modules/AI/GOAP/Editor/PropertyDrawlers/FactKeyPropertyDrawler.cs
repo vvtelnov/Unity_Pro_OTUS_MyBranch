@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace AI.GOAP.UnityEditor
 {
-    [CustomPropertyDrawer(typeof(FactIdAttribute))]
-    public sealed class FactIdPropertyDrawler : PropertyDrawer
+    [CustomPropertyDrawer(typeof(FactKeyAttribute))]
+    public sealed class FactKeyPropertyDrawler : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

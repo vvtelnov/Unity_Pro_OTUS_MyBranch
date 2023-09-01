@@ -20,19 +20,15 @@ namespace Lessons.AI.Lesson_GOAP
         private string unitKey;
         
         [Header("World State")]
-        [FactId]
+        [FactKey]
         [SerializeField]
         private string isInjured;
-
-        public override void OnUpdate(WorldState worldState)
+        
+        public override void PopulateFacts(FactState state)
         {
             if (this.Blackboard.TryGetVariable(this.unitKey, out IEntity unit))
             {
-                worldState.SetFact(this.isInjured, this.IsInjured(unit));
-            }
-            else
-            {
-                worldState.RemoveFact(this.isInjured);
+                state.SetFact(this.isInjured, this.IsInjured(unit));
             }
         }
 

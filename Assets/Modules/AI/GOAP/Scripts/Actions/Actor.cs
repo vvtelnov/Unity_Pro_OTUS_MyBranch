@@ -20,10 +20,6 @@ namespace AI.GOAP
         {
             get { return this.isPlaying; }
         }
-        
-        [Space]
-        [SerializeField]
-        private bool validate = true;
 
         [Space]
         [SerializeField]
@@ -31,8 +27,6 @@ namespace AI.GOAP
 
         [SerializeField]
         protected FactState requiredState;
-        
-        protected WorldState worldState;
 
         private bool isPlaying;
 
@@ -48,22 +42,6 @@ namespace AI.GOAP
             {
                 return;
             }
-            
-            if (this.validate)
-            {
-                if (!this.IsValid())
-                {
-                    callback?.Invoke(this, false);
-                    return;
-                }    
-                
-                this.worldState.UpdateFacts();
-                if (!this.requiredState.EqualsTo(this.worldState))
-                {
-                    callback?.Invoke(this, false);
-                    return;
-                }
-            }
 
             this.callback = callback;
             this.isPlaying = true;
@@ -72,7 +50,7 @@ namespace AI.GOAP
 
         public void Cancel()
         {
-            if (!this.IsPlaying)
+            if (!this.isPlaying)
             {
                 return;
             }
@@ -95,16 +73,6 @@ namespace AI.GOAP
             this.isPlaying = false;
             this.OnReturn();
             this.OnDispose();
-
-            if (this.validate)
-            {
-                this.worldState.UpdateFacts();
-                if (!this.resultState.EqualsTo(this.worldState))
-                {
-                    success = false;
-                }
-            }
-            
             this.InvokeCallback(success);
         }
 
@@ -134,11 +102,6 @@ namespace AI.GOAP
             var callback = this.callback;
             this.callback = null;
             callback.Invoke(this, success);
-        }
-
-        public virtual void Construct(WorldState worldState)
-        {
-            this.worldState = worldState;
         }
     }
 }
