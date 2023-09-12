@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f499b9100f454aa66254e8f9a80de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepType: 3
+  step: 0
   upgradeCursor: {fileID: 4130442898600698827}
   closeCursor: {fileID: 1723928941128517293}
   fading: {fileID: 8915147730854715974}
@@ -1044,7 +1044,8 @@ PrefabInstance:
     - target: {fileID: 8809413243723258090, guid: 52d93e697f46d476d82f0ac5d2e360d3,
         type: 3}
       propertyPath: onShow.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value:ShowPopup      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8809413243723258090, guid: 52d93e697f46d476d82f0ac5d2e360d3,
         type: 3}
       propertyPath: onShow.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
