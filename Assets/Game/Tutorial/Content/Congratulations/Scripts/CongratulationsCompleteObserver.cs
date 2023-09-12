@@ -10,7 +10,7 @@ using UnityEngine.AddressableAssets;
 namespace Game.Tutorial
 {
     [AddComponentMenu("Tutorial/Complete «Congratulations»")]
-    public sealed class CongratulationsCompleteController : TutorialCompleteController
+    public sealed class CongratulationsCompleteObserver : TutorialCompleteObserver
     {
         [SerializeField]
         private AssetReference popupPrefab;

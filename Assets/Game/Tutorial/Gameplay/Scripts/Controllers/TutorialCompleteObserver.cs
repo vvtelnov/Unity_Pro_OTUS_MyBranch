@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Tutorial.Gameplay
 {
-    public abstract class TutorialCompleteController : MonoBehaviour,
+    public abstract class TutorialCompleteObserver : MonoBehaviour,
         IGameConstructElement,
         IGameReadyElement,
         IGameFinishElement
