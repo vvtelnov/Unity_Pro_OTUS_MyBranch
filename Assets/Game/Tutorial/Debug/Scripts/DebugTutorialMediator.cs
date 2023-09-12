@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using Game.App;
 using Game.Tutorial.App;
 using JetBrains.Annotations;
 using Services;
@@ -9,12 +8,12 @@ namespace Game.Tutorial.Development
     [UsedImplicitly]
     public sealed class DebugTutorialMediator : TutorialMediator
     {
-        public override void SetupData(GameRepository repository)
+        protected override void SetupData()
         {
             var debugConfig = DebugTutorialConfig.Instance;
             if (!debugConfig.isDebug)
             {
-                base.SetupData(repository);
+                base.SetupData();
                 return;
             }
 
