@@ -14,7 +14,7 @@ namespace Lessons.Plugins.Lesson_Localization
         {
             base.OnInspectorGUI();
 
-            if (GUILayout.Button("Update Dictionary"))
+            if (GUILayout.Button("Sync"))
             {
                 var textDictionary = this.target as TextDictionary;
                 var updateRoutine = TextDictionaryUpdater.UpdateDictionaryRoutine(textDictionary);

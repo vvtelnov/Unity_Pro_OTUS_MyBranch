@@ -11,27 +11,27 @@ namespace Game.Tutorial.App
         IAppQuitListener
     {
         private const string TUTORIAL_PREFS_KEY = "TutorialData";
-        
+
         [ServiceInject]
         protected TutorialManager tutorialManager;
 
         void IAppInitListener.Init()
         {
+            this.SetupData();
+        }
+
+        protected virtual void SetupData()
+        {
             if (PlayerPrefs.HasKey(TUTORIAL_PREFS_KEY))
             {
-                this.SetupData();
+                var json = PlayerPrefs.GetString(TUTORIAL_PREFS_KEY);
+                var data = JsonUtility.FromJson<TutorialData>(json);
+                this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
             }
             else
             {
                 this.tutorialManager.Initialize();
             }
-        }
-
-        protected virtual void SetupData()
-        {
-            var json = PlayerPrefs.GetString(TUTORIAL_PREFS_KEY);
-            var data = JsonUtility.FromJson<TutorialData>(json);
-            this.tutorialManager.Initialize(data.isCompleted, data.stepIndex);
         }
 
         void IAppStartListener.Start()

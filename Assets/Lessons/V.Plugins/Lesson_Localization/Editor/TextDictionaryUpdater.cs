@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
 using System.Collections;
-using Lessons.Plugins.Lesson_Localization;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,20 +20,29 @@ namespace Lessons.Plugins.LocalizationLesson
             }
 
             var downloadResult = new DownloadResult();
+            
             yield return DownloadContent(uri, downloadResult);
-            config.entities = TextEntityParser.ParseTextByEntities(downloadResult.content);
+            
+            config.entities = TextDictionaryParser.ParseTextByEntities(downloadResult.content);
+            EditorUtility.SetDirty(config);
 
             var serializedObject = new SerializedObject(config);
+            
             serializedObject.ApplyModifiedProperties();
+            
+            // File.WriteAllText("LocalizationKeys.cs", "public static class");
+            
             AssetDatabase.SaveAssets();
         }
 
         private static IEnumerator DownloadContent(string uri, DownloadResult result)
         {
             var fullURI = $"{uri}/gviz/tq?tqx=out:csv&sheet={1}";
+            
             using (var request = UnityWebRequest.Get(fullURI))
             {
                 yield return request.SendWebRequest();
+                
                 if (request.isNetworkError)
                 {
                     Debug.LogError($"Download content error: {request.error}");
