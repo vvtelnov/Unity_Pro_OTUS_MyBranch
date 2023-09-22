@@ -197,7 +197,8 @@ AudioSource:
   m_GameObject: {fileID: 2095146537420025459}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 94905217914382134, guid: cea6ca8085d9e4c24ad2ef67d8a0c36f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2676,9 +2677,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 9453743266f15416cb928a034c75c66c, type: 2}
-  components:
-    entity: {fileID: 6196672209863689762}
-    movingPivot: {fileID: 4153233373919236228}
   core:
     transformEngine:
       sourcePositionTransform: {fileID: 4153233373919236228}
@@ -2690,20 +2688,20 @@ MonoBehaviour:
       sourceRotationTransform: {fileID: 8337770034888385040}
       rotatingTransforms:
       - {fileID: 8337770034888385040}
-    enableVariable:
+    isEnable:
       value: 0
-    move: {}
     collision:
       collisionLayer: {fileID: 3071190265748753616}
       colliders:
       - {fileID: 3899453554721830768}
     life:
-      hitPointsEngine:
+      hitPoints:
         maxHitPoints: 0
         currentHitPoints: 0
-      isAlive:
-        value: 0
     combat: {}
+  components:
+    entity: {fileID: 6196672209863689762}
+    movingPivot: {fileID: 4153233373919236228}
   animations:
     animator: {fileID: 5522807952119861164}
     observable: {fileID: 5610163594475732761}

@@ -69,6 +69,30 @@ namespace Game.Gameplay.Player
             this.resourceAnimator.PlayIncomeFromWorld(resourcePosition, resourceType, resourceAmount);
 
             SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
+            // SceneAudioManager.PlaySound(SceneAudioType.INTERFACE, this.collectSFX);
         }
     }
 }

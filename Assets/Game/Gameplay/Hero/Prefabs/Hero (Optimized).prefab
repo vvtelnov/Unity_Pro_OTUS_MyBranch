@@ -51,7 +51,8 @@ AudioSource:
   m_GameObject: {fileID: 838166166773445246}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 94905217914382134, guid: cea6ca8085d9e4c24ad2ef67d8a0c36f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -461,7 +462,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2553572460616179600}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -518,9 +519,6 @@ MonoBehaviour:
       hitPoints:
         maxHitPoints: 10
         currentHitPoints: 10
-    effects:
-      effector:
-        effects: []
   components:
     entity: {fileID: 3680522350642356875}
     movingPivot: {fileID: 7956214922342990283}
@@ -528,40 +526,6 @@ MonoBehaviour:
     collisionSensor: {fileID: 1268959503665915570}
     triggerSensor: {fileID: 1268959503665915573}
     collider: {fileID: 1268959503665915568}
-  states:
-    stateMachine:
-      states:
-      - key: 0
-        state:
-          rid: 420919523448979502
-      - key: 1
-        state:
-          rid: 420919523448979503
-      - key: 4
-        state:
-          rid: 420919523448979504
-      - key: 2
-        state:
-          rid: 420919523448979505
-      - key: 5
-        state:
-          rid: 420919523448979506
-      orderedTransitions:
-      - stateId: 5
-        condition:
-          rid: 420919523448979507
-      - stateId: 1
-        condition:
-          rid: 420919523448979508
-      - stateId: 4
-        condition:
-          rid: 420919523448979509
-      - stateId: 2
-        condition:
-          rid: 420919523448979510
-      - stateId: 0
-        condition:
-          rid: 420919523448979511
   animations:
     animator: {fileID: 887803968178836655}
     animatorObservable: {fileID: 6466444765088157045}
@@ -572,49 +536,12 @@ MonoBehaviour:
       chopVFX: {fileID: 2793578798730451373}
       mineVFX: {fileID: 9118719856452252241}
     moveState:
-      states:
-      - rid: 420919523448979466
-      - rid: 420919523448979467
-      - rid: 420919523448979489
-      - rid: 420919523448979490
-      - rid: 420919523448979512
-      - rid: 420919523448979513
       stepSoundId: Step
     chopState:
-      states:
-      - rid: 420919523448979466
-      - rid: 420919523448979468
-      - rid: 420919523448979469
-      - rid: 420919523448979489
-      - rid: 420919523448979491
-      - rid: 420919523448979492
-      - rid: 420919523448979512
-      - rid: 420919523448979514
-      - rid: 420919523448979515
       chopSoundId: Chop
     mineState:
-      states:
-      - rid: 420919523448979466
-      - rid: 420919523448979470
-      - rid: 420919523448979471
-      - rid: 420919523448979489
-      - rid: 420919523448979493
-      - rid: 420919523448979494
-      - rid: 420919523448979512
-      - rid: 420919523448979516
-      - rid: 420919523448979517
       mineSoundId: Mine
     combatState:
-      states:
-      - rid: 420919523448979466
-      - rid: 420919523448979472
-      - rid: 420919523448979473
-      - rid: 420919523448979489
-      - rid: 420919523448979495
-      - rid: 420919523448979496
-      - rid: 420919523448979512
-      - rid: 420919523448979518
-      - rid: 420919523448979519
       hitSoundId: Hit
   canvas:
     hitPointsBar: {fileID: 9156419929614464152}
@@ -622,122 +549,6 @@ MonoBehaviour:
     audioSource: {fileID: 1749185279263503139}
     soundCatalog: {fileID: 11400000, guid: 794f2acb0a88d4ee386f1097a39a5c5b, type: 2}
     humanDeathSoundId: HumanDeath
-  references:
-    version: 2
-    RefIds:
-    - rid: 420919523448979466
-      type: {class: AnimatorState_ResetRootMotion, ns: Game.GameEngine.Animation,
-        asm: Assets}
-      data:
-        resetPosition: 1
-        resetRotation: 1
-    - rid: 420919523448979467
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979468
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979469
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979470
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979471
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979472
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979473
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979489
-      type: {class: AnimatorState_ResetRootMotion, ns: Game.GameEngine.Animation,
-        asm: Assets}
-      data:
-        resetPosition: 1
-        resetRotation: 1
-    - rid: 420919523448979490
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979491
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979492
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979493
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979494
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979495
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979496
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979502
-      type: {class: HeroModel_States/IdleState, ns: Game.Gameplay.Hero, asm: Assets}
-      data:
-        states: []
-    - rid: 420919523448979503
-      type: {class: HeroModel_States/MoveState, ns: Game.Gameplay.Hero, asm: Assets}
-      data:
-        states:
-        - rid: 420919523448979520
-        - rid: 420919523448979521
-    - rid: 420919523448979504
-      type: {class: HeroModel_States/CombatState, ns: Game.Gameplay.Hero, asm: Assets}
-      data:
-        states:
-        - rid: 420919523448979522
-        - rid: 420919523448979523
-    - rid: 420919523448979505
-      type: {class: HeroModel_States/HarvestState, ns: Game.Gameplay.Hero, asm: Assets}
-      data:
-        states:
-        - rid: 420919523448979524
-    - rid: 420919523448979506
-      type: {class: HeroModel_States/DeathState, ns: Game.Gameplay.Hero, asm: Assets}
-      data:
-        states: []
-    - rid: 420919523448979507
-      type: {class: ConditionDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979508
-      type: {class: ConditionDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979509
-      type: {class: ConditionDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979510
-      type: {class: ConditionDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979511
-      type: {class: ConditionDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979512
-      type: {class: AnimatorState_ResetRootMotion, ns: Game.GameEngine.Animation,
-        asm: Assets}
-      data:
-        resetPosition: 1
-        resetRotation: 1
-    - rid: 420919523448979513
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979514
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979515
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979516
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979517
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979518
-      type: {class: AnimatorState_ListenEvent, ns: Game.GameEngine.Animation, asm: Assets}
-    - rid: 420919523448979519
-      type: {class: StateDelegate, ns: Elementary, asm: Elementary}
-    - rid: 420919523448979520
-      type: {class: MoveInDirectionState_SurfacePosition, ns: Game.GameEngine.Mechanics,
-        asm: Assets}
-    - rid: 420919523448979521
-      type: {class: MoveInDirectionState_Rotation, ns: Game.GameEngine.Mechanics,
-        asm: Assets}
-      data:
-        mode: 1
-        rotationSpeed: 45
-    - rid: 420919523448979522
-      type: {class: CombatState_ControlTargetDistance, ns: Game.GameEngine.Mechanics,
-        asm: Assets}
-    - rid: 420919523448979523
-      type: {class: CombatState_ControlTargetDestroy, ns: Game.GameEngine.Mechanics,
-        asm: Assets}
-    - rid: 420919523448979524
-      type: {class: HarvestResourceState_TimeProgress, ns: Game.GameEngine.Mechanics,
-        asm: Assets}
 --- !u!114 &3680522350642356875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a614841e3b47009107c4ca612d8f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnAwake: 0
+  playOnStart: 0
   minScanPeriod: 0.1
   maxScanPeriod: 0.2
   bufferCapacity: 16
@@ -2056,7 +1867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 480516, guid: b81ba67e44b1b174d9ef4491f146ee35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.64308953
+      value: 0.64308643
       objectReference: {fileID: 0}
     - target: {fileID: 480516, guid: b81ba67e44b1b174d9ef4491f146ee35, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2064,7 +1875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 480516, guid: b81ba67e44b1b174d9ef4491f146ee35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0205507
+      value: -1.0205626
       objectReference: {fileID: 0}
     - target: {fileID: 480516, guid: b81ba67e44b1b174d9ef4491f146ee35, type: 3}
       propertyPath: m_LocalRotation.w

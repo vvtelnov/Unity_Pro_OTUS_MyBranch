@@ -83,4 +83,31 @@
 //             this.availableSources.Enqueue(source);
 //         }
 //     }
+
+
+// using UnityEngine;
+// using UnityEngine.Audio;
+//
+//     public sealed class AudioManager : MonoBehaviour
+//     {
+//         private static AudioManager instance;
+//
+//         [SerializeField]
+//         private AudioMixer mixer;
+//
+//         public static void SetSoundVolume(float volume) => 
+//             instance.mixer.SetFloat("SoundVolume", ConvertToDb(volume));
+//
+//         public static void SetMusicVolume(float volume) => 
+//             instance.mixer.SetFloat("MusicVolume", ConvertToDb(volume));
+//
+//         private static float ConvertToDb(float volume) => 
+//             Mathf.Lerp(-80, 0, volume);
+//     }
+
+
+
+
+
+
 // }
