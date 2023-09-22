@@ -45,9 +45,9 @@ namespace Game.App
             volume = Mathf.Clamp01(volume);
             MusicVolume = volume;
             
-            mixer.SetFloat("MusicVolume", Mathf.Lerp(-80, 0, volume));
+            // mixer.SetFloat("MusicVolume", Mathf.Lerp(-80, 0, volume));
 
-            // MusicManager.Volume = volume;
+            MusicManager.Volume = volume;
             OnMusicVolumeChangd?.Invoke(volume);
         }
 
@@ -56,12 +56,11 @@ namespace Game.App
             volume = Mathf.Clamp01(volume);
             SoundVolume = volume;
 
-            mixer.SetFloat("SoundVolume", Mathf.Lerp(-80, 0, volume));
-            mixer.SetFloat("UIVolume", Mathf.Lerp(-80, 0, volume));
+            // mixer.SetFloat("SoundVolume", Mathf.Lerp(-80, 0, volume));
+            // mixer.SetFloat("UIVolume", Mathf.Lerp(-80, 0, volume));
 
-
-            // UISoundManager.Volume = volume;
-            // SceneAudioManager.SetVolumeAll(volume);
+            UISoundManager.Volume = volume;
+            SceneAudioManager.SetVolumeAll(volume);
 
             OnSoundVolumeChanged?.Invoke(volume);
         }

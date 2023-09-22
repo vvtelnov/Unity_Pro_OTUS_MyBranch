@@ -5,12 +5,12 @@ namespace Game
     [AddComponentMenu("Audio/UISound/UI Sound Component")]
     public class UISoundComponent : MonoBehaviour
     {
-        public void Play(UISoundType soundType)
+        public void PlayEnum(UISoundType soundType)
         {
             UISoundManager.PlaySound(soundType);
         }
 
-        public void Play(AudioClip sound)
+        public void PlayClip(AudioClip sound)
         {
             UISoundManager.PlaySound(sound);            
         }

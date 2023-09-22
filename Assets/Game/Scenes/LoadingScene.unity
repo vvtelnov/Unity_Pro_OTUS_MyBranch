@@ -1027,7 +1027,7 @@ PrefabInstance:
     - target: {fileID: 839118479003712424, guid: e3f828c8645f84cddb1b25e45fe226ce,
         type: 3}
       propertyPath: controlClips
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8199489683067609152, guid: e3f828c8645f84cddb1b25e45fe226ce,
         type: 3}
@@ -1044,7 +1044,7 @@ PrefabInstance:
     - target: {fileID: 8441777525663167281, guid: e3f828c8645f84cddb1b25e45fe226ce,
         type: 3}
       propertyPath: controlClips
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8441777525663167281, guid: e3f828c8645f84cddb1b25e45fe226ce,
         type: 3}
