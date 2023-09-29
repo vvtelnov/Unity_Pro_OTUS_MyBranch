@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Game.UI
 {
-    public sealed class LanguageSettingsAdapter : MonoBehaviour
+    public sealed class LanguageSettingsWidget : MonoBehaviour
     {
         [SerializeField]
         private TMP_Dropdown dropdown;

@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 namespace Game.App
 {
-    public sealed class AudioSettingsManager : MonoBehaviour
+    public static class AudioSettingsManager
     {
         private const string MIXER_PATH = "AudioMixer";
 
