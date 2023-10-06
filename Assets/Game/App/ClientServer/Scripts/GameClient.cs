@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Asyncoroutine;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 using static UnityEngine.Networking.UnityWebRequest.Result;
 
 // ReSharper disable UnusedMethodReturnValue.Global
@@ -16,29 +17,29 @@ namespace Game.App
 
         public bool IsAuthorized
         {
-            get { return this.isAuthorized; }
+            get { return this.authorized; }
         }
 
         private readonly GameServer server;
 
         private string userId;
         private string token;
-        private bool isAuthorized;
+        private bool authorized;
 
         public GameClient(GameServer server)
         {
             this.server = server;
         }
 
-        public Task<bool> Authenticate()
+        public async Task<bool> Authenticate()
         {
             if (ES3.KeyExists(USER_KEY))
             {
                 var user = ES3.Load<UserData>(USER_KEY);
-                return this.SignIn(user.id, user.password);
+                return await this.SignIn(user.id, user.password);
             }
 
-            return this.SignUp();
+            return await this.SignUp();
         }
 
         public async Task<bool> SignIn(string userId, string password)
@@ -49,7 +50,7 @@ namespace Game.App
                 password = password
             };
 
-            using (var request = this.server.Post("signIn", body))
+            using (UnityWebRequest request = this.server.Post("signIn", body))
             {
                 Debug.Log($"SIGN IN {userId} {password}");
                 await request.SendWebRequest();
@@ -69,6 +70,7 @@ namespace Game.App
 
                 this.userId = userId;
                 this.token = response.token;
+                this.authorized = true;
 
                 ES3.Save(USER_KEY, new UserData
                 {
@@ -88,9 +90,10 @@ namespace Game.App
             //TODO: Использовать рекламный идентификатор
             // Application.RequestAdvertisingIdentifierAsync();
 
-            using (var request = this.server.Get($"signUp/?deviceId={deviceId}"))
+            using (UnityWebRequest request = this.server.Get($"signUp/?deviceId={deviceId}"))
             {
                 Debug.Log($"SIGN UP {deviceId}");
+                
                 await request.SendWebRequest();
 
                 if (request.result is ConnectionError or ProtocolError)
@@ -112,6 +115,7 @@ namespace Game.App
 
                 this.userId = userId;
                 this.token = token;
+                this.authorized = true;
 
                 ES3.Save(USER_KEY, new UserData
                 {
@@ -125,7 +129,7 @@ namespace Game.App
         
         public async Task<(bool, string)> GetPlayerData()
         {
-            if (!this.IsAuthorized)
+            if (!this.authorized)
             {
                 return (false, null);
             }
@@ -141,7 +145,7 @@ namespace Game.App
                 }
 
                 var playerState = request.downloadHandler.text;
-                if (playerState == "null")
+                if (string.IsNullOrEmpty(playerState) || playerState == "null")
                 {
                     return (false, null);
                 }
@@ -152,16 +156,15 @@ namespace Game.App
 
         public async Task<bool> SetPlayerData(string playerState)
         {
-            if (!this.IsAuthorized)
+            if (!this.authorized)
             {
                 return false;
             }
-
-            Debug.Log($"UPLOAD DATA {playerState}");
-
+            
             var route = $"save_player?userId={this.userId}&token={this.token}";
             using (var request = this.server.Put(route, playerState))
             {
+                Debug.Log($"UPLOAD DATA {playerState}");
                 await request.SendWebRequest();
                 return request.result == Success;
             }

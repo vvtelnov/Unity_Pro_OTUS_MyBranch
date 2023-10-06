@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Game.App;
 using Game.UI;
 using Services;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 namespace Lessons.Plugins.Lesson_Server
 {
+    //Domain:
     public sealed class GameSignIn : MonoBehaviour
     {
         private GameClient gameClient;
@@ -35,8 +37,8 @@ namespace Lessons.Plugins.Lesson_Server
             LoadingScreen.Hide();
         }
 
-        private async Task AuthorizeInternal(string login, string password)
-        {
+        private async UniTask AuthorizeInternal(string login, string password)
+        {   
             if (!await this.gameClient.SignIn(login, password))
             {
                 Debug.LogError("Invalid login or password");

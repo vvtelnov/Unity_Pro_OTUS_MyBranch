@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Services;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -48,11 +49,11 @@ namespace Game.App
             this.OnCompleted?.Invoke();
         }
 
-        private Task<LoadingResult> DoTask(Type taskType)
+        private UniTask<LoadingResult> DoTask(Type taskType)
         {
-            var tcs = new TaskCompletionSource<LoadingResult>();
+            var tcs = new UniTaskCompletionSource<LoadingResult>();
             var loadingTask = (ILoadingTask) ServiceInjector.Instantiate(taskType);
-            loadingTask.Do(result => tcs.SetResult(result));
+            loadingTask.Do(result => tcs.TrySetResult(result));
             return tcs.Task;
         }
     }

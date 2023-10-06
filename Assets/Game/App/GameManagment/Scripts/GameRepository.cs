@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Services;
 using UnityEngine;
+// ReSharper disable UnusedMember.Global
 
 namespace Game.App
 {
@@ -40,7 +41,7 @@ namespace Game.App
             this.gameState[key] = data;
         }
 
-        public async Task LoadStateAuto()
+        public async Task LoadSynchronizedState()
         {
             //Load local game state:
             Dictionary<string, string> localState = new();
@@ -90,7 +91,16 @@ namespace Game.App
             return success;
         }
 
-        public async void SaveState()
+        public void LoadLocalState()
+        {
+            if (PlayerPrefs.HasKey(GAME_PREFS))
+            {
+                var localJson = PlayerPrefs.GetString(GAME_PREFS);
+                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(localJson);
+            }
+        }
+
+        public async void SaveAllStates()
         {
             if (this.isSaving)
             {

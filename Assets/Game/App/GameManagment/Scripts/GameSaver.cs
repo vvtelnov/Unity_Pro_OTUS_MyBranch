@@ -74,7 +74,7 @@ namespace Game.App
                 mediator.SaveData(this.gameRepository);
             }
 
-            this.gameRepository.SaveState();
+            this.gameRepository.SaveAllStates();
             this.remainingSeconds = SAVE_PERIOD_IN_SECONDS;
         }
     }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
@@ -8,7 +7,6 @@ namespace Game.App
     public sealed class GameServer
     {
         private readonly string url;
-
         private readonly int port;
 
         public GameServer(string url, int port)
