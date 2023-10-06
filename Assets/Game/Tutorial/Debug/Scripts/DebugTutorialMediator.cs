@@ -14,13 +14,11 @@ namespace Game.Tutorial.Development
             var debugConfig = DebugTutorialConfig.Instance;
             if (debugConfig.isDebug)
             {
-                Debug.Log("DEBUG TUTOR");
                 this.tutorialManager.Initialize(debugConfig.isCompleted, (int) debugConfig.currentStep);
             }
             else
             {
                 base.SetupData();
-                Debug.Log("RELEASE TUTOR");
             }
         }
     }

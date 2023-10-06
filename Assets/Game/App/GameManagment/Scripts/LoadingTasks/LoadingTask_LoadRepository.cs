@@ -16,7 +16,7 @@ namespace Game.App
 
         async void ILoadingTask.Do(Action<LoadingResult> callback)
         {
-            await this.repository.LoadState();
+            await this.repository.LoadStateAuto();
             LoadingScreen.ReportProgress(0.25f);
             callback?.Invoke(LoadingResult.Success());
         }

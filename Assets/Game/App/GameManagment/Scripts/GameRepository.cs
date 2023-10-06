@@ -9,16 +9,14 @@ namespace Game.App
 {
     public sealed class GameRepository
     {
-        private static readonly DateTime originTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-
         private const string SAVE_TIME_KEY = "saveTime";
-
         private const string GAME_PREFS = "GameState";
         
+        private static readonly DateTime originTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
         private GameClient client;
         
         private Dictionary<string, string> gameState;
-
         private bool isSaving;
 
         [ServiceInject]
@@ -40,9 +38,9 @@ namespace Game.App
         public void SetData(string key, string data)
         {
             this.gameState[key] = data;
-        } 
+        }
 
-        public async Task LoadState()
+        public async Task LoadStateAuto()
         {
             //Load local game state:
             Dictionary<string, string> localState = new();
@@ -58,9 +56,10 @@ namespace Game.App
             Dictionary<string, string> remoteState = new();
             long remoteSaveTime = -1;
             
-            var (success, remoteJson) = await this.client.DownloadState();
+            var (success, remoteJson) = await this.client.GetPlayerData();
             if (success)
             {
+                Debug.Log($"DOWNLOADED DATA {remoteJson}");
                 remoteState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
                 remoteSaveTime = long.Parse(remoteState[SAVE_TIME_KEY]);   
             }
@@ -68,12 +67,27 @@ namespace Game.App
             //Select recent game state:
             if (remoteSaveTime > localSaveTime)
             {
+                Debug.Log($"SELECT REMOTE DATA {remoteSaveTime}");
                 this.gameState = remoteState;
             }
             else
             {
+                Debug.Log($"SELECT LOCAL DATA {localSaveTime}");
                 this.gameState = localState;
             }
+        }
+
+        public async Task<bool> LoadRemoteState()
+        {
+            var (success, remoteJson) = await this.client.GetPlayerData();
+            if (success)
+            {
+                Debug.Log($"DOWNLOADED DATA {remoteJson}");
+                this.gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(remoteJson);
+                PlayerPrefs.DeleteKey(GAME_PREFS);
+            }
+
+            return success;
         }
 
         public async void SaveState()
@@ -93,7 +107,7 @@ namespace Game.App
             //Save game state:
             var json = JsonConvert.SerializeObject(this.gameState);
             PlayerPrefs.SetString(GAME_PREFS, json);
-            await this.client.UploadState(json);
+            await this.client.SetPlayerData(json);
             
             this.isSaving = false;
         }

@@ -1,15 +1,17 @@
+using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using UnityEngine.Networking;
 
 namespace Game.App
 {
-    public sealed class BackendServer
+    public sealed class GameServer
     {
         private readonly string url;
 
         private readonly int port;
 
-        public BackendServer(string url, int port)
+        public GameServer(string url, int port)
         {
             this.url = url;
             this.port = port;
@@ -19,6 +21,12 @@ namespace Game.App
         {
             var url = this.CombineUrl(route);
             return UnityWebRequest.Get(url);
+        }
+
+        public UnityWebRequest Post(string route, object body)
+        {
+            var bodyJson = JsonConvert.SerializeObject(body);
+            return this.Post(route, bodyJson);
         }
 
         public UnityWebRequest Post(string route, string bodyJson)

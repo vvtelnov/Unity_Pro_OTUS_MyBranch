@@ -15,8 +15,6 @@ MonoBehaviour:
   tasks:
   - script: {fileID: 11500000, guid: fdec4862bad74363909105cf4e9519a0, type: 3}
     className: Game.App.GameTask_LoadScene
-  - script: {fileID: 11500000, guid: d9fd8ae379b048578cfc24efa43ebb9e, type: 3}
-    className: Game.App.LoadingTask_LoadPopups
   - script: {fileID: 11500000, guid: fc1f641489e84b2f9d7af3b43fc0a2f0, type: 3}
     className: Game.App.GameTask_ConstructGame
   - script: {fileID: 11500000, guid: d754ddf9a4694df6a8a470e8cef5d226, type: 3}

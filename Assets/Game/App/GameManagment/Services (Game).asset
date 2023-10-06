@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 0e6caca7bdcc41fcb2d49a5614644db2, type: 3}
   - {fileID: 11500000, guid: 083148b9de584d689bff91bdb9adbe0d, type: 3}
   - {fileID: 11500000, guid: 090e1c13435443b39379d04d5bc343de, type: 3}
-  - {fileID: 11500000, guid: f23cf7d77392444fb7a22a6be9a21d08, type: 3}
   - {fileID: 11500000, guid: 881b34a308974185ad303ca2612810a7, type: 3}
   editorScripts: []
   releaseClassNames:
