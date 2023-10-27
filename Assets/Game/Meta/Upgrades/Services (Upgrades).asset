@@ -18,6 +18,5 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 6613a04c884cb4820835e81013829237, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.Meta.UpgradesRepository
   - Game.Meta.UpgradesMediator
   - Game.Meta.UpgradesAssetSupplier

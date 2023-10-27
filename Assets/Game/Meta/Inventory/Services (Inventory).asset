@@ -18,6 +18,5 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 72ef85487b9e4e9a9efd35b8a37b60ec, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.Meta.InventoryItemsRepository
   - Game.Meta.InventoryItemsAssetSupplier
   - Game.Meta.InventoryItemsMediator

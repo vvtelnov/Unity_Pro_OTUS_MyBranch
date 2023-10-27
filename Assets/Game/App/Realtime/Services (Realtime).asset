@@ -22,5 +22,5 @@ MonoBehaviour:
   releaseClassNames:
   - Game.App.RealtimeClockStarter
   - Game.App.RealtimeClockSaver
-  - Game.App.RealtimeRepository
   - Game.App.RealtimeGameSynchronizer
+  - Game.App.RealtimePreferences

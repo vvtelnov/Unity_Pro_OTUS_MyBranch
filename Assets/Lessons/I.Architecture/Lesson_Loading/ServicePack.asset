@@ -20,4 +20,9 @@ MonoBehaviour:
   - {fileID: 11500000, guid: d6a5647c76414b19999a3ac0d3f5279b, type: 3}
   - {fileID: 11500000, guid: f6f02c8c9ff74fdeb673aa7798726006, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Lessons.Architecture.Loading.GameDataLoader
+  - Purchasing.PurchaseManager
+  - Lessons.Architecture.Loading.PluginsStartable
+  - Lessons.Architecture.Loading.PurchasingStartable
+  - Lessons.Architecture.Loading.AuthSocialStartable

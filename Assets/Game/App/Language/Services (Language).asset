@@ -17,5 +17,4 @@ MonoBehaviour:
   - {fileID: 11500000, guid: fd14c211814c4d81b7bc5dacea098bfc, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.App.LanguageRepository
   - Game.App.LanguageMediator

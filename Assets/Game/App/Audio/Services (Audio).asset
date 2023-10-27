@@ -17,5 +17,4 @@ MonoBehaviour:
   - {fileID: 11500000, guid: fc906519a4b24d98bf8c9033554ff3e8, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.App.AudioSettingsRepository
   - Game.App.AudioSettingsMediator

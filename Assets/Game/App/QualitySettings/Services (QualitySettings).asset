@@ -17,5 +17,4 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 0751666b36e54b8ab679e04cd073be5b, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.App.QualitySettingsRepository
   - Game.App.QualitySettingsMediator

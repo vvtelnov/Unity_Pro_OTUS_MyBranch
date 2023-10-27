@@ -20,5 +20,5 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 3c1bbdfdb6f04a6da70824abb415cd75, type: 3}
   - {fileID: 11500000, guid: e504642890774d46adc01d9d8fc07f97, type: 3}
   releaseClassNames:
-  - Game.Gameplay.Player.MoneyRepository
+  - Game.Gameplay.Player.MoneyMediator
   - Game.Gameplay.Player.MoneyMediator

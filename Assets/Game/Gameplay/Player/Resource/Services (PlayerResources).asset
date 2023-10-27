@@ -18,4 +18,3 @@ MonoBehaviour:
   editorScripts: []
   releaseClassNames:
   - Game.Gameplay.Player.ResourceMediator
-  - Game.Gameplay.Player.ResourceRepository

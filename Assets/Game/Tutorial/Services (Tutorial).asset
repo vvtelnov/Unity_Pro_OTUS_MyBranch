@@ -24,7 +24,6 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 0673139518b741a49e70e9f50c464ac9, type: 3}
   - {fileID: 11500000, guid: 4c59e3d27630458c8cea698a101b5d27, type: 3}
   releaseClassNames:
-  - Game.Tutorial.App.TutorialRepository
   - Game.Tutorial.App.TutorialDeployer
   - Game.Tutorial.App.TutorialMediator
   - Game.Tutorial.App.TutorialAssetSupplier

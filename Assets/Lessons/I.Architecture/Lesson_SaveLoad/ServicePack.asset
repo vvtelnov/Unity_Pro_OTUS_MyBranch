@@ -18,4 +18,7 @@ MonoBehaviour:
   - {fileID: 11500000, guid: c059ae895c264ded97b2dfeb6860f42e, type: 3}
   - {fileID: 11500000, guid: 7bf4596845634b368f1e197c74a04577, type: 3}
   editorScripts: []
-  releaseClassNames: []
+  releaseClassNames:
+  - Lessons.Architecture.SaveLoad.MoneySaveLoader
+  - Lessons.Architecture.SaveLoad.GameRepository
+  - Lessons.Architecture.SaveLoad.ResourcesSaveLoader

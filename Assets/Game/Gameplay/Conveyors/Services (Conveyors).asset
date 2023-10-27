@@ -17,5 +17,4 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 3bd69b94eba04a22bf64045ec375c0fa, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.Gameplay.Conveyors.ConveyorsRepository
   - Game.Gameplay.Conveyors.ConveyorsMediator

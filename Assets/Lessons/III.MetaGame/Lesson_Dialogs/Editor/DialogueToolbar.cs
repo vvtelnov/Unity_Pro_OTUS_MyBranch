@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -87,3 +88,4 @@ namespace Lessons.MetaGame.Dialogs
         }
     }
 }
+#endif

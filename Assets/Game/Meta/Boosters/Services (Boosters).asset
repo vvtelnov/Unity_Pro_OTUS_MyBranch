@@ -18,6 +18,5 @@ MonoBehaviour:
   - {fileID: 11500000, guid: 3aec77d64bb64d1bb558a25ab562a1db, type: 3}
   editorScripts: []
   releaseClassNames:
-  - Game.Meta.BoostersRepository
   - Game.Meta.BoostersAssetSupplier
   - Game.Meta.BoostersMediator

@@ -11,7 +11,6 @@ namespace Game.App
     public sealed class ApplicationLoader : MonoBehaviour
     {
         public event Action OnCompleted;
-
         public event Action<string> OnFailed;
 
         [SerializeField]
@@ -21,8 +20,6 @@ namespace Game.App
         [SerializeField]
         [FormerlySerializedAs("config")]
         private LoadingPipeline pipeline;
-
-        private int taskPointer;
 
         private void Start()
         {

@@ -23,3 +23,4 @@ MonoBehaviour:
   - Game.App.GameFacade
   - Game.App.GameSaver
   - Game.App.GameLauncher
+  - Game.App.GameRepository
