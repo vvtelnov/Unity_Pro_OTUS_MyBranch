@@ -417,3 +417,278 @@
 // //         }
 // //     }
 // // }
+//
+// using System;
+// using UnityEngine;
+// using Random = UnityEngine.Random;
+//
+// public sealed class PlayerController : Singleton<PlayerController>
+// {
+//     public void Initialize() {
+//         Singleton<IMoveInput>.Instance.OnMove += this.OnMove;
+//     }
+//
+//     public void Dispose() {
+//         Singleton<IMoveInput>.Instance.OnMove -= this.OnMove;
+//     }
+//
+//     private void OnMove(Vector3 direction) {
+//         Singleton<IPlayer>.Instance.MoveTowards(direction);
+//     }
+// }
+//
+// public abstract class Singleton<T> where T : class
+// {
+//     public static T Instance { get; private set; }
+//     
+//     protected Singleton()
+//     {
+//         Instance = this as T;
+//     }
+// }
+//
+// public interface IPlayer
+// {
+//     void MoveTowards(Vector3 direction);
+// }
+//
+// public interface IMoveInput
+// {
+//     event Action<Vector3> OnMove;
+// }
+//
+//
+//
+//
+// public sealed class QuestFactory
+// {
+//     private readonly DependencyInjector injector;
+//
+//     public QuestFactory(DependencyInjector injector)
+//     {
+//         this.injector = injector;
+//     }
+//
+//     public Quest InstantiateQuest(QuestConfig config)
+//     {
+//         var quest = config.InstatiateQuest();
+//         injector.Inject(quest);
+//         return quest;
+//     }
+// }
+//
+// public sealed class QuestSelector
+// {
+//     private readonly QuestConfig[] questPool;
+//
+//     public QuestSelector(QuestConfig[] questPool)
+//     {
+//         this.questPool = questPool;
+//     }
+//
+//     public QuestConfig SelectQuestConfig()
+//     {
+//         var randomIndex = Random.Range(0, this.questPool.Length);
+//         return this.questPool[randomIndex];
+//     }
+// }
+//
+// public sealed class QuestService
+// {
+//     public Quest CurrentQuest { get; set; }
+// }
+//
+// public sealed class QuestGiver
+// {
+//     private readonly QuestSelector selector;
+//     private readonly QuestFactory factory;
+//     private readonly QuestService service;
+//
+//     public QuestGiver(QuestSelector selector, QuestFactory factory, QuestService service)
+//     {
+//         this.selector = selector;
+//         this.factory = factory;
+//         this.service = service;
+//     }
+//
+//     public void GiveNewQuest()
+//     {
+//         var questConfig = this.selector.SelectQuestConfig();
+//         var quest = this.factory.InstantiateQuest(questConfig);
+//         this.service.CurrentQuest = quest;
+//         this.service.CurrentQuest.Start();
+//     }
+// }
+//
+// public sealed class QuestRewardReceiver
+// {
+//     private readonly MoneyStorage moneyStorage;
+//     private readonly QuestService service;
+//
+//     public QuestRewardReceiver(MoneyStorage moneyStorage, QuestService service)
+//     {
+//         this.moneyStorage = moneyStorage;
+//         this.service = service;
+//     }
+//
+//     public void ReceiveReward()
+//     {
+//         var quest = this.ActiveQuest;
+//         if (quest is {IsCompleted: true})
+//         {
+//             this.moneyStorage.EarnMoney(quest.MoneyReward);
+//             quest.Dispose();
+//             this.service.CurrentQuest = null;
+//         }
+//     }
+// }
+
+//
+// using System;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using Random = UnityEngine.Random;
+//
+// public sealed class PistolWeapon : MonoBehaviour
+// {
+//     [SerializeField]
+//     public int currentBullets;
+//
+//     [SerializeField]
+//     public int maxBullets;
+//
+//     private GameObject bulletPrefab;
+//     private float bulletSpreadAngle;
+//
+//     [SerializeField]
+//     private float fireDuration = 0.75f;
+//     private float fireCountdown;
+//
+//     [SerializeField]
+//     private Transform firePoint;
+//
+//     [SerializeField]
+//     private ParticleSystem fireVFX;
+//
+//     [SerializeField]
+//     private AudioClip fireSFX;
+//
+//     private IBulletSpawner bulletSpawner;
+//     private IAudioManager audioManager;
+//     private IAnalyticsManager analyticsManager;
+//     private IPlayerLevel playerLevel;
+//     
+//     public void Construct(
+//         IBulletSpawner bulletSpawner,
+//         IAudioManager audioManager,
+//         IAnalyticsManager analyticsManager,
+//         IPlayerLevel playerLevel
+//     )
+//     {
+//         this.bulletSpawner = bulletSpawner;
+//         this.audioManager = audioManager;
+//         this.analyticsManager = analyticsManager;
+//         this.playerLevel = playerLevel;
+//     }
+//
+//     public bool CanFire()
+//     {
+//         return this.currentBullets > 0 &&
+//                this.fireCountdown <= 0;
+//     }
+//
+//     public void Fire()
+//     {
+//         if (!this.CanFire())
+//         {
+//             return;
+//         }
+//
+//         var prevBullets = this.currentBullets;
+//         this.currentBullets--;
+//         var spreadAngle = Random.Range(-this.bulletSpreadAngle, this.bulletSpreadAngle);
+//         var position = this.firePoint.position;
+//         var rotation = this.firePoint.rotation * Quaternion.Euler(0, spreadAngle, 0);
+//         this.bulletSpawner.Spawn(this.bulletPrefab, position, rotation);
+//         this.fireCountdown = this.fireDuration;
+//         this.fireVFX.Play(withChildren: true);
+//         this.audioManager.Play(this.fireSFX);
+//         this.analyticsManager.LogEvent("PistolFire", new Dictionary<string, object>
+//         {
+//             {"pistol_bullets", prevBullets},
+//             {"player_level", this.playerLevel.Value}
+//         });
+//     }
+// }
+//
+//
+// public class ClickAndSpawnObject : MonoBehaviour
+// {
+//     [SerializeField]
+//     private GameObject prefab;
+//
+//     [SerializeField]
+//     private ObjectManager objectManager;
+//     
+//     private void Update() {
+//         if (!Input.GetMouseButtonDown(0)) {
+//             return;
+//         }
+//     
+//         var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
+//         if (!Physics.Raycast(ray, out var hit)) {
+//             return;
+//         }
+//         
+//         if (!hit.transform.CompareTag("Ground")) {
+//             return;
+//         }
+//         
+//         var obj = Instantiate(this.prefab, hit.point, Quaternion.identity);
+//         this.objectManager.RegisterObject(obj);
+//     }
+// }
+//
+//
+//
+//
+//
+//
+// public sealed class SelectedUnitStackController : IInitializable, IDisposable
+// {
+//     private readonly SelectedUnitStack stack;
+//     private readonly ObjectSelection objectSelection;
+//
+//     public SelectedUnitStackController(SelectedUnitStack stack, ObjectSelection objectSelection)
+//     {
+//         this.stack = stack;
+//         this.objectSelection = objectSelection;
+//     }
+//
+//     public void Initialize()
+//     {
+//         this.objectSelection.OnStateChanged += this.OnObjectsChanged;
+//     }
+//
+//     public void Dispose()
+//     {
+//         this.objectSelection.OnStateChanged += this.OnObjectsChanged;
+//     }
+//
+//     private void OnObjectsChanged(IEnumerable<int> objects)
+//     {
+//         var playerObjects = this.FilterPlayerObjects(objects);
+//         this.stack.Update(playerObjects);
+//     }
+//
+//     private IEnumerable<int> FilterPlayerObjects(IEnumerable<int> objects)
+//     {
+//         foreach (var obj in objects)
+//         {
+//             if (this.objectHelper.IsPlayer(obj, this.playerId))
+//             {
+//                 yield return obj;
+//             }
+//         }
+//     }
+// }
