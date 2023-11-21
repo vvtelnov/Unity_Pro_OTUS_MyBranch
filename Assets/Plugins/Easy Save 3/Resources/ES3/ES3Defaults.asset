@@ -38,7 +38,6 @@ MonoBehaviour:
     - GOAP
     - Assembly-CSharp
     - BehaviourTree
-    - GameSystemLesson
     - Windows
     - Products
     - Cinemachine
@@ -82,7 +81,6 @@ MonoBehaviour:
     - LessonCraftingTest
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - InventorySystem (EditMode)
-    - LessonTDD
     - SimpleFolderIcon
     - Pathfinding (EditMode)
     showAdvancedSettings: 1
