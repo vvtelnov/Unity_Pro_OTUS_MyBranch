@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace Lessons.Architecture.DI
 {
-    public sealed class KeyboardInput : MonoBehaviour, IGameUpdateListener
+    public sealed class KeyboardInput :
+        IMoveInput,
+        IGameUpdateListener
     {
-        public Action<Vector2> OnMove;
+        public event Action<Vector2> OnMove;
 
         void IGameUpdateListener.OnUpdate(float deltaTime)
         {

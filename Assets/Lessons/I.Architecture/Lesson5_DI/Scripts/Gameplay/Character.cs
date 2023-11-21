@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Lessons.Architecture.DI
 {
-    public sealed class Player : MonoBehaviour
+    public sealed class Character : MonoBehaviour
     {
         [SerializeField]
         private float speed = 2.5f;
-        
+
         public void Move(Vector3 offset)
         {
             this.transform.position += offset * this.speed;

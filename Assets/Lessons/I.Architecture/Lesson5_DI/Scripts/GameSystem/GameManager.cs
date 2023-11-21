@@ -75,6 +75,14 @@ namespace Lessons.Architecture.DI
             }
         }
         
+        public void AddListeners(IEnumerable<IGameListener> listeners)
+        {
+            foreach (var listener in listeners)
+            {
+                this.AddListener(listener);
+            }
+        }
+        
         public void AddListener(IGameListener listener)
         {
             if (listener == null)
@@ -181,5 +189,7 @@ namespace Lessons.Architecture.DI
             
             this.state = GameState.FINISHED;
         }
+
+      
     }
 }
