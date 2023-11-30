@@ -64,7 +64,7 @@ namespace Lessons.MetaGame.Inventory
                 components[i] = component;
             }
             
-            return new InventoryItem(this.name, this.flags, this.metadata, this.components);
+            return new InventoryItem(this.name, this.flags, this.metadata, components);
         }
     }
 }
