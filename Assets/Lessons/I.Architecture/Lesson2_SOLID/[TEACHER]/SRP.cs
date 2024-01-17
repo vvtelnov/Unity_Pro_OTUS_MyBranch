@@ -28,37 +28,81 @@
 //
 // using UnityEngine;
 //
-//             public sealed class Player : MonoBehaviour
-//             {
-//                 [SerializeField] private float speed;
-//
-//                 public void Move(Vector3 direction) {
-//                     this.transform.position += direction * Time.deltaTime * this.speed;
-//                     this.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-//                 }
-//             }
-//
-//             public sealed class MoveController : MonoBehaviour
-//             {
-//                 [SerializeField]
-//                 private Player player;
-//                 
-//                 private void Update() {
-//                     if (Input.GetKey(KeyCode.UpArrow)) {
-//                         this.player.Move(Vector3.up);
-//                     }
-//                     else if (Input.GetKey(KeyCode.DownArrow)) {
-//                         this.player.Move(Vector3.down);
-//                     }
-//                     
-//                     if (Input.GetKey(KeyCode.LeftArrow)) {
-//                         this.player.Move(Vector3.left);
-//                     }
-//                     else if (Input.GetKey(KeyCode.RightArrow)) {
-//                         this.player.Move(Vector3.right);
-//                     }
-//                 }
-//             }
+using UnityEngine;
+
+        // public sealed class Player : MonoBehaviour
+        // {
+        //     [SerializeField] private float speed;
+        //     
+        //     private void Update() {
+        //         if (Input.GetKey(KeyCode.UpArrow)) {
+        //             this.Move(Vector3.up);
+        //         }
+        //         else if (Input.GetKey(KeyCode.DownArrow)) {
+        //             this.Move(Vector3.down);
+        //         }
+        //          
+        //         if (Input.GetKey(KeyCode.LeftArrow)) {
+        //             this.Move(Vector3.left);
+        //         }
+        //         else if (Input.GetKey(KeyCode.RightArrow)) {
+        //             this.Move(Vector3.right);
+        //         }
+        //     }
+        //     
+        //     private void Move(Vector3 direction) {
+        //         this.transform.position += direction * Time.deltaTime * this.speed;
+        //         this.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        //     }
+        // }
+
+
+
+ //
+ //
+     public sealed class Player : MonoBehaviour
+     {
+         [SerializeField] private float speed;
+     
+         public void Move(Vector3 direction) {
+             this.transform.position += direction * Time.deltaTime * this.speed;
+             this.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+         }
+     }
+   
+     public sealed class MoveController : MonoBehaviour
+     {
+         [SerializeField] private Player player;
+         [SerializeField] private MoveInput moveInput;
+         
+         private void Update() {
+             this.player.Move(this.moveInput.GetDirection());
+         }
+     }
+
+
+
+    public sealed class MoveInput : MonoBehaviour
+    {
+        public Vector3 GetDirection() {
+            if (Input.GetKey(KeyCode.UpArrow)) {
+                return Vector3.up;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow)) {
+                return Vector3.down;
+            } else if (Input.GetKey(KeyCode.LeftArrow)) {
+                return Vector3.left;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow)) {
+                return Vector3.right;
+            }
+            return Vector3.zero;
+        }
+    }
+
+
+
+
 //
 //
 //

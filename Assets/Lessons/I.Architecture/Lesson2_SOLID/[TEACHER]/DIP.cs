@@ -3,6 +3,7 @@
 // //Неправильное использование:
 
 
+using System;
 using UnityEngine;
 
     // public sealed class MoveController : MonoBehaviour
@@ -27,6 +28,7 @@ using UnityEngine;
 
 
 
+        
 
 
 //
