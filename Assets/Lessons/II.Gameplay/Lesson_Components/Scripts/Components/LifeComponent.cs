@@ -4,13 +4,7 @@ using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
-    public interface IHitPointsComponent
-    {
-        event Action<int> HealthChanged;
-        void TakeDamage(int damage);
-    }
-    
-    public class HitPointsComponent : MonoBehaviour, IHitPointsComponent
+    public class LifeComponent : MonoBehaviour, ILifeComponent
     {
         [SerializeField] private int _hitPoints = 3;
         
@@ -24,6 +18,7 @@ namespace Lessons.Lesson_Components
         public void TakeDamage(int damage)
         {
             _hitPoints -= damage;
+            Debug.Log($"Take damage {damage}");
             HealthChanged?.Invoke(_hitPoints);
             OnHealthChanged(_hitPoints);
         }
@@ -39,6 +34,7 @@ namespace Lessons.Lesson_Components
             {
                 _isDeath = true;
                 Death?.Invoke();
+                Debug.Log("Death");
             }
         }
     }

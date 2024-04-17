@@ -6,7 +6,7 @@ namespace Lessons.Lesson_Components
 {
     public class DeathComponent : MonoBehaviour
     {
-        [SerializeField] private HitPointsComponent _hitPointsComponent;
+        [SerializeField] private LifeComponent lifeComponent;
 
         [ShowInInspector, ReadOnly]
         private bool _isDeath;
@@ -15,7 +15,7 @@ namespace Lessons.Lesson_Components
         
         private void OnEnable()
         {
-            _hitPointsComponent.HealthChanged += OnHealthChanged;
+            lifeComponent.HealthChanged += OnHealthChanged;
         }
 
         private void OnHealthChanged(int hitPoints)
