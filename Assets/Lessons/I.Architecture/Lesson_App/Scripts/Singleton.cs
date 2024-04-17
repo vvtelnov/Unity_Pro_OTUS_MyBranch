@@ -1,6 +1,5 @@
 using System;
 using Entities;
-using Lessons.Architecture.Components;
 using Lessons.Architecture.GameSystem;
 using UnityEngine;
 

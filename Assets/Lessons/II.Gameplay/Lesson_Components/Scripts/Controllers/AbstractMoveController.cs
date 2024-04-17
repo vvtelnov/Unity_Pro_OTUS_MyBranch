@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lessons.Architecture.Components
+namespace Lessons.Lesson_Components
 {
     public abstract class AbstractMoveController : MonoBehaviour
     {

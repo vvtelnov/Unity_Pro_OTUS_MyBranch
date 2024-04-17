@@ -1,24 +1,23 @@
 using UnityEngine;
 
-namespace Lessons.Architecture.Components
+namespace Lessons.Lesson_Components
 {
     public class MoveController : AbstractMoveController
     {
-        [SerializeField]
-        private Entity unit;
-
-        private IMoveComponent moveComponent;
+        [SerializeField] private GameObject _gameObj;
+        private IMoveComponent _moveComponent;
+        private IRotateComponent _rotateComponent;
 
         private void Awake()
         {
-            this.moveComponent = this.unit.Get<IMoveComponent>();
+            _moveComponent = _gameObj.GetComponentInChildren<IMoveComponent>();
+            _rotateComponent = _gameObj.GetComponentInChildren<IRotateComponent>();
         }
 
         protected override void Move(Vector3 direction)
         {
-            const float speed = 5.0f;
-            var velocity = direction * (speed * Time.deltaTime);
-            this.moveComponent.Move(velocity);
+            _moveComponent.Move(direction);
+            _rotateComponent.Rotate(direction);
         }
     }
 }
