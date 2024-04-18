@@ -8,8 +8,7 @@ namespace Lessons.Lesson_Components
     {
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
-        [SerializeField] private Vector3 _moveDirection;
-        [SerializeField] private bool _canMove;
+        [SerializeField] private Vector3 _rotateDirection;
         
         [SerializeField] private int _hitPoints;
         [SerializeField] private bool _isDead;
@@ -19,12 +18,18 @@ namespace Lessons.Lesson_Components
         [SerializeField] private bool _canRotate;
 
         [SerializeField] private Transform _firePoint;
+        [SerializeField] private Bullet _bulletPrefab;
 
-        public void Move(Vector3 direction)
+        [SerializeField] private MoveComponent _moveComponent;
+
+        private void Awake()
         {
-            _moveDirection = direction;
+            _moveComponent.AppendCondition(()=> !_isDead);
             
-            Move();
+        }
+
+        private void Update()
+        {
             Rotate();
         }
 
@@ -51,18 +56,15 @@ namespace Lessons.Lesson_Components
             {
                 return;
             }
-            
-            Debug.Log($"Fire! = {_firePoint}");
-        }
 
-        private void Move()
-        {
-            if (!_canMove && _isDead)
-            {
-                return;
-            }
+            var bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
             
-            _root.position += _moveDirection * _speed * Time.deltaTime;
+            if (bullet.TryGetComponent(out MoveComponent moveComponent))
+            {
+                moveComponent.Direction = _firePoint.forward;
+            }
+
+            Debug.Log($"Fire!");
         }
 
         private void Rotate()
@@ -72,7 +74,14 @@ namespace Lessons.Lesson_Components
                 return;
             }
 
-            var targetRotation = Quaternion.LookRotation(_moveDirection, Vector3.up);
+            _rotateDirection = _moveComponent.Direction;
+
+            if (_rotateDirection == Vector3.zero)
+            {
+                return;
+            }
+            
+            var targetRotation = Quaternion.LookRotation(_rotateDirection, Vector3.up);
             _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
         }
     }
