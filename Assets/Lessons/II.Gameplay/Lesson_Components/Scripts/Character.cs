@@ -18,27 +18,14 @@ namespace Lessons.Lesson_Components
         [SerializeField] private float _rotateRate;
         [SerializeField] private bool _canRotate;
 
+        [SerializeField] private Transform _firePoint;
+
         public void Move(Vector3 direction)
         {
             _moveDirection = direction;
             
-            if (_canMove)
-            {
-                _root.position += _moveDirection * _speed * Time.deltaTime;
-            }
-            
-            Rotate(_moveDirection);
-        }
-
-        public void Rotate(Vector3 forwardDirection)
-        {
-            if (!_canRotate)
-            {
-                return;
-            }
-
-            var targetRotation = Quaternion.LookRotation(forwardDirection, Vector3.up);
-            _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
+            Move();
+            Rotate();
         }
 
         [Button]
@@ -60,7 +47,33 @@ namespace Lessons.Lesson_Components
 
         public void Shoot()
         {
-            Debug.Log("Fire!");
+            if (_isDead)
+            {
+                return;
+            }
+            
+            Debug.Log($"Fire! = {_firePoint}");
+        }
+
+        private void Move()
+        {
+            if (!_canMove && _isDead)
+            {
+                return;
+            }
+            
+            _root.position += _moveDirection * _speed * Time.deltaTime;
+        }
+
+        private void Rotate()
+        {
+            if (!_canRotate && _isDead)
+            {
+                return;
+            }
+
+            var targetRotation = Quaternion.LookRotation(_moveDirection, Vector3.up);
+            _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
         }
     }
 }
