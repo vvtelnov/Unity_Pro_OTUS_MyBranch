@@ -8,10 +8,7 @@ namespace Lessons.Lesson_Components
         
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _character.Shoot();        
-            }
+            _character.FireRequest = Input.GetKey(KeyCode.Space);
         }
     }
 }

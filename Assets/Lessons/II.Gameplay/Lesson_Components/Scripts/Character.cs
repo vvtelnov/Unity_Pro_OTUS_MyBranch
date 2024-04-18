@@ -1,4 +1,3 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,18 +18,40 @@ namespace Lessons.Lesson_Components
 
         [SerializeField] private Transform _firePoint;
         [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private bool _canFire;
+        [SerializeField] private float _reloadTime;
+        [SerializeField] private bool _isReloading;
+        
+        public bool FireRequest;
+        private float _timer;
 
         [SerializeField] private MoveComponent _moveComponent;
+        [SerializeField] private RotateComponent _rotateComponent;
 
         private void Awake()
         {
             _moveComponent.AppendCondition(()=> !_isDead);
             
+            _rotateComponent.AppendCondition(()=> !_isDead);
         }
 
         private void Update()
         {
-            Rotate();
+            if (_isReloading)
+            {
+                _timer -= Time.deltaTime;
+                if (_timer <= 0)
+                {
+                    _timer = 0;
+                    _isReloading = false;
+                }
+            }
+            
+            if (_canFire && !_isReloading && FireRequest && !_isDead)
+            {
+                FireRequest = false;
+                Fire();
+            }
         }
 
         [Button]
@@ -50,13 +71,8 @@ namespace Lessons.Lesson_Components
             }
         }
 
-        public void Shoot()
+        public void Fire()
         {
-            if (_isDead)
-            {
-                return;
-            }
-
             var bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
             
             if (bullet.TryGetComponent(out MoveComponent moveComponent))
@@ -65,24 +81,8 @@ namespace Lessons.Lesson_Components
             }
 
             Debug.Log($"Fire!");
-        }
-
-        private void Rotate()
-        {
-            if (!_canRotate && _isDead)
-            {
-                return;
-            }
-
-            _rotateDirection = _moveComponent.Direction;
-
-            if (_rotateDirection == Vector3.zero)
-            {
-                return;
-            }
-            
-            var targetRotation = Quaternion.LookRotation(_rotateDirection, Vector3.up);
-            _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
+            _isReloading = true;
+            _timer = _reloadTime;
         }
     }
 }
