@@ -4,11 +4,14 @@ namespace Lessons.Lesson_Components
 {
     public class ShootController : MonoBehaviour
     {
-        [SerializeField] private FireComponent _fireComponent;
+        [SerializeField] private Character _character;
         
         private void Update()
         {
-            _fireComponent.FireRequest = Input.GetKey(KeyCode.Space);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _character.Shoot();        
+            }
         }
     }
 }

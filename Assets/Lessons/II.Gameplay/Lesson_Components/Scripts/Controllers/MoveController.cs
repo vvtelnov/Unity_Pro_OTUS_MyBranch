@@ -7,18 +7,9 @@ namespace Lessons.Lesson_Components
     {
         [SerializeField] private Character _character;
 
-        private MoveComponent _moveComponent;
-        private RotateComponent _rotateComponent;
-        
-        private void Awake()
-        {
-            _moveComponent = _character.GetComponent<MoveComponent>();
-            _rotateComponent = _character.GetComponent<RotateComponent>();
-        }
-
         private void Update()
         {
-            this.HandleKeyboard();
+            HandleKeyboard();
         }
 
         private void HandleKeyboard()
@@ -45,8 +36,7 @@ namespace Lessons.Lesson_Components
         
         private void Move(Vector3 direction)
         {
-            _moveComponent.Direction = direction;
-            _rotateComponent.Rotate(direction);
+            _character.Move(direction);
         }
     }
 }
