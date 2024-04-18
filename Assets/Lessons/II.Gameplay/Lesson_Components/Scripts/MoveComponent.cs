@@ -10,7 +10,7 @@ namespace Lessons.Lesson_Components
         [SerializeField] private float _speed;
         [SerializeField] private bool _canMove;
 
-        private readonly ComponentCondition _condition = new();
+        private readonly CompositeCondition _condition = new();
 
         public void Update()
         {
@@ -25,11 +25,6 @@ namespace Lessons.Lesson_Components
         public void AppendCondition(Func<bool> condition)
         {
             _condition.Add(condition);
-        }
-
-        public void RemoveCondition(Func<bool> condition)
-        {
-            _condition.Remove(condition);
         }
 
         private bool CanMove()
