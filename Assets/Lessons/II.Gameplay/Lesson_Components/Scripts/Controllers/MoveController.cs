@@ -1,23 +1,40 @@
+using System;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
-    public class MoveController : AbstractMoveController
+    public class MoveController : MonoBehaviour
     {
-        [SerializeField] private GameObject _gameObj;
-        private IMoveComponent _moveComponent;
-        private IRotateComponent _rotateComponent;
+        [SerializeField] private Character _character;
 
-        private void Awake()
+        private void Update()
         {
-            _moveComponent = _gameObj.GetComponentInChildren<IMoveComponent>();
-            _rotateComponent = _gameObj.GetComponentInChildren<IRotateComponent>();
+            this.HandleKeyboard();
         }
 
-        protected override void Move(Vector3 direction)
+        private void HandleKeyboard()
         {
-            _moveComponent.Move(direction);
-            _rotateComponent.Rotate(direction);
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                this.Move(Vector3.forward);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                this.Move(Vector3.back);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.Move(Vector3.left);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.Move(Vector3.right);
+            }
+        }
+        
+        private void Move(Vector3 direction)
+        {
+            _character.Move(direction);
         }
     }
 }

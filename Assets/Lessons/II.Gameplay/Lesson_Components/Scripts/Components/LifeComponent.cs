@@ -6,35 +6,25 @@ namespace Lessons.Lesson_Components
 {
     public class LifeComponent : MonoBehaviour, ILifeComponent
     {
-        [SerializeField] private int _hitPoints = 3;
-        
-        [ShowInInspector, ReadOnly]
-        private bool _isDeath;
+        [SerializeField] private int _hitPoints;
+        [SerializeField] private bool _isDead;
 
-        public event Action Death;
         public event Action<int> HealthChanged;
 
         [Button]
         public void TakeDamage(int damage)
         {
-            _hitPoints -= damage;
-            Debug.Log($"Take damage {damage}");
-            HealthChanged?.Invoke(_hitPoints);
-            OnHealthChanged(_hitPoints);
-        }
-        
-        private void OnHealthChanged(int hitPoints)
-        {
-            if (_isDeath)
+            if (_isDead)
             {
                 return;
             }
             
-            if (hitPoints <= 0)
+            _hitPoints -= damage;
+            Debug.Log($"Take damage = {damage}");
+            
+            if (_hitPoints <= 0)
             {
-                _isDeath = true;
-                Death?.Invoke();
-                Debug.Log("Death");
+                _isDead = true;
             }
         }
     }
