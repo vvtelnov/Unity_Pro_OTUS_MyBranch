@@ -4,11 +4,11 @@ namespace Lessons.Lesson_Components
 {
     public class DealDamageAction : MonoBehaviour
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private LifeComponent _lifeComponent;
 
         public void DealDamage(int damage)
         {
-            _character.TakeDamage(damage);
+            _lifeComponent.TakeDamage(damage);
         }
     }
 }
