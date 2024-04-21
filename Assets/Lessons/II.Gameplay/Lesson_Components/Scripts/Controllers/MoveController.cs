@@ -1,24 +1,53 @@
+using System;
+using Lessons.Lesson_Components.Components;
 using UnityEngine;
 
-namespace Lessons.Architecture.Components
+namespace Lessons.Lesson_Components
 {
-    public class MoveController : AbstractMoveController
+    public class MoveController : MonoBehaviour
     {
-        [SerializeField]
-        private Entity unit;
+        [SerializeField] private Character _character;
 
-        private IMoveComponent moveComponent;
-
+        private MoveComponent _moveComponent;
+        private RotationComponent _rotationComponent;
+        
         private void Awake()
         {
-            this.moveComponent = this.unit.Get<IMoveComponent>();
+            _moveComponent = _character.GetComponent<MoveComponent>();
+            _rotationComponent = _character.GetComponent<RotationComponent>();
         }
 
-        protected override void Move(Vector3 direction)
+        private void Update()
         {
-            const float speed = 5.0f;
-            var velocity = direction * (speed * Time.deltaTime);
-            this.moveComponent.Move(velocity);
+            HandleKeyboard();
+        }
+
+        private void HandleKeyboard()
+        {
+            Move(Vector3.zero);
+            
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                this.Move(Vector3.forward);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                this.Move(Vector3.back);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.Move(Vector3.left);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.Move(Vector3.right);
+            }
+        }
+        
+        private void Move(Vector3 direction)
+        {
+            _moveComponent.SetDirection(direction);
+            _rotationComponent.Rotate(direction);
         }
     }
 }
