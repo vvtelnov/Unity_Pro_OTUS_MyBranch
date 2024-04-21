@@ -1,4 +1,5 @@
 using System;
+using Lessons.Lesson_Components.Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
@@ -6,6 +7,15 @@ namespace Lessons.Lesson_Components
     public class MoveController : MonoBehaviour
     {
         [SerializeField] private Character _character;
+
+        private MoveComponent _moveComponent;
+        private RotationComponent _rotationComponent;
+        
+        private void Awake()
+        {
+            _moveComponent = _character.GetComponent<MoveComponent>();
+            _rotationComponent = _character.GetComponent<RotationComponent>();
+        }
 
         private void Update()
         {
@@ -36,7 +46,8 @@ namespace Lessons.Lesson_Components
         
         private void Move(Vector3 direction)
         {
-            _character.Move(direction);
+            _moveComponent.SetDirection(direction);
+            _rotationComponent.Rotate(direction);
         }
     }
 }
