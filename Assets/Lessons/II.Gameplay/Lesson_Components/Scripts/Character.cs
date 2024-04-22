@@ -33,8 +33,7 @@ namespace Lessons.Lesson_Components
             var targetPoint = new AtomicFunction<Vector3>(()=>_targetPoint.position);
             
             _lookAtMechanics = 
-                new LookAtMechanics(RotationComponent.RotateAction, rotationPoint, targetPoint,
-                    new AtomicValue<bool>(true));
+                new LookAtMechanics(RotationComponent.RotateAction, rotationPoint, targetPoint);
         }
 
         private void Update()

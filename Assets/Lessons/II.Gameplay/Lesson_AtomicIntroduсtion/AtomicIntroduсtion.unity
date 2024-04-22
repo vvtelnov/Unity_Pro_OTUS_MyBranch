@@ -1008,14 +1008,9 @@ MonoBehaviour:
     _bulletPrefab: {fileID: 2986598073785827168, guid: fc08df3c29bad4516b0418417a001dd6,
       type: 3}
     _firePoint: {fileID: 1933952831}
-  _targetPoint:
-    value: {fileID: 134904403}
+  _targetPoint: {fileID: 134904404}
   _radius:
     value: 3
-  _layerMask:
-    value:
-      serializedVersion: 2
-      m_Bits: 1024
 --- !u!136 &1105775969
 CapsuleCollider:
   m_ObjectHideFlags: 0
