@@ -11,4 +11,9 @@ namespace Lessons.Lesson_Components.Components
             _lifeComponent.TakeDamage(damage);
         }
     }
+
+    public interface IDamageable
+    {
+        void TakeDamage(int damage);
+    }
 }

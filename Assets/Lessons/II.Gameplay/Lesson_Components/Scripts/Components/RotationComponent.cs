@@ -1,16 +1,25 @@
 using System;
+using Atomic.Elements;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Components
 {
-    public class RotationComponent : MonoBehaviour
+    [Serializable]
+    public class RotationComponent
     {
-        [SerializeField] private Transform _rotationRoot;
+         public Transform RotationRoot;
         [SerializeField] private Vector3 _rotateDirection;
         [SerializeField] private float _rotateRate;
         [SerializeField] private bool _canRotate;
         
         private readonly CompositeCondition _condition = new();
+
+        public AtomicAction<Vector3> RotateAction;
+
+        public void Construct()
+        {
+            RotateAction.Compose(Rotate);
+        }
         
         public void Rotate(Vector3 forwardDirection)
         {
@@ -27,7 +36,7 @@ namespace Lessons.Lesson_Components.Components
             }
 
             var targetRotation = Quaternion.LookRotation(_rotateDirection, Vector3.up);
-            _rotationRoot.rotation = Quaternion.Lerp(_rotationRoot.rotation, targetRotation, _rotateRate);
+            RotationRoot.rotation = Quaternion.Lerp(RotationRoot.rotation, targetRotation, _rotateRate);
         }
         
         public void AppendCondition(Func<bool> condition)
