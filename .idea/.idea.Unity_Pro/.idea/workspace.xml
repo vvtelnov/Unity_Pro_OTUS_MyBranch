@@ -6,23 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab46836-b01f-4ed3-88ea-920903e23f10" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity_Pro/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity_Pro/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/App/[ARCHIVE]/Database/Scripts/LoadingTasks/LoadingTask_ConnectToDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/App/[ARCHIVE]/Database/Scripts/LoadingTasks/LoadingTask_ConnectToDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Game.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Game.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/AtomicIntroduсtion.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/AtomicIntroduсtion.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/Scripts/LookAtMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/Scripts/LookAtMechanics.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/Scripts/ShootTargetsMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/Scripts/ShootTargetsMechanics.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/LifeComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/LifeComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/MoveComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/MoveComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/RotationComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/RotationComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/ShootComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/ShootComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/TakeDamageAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/TakeDamageAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/MoveController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/MoveController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/ShootController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/ShootController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Tower.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +29,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@443a96d757/Elements/Implementations/AtomicValue.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@443a96d757/Elements/Implementations/AtomicVariable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@443a96d757/Elements/Interfaces/IAtomicFunction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@443a96d757/Elements/Interfaces/IAtomicValue.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 3
@@ -114,7 +103,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713761308030</updated>
-      <workItem from="1713761310486" duration="5067000" />
+      <workItem from="1713761310486" duration="5711000" />
     </task>
     <servers />
   </component>

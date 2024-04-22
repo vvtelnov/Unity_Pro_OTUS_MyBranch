@@ -14,11 +14,13 @@ namespace Lessons.Lesson_Components.Components
         
         private readonly CompositeCondition _condition = new();
 
+        public AtomicFunction<Vector3> Position;
         public AtomicAction<Vector3> RotateAction;
 
         public void Construct()
         {
             RotateAction.Compose(Rotate);
+            Position.Compose(()=>RotationRoot.position);
         }
         
         public void Rotate(Vector3 forwardDirection)
