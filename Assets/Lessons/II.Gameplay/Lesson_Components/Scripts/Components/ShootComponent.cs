@@ -1,19 +1,15 @@
 using System;
-using Atomic.Elements;
-using Lessons.Lesson_Components.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Lessons.Lesson_Components.Components
 {
-    [Serializable]
-    public class ShootComponent
+    public class ShootComponent : MonoBehaviour
     {
         [SerializeField] private float _reloadTime = 2f;
         [SerializeField] private bool _isReloading;
         [SerializeField] private bool _canFire;
-        [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _firePoint;
         
         [ShowInInspector, ReadOnly]
@@ -21,18 +17,11 @@ namespace Lessons.Lesson_Components.Components
         
         private readonly CompositeCondition _condition = new();
 
-        public AtomicAction ShootAction;
-
-        public void Compose()
-        {
-            ShootAction.Compose(Shoot);
-        }
-        
-        public void Update(float deltaTime)
+        private void Update()
         {
             if (_isReloading)
             {
-                _reloadTimer -= deltaTime;
+                _reloadTimer -= Time.deltaTime;
                 
                 if (_reloadTimer <= 0)
                 {
@@ -58,9 +47,12 @@ namespace Lessons.Lesson_Components.Components
                 return;
             }
 
-            //Зависимость через фактори
-            var bullet = Object.Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-            bullet.MoveComponent.SetDirection(_firePoint.forward);
+            var bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+
+            if (bullet.TryGetComponent(out MoveComponent component))
+            {
+                component.SetDirection(_firePoint.forward);
+            }
             
             _reloadTimer = _reloadTime;
             _isReloading = true;
