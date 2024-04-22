@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Lessons.Lesson_Components.Components
 {
-    public class MoveComponent : MonoBehaviour
+    [Serializable]
+    public class MoveComponent
     {
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
@@ -12,11 +13,11 @@ namespace Lessons.Lesson_Components.Components
 
         private readonly CompositeCondition _condition = new();
 
-        private void Update()
+        public void Update(float deltaTime)
         {
             if (_condition.IsTrue() && _canMove)
             {
-                _root.position += _moveDirection * _speed * Time.deltaTime;
+                _root.position += _moveDirection * _speed * deltaTime;
             }
         }
         

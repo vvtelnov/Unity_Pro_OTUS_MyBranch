@@ -1,33 +1,77 @@
 using System;
+using Atomic.Elements;
+using Lessons.Lesson_AtomicIntroduсtion;
 using Lessons.Lesson_Components.Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Scripts
 {
-    public class Tower : MonoBehaviour
+    //Facade
+    public class Tower : MonoBehaviour, IDamageable
     {
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private LifeComponent _lifeComponent;
         [SerializeField] private ShootComponent _shootComponent;
 
-        [SerializeField] private Transform _targetPoint;
-        [SerializeField] private float _radius;
+        [SerializeField] private AtomicVariable<GameObject> _target;
+        [SerializeField] private AtomicVariable<float> _radius;
+        [SerializeField] private AtomicValue<LayerMask> _layerMask;
+
+        private LookAtTargetMechanics _lookAtTargetMechanics;
+        private ShootTargetMechanics _shootTargetMechanics;
+        private TargetDetectionMechanics _targetDetectionMechanics;
+
+        public AtomicAction FireAction;
 
         private void Awake()
         {
+            FireAction.Compose(()=> Debug.Log("Shoot"));
+            _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
+            
+            _shootComponent.Construct();
             _shootComponent.AppendCondition(_lifeComponent.IsAlive);
+
+            var targetPosition = new AtomicFunction<Vector3>(() =>
+            {
+                return _target.Value.transform.position;
+            });
+
+            var rootPosition = new AtomicFunction<Vector3>(() =>
+            {
+                return _rotationComponent.RotationRoot.position;
+            });
+            
+            var hasTarget = new AtomicFunction<bool>(() =>
+            {
+                return _target.Value != null;
+            });
+
+            _lookAtTargetMechanics =
+                new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition, 
+                    rootPosition, hasTarget);
+            _shootTargetMechanics =
+                new ShootTargetMechanics(FireAction, targetPosition, rootPosition, _radius, hasTarget);
+            _targetDetectionMechanics = new TargetDetectionMechanics(_radius, rootPosition,
+                _target, _layerMask);
+        }
+
+        private void FixedUpdate()
+        {
+            _targetDetectionMechanics.FixedUpdate();
         }
 
         private void Update()
         {
-            var direction = _targetPoint.position - transform.position;
-            _rotationComponent.Rotate(direction);
+            _shootComponent.Update(Time.deltaTime);
             
-            if (direction.magnitude < _radius)
-            {
-                _shootComponent.Shoot();
-            }
+            _lookAtTargetMechanics.Update();
+            _shootTargetMechanics.Update();
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _lifeComponent.TakeDamage(damage);
         }
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Atomic.Elements;
+using GameEngine;
 
 namespace Lessons.Lesson_Components.Components
 {

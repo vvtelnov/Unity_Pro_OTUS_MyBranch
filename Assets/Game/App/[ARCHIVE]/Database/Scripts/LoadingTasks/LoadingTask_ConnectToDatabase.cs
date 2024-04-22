@@ -1,9 +1,6 @@
 using System;
-using Declarative;
-using Lessons.Utils;
 using Services;
 using SqliteModule;
-using UnityEngine;
 
 namespace Game.App
 {
