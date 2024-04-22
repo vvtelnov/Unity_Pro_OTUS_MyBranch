@@ -1,52 +1,23 @@
-using Atomic.Elements;
-using Lessons.Lesson_AtomicIntroduсtion.Scripts;
+using System;
 using Lessons.Lesson_Components.Components;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
-    //Facade
-    public class Character : MonoBehaviour, IDamageable
+    public class Character : MonoBehaviour
     {
-        //Interfaces
-        [field: SerializeField] public MoveComponent MoveComponent { get; private set; }
-        [field: SerializeField] public RotationComponent RotationComponent { get; private set; }
-        [field: SerializeField] public ShootComponent ShootComponent { get; private set; }
-
+        [SerializeField] private MoveComponent _moveComponent;
         [SerializeField] private LifeComponent _lifeComponent;
-        [SerializeField] private Transform _targetPoint;
-        
-        //Logic
-        private LookAtMechanics _lookAtMechanics;
+        [SerializeField] private RotationComponent _rotationComponent;
+        [SerializeField] private ShootComponent _shootComponent;
         
         private void Awake()
         {
-            MoveComponent.AppendCondition(_lifeComponent.IsAlive);
-            MoveComponent.AppendCondition(ShootComponent.CanFire);
+            _moveComponent.AppendCondition(_lifeComponent.IsAlive);
+            _moveComponent.AppendCondition(_shootComponent.CanFire);
             
-            RotationComponent.Construct();
-            RotationComponent.AppendCondition(_lifeComponent.IsAlive);
-            
-            ShootComponent.Construct();
-
-            var rotationPoint = new AtomicFunction<Vector3>(()=>RotationComponent.RotationRoot.position);
-            var targetPoint = new AtomicFunction<Vector3>(()=>_targetPoint.position);
-            
-            _lookAtMechanics = 
-                new LookAtMechanics(RotationComponent.RotateAction, rotationPoint, targetPoint);
-        }
-
-        private void Update()
-        {
-            MoveComponent.Update(Time.deltaTime);
-            ShootComponent.Update(Time.deltaTime);
-            
-            _lookAtMechanics.Update();
-        }
-
-        public void TakeDamage(int damage)
-        {
-            _lifeComponent.TakeDamage(damage);
+            _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
         }
     }
 }
