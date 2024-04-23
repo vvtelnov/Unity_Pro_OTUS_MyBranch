@@ -1,12 +1,22 @@
 using System;
+using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_Components.Components;
+using Lessons.Lesson_SectionAndVisuals;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
     public class MoveController : MonoBehaviour
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private AtomicEntity _entity;
+
+        private IAtomicVariable<Vector3> _moveDirection;
+
+        private void Awake()
+        {
+            _moveDirection = _entity.Get<IAtomicVariable<Vector3>>(MoveAPI.MOVE_ACTION);
+        }
 
         private void Update()
         {
@@ -37,7 +47,12 @@ namespace Lessons.Lesson_Components
         
         private void Move(Vector3 direction)
         {
-            _character.MoveComponent.SetDirection(direction);
+            if (_moveDirection == null)
+            {
+                return;
+            }
+            
+            _moveDirection.Value = direction;
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_Components.Components;
+using Lessons.Lesson_SectionAndVisuals;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Scripts
@@ -25,9 +27,9 @@ namespace Lessons.Lesson_Components.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Character character))
+            if (other.TryGetComponent(out IAtomicEntity character))
             {
-                character.TakeDamageEvent?.Invoke(_damage);
+                character.Get<IAtomicAction<int>>(HealthAPI.TAKE_DAMAGE_EVENT).Invoke(_damage);
             }
         }
     }

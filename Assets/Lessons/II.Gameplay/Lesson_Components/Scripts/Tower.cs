@@ -1,13 +1,15 @@
 using System;
 using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_AtomicIntroduсtion;
 using Lessons.Lesson_Components.Components;
+using Lessons.Lesson_SectionAndVisuals;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Scripts
 {
     //Facade
-    public class Tower : MonoBehaviour
+    public class Tower : AtomicEntity
     {
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private LifeComponent _lifeComponent;
@@ -21,9 +23,11 @@ namespace Lessons.Lesson_Components.Scripts
         private ShootTargetMechanics _shootTargetMechanics;
         private TargetDetectionMechanics _targetDetectionMechanics;
 
+        [Get(HealthAPI.TAKE_DAMAGE_EVENT)]
         public AtomicEvent<int> TakeDamageEvent;
         public AtomicVariable<bool> IsDead;
         public AtomicEvent ShootEvent;
+        public AtomicEvent FireAction;
         public Transform FirePoint;
 
         private void Awake()
@@ -32,7 +36,7 @@ namespace Lessons.Lesson_Components.Scripts
             _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
             
-            _shootComponent.Construct(ShootEvent, FirePoint);
+            _shootComponent.Construct(ShootEvent, FirePoint, FireAction);
             _shootComponent.AppendCondition(_lifeComponent.IsAlive);
 
             var targetPosition = new AtomicFunction<Vector3>(() => _target.Value.transform.position);
@@ -50,11 +54,13 @@ namespace Lessons.Lesson_Components.Scripts
 
         private void OnEnable()
         {
+            _lifeComponent.OnEnable();
             _shootComponent.OnEnable();
         }
 
         private void OnDisable()
         {
+            _lifeComponent.OnDisable();
             _shootComponent.OnDisable();
         }
 

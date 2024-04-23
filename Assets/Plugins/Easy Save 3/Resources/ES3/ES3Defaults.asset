@@ -38,6 +38,7 @@ MonoBehaviour:
     - GOAP
     - Assembly-CSharp
     - BehaviourTree
+    - Atomic
     - Windows
     - Products
     - Cinemachine
@@ -73,7 +74,6 @@ MonoBehaviour:
     - Sirenix.OdinInspector.CompatibilityLayer
     - UniTask.TextMeshPro
     - Input
-    - Atomic
     - PPv2URPConverters
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor

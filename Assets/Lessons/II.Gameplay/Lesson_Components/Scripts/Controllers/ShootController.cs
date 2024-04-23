@@ -1,5 +1,7 @@
 using System;
+using Atomic.Elements;
 using Lessons.Lesson_Components.Components;
+using Lessons.Lesson_SectionAndVisuals;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
@@ -8,11 +10,18 @@ namespace Lessons.Lesson_Components
     {
         [SerializeField] private Character _character;
 
+        private IAtomicAction _shootAction;
+
+        private void Awake()
+        {
+            _shootAction = _character.Get<IAtomicAction>(FireAPI.FIRE_REQUEST);
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _character.ShootEvent?.Invoke();
+                _shootAction.Invoke();
             }
         }
     }

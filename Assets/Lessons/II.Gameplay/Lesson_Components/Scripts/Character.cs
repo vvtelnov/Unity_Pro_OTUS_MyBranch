@@ -1,28 +1,33 @@
 using System;
 using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_AtomicIntroduсtion;
 using Lessons.Lesson_Components.Components;
+using Lessons.Lesson_SectionAndVisuals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
     //Facade
-    public class Character : MonoBehaviour
+    public class Character : AtomicEntity
     {
-        //Interfaces
-        public MoveComponent MoveComponent => _moveComponent;
-        public RotationComponent RotationComponent => _rotationComponent;
-        public ShootComponent ShootComponent => _shootComponent;
-        
+        [Get(HealthAPI.TAKE_DAMAGE_EVENT)]
         public AtomicEvent<int> TakeDamageEvent;
-        public AtomicEvent ShootEvent;
+        
         public Transform FirePoint;
         
         public AtomicVariable<bool> IsDead;
+        
+        [Get(FireAPI.FIRE_REQUEST)]
         public AtomicEvent FireRequest;
+        
+        [Get(FireAPI.REQUESTED_FIRE_EVENT)]
+        public AtomicEvent RequestedFireEvent;
+
         public AtomicEvent FireEvent;
         
+        [Get(MoveAPI.MOVE_ACTION)]
         public AtomicVariable<Vector3> MoveDirection;
         
         [SerializeField] private MoveComponent _moveComponent;
@@ -31,6 +36,7 @@ namespace Lessons.Lesson_Components
         [SerializeField] private ShootComponent _shootComponent;
 
         [SerializeField] private Transform _targetPoint;
+        [SerializeField] private Collider _collider;
 
         private LookAtTargetMechanics _lookAtTargetMechanics;
 
@@ -45,7 +51,7 @@ namespace Lessons.Lesson_Components
             _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
             
-            _shootComponent.Construct(ShootEvent, FirePoint);
+            _shootComponent.Construct(RequestedFireEvent, FirePoint, FireEvent);
 
             var targetPosition = new AtomicFunction<Vector3>(() => _targetPoint.position);
             var rootPosition = new AtomicFunction<Vector3>(() => _rotationComponent.RotationRoot.position);
@@ -54,6 +60,9 @@ namespace Lessons.Lesson_Components
             _lookAtTargetMechanics =
                 new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition,
                     rootPosition, hasTarget);
+            
+            //Куда эту логику?
+            IsDead.Subscribe(isDead => _collider.enabled = !isDead);
         }
 
         private void OnEnable()

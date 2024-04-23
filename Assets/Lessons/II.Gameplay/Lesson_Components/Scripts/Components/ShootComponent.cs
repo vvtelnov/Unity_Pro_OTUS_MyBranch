@@ -22,11 +22,13 @@ namespace Lessons.Lesson_Components.Components
         private readonly CompositeCondition _condition = new();
 
         public IAtomicEvent ShootEvent;
+        private IAtomicAction _fireAction;
 
-        public void Construct(IAtomicEvent shootEvent, Transform firePoint)
+        public void Construct(IAtomicEvent shootEvent, Transform firePoint, IAtomicAction fireAction)
         {
             ShootEvent = shootEvent;
             _firePoint = firePoint;
+            _fireAction = fireAction;
         }
 
         public void OnEnable()
@@ -74,6 +76,7 @@ namespace Lessons.Lesson_Components.Components
             
             _reloadTimer = _reloadTime;
             _isReloading = true;
+            _fireAction.Invoke();
             
             Debug.Log("Fire!");
         }

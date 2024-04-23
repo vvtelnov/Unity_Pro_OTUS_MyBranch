@@ -10,27 +10,27 @@ namespace Lessons.Lesson_SectionAndVisuals
         [SerializeField] private Animator _animator;
         
         //Logic
-        private AnimatorController _animatorController;
+        private CharacterAnimatorController _characterAnimatorController;
         
         private void Awake()
         {
-            _animatorController = new AnimatorController(_character.MoveDirection, _character.IsDead,
+            _characterAnimatorController = new CharacterAnimatorController(_character.MoveDirection, _character.IsDead,
                 _animator, _character.FireRequest);
         }
         
         private void OnEnable()
         {
-            _animatorController.OnEnable();
+            _characterAnimatorController.OnEnable();
         }
         
         private void OnDisable()
         {
-            _animatorController.OnDisable();
+            _characterAnimatorController.OnDisable();
         }
         
         public void Update()
         {
-            _animatorController.Update();
+            _characterAnimatorController.Update();
         }
     }
 }

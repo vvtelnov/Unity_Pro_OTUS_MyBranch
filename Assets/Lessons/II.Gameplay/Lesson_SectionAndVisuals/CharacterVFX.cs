@@ -12,13 +12,13 @@ namespace Lessons.Lesson_SectionAndVisuals
 
         private void OnEnable()
         {
-            _character.ShootEvent.Subscribe(OnFire);
+            _character.FireEvent.Subscribe(OnFire);
             _character.TakeDamageEvent.Subscribe(OnTakeDamage);
         }
 
         private void OnDisable()
         {
-            _character.ShootEvent.Unsubscribe(OnFire);
+            _character.FireEvent.Unsubscribe(OnFire);
             _character.TakeDamageEvent.Unsubscribe(OnTakeDamage);
         }
 

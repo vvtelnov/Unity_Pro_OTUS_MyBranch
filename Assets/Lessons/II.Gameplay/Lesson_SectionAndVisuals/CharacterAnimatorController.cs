@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lessons.Lesson_SectionAndVisuals
 {
-    public class AnimatorController
+    public class CharacterAnimatorController
     {
         private static readonly int MainState = Animator.StringToHash("MainState");
         private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
@@ -17,7 +17,7 @@ namespace Lessons.Lesson_SectionAndVisuals
         private readonly Animator _animator;
         private readonly AtomicEvent _fireRequest;
 
-        public AnimatorController(
+        public CharacterAnimatorController(
             IAtomicValue<Vector3> moveDirection,
             IAtomicValue<bool> isDead,
             Animator animator,
