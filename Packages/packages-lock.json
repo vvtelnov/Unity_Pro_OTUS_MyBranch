@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.starkre.unity-atomic": {
+      "version": "https://github.com/StarKRE22/unity-atomic.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f3c070cc19054e86a9262d90552d9def6cc4ea7e"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

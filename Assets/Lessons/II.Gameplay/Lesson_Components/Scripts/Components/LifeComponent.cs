@@ -1,9 +1,11 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Components
 {
-    public class LifeComponent : MonoBehaviour
+    [Serializable]
+    public class LifeComponent 
     {
         [SerializeField] private int _hitPoints;
         [SerializeField] private bool _isDead;

@@ -1,16 +1,27 @@
 using System;
+using Atomic.Elements;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Components
 {
-    public class RotationComponent : MonoBehaviour
+    [Serializable]
+    public class RotationComponent
     {
+        public Transform RotationRoot => _rotationRoot;
+        
         [SerializeField] private Transform _rotationRoot;
         [SerializeField] private Vector3 _rotateDirection;
         [SerializeField] private float _rotateRate;
         [SerializeField] private bool _canRotate;
         
         private readonly CompositeCondition _condition = new();
+
+        public AtomicAction<Vector3> RotateAction;
+
+        public void Construct()
+        {
+            RotateAction.Compose(Rotate);
+        }
         
         public void Rotate(Vector3 forwardDirection)
         {
