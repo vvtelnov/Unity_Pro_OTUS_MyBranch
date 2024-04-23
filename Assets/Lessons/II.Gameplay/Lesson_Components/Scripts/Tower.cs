@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Lessons.Lesson_Components.Scripts
 {
     //Facade
-    public class Tower : MonoBehaviour, IDamageable
+    public class Tower : MonoBehaviour
     {
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private LifeComponent _lifeComponent;
@@ -21,39 +21,38 @@ namespace Lessons.Lesson_Components.Scripts
         private ShootTargetMechanics _shootTargetMechanics;
         private TargetDetectionMechanics _targetDetectionMechanics;
 
-        public AtomicAction FireAction;
+        public AtomicEvent ShootEvent;
+        public Transform FirePoint;
 
         private void Awake()
         {
-            FireAction.Compose(()=> Debug.Log("Shoot"));
             _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
             
-            _shootComponent.Construct();
+            _shootComponent.Construct(ShootEvent, FirePoint);
             _shootComponent.AppendCondition(_lifeComponent.IsAlive);
 
-            var targetPosition = new AtomicFunction<Vector3>(() =>
-            {
-                return _target.Value.transform.position;
-            });
-
-            var rootPosition = new AtomicFunction<Vector3>(() =>
-            {
-                return _rotationComponent.RotationRoot.position;
-            });
-            
-            var hasTarget = new AtomicFunction<bool>(() =>
-            {
-                return _target.Value != null;
-            });
+            var targetPosition = new AtomicFunction<Vector3>(() => _target.Value.transform.position);
+            var rootPosition = new AtomicFunction<Vector3>(() => _rotationComponent.RotationRoot.position);
+            var hasTarget = new AtomicFunction<bool>(() => _target.Value != null);
 
             _lookAtTargetMechanics =
                 new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition, 
                     rootPosition, hasTarget);
             _shootTargetMechanics =
-                new ShootTargetMechanics(FireAction, targetPosition, rootPosition, _radius, hasTarget);
+                new ShootTargetMechanics(_shootComponent.ShootEvent, targetPosition, rootPosition, _radius, hasTarget);
             _targetDetectionMechanics = new TargetDetectionMechanics(_radius, rootPosition,
                 _target, _layerMask);
+        }
+
+        private void OnEnable()
+        {
+            _shootComponent.OnEnable();
+        }
+
+        private void OnDisable()
+        {
+            _shootComponent.OnDisable();
         }
 
         private void FixedUpdate()
@@ -67,11 +66,6 @@ namespace Lessons.Lesson_Components.Scripts
             
             _lookAtTargetMechanics.Update();
             _shootTargetMechanics.Update();
-        }
-
-        public void TakeDamage(int damage)
-        {
-            _lifeComponent.TakeDamage(damage);
         }
     }
 }

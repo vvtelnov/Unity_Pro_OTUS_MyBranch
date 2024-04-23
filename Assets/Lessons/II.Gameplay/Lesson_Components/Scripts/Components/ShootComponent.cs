@@ -13,18 +13,30 @@ namespace Lessons.Lesson_Components.Components
         [SerializeField] private bool _isReloading;
         [SerializeField] private bool _canFire;
         [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Transform _firePoint;
+        
+        private Transform _firePoint;
         
         [ShowInInspector, ReadOnly]
         private float _reloadTimer;
         
         private readonly CompositeCondition _condition = new();
 
-        public AtomicAction ShootAction;
+        public IAtomicEvent ShootEvent;
 
-        public void Construct()
+        public void Construct(IAtomicEvent shootEvent, Transform firePoint)
         {
-            ShootAction.Compose(Shoot);
+            ShootEvent = shootEvent;
+            _firePoint = firePoint;
+        }
+
+        public void OnEnable()
+        {
+            ShootEvent.Subscribe(Shoot);
+        }
+
+        public void OnDisable()
+        {
+            ShootEvent.Unsubscribe(Shoot);
         }
 
         public void Update(float deltaTime)
@@ -45,7 +57,7 @@ namespace Lessons.Lesson_Components.Components
             return _canFire;
         }
         
-        public void Shoot()
+        private void Shoot()
         {
             if (!_canFire)
             {

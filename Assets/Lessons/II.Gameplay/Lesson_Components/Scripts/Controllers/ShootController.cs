@@ -12,7 +12,7 @@ namespace Lessons.Lesson_Components
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _character.ShootComponent.Shoot();
+                _character.ShootEvent?.Invoke();
             }
         }
     }

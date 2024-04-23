@@ -19,9 +19,9 @@ namespace Lessons.Lesson_Components.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IDamageable damageable))
+            if (other.TryGetComponent(out Character character))
             {
-                damageable.TakeDamage(_damage);
+                character.TakeDamageEvent?.Invoke(_damage);
             }
         }
     }
