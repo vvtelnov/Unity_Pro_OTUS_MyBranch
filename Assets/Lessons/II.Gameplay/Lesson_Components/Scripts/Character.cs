@@ -14,10 +14,16 @@ namespace Lessons.Lesson_Components
         public MoveComponent MoveComponent => _moveComponent;
         public RotationComponent RotationComponent => _rotationComponent;
         public ShootComponent ShootComponent => _shootComponent;
-
+        
         public AtomicEvent<int> TakeDamageEvent;
         public AtomicEvent ShootEvent;
         public Transform FirePoint;
+        
+        public AtomicVariable<bool> IsDead;
+        public AtomicEvent FireRequest;
+        public AtomicEvent FireEvent;
+        
+        public AtomicVariable<Vector3> MoveDirection;
         
         [SerializeField] private MoveComponent _moveComponent;
         [SerializeField] private LifeComponent _lifeComponent;
@@ -27,11 +33,12 @@ namespace Lessons.Lesson_Components
         [SerializeField] private Transform _targetPoint;
 
         private LookAtTargetMechanics _lookAtTargetMechanics;
-        
+
         private void Awake()
         {
-            _lifeComponent.Compose(TakeDamageEvent);
+            _lifeComponent.Compose(TakeDamageEvent, IsDead);
             
+            _moveComponent.Construct(MoveDirection);
             _moveComponent.AppendCondition(_lifeComponent.IsAlive);
             _moveComponent.AppendCondition(_shootComponent.CanFire);
             

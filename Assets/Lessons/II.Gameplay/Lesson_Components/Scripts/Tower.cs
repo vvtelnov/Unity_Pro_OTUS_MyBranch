@@ -21,11 +21,14 @@ namespace Lessons.Lesson_Components.Scripts
         private ShootTargetMechanics _shootTargetMechanics;
         private TargetDetectionMechanics _targetDetectionMechanics;
 
+        public AtomicEvent<int> TakeDamageEvent;
+        public AtomicVariable<bool> IsDead;
         public AtomicEvent ShootEvent;
         public Transform FirePoint;
 
         private void Awake()
         {
+            _lifeComponent.Compose(TakeDamageEvent, IsDead);
             _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
             

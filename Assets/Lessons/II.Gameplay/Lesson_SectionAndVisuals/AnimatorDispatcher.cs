@@ -11,7 +11,7 @@ namespace Lessons.Lesson_SectionAndVisuals
         {
             if (value == "shoot")
             {
-                // _character.FireEvent.Invoke(); 
+                _character.FireEvent.Invoke(); 
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Atomic.Elements;
 using Lessons.Lesson_Components.Components;
 using UnityEngine;
 
@@ -9,8 +10,13 @@ namespace Lessons.Lesson_Components.Scripts
     {
         [SerializeField] private int _damage = 1;
         [field: SerializeField] public MoveComponent MoveComponent { get; private set; }
+
+        public AtomicVariable<Vector3> MoveDirection;
         
-        
+        private void Awake()
+        {
+            MoveComponent.Construct(MoveDirection);
+        }
 
         private void Update()
         {
