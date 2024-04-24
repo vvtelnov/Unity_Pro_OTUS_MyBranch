@@ -10,34 +10,28 @@ namespace Lessons.Lesson_Components.Components
     {
         [SerializeField] private int _hitPoints;
         
-        private IAtomicVariable<bool> _isDead;
-        private IAtomicEvent<int> _takeDamageEvent;
-
-        public void Compose(IAtomicEvent<int> takeDamageEvent, IAtomicVariable<bool> isDead)
-        {
-            _takeDamageEvent = takeDamageEvent;
-            _isDead = isDead;
-        }
+        public AtomicEvent<int> TakeDamageEvent;
+        public AtomicVariable<bool> IsDead;
 
         public void OnEnable()
         {
-            _takeDamageEvent.Subscribe(TakeDamage);
+            TakeDamageEvent.Subscribe(TakeDamage);
         }
 
         public void OnDisable()
         {
-            _takeDamageEvent.Unsubscribe(TakeDamage);
+            TakeDamageEvent.Unsubscribe(TakeDamage);
         }
         
         public bool IsAlive()
         {
-            return !_isDead.Value;
+            return !IsDead.Value;
         }
         
         [Button]
         private void TakeDamage(int damage)
         {
-            if (_isDead.Value)
+            if (IsDead.Value)
             {
                 return;
             }
@@ -47,7 +41,7 @@ namespace Lessons.Lesson_Components.Components
             
             if (_hitPoints <= 0)
             {
-                _isDead.Value = true;
+                IsDead.Value = true;
             }
         }
     }

@@ -1,8 +1,10 @@
 using System;
 using Atomic.Elements;
+using Atomic.Extensions;
 using Atomic.Objects;
 using Lessons.Lesson_Components.Components;
 using Lessons.Lesson_SectionAndVisuals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
@@ -11,11 +13,12 @@ namespace Lessons.Lesson_Components
     {
         [SerializeField] private AtomicEntity _entity;
 
+        [ShowInInspector]
         private IAtomicVariable<Vector3> _moveDirection;
 
         private void Awake()
         {
-            _moveDirection = _entity.Get<IAtomicVariable<Vector3>>(MoveAPI.MOVE_ACTION);
+            _moveDirection = _entity.GetVariable<Vector3>(MoveAPI.MOVE_DIRECTION);
         }
 
         private void Update()
@@ -29,19 +32,19 @@ namespace Lessons.Lesson_Components
             
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                this.Move(Vector3.forward);
+                Move(Vector3.forward);
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
-                this.Move(Vector3.back);
+                Move(Vector3.back);
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                this.Move(Vector3.left);
+                Move(Vector3.left);
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                this.Move(Vector3.right);
+                Move(Vector3.right);
             }
         }
         

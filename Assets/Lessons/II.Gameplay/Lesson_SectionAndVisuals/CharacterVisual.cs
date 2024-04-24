@@ -1,36 +1,46 @@
+using System;
 using Lessons.Lesson_Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_SectionAndVisuals
 {
-    public class CharacterVisual : MonoBehaviour
+    [Serializable]
+    public class CharacterAnimation
     {
-        //Data
-        [SerializeField] private Character _character;
         [SerializeField] private Animator _animator;
-        
-        //Logic
-        private CharacterAnimatorController _characterAnimatorController;
-        
-        private void Awake()
+        [SerializeField] private AnimatorDispatcher _animatorDispatcher;
+        private CharacterCore _core;
+
+        public void Compose(CharacterCore core)
         {
-            _characterAnimatorController = new CharacterAnimatorController(_character.MoveDirection, _character.IsDead,
-                _animator, _character.FireRequest);
+            _core = core;
+        }
+      
+        public void OnEnable()
+        {
+            _core.MoveComponent.MoveDirection.Subscribe(OnMoveChanged);
+            _core.ShootComponent.ShootRequest.Subscribe(OnShootRequest);
+            _animatorDispatcher.SubscribeOnEvent("shoot", _core.ShootComponent.ShootAction.Invoke);
         }
         
-        private void OnEnable()
+        public void OnDisable()
         {
-            _characterAnimatorController.OnEnable();
+            _animatorDispatcher.UnsubscribeOnEvent("shoot", _core.ShootComponent.ShootAction.Invoke);
+            _core.MoveComponent.MoveDirection.Unsubscribe(OnMoveChanged);
+            _core.ShootComponent.ShootRequest.Unsubscribe(OnShootRequest);
         }
         
-        private void OnDisable()
+        private void OnShootRequest()
         {
-            _characterAnimatorController.OnDisable();
+            if (_core.ShootComponent.CanFire())
+            {
+                _animator.SetTrigger("Shoot");
+            }
         }
-        
-        public void Update()
+
+        private void OnMoveChanged(Vector3 direction)
         {
-            _characterAnimatorController.Update();
+            _animator.SetBool("IsMoving", direction != Vector3.zero);
         }
     }
 }

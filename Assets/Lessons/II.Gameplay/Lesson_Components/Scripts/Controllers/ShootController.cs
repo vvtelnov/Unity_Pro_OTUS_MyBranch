@@ -10,18 +10,18 @@ namespace Lessons.Lesson_Components
     {
         [SerializeField] private Character _character;
 
-        private IAtomicAction _shootAction;
+        private IAtomicAction _shootRequest;
 
         private void Awake()
         {
-            _shootAction = _character.Get<IAtomicAction>(FireAPI.FIRE_REQUEST);
+            _shootRequest = _character.Get<IAtomicAction>(ShootAPI.SHOOT_REQUEST);
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _shootAction.Invoke();
+                _shootRequest.Invoke();
             }
         }
     }

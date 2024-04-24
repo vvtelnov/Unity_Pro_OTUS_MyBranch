@@ -7,29 +7,25 @@ namespace Lessons.Lesson_Components.Components
     [Serializable]
     public class MoveComponent
     {
+        public AtomicVariable<Vector3> MoveDirection;
+
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
-        [SerializeField] private bool _canMove;
+        public AtomicVariable<bool> CanMove;
 
-        private IAtomicVariable<Vector3> _moveDirection;
         private readonly CompositeCondition _condition = new();
 
-        public void Construct(IAtomicVariable<Vector3> moveDirection)
-        {
-            _moveDirection = moveDirection;
-        }
-        
         public void Update(float deltaTime)
         {
-            if (_condition.IsTrue() && _canMove)
+            if (_condition.IsTrue() && CanMove.Value)
             {
-                _root.position += _moveDirection.Value * _speed * deltaTime;
+                _root.position += MoveDirection.Value * _speed * deltaTime;
             }
         }
         
         public void SetDirection(Vector3 direction)
         {
-            _moveDirection.Value = direction;
+            MoveDirection.Value = direction;
         }
 
         public void AppendCondition(Func<bool> condition)

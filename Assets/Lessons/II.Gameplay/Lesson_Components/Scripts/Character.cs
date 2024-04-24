@@ -1,10 +1,6 @@
-using System;
 using Atomic.Elements;
 using Atomic.Objects;
-using Lessons.Lesson_AtomicIntroduсtion;
-using Lessons.Lesson_Components.Components;
 using Lessons.Lesson_SectionAndVisuals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
@@ -12,77 +8,66 @@ namespace Lessons.Lesson_Components
     //Facade
     public class Character : AtomicEntity
     {
-        [Get(HealthAPI.TAKE_DAMAGE_EVENT)]
-        public AtomicEvent<int> TakeDamageEvent;
-        
-        public Transform FirePoint;
-        
-        public AtomicVariable<bool> IsDead;
-        
-        [Get(FireAPI.FIRE_REQUEST)]
-        public AtomicEvent FireRequest;
-        
-        [Get(FireAPI.REQUESTED_FIRE_EVENT)]
-        public AtomicEvent RequestedFireEvent;
+        #region Interface
 
-        public AtomicEvent FireEvent;
+        [Get(HealthAPI.TAKE_DAMAGE_ACTION)] 
+        public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.TakeDamageEvent;
         
-        [Get(MoveAPI.MOVE_ACTION)]
-        public AtomicVariable<Vector3> MoveDirection;
+        [Get(ShootAPI.SHOOT_REQUEST)]
+        public AtomicEvent ShootRequest => _core.ShootComponent.ShootRequest;
         
-        [SerializeField] private MoveComponent _moveComponent;
-        [SerializeField] private LifeComponent _lifeComponent;
-        [SerializeField] private RotationComponent _rotationComponent;
-        [SerializeField] private ShootComponent _shootComponent;
+        [Get(ShootAPI.SHOOT_ACTION)]
+        public AtomicEvent ShootAction => _core.ShootComponent.ShootAction;
 
-        [SerializeField] private Transform _targetPoint;
-        [SerializeField] private Collider _collider;
+        [Get(MoveAPI.MOVE_DIRECTION)] 
+        public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
 
-        private LookAtTargetMechanics _lookAtTargetMechanics;
+        #endregion
+
+        #region Core
+
+        [SerializeField]
+        private CharacterCore _core;
+        
+        [SerializeField] 
+        private CharacterAnimation _characterAnimation;
+
+        [SerializeField] 
+        private CharacterVFX _characterVFX;
+
+        [SerializeField] 
+        private CharacterAudio _characterAudio;
 
         private void Awake()
         {
-            _lifeComponent.Compose(TakeDamageEvent, IsDead);
-            
-            _moveComponent.Construct(MoveDirection);
-            _moveComponent.AppendCondition(_lifeComponent.IsAlive);
-            _moveComponent.AppendCondition(_shootComponent.CanFire);
-            
-            _rotationComponent.Construct();
-            _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
-            
-            _shootComponent.Construct(RequestedFireEvent, FirePoint, FireEvent);
-
-            var targetPosition = new AtomicFunction<Vector3>(() => _targetPoint.position);
-            var rootPosition = new AtomicFunction<Vector3>(() => _rotationComponent.RotationRoot.position);
-            var hasTarget = new AtomicFunction<bool>(() => _targetPoint != null);
-            
-            _lookAtTargetMechanics =
-                new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition,
-                    rootPosition, hasTarget);
-            
-            //Куда эту логику?
-            IsDead.Subscribe(isDead => _collider.enabled = !isDead);
+            _core.Compose();
+            _characterAnimation.Compose(_core);
+            _characterVFX.Compose(_core);
+            _characterAudio.Compose(_core);
         }
 
         private void OnEnable()
         {
-            _lifeComponent.OnEnable();
-            _shootComponent.OnEnable();
+            _core.OnEnable();
+            _characterAnimation.OnEnable();
+            _characterVFX.OnEnable();
+            _characterAudio.OnEnable();
         }
 
         private void OnDisable()
         {
-            _lifeComponent.OnDisable();
-            _shootComponent.OnDisable();
+            _core.OnDisable();
+            _characterAnimation.OnDisable();
+            _characterVFX.OnDisable();
+            _characterAudio.OnDisable();
         }
 
         private void Update()
         {
-            _moveComponent.Update(Time.deltaTime);
-            _shootComponent.Update(Time.deltaTime);
-            
-           _lookAtTargetMechanics.Update();
+            var deltaTime = Time.deltaTime;
+            _core.Update(deltaTime);
         }
+
+        #endregion
     }
 }

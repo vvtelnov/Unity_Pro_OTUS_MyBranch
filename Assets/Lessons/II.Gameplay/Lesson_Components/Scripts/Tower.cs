@@ -23,20 +23,14 @@ namespace Lessons.Lesson_Components.Scripts
         private ShootTargetMechanics _shootTargetMechanics;
         private TargetDetectionMechanics _targetDetectionMechanics;
 
-        [Get(HealthAPI.TAKE_DAMAGE_EVENT)]
-        public AtomicEvent<int> TakeDamageEvent;
-        public AtomicVariable<bool> IsDead;
-        public AtomicEvent ShootEvent;
-        public AtomicEvent FireAction;
-        public Transform FirePoint;
+        [Get(HealthAPI.TAKE_DAMAGE_ACTION)]
+        public AtomicEvent<int> TakeDamageEvent => _lifeComponent.TakeDamageEvent;
 
         private void Awake()
         {
-            _lifeComponent.Compose(TakeDamageEvent, IsDead);
             _rotationComponent.Construct();
             _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
             
-            _shootComponent.Construct(ShootEvent, FirePoint, FireAction);
             _shootComponent.AppendCondition(_lifeComponent.IsAlive);
 
             var targetPosition = new AtomicFunction<Vector3>(() => _target.Value.transform.position);
@@ -47,7 +41,7 @@ namespace Lessons.Lesson_Components.Scripts
                 new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition, 
                     rootPosition, hasTarget);
             _shootTargetMechanics =
-                new ShootTargetMechanics(_shootComponent.ShootEvent, targetPosition, rootPosition, _radius, hasTarget);
+                new ShootTargetMechanics(_shootComponent.ShootAction, targetPosition, rootPosition, _radius, hasTarget);
             _targetDetectionMechanics = new TargetDetectionMechanics(_radius, rootPosition,
                 _target, _layerMask);
         }

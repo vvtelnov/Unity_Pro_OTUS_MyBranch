@@ -1,6 +1,8 @@
 using System;
 using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_Components.Scripts;
+using Lessons.Lesson_SectionAndVisuals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,36 +11,29 @@ namespace Lessons.Lesson_Components.Components
     [Serializable]
     public class ShootComponent
     {
+        public Transform FirePoint;
+        public AtomicEvent ShootRequest;
+        public AtomicEvent ShootAction;
+        public AtomicEvent ShootEvent;
+        
         [SerializeField] private float _reloadTime = 2f;
         [SerializeField] private bool _isReloading;
-        [SerializeField] private bool _canFire;
+        [SerializeField] private bool _canShoot;
         [SerializeField] private Bullet _bulletPrefab;
-        
-        private Transform _firePoint;
         
         [ShowInInspector, ReadOnly]
         private float _reloadTimer;
         
         private readonly CompositeCondition _condition = new();
 
-        public IAtomicEvent ShootEvent;
-        private IAtomicAction _fireAction;
-
-        public void Construct(IAtomicEvent shootEvent, Transform firePoint, IAtomicAction fireAction)
-        {
-            ShootEvent = shootEvent;
-            _firePoint = firePoint;
-            _fireAction = fireAction;
-        }
-
         public void OnEnable()
         {
-            ShootEvent.Subscribe(Shoot);
+            ShootAction.Subscribe(Shoot);
         }
 
         public void OnDisable()
         {
-            ShootEvent.Unsubscribe(Shoot);
+            ShootAction.Unsubscribe(Shoot);
         }
 
         public void Update(float deltaTime)
@@ -56,28 +51,23 @@ namespace Lessons.Lesson_Components.Components
 
         public bool CanFire()
         {
-            return _canFire;
+            return _canShoot && !_isReloading;
         }
         
         private void Shoot()
         {
-            if (!_canFire)
+            if (!CanFire())
             {
                 return;
             }
 
-            if (_isReloading)
-            {
-                return;
-            }
-
-            var bullet = GameObject.Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-            bullet.MoveComponent.SetDirection(_firePoint.forward);
+            var bullet = GameObject.Instantiate(_bulletPrefab, FirePoint.position, FirePoint.rotation);
+            bullet.MoveComponent.SetDirection(FirePoint.forward);
             
             _reloadTimer = _reloadTime;
             _isReloading = true;
-            _fireAction.Invoke();
             
+            ShootEvent.Invoke();
             Debug.Log("Fire!");
         }
         

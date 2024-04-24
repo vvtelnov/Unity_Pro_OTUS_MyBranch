@@ -9,8 +9,8 @@ namespace Lessons.Lesson_SectionAndVisuals
         private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
 
         private const int IDLE = 0;
-        private const int Move = 1;
-        private const int Death = 2;
+        private const int MOVE = 1;
+        private const int DEATH = 2;
         
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly IAtomicValue<bool> _isDead;
@@ -54,12 +54,12 @@ namespace Lessons.Lesson_SectionAndVisuals
         {
             if (_isDead.Value)
             {
-                return Death;
+                return DEATH;
             }
 
             if (_moveDirection.Value != Vector3.zero)
             {
-                return Move;
+                return MOVE;
             }
 
             return IDLE;

@@ -1,25 +1,32 @@
+using System;
 using Lessons.Lesson_Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_SectionAndVisuals
 {
-    public class CharacterVFX : MonoBehaviour
+    [Serializable]
+    public class CharacterVFX
     {
-        [SerializeField] private Character _character;
-
         public ParticleSystem ShootVfx;
         public ParticleSystem DamageVfx;
+        
+        private CharacterCore _core;
 
-        private void OnEnable()
+        public void Compose(CharacterCore core)
         {
-            _character.FireEvent.Subscribe(OnFire);
-            _character.TakeDamageEvent.Subscribe(OnTakeDamage);
+            _core = core;
+        }
+        
+        public void OnEnable()
+        {
+            _core.ShootComponent.ShootEvent.Subscribe(OnShoot);
+            _core.LifeComponent.TakeDamageEvent.Subscribe(OnTakeDamage);
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
-            _character.FireEvent.Unsubscribe(OnFire);
-            _character.TakeDamageEvent.Unsubscribe(OnTakeDamage);
+            _core.ShootComponent.ShootEvent.Unsubscribe(OnShoot);
+            _core.LifeComponent.TakeDamageEvent.Unsubscribe(OnTakeDamage);
         }
 
         private void OnTakeDamage(int value)
@@ -28,9 +35,9 @@ namespace Lessons.Lesson_SectionAndVisuals
             DamageVfx.Play();
         }
 
-        private void OnFire()
+        private void OnShoot()
         {
-            ShootVfx.transform.position = _character.FirePoint.position;
+            ShootVfx.transform.position = _core.ShootComponent.FirePoint.position;
             ShootVfx.Play();
         }
     }

@@ -1,28 +1,35 @@
+using System;
 using Lessons.Lesson_Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_SectionAndVisuals
 {
-    public class CharacterAudio : MonoBehaviour
+    [Serializable]
+    public class CharacterAudio 
     {
-        [SerializeField] private Character _character;
         [SerializeField] private AudioSource _audioSource;
-        
-        public AudioClip DamageAudio;
+        [SerializeField] private AudioClip _damageAudio;
 
-        private void OnEnable()
+        private CharacterCore _core;
+        
+        public void Compose(CharacterCore characterCore)
         {
-            _character.TakeDamageEvent.Subscribe(OnTakeDamage);
+            _core = characterCore;
+        }
+        
+        public void OnEnable()
+        {
+            _core.LifeComponent.TakeDamageEvent.Subscribe(OnTakeDamage);
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
-            _character.TakeDamageEvent.Unsubscribe(OnTakeDamage);
+            _core.LifeComponent.TakeDamageEvent.Unsubscribe(OnTakeDamage);
         }
 
         private void OnTakeDamage(int obj)
         {
-            _audioSource.clip = DamageAudio;
+            _audioSource.clip = _damageAudio;
             _audioSource.Play();
         }
     }
