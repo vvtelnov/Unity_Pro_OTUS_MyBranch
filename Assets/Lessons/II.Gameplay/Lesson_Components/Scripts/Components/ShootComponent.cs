@@ -1,8 +1,6 @@
 using System;
 using Atomic.Elements;
-using Atomic.Objects;
 using Lessons.Lesson_Components.Scripts;
-using Lessons.Lesson_SectionAndVisuals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,29 +9,22 @@ namespace Lessons.Lesson_Components.Components
     [Serializable]
     public class ShootComponent
     {
-        public Transform FirePoint;
-        public AtomicEvent ShootRequest;
-        public AtomicEvent ShootAction;
-        public AtomicEvent ShootEvent;
-        
         [SerializeField] private float _reloadTime = 2f;
         [SerializeField] private bool _isReloading;
-        [SerializeField] private bool _canShoot;
+        [SerializeField] private bool _canFire;
         [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private Transform _firePoint;
         
         [ShowInInspector, ReadOnly]
         private float _reloadTimer;
         
         private readonly CompositeCondition _condition = new();
 
-        public void OnEnable()
-        {
-            ShootAction.Subscribe(Shoot);
-        }
+        public AtomicAction ShootAction;
 
-        public void OnDisable()
+        public void Construct()
         {
-            ShootAction.Unsubscribe(Shoot);
+            ShootAction.Compose(Shoot);
         }
 
         public void Update(float deltaTime)
@@ -51,23 +42,27 @@ namespace Lessons.Lesson_Components.Components
 
         public bool CanFire()
         {
-            return _canShoot && !_isReloading;
+            return _canFire;
         }
         
-        private void Shoot()
+        public void Shoot()
         {
-            if (!CanFire())
+            if (!_canFire)
             {
                 return;
             }
 
-            var bullet = GameObject.Instantiate(_bulletPrefab, FirePoint.position, FirePoint.rotation);
-            bullet.MoveComponent.SetDirection(FirePoint.forward);
+            if (_isReloading)
+            {
+                return;
+            }
+
+            var bullet = GameObject.Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+            bullet.MoveComponent.SetDirection(_firePoint.forward);
             
             _reloadTimer = _reloadTime;
             _isReloading = true;
             
-            ShootEvent.Invoke();
             Debug.Log("Fire!");
         }
         

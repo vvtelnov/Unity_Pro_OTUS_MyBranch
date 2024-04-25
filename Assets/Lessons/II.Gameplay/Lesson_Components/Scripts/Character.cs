@@ -1,73 +1,68 @@
+using System;
 using Atomic.Elements;
-using Atomic.Objects;
-using Lessons.Lesson_SectionAndVisuals;
+using Lessons.Lesson_AtomicIntroduсtion;
+using Lessons.Lesson_Components.Components;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components
 {
     //Facade
-    public class Character : AtomicEntity
+    public class Character : MonoBehaviour, IDamageable
     {
-        #region Interface
-
-        [Get(HealthAPI.TAKE_DAMAGE_ACTION)] 
-        public IAtomicAction<int> TakeDamageAction => _core.LifeComponent.TakeDamageEvent;
+        //Interfaces
+        public MoveComponent MoveComponent => _moveComponent;
+        public RotationComponent RotationComponent => _rotationComponent;
+        public ShootComponent ShootComponent => _shootComponent;
         
-        [Get(ShootAPI.SHOOT_REQUEST)]
-        public AtomicEvent ShootRequest => _core.ShootComponent.ShootRequest;
+        [SerializeField] private MoveComponent _moveComponent;
+        [SerializeField] private LifeComponent _lifeComponent;
+        [SerializeField] private RotationComponent _rotationComponent;
+        [SerializeField] private ShootComponent _shootComponent;
+
+        [SerializeField] private Transform _targetPoint;
+
+        private LookAtTargetMechanics _lookAtTargetMechanics;
         
-        [Get(ShootAPI.SHOOT_ACTION)]
-        public AtomicEvent ShootAction => _core.ShootComponent.ShootAction;
-
-        [Get(MoveAPI.MOVE_DIRECTION)] 
-        public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
-
-        #endregion
-
-        #region Core
-
-        [SerializeField]
-        private CharacterCore _core;
-        
-        [SerializeField] 
-        private CharacterAnimation _characterAnimation;
-
-        [SerializeField] 
-        private CharacterVFX _characterVFX;
-
-        [SerializeField] 
-        private CharacterAudio _characterAudio;
-
         private void Awake()
         {
-            _core.Compose();
-            _characterAnimation.Compose(_core);
-            _characterVFX.Compose(_core);
-            _characterAudio.Compose(_core);
-        }
+            _moveComponent.AppendCondition(_lifeComponent.IsAlive);
+            _moveComponent.AppendCondition(_shootComponent.CanFire);
+            
+            _rotationComponent.Construct();
+            _rotationComponent.AppendCondition(_lifeComponent.IsAlive);
 
-        private void OnEnable()
-        {
-            _core.OnEnable();
-            _characterAnimation.OnEnable();
-            _characterVFX.OnEnable();
-            _characterAudio.OnEnable();
-        }
+            var targetPosition = new AtomicFunction<Vector3>(() =>
+            {
+                return _targetPoint.position;
+            });
 
-        private void OnDisable()
-        {
-            _core.OnDisable();
-            _characterAnimation.OnDisable();
-            _characterVFX.OnDisable();
-            _characterAudio.OnDisable();
+            var rootPosition = new AtomicFunction<Vector3>(() =>
+            {
+                return _rotationComponent.RotationRoot.position;
+            });
+
+            var hasTarget = new AtomicFunction<bool>(() =>
+            {
+                return _targetPoint != null;
+            });
+            
+            _lookAtTargetMechanics =
+                new LookAtTargetMechanics(_rotationComponent.RotateAction, targetPosition,
+                    rootPosition, hasTarget);
         }
 
         private void Update()
         {
-            var deltaTime = Time.deltaTime;
-            _core.Update(deltaTime);
+            _moveComponent.Update(Time.deltaTime);
+            _shootComponent.Update(Time.deltaTime);
+            
+           _lookAtTargetMechanics.Update();
         }
 
-        #endregion
+        public void TakeDamage(int damage)
+        {
+            _lifeComponent.TakeDamage(damage);
+        }
     }
 }

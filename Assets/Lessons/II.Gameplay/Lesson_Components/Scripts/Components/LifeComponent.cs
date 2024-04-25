@@ -1,5 +1,4 @@
 using System;
-using Atomic.Elements;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,29 +8,17 @@ namespace Lessons.Lesson_Components.Components
     public class LifeComponent 
     {
         [SerializeField] private int _hitPoints;
-        
-        public AtomicEvent<int> TakeDamageEvent;
-        public AtomicVariable<bool> IsDead;
-
-        public void OnEnable()
-        {
-            TakeDamageEvent.Subscribe(TakeDamage);
-        }
-
-        public void OnDisable()
-        {
-            TakeDamageEvent.Unsubscribe(TakeDamage);
-        }
+        [SerializeField] private bool _isDead;
         
         public bool IsAlive()
         {
-            return !IsDead.Value;
+            return !_isDead;
         }
         
         [Button]
-        private void TakeDamage(int damage)
+        public void TakeDamage(int damage)
         {
-            if (IsDead.Value)
+            if (_isDead)
             {
                 return;
             }
@@ -41,7 +28,7 @@ namespace Lessons.Lesson_Components.Components
             
             if (_hitPoints <= 0)
             {
-                IsDead.Value = true;
+                _isDead = true;
             }
         }
     }

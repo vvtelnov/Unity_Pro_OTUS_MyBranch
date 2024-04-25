@@ -1,6 +1,4 @@
 using Atomic.Elements;
-using Lessons.Lesson_Components.Components;
-using Lessons.Lesson_SectionAndVisuals;
 using UnityEngine;
 
 namespace Lessons.Lesson_AtomicIntroduсtion

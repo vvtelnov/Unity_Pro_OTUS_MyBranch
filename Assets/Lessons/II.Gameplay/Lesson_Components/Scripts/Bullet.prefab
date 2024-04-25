@@ -131,12 +131,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   <MoveComponent>k__BackingField:
-    MoveDirection:
-      value: {x: 0, y: 0, z: 0}
     _root: {fileID: 3682944406702578429}
     _speed: 3
-    CanMove:
-      value: 1
+    _moveDirection: {x: 0, y: 0, z: 0}
+    _canMove: 1
 --- !u!135 &362910468
 SphereCollider:
   m_ObjectHideFlags: 0
