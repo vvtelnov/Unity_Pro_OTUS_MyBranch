@@ -1,5 +1,6 @@
 using System;
 using Atomic.Elements;
+using Atomic.Objects;
 using Lessons.Lesson_AtomicIntroduсtion;
 using Lessons.Lesson_Components.Components;
 using UnityEngine;
@@ -7,8 +8,11 @@ using UnityEngine;
 namespace Lessons.Lesson_Components.Scripts
 {
     //Facade
-    public class Tower : MonoBehaviour, IDamageable
+    public class Tower : AtomicEntity
     {
+        [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
+        public IAtomicAction<int> TakeDamageAction => _lifeComponent.TakeDamageAction;
+        
         [SerializeField] private RotationComponent _rotationComponent;
         [SerializeField] private LifeComponent _lifeComponent;
         [SerializeField] private ShootComponent _shootComponent;
@@ -28,6 +32,8 @@ namespace Lessons.Lesson_Components.Scripts
             
             _shootComponent.Construct();
             _shootComponent.AppendCondition(_lifeComponent.IsAlive);
+            
+            _lifeComponent.Compose();
 
             var targetPosition = new AtomicFunction<Vector3>(() =>
             {
@@ -64,11 +70,6 @@ namespace Lessons.Lesson_Components.Scripts
             
             _lookAtTargetMechanics.Update();
             _shootTargetMechanics.Update();
-        }
-
-        public void TakeDamage(int damage)
-        {
-            _lifeComponent.TakeDamage(damage);
         }
     }
 }

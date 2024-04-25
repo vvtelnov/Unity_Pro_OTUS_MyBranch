@@ -1,4 +1,6 @@
 using System;
+using Atomic.Elements;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Lessons.Lesson_Components.Components
@@ -6,24 +8,29 @@ namespace Lessons.Lesson_Components.Components
     [Serializable]
     public class MoveComponent
     {
+        public AtomicVariable<Vector3> MoveDirection;
+        public AtomicVariable<bool> IsMoving;
+
         [SerializeField] private Transform _root;
         [SerializeField] private float _speed = 3f;
-        [SerializeField] private Vector3 _moveDirection;
         [SerializeField] private bool _canMove;
 
         private readonly CompositeCondition _condition = new();
+
+        public void Compose()
+        {
+            MoveDirection.Subscribe(moveDirection =>
+            {
+                IsMoving.Value = moveDirection != Vector3.zero;
+            });
+        }
 
         public void Update(float deltaTime)
         {
             if (_condition.IsTrue() && _canMove)
             {
-                _root.position += _moveDirection * _speed * deltaTime;
+                _root.position += MoveDirection.Value * _speed * deltaTime;
             }
-        }
-        
-        public void SetDirection(Vector3 direction)
-        {
-            _moveDirection = direction;
         }
 
         public void AppendCondition(Func<bool> condition)
