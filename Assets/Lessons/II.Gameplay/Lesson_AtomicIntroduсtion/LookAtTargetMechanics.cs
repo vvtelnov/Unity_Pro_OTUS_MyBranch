@@ -1,5 +1,4 @@
 using Atomic.Elements;
-using Lessons.Lesson_Components.Components;
 using UnityEngine;
 
 namespace Lessons.Lesson_AtomicIntroduсtion
@@ -12,6 +11,7 @@ namespace Lessons.Lesson_AtomicIntroduсtion
         private readonly IAtomicValue<bool> _isEnabled;
 
         public LookAtTargetMechanics(
+            
             IAtomicAction<Vector3> rotateAction,
             IAtomicValue<Vector3> targetPoint,
             IAtomicValue<Vector3> transform,

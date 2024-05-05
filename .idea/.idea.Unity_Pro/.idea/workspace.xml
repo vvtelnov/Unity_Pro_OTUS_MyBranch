@@ -6,118 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab46836-b01f-4ed3-88ea-920903e23f10" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity_Pro/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity_Pro/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/App/[ARCHIVE]/Database/Scripts/LoadingTasks/LoadingTask_ConnectToDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/App/[ARCHIVE]/Database/Scripts/LoadingTasks/LoadingTask_ConnectToDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Game.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Game.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character (Idle).anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character (Idle).anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character (Move).anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character (Move).anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Animations/Character.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scenes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scenes/Scene (Start).unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scenes/Scene (Start).unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorDispatcher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorDispatcher.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorStateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorStateMachine.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorStateType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Animations/AnimatorStateType.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/CharacterEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/CharacterEntity.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/CharacterModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/CharacterModel.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/CollisionComponent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/CollisionComponent.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/GatherResourceComponent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/GatherResourceComponent.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/MoveInDirectionComponent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Components/MoveInDirectionComponent.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterMovementController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterMovementController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterResourceCollectedObserver.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterResourceCollectedObserver.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterResourceVisitor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Controllers/CharacterResourceVisitor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Engines.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Engines/MoveInDirectionEngine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Engines/MoveInDirectionEngine.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Engines/RotateInDirectionEngine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Engines/RotateInDirectionEngine.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Model.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Model/CharacterCore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Model/CharacterCore.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Model/CharacterVisual.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Character/Model/CharacterVisual.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/MovementInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/MovementInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/StateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/StateMachine.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/CharacterStateType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/CharacterStateType.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/CompositeState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/CompositeState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/DeadState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/DeadState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/DelegateState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/DelegateState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatherCompositeState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatherCompositeState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatheringDistanceState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatheringDistanceState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatheringTimerState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/GatheringTimerState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/IState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/IState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/IdleState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/IdleState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/MoveState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/MoveState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/RunState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/RunState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/UpdateState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/States/UpdateState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/TransitionableStateMachine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/StateMachines/TransitionableStateMachine.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicEvent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicEvent.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicProcess.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicValue.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicValue.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicVariable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/AtomicVariable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/CollisionSensor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/CollisionSensor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/MovementDirectionVariable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/MovementDirectionVariable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/TransformSynchronizer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson15_CharacterStates/Scripts/Utils/TransformSynchronizer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/AtomicIntroduсtion.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/AtomicIntroduсtion.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/Polygon Arsenal/Materials/Gradients/PolyGradientSoft_ADD.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/Polygon Arsenal/Materials/Gradients/PolyGradientSoft_ADD.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPacks/Polygon Arsenal/Materials/Rimlight/Solid/Crystals/PolyCrystalPurple.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPacks/Polygon Arsenal/Materials/Rimlight/Solid/Crystals/PolyCrystalPurple.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/LookAtTargetMechanics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_AtomicIntroduсtion/LookAtTargetMechanics.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Bullet.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/CompositeCondition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/CompositeCondition.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/LifeComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/LifeComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/MoveComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/MoveComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/RotationComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/RotationComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/ShootComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/ShootComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/TakeDamageAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/TakeDamageAction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/MoveController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/MoveController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/ShootController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Controllers/ShootController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Tower.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AnimatorDispatcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AnimatorDispatcher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AssetPacks/Animations/Human (Controller).controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AssetPacks/Animations/Human (Controller).controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AssetPacks/Animations/Human (Shoot).anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/AssetPacks/Animations/Human (Shoot).anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterAudio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterAudio.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVFX.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/FireAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/ShootAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/FireAPI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/ShootAPI.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/SectionAndVisual.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/SectionAndVisual.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,23 +41,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Character.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_Components/Scripts/Components/TakeDamageAction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicAction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicEvent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicExpression.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicFunction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicValue.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Implementations/AtomicVariable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Interfaces/IAtomicFunction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Interfaces/IAtomicValue.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Interfaces/IAtomicVariable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Elements/Interfaces/IAtomicVariableObservable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Extensions/Expressions/AtomicAnd.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@f3c070cc19/Extensions/Expressions/AtomicFloatSum.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVFX.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Lessons/II.Gameplay/Lesson_SectionAndVisuals/CharacterVisual.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@d16d9b920c/Elements/Implementations/AtomicEvent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@d16d9b920c/Extensions/ObjectExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@d16d9b920c/Objects/AtomicEntity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.starkre.unity-atomic@d16d9b920c/Objects/AtomicObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2fShJ4wq2Zf98xleguEDy4wjfgA" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -158,9 +62,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "lesson/atomicIntrouction",
+    "git-widget-placeholder": "lesson/components__and__sections",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   },
   "keyToStringList": {
@@ -198,10 +103,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18098">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="18098" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -218,6 +123,9 @@
       <option name="presentableId" value="Default" />
       <updated>1713800313005</updated>
       <workItem from="1713800315050" duration="10494000" />
+      <workItem from="1713895466301" duration="3615000" />
+      <workItem from="1713899110244" duration="1630000" />
+      <workItem from="1713943664066" duration="5893000" />
     </task>
     <servers />
   </component>
