@@ -17,14 +17,14 @@ namespace Game.Tutorial.Gameplay
 
         public void Hide()
         {
-            this.gameObject.SetActive(false);   
+            this.gameObject.SetActive(false);
         }
 
         public void SetPosition(Vector3 position)
         {
             this.rootTransform.position = position;
         }
-        
+
         public void LookAt(Vector3 targetPosition)
         {
             var distanceVector = targetPosition - this.rootTransform.position;
