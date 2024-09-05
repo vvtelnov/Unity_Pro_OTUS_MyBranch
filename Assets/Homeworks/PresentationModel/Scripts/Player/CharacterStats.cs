@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 
-namespace Lessons.Architecture.PM
+namespace Lessons.Architecture.PM.Player
 {
-    public sealed class CharacterInfo
+    public sealed class CharacterStats
     {
         public event Action<CharacterStat> OnStatAdded;
         public event Action<CharacterStat> OnStatRemoved;
     
-        [ShowInInspector]
         private readonly HashSet<CharacterStat> stats = new();
 
-        [Button]
         public void AddStat(CharacterStat stat)
         {
             if (this.stats.Add(stat))
@@ -22,7 +20,6 @@ namespace Lessons.Architecture.PM
             }
         }
 
-        [Button]
         public void RemoveStat(CharacterStat stat)
         {
             if (this.stats.Remove(stat))
@@ -31,11 +28,11 @@ namespace Lessons.Architecture.PM
             }
         }
 
-        public CharacterStat GetStat(string name)
+        public CharacterStat GetStat(Stats name)
         {
             foreach (var stat in this.stats)
             {
-                if (stat.Name == name)
+                if (stat.StatType == name)
                 {
                     return stat;
                 }

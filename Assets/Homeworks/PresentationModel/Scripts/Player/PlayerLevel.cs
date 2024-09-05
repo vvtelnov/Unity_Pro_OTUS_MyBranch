@@ -1,34 +1,33 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace Lessons.Architecture.PM
+namespace Lessons.Architecture.PM.Player
 {
     public sealed class PlayerLevel
     {
         public event Action OnLevelUp;
-        public event Action<int> OnExperienceChanged;
+        public event Action<uint> OnExperienceChanged;
 
-        [ShowInInspector, ReadOnly]
-        public int CurrentLevel { get; private set; } = 1;
+        public uint CurrentLevel { get; internal set; } = 1;
 
-        [ShowInInspector, ReadOnly]
-        public int CurrentExperience { get; private set; }
+        public uint CurrentExperience { get; internal set; }
 
-        [ShowInInspector, ReadOnly]
-        public int RequiredExperience
+        public uint RequiredExperience
         {
             get { return 100 * (this.CurrentLevel + 1); }
         }
 
-        [Button]
         public void AddExperience(int range)
         {
             var xp = Math.Min(this.CurrentExperience + range, this.RequiredExperience);
-            this.CurrentExperience = xp;
-            this.OnExperienceChanged?.Invoke(xp);
+
+            if (xp < 0)
+                throw new InvalidOperationException("Xp Cannot be less than 0");
+
+            this.CurrentExperience = (uint)xp;
+            this.OnExperienceChanged?.Invoke((uint)xp);
         }
 
-        [Button]
         public void LevelUp()
         {
             if (this.CanLevelUp())
