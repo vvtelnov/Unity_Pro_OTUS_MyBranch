@@ -223,16 +223,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
-  _stamina: 1
-  _dexterity: 1
-  _intelligence: 1
-  _damage: 1
-  _regeneration: 1
+  _stamina: 6
+  _dexterity: 6
+  _intelligence: 6
+  _damage: 4
+  _regeneration: 4
   _name: Vovov
-  _profilePicture: {fileID: 21300000, guid: a564258f7260e47d58e9ee37e2a3abb7, type: 3}
-  _description: qqqqqqq
-  _lvl: 1
-  _xp: 200
+  _profilePicture: {fileID: 21300000, guid: 954d79ad0f5124da59b33552ab47a641, type: 3}
+  _description: Hello world
+  _lvl: 3
+  _xp: 178
 --- !u!114 &784678830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +245,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417626ddb42241e79d7aec6e83a5a3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _newName:
+    value: qwerewrrq
+  _newDescription:
+    value: 
+  _newProfileImage:
+    value: {fileID: 0}
+  _xpValue: 0
 --- !u!4 &784678831
 Transform:
   m_ObjectHideFlags: 0
@@ -497,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220e25ef7c9a4ef39bee1897fbd06055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterPopup: {fileID: 0}
 --- !u!114 &1608876435
 MonoBehaviour:
   m_ObjectHideFlags: 0

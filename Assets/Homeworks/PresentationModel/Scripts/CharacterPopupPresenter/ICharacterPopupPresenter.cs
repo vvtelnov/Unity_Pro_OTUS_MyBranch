@@ -1,22 +1,34 @@
-using System.Collections.Generic;
 using Lessons.Architecture.PM.Player;
+using Lessons.Architecture.PM.PopupView;
+using Lessons.Architecture.PM.ScriptableObjects;
+using UniRx;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM.CharacterPopupPresenter
 {
     public interface ICharacterPopupPresenter
     {
-        public string Name { get; }
-        public string Description { get; }
-        public Sprite Icon { get; set; }
-        public string CurrentLevel { get; }
-        public string XpFullStr { get; }
-        public uint CurrentXp { get; }
-        public uint MaxBarXp { get; }
-        public bool IsXpBarFull => CurrentXp == MaxBarXp;
-        public bool CanLevelUp { get; }
+        public IReadOnlyReactiveProperty<string> Name { get; }
+        public IReadOnlyReactiveProperty<string> Description { get; }
+        public IReadOnlyReactiveProperty<Sprite> Icon { get; }
+        
+        public IReadOnlyReactiveProperty<string> CurrentLevel { get; }
+        public IReadOnlyReactiveProperty<string> XpFullStr { get; }
 
-        public Dictionary<Stats, string> CharacterStats { get; }
+        public IReadOnlyReactiveProperty<bool> IsXpBarFull { get; }
+        public IReadOnlyReactiveProperty<bool> CanLevelUp { get; }
+        
+        public IReadOnlyReactiveProperty<uint> CurrentXp { get; }
+        public IReadOnlyReactiveProperty<uint> MaxBarXp { get; }
 
+        public ReactiveDictionary<Stats, StringReactiveProperty> CharacterStatsMapToReactiveProperties { get; }
+        
+        public CharacterPopupElements PopupElements { get; }
+
+    }
+
+    public interface IEventsubscriberPresenter
+    {
+        public void SubscribeToViewEvents(IPopupEventEmitter viewEventEmitter);
     }
 }

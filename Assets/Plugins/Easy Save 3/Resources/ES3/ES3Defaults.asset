@@ -30,6 +30,7 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assets
+    - Zenject
     - UniTask
     - Elementary
     - ES3
@@ -39,6 +40,8 @@ MonoBehaviour:
     - Assembly-CSharp
     - BehaviourTree
     - Atomic
+    - UniRx
+    - Zenject-IntegrationTests
     - Windows
     - Products
     - Cinemachine
@@ -75,6 +78,7 @@ MonoBehaviour:
     - UniTask.TextMeshPro
     - Input
     - PPv2URPConverters
+    - Zenject-TestFramework
     - GOAP (EditMode)
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - UniTask.Editor

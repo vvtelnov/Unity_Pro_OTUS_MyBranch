@@ -1,10 +1,10 @@
 using System;
-using Sirenix.OdinInspector;
+using Homeworks.PresentationModel.Scripts.Player;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM.Player
 {
-    public sealed class UserInfo
+    public sealed class UserInfo : IUserInfoModelSetter
     {
         public event Action<string> OnNameChanged;
         public event Action<string> OnDescriptionChanged;

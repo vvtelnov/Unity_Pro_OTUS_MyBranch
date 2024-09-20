@@ -3,7 +3,6 @@ using Lessons.Architecture.PM.CharacterPopupPresenter;
 using Lessons.Architecture.PM.PopupView;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Purchasing;
 using Zenject;
 
 namespace Lessons.Architecture.PM.PopUpHelper
@@ -26,9 +25,7 @@ namespace Lessons.Architecture.PM.PopUpHelper
         [Button(ButtonSizes.Large)]
         private void OpenPopup()
         {
-            Debug.Log(_presenterFactory);
             var args = _presenterFactory.CreatePresenter();
-            Debug.Log(args);
             Open(args);
         }
 
@@ -40,8 +37,16 @@ namespace Lessons.Architecture.PM.PopUpHelper
             {
                 throw new NullReferenceException("There is no view script (e.g. CharacterPopupView) on prefab");
             }
+
+            if (args is IEventsubscriberPresenter presenter)
+                SubscribePresenterToPopupEvents(presenter, popup);
             
             ((IPopupView)popup).Open(args);
+        }
+
+        private void SubscribePresenterToPopupEvents(IEventsubscriberPresenter presenter, IPopupEventEmitter popup)
+        {
+            presenter.SubscribeToViewEvents(popup);
         }
     }
 }

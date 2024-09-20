@@ -1,5 +1,5 @@
 using Lessons.Architecture.PM.Player;
-using UnityEngine;
+using Lessons.Architecture.PM.ScriptableObjects;
 
 namespace Lessons.Architecture.PM.CharacterPopupPresenter
 {
@@ -13,17 +13,23 @@ namespace Lessons.Architecture.PM.CharacterPopupPresenter
         private PlayerLevel _playerLevel;
         private UserInfo _userInfo;
         private CharacterStats _characterStats;
-
-        public PopupPresenterFactory(PlayerLevel playerLevel, UserInfo userInfo, CharacterStats characterStats)
+        private CharacterPopupElements _popupElements;
+        
+        public PopupPresenterFactory(PlayerLevel playerLevel, 
+            UserInfo userInfo, 
+            CharacterStats characterStats,
+            CharacterPopupElements popupElements
+            )
         {
             _playerLevel = playerLevel;
             _userInfo = userInfo;
             _characterStats = characterStats;
+            _popupElements = popupElements;
         }
 
         public ICharacterPopupPresenter CreatePresenter()
         {
-            bool canLevelUp = _playerLevel.CanLevelUp();
+            bool canLevelUp = _playerLevel.CanLevelUp;
             uint requiredExperience = _playerLevel.RequiredExperience;
             var stats = _characterStats.GetStats();
 
@@ -35,7 +41,11 @@ namespace Lessons.Architecture.PM.CharacterPopupPresenter
                 currentLevel: _playerLevel.CurrentLevel,
                 currentXp: _playerLevel.CurrentExperience,
                 maxBarXp: requiredExperience,
-                canLevelUp: canLevelUp
+                canLevelUp: canLevelUp,
+                playerLevel: _playerLevel,
+                userInfo: _userInfo,
+                characterStats: _characterStats,
+                popupElements: _popupElements
             );
         }
     }

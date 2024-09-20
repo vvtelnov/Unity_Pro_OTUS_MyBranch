@@ -1,20 +1,28 @@
 using System;
+using Homeworks.PresentationModel.Scripts.Player;
 using Sirenix.OdinInspector;
 
 namespace Lessons.Architecture.PM.Player
 {
-    public sealed class PlayerLevel
+    public sealed class PlayerLevel : IPlayerXpModelSetter
     {
-        public event Action OnLevelUp;
+        public event Action<uint> OnLevelUp;
+        public event Action<bool> OnCanLevelUp;
         public event Action<uint> OnExperienceChanged;
+        public event Action<uint> OnMaxExperienceChanged;
 
-        public uint CurrentLevel { get; internal set; } = 1;
+        public uint CurrentLevel { get; set; } = 1;
 
-        public uint CurrentExperience { get; internal set; }
+        public uint CurrentExperience { get; set; }
 
         public uint RequiredExperience
         {
             get { return 100 * (this.CurrentLevel + 1); }
+        }
+
+        public bool CanLevelUp
+        {
+            get { return this.CurrentExperience == this.RequiredExperience; }
         }
 
         public void AddExperience(int range)
@@ -26,21 +34,21 @@ namespace Lessons.Architecture.PM.Player
 
             this.CurrentExperience = (uint)xp;
             this.OnExperienceChanged?.Invoke((uint)xp);
+            
+            this.OnCanLevelUp?.Invoke(CanLevelUp);
         }
 
         public void LevelUp()
         {
-            if (this.CanLevelUp())
+            if (this.CanLevelUp)
             {
                 this.CurrentExperience = 0;
                 this.CurrentLevel++;
-                this.OnLevelUp?.Invoke();
+                this.OnLevelUp?.Invoke(this.CurrentLevel);
+                this.OnExperienceChanged?.Invoke(CurrentExperience);
+                this.OnMaxExperienceChanged?.Invoke(RequiredExperience);
+                this.OnCanLevelUp?.Invoke(CanLevelUp);
             }
-        }
-
-        public bool CanLevelUp()
-        {
-            return this.CurrentExperience == this.RequiredExperience;
         }
     }
 }

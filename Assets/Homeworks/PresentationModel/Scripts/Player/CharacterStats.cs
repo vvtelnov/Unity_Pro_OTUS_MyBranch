@@ -1,49 +1,89 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Homeworks.PresentationModel.Scripts.Player;
 using Sirenix.OdinInspector;
+using UnityEngine.Rendering;
 
 namespace Lessons.Architecture.PM.Player
 {
-    public sealed class CharacterStats
+    public enum Stats
     {
-        public event Action<CharacterStat> OnStatAdded;
-        public event Action<CharacterStat> OnStatRemoved;
-    
-        private readonly HashSet<CharacterStat> stats = new();
+        MOVE_SPEED = 0,    
+        STAMINA = 1,
+        DEXTERITY = 2,
+        INTELLIGENCE = 3,
+        DAMAGE = 4,
+        REGENERATION = 5,
+    }
 
-        public void AddStat(CharacterStat stat)
+    public sealed class CharacterStats : ICharacterStatsModelSetter
+    {
+    public event Action<CharacterStat> OnStatAdded;
+    public event Action<CharacterStat> OnStatRemoved;
+    public event Action<CharacterStat> OnStatValueChanged;
+
+    private readonly HashSet<CharacterStat> stats = new();
+
+    public void AddStat(CharacterStat stat)
+    {
+        if (this.stats.Add(stat))
         {
-            if (this.stats.Add(stat))
+            this.OnStatAdded?.Invoke(stat);
+        }
+    }
+
+    public void RemoveStat(CharacterStat stat)
+    {
+        if (this.stats.Remove(stat))
+        {
+            this.OnStatRemoved?.Invoke(stat);
+        }
+    }
+
+    public void IncreaseStat(CharacterStat stat, uint increaseValue)
+    {
+        uint newValue = stat.Value + increaseValue;
+        stat.ChangeValue(newValue);
+        OnStatValueChanged?.Invoke(stat);
+    }
+
+    public void DecreaseStat(CharacterStat stat, uint decreaseValue)
+    {
+        var newValue = (uint)Math.Max((int)(stat.Value - decreaseValue), 0);
+        stat.ChangeValue(newValue);
+        OnStatValueChanged?.Invoke(stat);
+    }
+
+    public CharacterStat GetStat(Stats statType)
+    {
+        foreach (var stat in this.stats)
+        {
+            if (stat.StatType == statType)
             {
-                this.OnStatAdded?.Invoke(stat);
+                return stat;
             }
         }
 
-        public void RemoveStat(CharacterStat stat)
-        {
-            if (this.stats.Remove(stat))
-            {
-                this.OnStatRemoved?.Invoke(stat);
-            }
-        }
+        throw new Exception($"Stat {statType} is not found!");
+    }
 
-        public CharacterStat GetStat(Stats name)
-        {
-            foreach (var stat in this.stats)
-            {
-                if (stat.StatType == name)
-                {
-                    return stat;
-                }
-            }
+    public void ChangeStatValue(Stats statType, int value)
+    {
+        CharacterStat stat = GetStat(statType);
 
-            throw new Exception($"Stat {name} is not found!");
-        }
-
-        public CharacterStat[] GetStats()
+        if ((stat.Value + value) < 0)
         {
-            return this.stats.ToArray();
+            throw new Exception($"You tried to change stat {statType} value to value bellow zero");
         }
+        
+        stat.ChangeValue((uint)(stat.Value + value));
+        OnStatValueChanged?.Invoke(stat);
+    }
+
+    public CharacterStat[] GetStats()
+    {
+        return this.stats.ToArray();
+    }
     }
 }
